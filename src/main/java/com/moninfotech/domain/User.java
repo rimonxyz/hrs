@@ -2,17 +2,22 @@ package com.moninfotech.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 /**
  * Created by sayemkcn on 3/21/17.
  */
 @Entity(name = "h_user")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
     private String name;
     private String email;
     private String phoneNumber;
     @Embedded
     private Address address;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Booking> bookingList;
 
     public String getName() {
         return name;
@@ -54,5 +59,13 @@ public class User extends BaseEntity{
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address=" + address +
                 '}';
+    }
+
+    public List<Booking> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
     }
 }

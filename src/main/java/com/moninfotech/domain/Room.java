@@ -2,7 +2,6 @@ package com.moninfotech.domain;
 
 import javax.persistence.*;
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,13 +14,12 @@ public class Room extends BaseEntity {
     private Category type;
     private int price;
     @ElementCollection(fetch = FetchType.LAZY)
-    private List<Date> bookedDateList;
-    @ElementCollection(fetch = FetchType.LAZY)
     private List<File> images;
     private int discount;
     private boolean discounted;
     private int floorNumber;
-
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roomList")
+    private List<Booking> bookingList;
     @ManyToOne
     private Hotel hotel;
 
@@ -47,14 +45,6 @@ public class Room extends BaseEntity {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public List<Date> getBookedDateList() {
-        return bookedDateList;
-    }
-
-    public void setBookedDateList(List<Date> bookedDateList) {
-        this.bookedDateList = bookedDateList;
     }
 
     public List<File> getImages() {
@@ -97,17 +87,25 @@ public class Room extends BaseEntity {
         this.hotel = hotel;
     }
 
+    public List<Booking> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
+    }
+
     @Override
     public String toString() {
         return "Room{" +
                 "roomNumber='" + roomNumber + '\'' +
                 ", type=" + type +
                 ", price=" + price +
-                ", bookedDateList=" + bookedDateList +
                 ", images=" + images +
                 ", discount=" + discount +
                 ", discounted=" + discounted +
                 ", floorNumber=" + floorNumber +
+                ", bookingList=" + bookingList +
                 ", hotel=" + hotel +
                 "} " + super.toString();
     }
