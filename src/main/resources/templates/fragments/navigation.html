@@ -1,4 +1,4 @@
-<div class="top-nav">
+<div class="top-nav" xmlns:th="http://www.thymeleaf.org">
     <div class="container">
         <div class="navbar-header logo">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -7,16 +7,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <h1 class="wow fadeInUp animated" data-wow-delay=".5s"><a href="index.html">Vacation</a></h1>
+            <h1 class="wow fadeInUp animated" data-wow-delay=".5s"><a th:href="@{/}">Intelligent Travel Agency</a></h1>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-right menu__list menu--shylock">
-                <li class="menu__item menu__item--current"><a href="index.html" class="menu__link">Home</a></li>
+                <li class="menu__item menu__item--current"><a th:href="@{/}" class="menu__link">Home</a></li>
                 <li class="menu__item"><a href="#about" class="menu__link scroll">About</a></li>
                 <li class="menu__item"><a href="#services" class="menu__link scroll">Services</a></li>
                 <li class="menu__item"><a href="#portfolio" class="menu__link scroll">Portfolio</a></li>
                 <li class="menu__item"><a href="#contact" class="menu__link scroll">Contact</a></li>
+                <li class="menu__item"><a th:href="@{/admin/hotels}">Hotels</a></li>
                 <li><a href="#" class="sign-in" data-toggle="modal" data-target="#myModal">Book Now</a></li>
             </ul>
             <div class="clearfix"> </div>

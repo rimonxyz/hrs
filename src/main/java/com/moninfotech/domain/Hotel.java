@@ -7,8 +7,12 @@ import java.util.List;
  * Created by sayemkcn on 3/21/17.
  */
 @Entity
-public class Hotel extends BaseEntity{
+public class Hotel extends BaseEntity {
     private String name;
+    private String description;
+    private String phoneNumber;
+    @Column(length = 1000000)
+    private byte[] image;
     @Embedded
     private Address address;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
@@ -59,14 +63,42 @@ public class Hotel extends BaseEntity{
         this.user = user;
     }
 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
                 "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", address=" + address +
                 ", roomList=" + roomList +
                 ", reviewList=" + reviewList +
                 ", user=" + user +
-                '}';
+                "} " + super.toString();
     }
+
 }

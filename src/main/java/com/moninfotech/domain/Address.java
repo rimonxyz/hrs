@@ -44,6 +44,10 @@ public class Address {
         this.area = area;
     }
 
+    public String getCommaSeperatedString(){
+        return String.join(", ",new String[]{this.area,this.district,this.city,this.country});
+    }
+
     @Override
     public String toString() {
         return "Address{" +

@@ -79,7 +79,7 @@ ul.nav.navbar-right {
     text-decoration: none;
     letter-spacing: 1px;
     font-size: 1.5em;
-	color:#fff;
+	color:#000;
 	font-family: 'Aladin', cursive;
 	position:relative;
 	padding:0;
@@ -118,7 +118,7 @@ ul.nav.navbar-right {
 
 .menu__link:hover,
 .menu__link:focus {
-	color: #fff;
+	color: #000;
 }
 
 .menu__link:hover::before,

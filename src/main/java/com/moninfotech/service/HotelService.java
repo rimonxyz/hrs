@@ -22,4 +22,9 @@ public class HotelService {
     public List<Hotel> findAll(int page, int size) {
         return this.hotelRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
+
+    // save a hotel
+    public Hotel save(Hotel hotel){
+        return this.hotelRepo.save(hotel);
+    }
 }
