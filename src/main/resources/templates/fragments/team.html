@@ -1,0 +1,211 @@
+<!--team-->
+<div class="team" id="team">
+    <div class="container">
+        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">Meet Our Team</h3>
+        <div class="team-info">
+            <script>
+                // You can also use "$(window).load(function() {"
+                $(function () {
+                    // Slideshow 4
+                    $("#slider4").responsiveSlides({
+                        auto: true,
+                        pager: true,
+                        nav: false,
+                        speed: 500,
+                        namespace: "callbacks",
+                        before: function () {
+                            $('.events').append("<li>before event fired.</li>");
+                        },
+                        after: function () {
+                            $('.events').append("<li>after event fired.</li>");
+                        }
+                    });
+
+                });
+            </script>
+            <!--//End-slider-script-->
+            <div id="top" class="callbacks_container">
+                <ul class="rslides" id="slider4">
+                    <li>
+                        <div class="col-md-3 team-grids wow zoomInLeft animated" data-wow-delay=".5s">
+                            <h5>Mark Sophia</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipi est eligendi scing elit consectetur</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t1.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl wow zoomInLeft animated" data-wow-delay=".9s">
+                            <h5>Michael amet</h5>
+                            <p>Consectetur adipi lorem ipsum dolor sit amet, est eligendi scing elit consectetur.</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t2.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl1 wow zoomInRight animated" data-wow-delay=".7s">
+                            <h5>Daniel Nyari</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipi est eligendi scing elit consectetur.</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t3.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids wow zoomInRight animated" data-wow-delay=".5s">
+                            <h5>Alan Joshua</h5>
+                            <p>Eligendi scing elit lorem ipsum dolor sit amet, consectetur dolore magnam aliquam</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t4.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                    <li>
+                        <div class="col-md-3 team-grids wow fadeInUp animated" data-wow-delay=".5s">
+                            <h5>Mark Smith</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipi est eligendi scing elit consectetur</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t5.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl wow fadeInUp animated" data-wow-delay=".5s">
+                            <h5>Matthew Ava</h5>
+                            <p>Consectetur adipi lorem ipsum dolor sit amet, est eligendi scing elit consectetur.</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t6.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl1 wow fadeInUp animated" data-wow-delay=".5s">
+                            <h5>Daniel Nyari</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipi est eligendi scing elit consectetur.</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t7.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids wow fadeInUp animated" data-wow-delay=".5s">
+                            <h5>Alan ipsum</h5>
+                            <p>Eligendi scing elit lorem ipsum dolor sit amet, consectetur dolore magnam aliquam</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t1.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                    <li>
+                        <div class="col-md-3 team-grids wow fadeInUp animated" data-wow-delay=".5s">
+                            <h5>Mark Smithy</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipi est eligendi scing elit consectetur</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t2.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl wow fadeInUp animated" data-wow-delay=".5s">
+                            <h5>Aliquam amet</h5>
+                            <p>Consectetur adipi lorem ipsum dolor sit amet, est eligendi scing elit consectetur.</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t5.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl1 wow fadeInUp animated" data-wow-delay=".5s">
+                            <h5>Daniel Nyari</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipi est eligendi scing elit consectetur.</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t3.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids wow fadeInUp animated" data-wow-delay=".5s">
+                            <h5>Alan ipsum</h5>
+                            <p>Eligendi scing elit lorem ipsum dolor sit amet, consectetur dolore magnam aliquam</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/t6.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//team-->
