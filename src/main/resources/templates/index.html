@@ -27,20 +27,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="banner-text-info">
                         <form class="form" th:action="@{/search}" method="get">
                             <datalist id="places">
-                                <option value="baal">Baal</option>
-                                <option value="chaal">Chaal</option>
+                                <option value="baal">Coxs Bazar</option>
+                                <option value="chaal">Saint Martins</option>
                             </datalist>
                             <div class="from-group">
-                                <label for="place" class="label">Place</label>
+                                <label for="place" class="label">LOCATION</label>
                                 <input id="place" list="places" class="form-control" required="required"></input>
                             </div>
                             <div class="form-group">
-                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                                <input name="startDate" type="date" value="Select date" onfocus="this.value = '';"
+                                <label for="startDate" class="label">FROM</label>
+                                <input id="startDate" class="form-control" name="startDate" type="date" value="Select date" onfocus="this.value = '';"
                                        onblur="if (this.value == '') {this.value = 'Select date';}"></input>
-                                <!--<label for="endDate" class="label">End Date</label>-->
-                                <!--<input class="form-control" type="date" name="endDate" id="endDate"-->
-                                       <!--required="required"></input>-->
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate" class="label">TO</label>
+                                <input class="form-control" type="date" name="endDate" id="endDate"
+                                       required="required"></input>
                             </div>
                             <button class="form-control" type="submit">Search</button>
                         </form>
@@ -52,54 +54,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <!--//banner-->
 <div th:include="fragments/modal"></div>
-<!--welcome-->
-<div class="welcome" id="about">
-    <div class="container">
-        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">About Us</h3>
-        <h4 class="wow fadeInDown animated" data-wow-delay=".7s">Nulla at dolor at ipsum convallis pulvinar a non nunc
-            non leo sollicitudin, tincidunt odio a, rutrum ligula aliquam orci cursus facilisis maximus </h4>
-        <p class="w-text wow fadeInUp animated" data-wow-delay=".5s">Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Integer gravida mauris non mi gravida, at sollicitudin odio efficitur. Mauris ex nulla, aliquam ornare
-            facilisis nec convallis pulvinar a non nunc non leo sollicitudin</p>
-        <div class="welcome-row">
-            <div class="col-md-4 welcome-grids wow slideInLeft animated" data-wow-delay=".5s">
-                <div class="welcome-img">
-                    <img th:src="@{/images/img1.jpg}" class="img-responsive zoom-img" alt=""></img>
-                    <div class="welcome-text">
-                        <h5>Our Trip</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 welcome-grids grid wow zoomIn animated" data-wow-delay=".5s">
-                <div class="welcome-img">
-                    <img th:src="@{/images/img2.jpg}" class="img-responsive zoom-img" alt=""></img>
-                    <div class="welcome-text">
-                        <h5>Our Trip</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 welcome-grids grid wow slideInRight animated" data-wow-delay=".5s">
-                <div class="welcome-img">
-                    <img th:src="@{/images/img3.jpg}" class="img-responsive zoom-img" alt=""></img>
-                    <div class="welcome-text">
-                        <h5>Our Trip</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-<!--//welcome-->
+<!--//Top Locations-->
+<div th:include="fragments/top_locations"></div>
+<!--//Holyday Packages-->
+<div th:include="fragments/packages"></div>
+<!--//Ships-->
+<div th:include="fragments/ships"></div>
+
 <!--skills-->
-<div th:include="fragments/skills"></div>
+<!--<div th:include="fragments/skills"></div>-->
 <!--//skills-->
 <!--services-->
-<div th:include="fragments/services"></div>
+<!--<div th:include="fragments/services"></div>-->
 <!--//services -->
-<div th:include="fragments/team"></div>
+<!--<div th:include="fragments/team"></div>-->
 <!--portfolio-->
-<div th:include="fragments/portfolio"></div>
+<!--<div th:include="fragments/portfolio"></div>-->
 <!--end portfolio-->
 
 <!--address and map-->

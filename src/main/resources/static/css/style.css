@@ -68,7 +68,7 @@ ul.nav.navbar-right {
     margin-top: 0.6em;
 }
 .top-nav ul li {
-    margin: 0 1.8em;
+    margin: 0 0.2em;
     display: inline-block;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .top-nav ul li  a.active:before {
@@ -79,10 +79,13 @@ ul.nav.navbar-right {
     text-decoration: none;
     letter-spacing: 1px;
     font-size: 1.5em;
-	color:#000;
+	color:white;
 	font-family: 'Aladin', cursive;
 	position:relative;
 	padding:0;
+}
+.top-nav ul{
+    background: black;
 }
 .nav > li > a:hover, .nav > li > a:focus,.top-nav ul li a.active{
     background: none;
@@ -767,8 +770,9 @@ img.zoom-img:hover,.welcome-grids:hover img.zoom-img,.portfolio-grids:hover img.
 }
 .team-grids {
     border: 10px solid #404040;
-    padding: 4em 1.5em;
+    padding: 2em 1.5em;
     width: 22.5%;
+    height: 270px;;
 	background:#fff;
     position: relative;
     transition: .5s all;
@@ -1205,7 +1209,7 @@ p.twit-text {
 /*---- responsive-design -----*/
 @media(max-width:1440px){
 .banner-text-info {
-	width: 42%;
+	width: 50%;
 	margin: 12em auto 0;
 }
 .banner {
@@ -1601,7 +1605,7 @@ p.twit-text {
 .footer h3 {
     font-size: 3em;
 }
-}
+
 @media(max-width:767px){
 .top-nav {
     margin: 0 2em;
@@ -1644,7 +1648,7 @@ ul.nav.navbar-right {
     padding: .5em 3em;
     display: inline-block;
 }
-}
+
 @media(max-width:640px){
 .banner-text h2.bnr-title, .banner-text h3.bnr-title {
     font-size: 1.8em;

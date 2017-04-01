@@ -7,18 +7,99 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <h1 class="wow fadeInUp animated" data-wow-delay=".5s"><a th:href="@{/}">Intelligent Tourist Aid</a></h1>
+            <!--<h1 class="wow fadeInUp animated" data-wow-delay=".5s"><a th:href="@{/}">Intelligent Tourist Aid</a></h1>-->
+            <a th:href="@{/}">
+                <img height="96" width="144" th:src="@{/images/logo.png}"></img>
+            </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-right menu__list menu--shylock">
                 <li class="menu__item menu__item--current"><a th:href="@{/}" class="menu__link">Home</a></li>
-                <li class="menu__item"><a href="#about" class="menu__link scroll">About</a></li>
-                <li class="menu__item"><a href="#services" class="menu__link scroll">Services</a></li>
-                <li class="menu__item"><a href="#portfolio" class="menu__link scroll">Portfolio</a></li>
-                <li class="menu__item"><a href="#contact" class="menu__link scroll">Contact</a></li>
-                <li class="menu__item"><a th:href="@{/admin/hotels}">Hotels</a></li>
-                <li><a href="#" class="sign-in" data-toggle="modal" data-target="#myModal">Book Now</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hotels
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Coxs Bazar</a></li>
+                        <li><a href="#">Saint Martin</a></li>
+                        <li><a href="#">Bandarban</a></li>
+                        <li><a href="#">Bandarban</a></li>
+                        <li><a href="#">Sajek</a></li>
+                        <li><a href="#">Sylhet</a></li>
+                        <li><a href="#">Srimangal</a></li>
+                        <li><a href="#">Khulna</a></li>
+                        <li><a href="#">Dhaka</a></li>
+                        <li><a href="#">Chittagong</a></li>
+                    </ul>
+                </li>                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Conference &amp; Events
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Annual General Meetings</a></li>
+                        <li><a href="#">Board Meetings</a></li>
+                        <li><a href="#">Business Dinners and Banquets</a></li>
+                        <li><a href="#">Conventions</a></li>
+                        <li><a href="#">Fairs</a></li>
+                        <li><a href="#">International Events</a></li>
+                        <li><a href="#">Seminars &amp; Symposiums</a></li>
+                        <li><a href="#">Trade Shows</a></li>
+                        <li><a href="#">Workshops</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Group Booking
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Corporate</a></li>
+                        <li><a href="#">Family</a></li>
+                        <li><a href="#">Student</a></li>
+                    </ul>
+                </li>
+                <li class="menu__item"><a href="#portfolio" class="menu__link scroll">Car &amp; Bus</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ship
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Keari Cruise &amp; Dine</a></li>
+                        <li><a href="#">M.V. Bangali</a></li>
+                        <li><a href="#">Keari Sindbad</a></li>
+                        <li><a href="#">M.V. Green Line</a></li>
+                        <li><a href="#">M.V. Bay Cruiser-1</a></li>
+                        <li><a href="#">L.C.T Kutubdia</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Holyday Packages
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Coxs Bazar</a></li>
+                        <li><a href="#">Saint Martin</a></li>
+                        <li><a href="#">Bandarban</a></li>
+                        <li><a href="#">Rangmati</a></li>
+                        <li><a href="#">Sajek</a></li>
+                        <li><a href="#">Sylhet</a></li>
+                        <li><a href="#">Srimangal</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customer Service
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Your Booking</a></li>
+                        <li><a href="#">Review a Hotel</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sing in &amp; Account
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Sing In</a></li>
+                        <li><a href="#">Create an account</a></li>
+                        <li><a href="#">Your booking</a></li>
+                    </ul>
+                </li>
+                <!--<li><a href="#" class="sign-in" data-toggle="modal" data-target="#myModal">Book Now</a></li>-->
             </ul>
             <div class="clearfix"> </div>
         </div>

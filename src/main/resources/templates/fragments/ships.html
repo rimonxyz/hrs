@@ -1,0 +1,139 @@
+<!--team-->
+<div class="team" id="team">
+    <div class="container">
+        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">Ships</h3>
+        <div class="team-info">
+            <script>
+                // You can also use "$(window).load(function() {"
+                $(function () {
+                    // Slideshow 4
+                    $("#slider4").responsiveSlides({
+                        auto: true,
+                        pager: true,
+                        nav: false,
+                        speed: 500,
+                        namespace: "callbacks",
+                        before: function () {
+                            $('.events').append("<li>before event fired.</li>");
+                        },
+                        after: function () {
+                            $('.events').append("<li>after event fired.</li>");
+                        }
+                    });
+
+                });
+            </script>
+            <!--//End-slider-script-->
+            <div id="top" class="callbacks_container">
+                <ul class="rslides" id="slider4">
+                    <li>
+                        <div class="col-md-3 team-grids wow zoomInLeft animated" data-wow-delay=".5s">
+                            <h5>Keari Cruise &amp; Dine</h5>
+                            <p>Details about Keari Cruise &amp; Dine</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/locations/coxsbazar.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl wow zoomInLeft animated" data-wow-delay=".9s">
+                            <h5>M.V. Bangali</h5>
+                            <p>Details about M.V. Bangali</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/locations/saintmartins.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl1 wow zoomInRight animated" data-wow-delay=".7s">
+                            <h5>Keari Sindbad</h5>
+                            <p>Details about Keari Sindbad.</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/locations/bandarbans.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl1 wow zoomInRight animated" data-wow-delay=".7s">
+                            <h5>M.V. Green Line</h5>
+                            <p>Details about M.V. Green Line</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/locations/bandarbans.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl1 wow zoomInRight animated" data-wow-delay=".7s">
+                            <h5>M.V. Bay Cruiser-1</h5>
+                            <p>Details about M.V. Bay Cruiser-1</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/locations/bandarbans.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids team-mdl1 wow zoomInRight animated" data-wow-delay=".7s">
+                            <h5>L.C.T Kutubdia</h5>
+                            <p>Details about M.V. L.C.T Kutubdia</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <div class="team-img">
+                                <img th:src="@{/images/locations/bandarbans.jpg}" alt=""></img>
+                            </div>
+                        </div>
+                        <div class="col-md-3 team-grids wow zoomInRight animated" data-wow-delay=".5s">
+                            <h5>
+                                <a th:href="@{/}">
+                                    More
+                                </a>
+                            </h5>
+                            <p>Click to discover more tourist locations</p>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="#" class="fb"> </a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li><a href="#" class="in"> </a></li>
+                                </ul>
+                            </div>
+                            <!--<div class="team-img">-->
+                            <!--<img th:src="@{/images/locations/morebutton.png}" alt=""></img>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//team-->
