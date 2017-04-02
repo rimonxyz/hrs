@@ -27,4 +27,13 @@ public class HotelService {
     public Hotel save(Hotel hotel){
         return this.hotelRepo.save(hotel);
     }
+
+    // find a hotel by id
+    public Hotel findOne(Long id){
+        return this.hotelRepo.findOne(id);
+    }
+
+    public void delete(Long id) {
+        this.hotelRepo.delete(id);
+    }
 }

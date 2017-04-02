@@ -1,6 +1,7 @@
 package com.moninfotech.domain;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -33,6 +34,10 @@ public abstract class BaseEntity {
         this.created = new Date();
     }
 
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
     public Date getLastUpdated() {
         return lastUpdated;
     }
@@ -40,6 +45,12 @@ public abstract class BaseEntity {
     @PreUpdate
     public void setLastUpdated() {
         this.lastUpdated = new Date();
+    }
+
+    public String getReadableDate(Date date) {
+        if (date == null) return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM, dd yyyy hh:mm:ss a");
+        return sdf.format(date);
     }
 
     @Override

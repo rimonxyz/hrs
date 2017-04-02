@@ -13,10 +13,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <!--navigation-->
 <div th:include="fragments/navigation"></div>
-<!--//navigation-->
 
-
-<div th:include="fragments/modal"></div>
 <!--welcome-->
 <div class="contact" id="contact">
     <div class="container">
@@ -25,20 +22,38 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <a th:href="@{/admin/hotels/create}">Create New</a>
         </h3>
         <div class="contact-form">
-            <p class="wow slideInDown animated" data-wow-delay=".5s">Sed ut turpis elit ullamcorper in auctor non,
-                accumsan vel lacus nulla auctor cursus nunc. Maecenas ultricies dolor in urna tempus, id egestas erat
-                finibus interdum lectus eget scelerisque.</p>
+            <p class="wow slideInDown animated" data-wow-delay=".5s">
+                <b>
+                    => <span style="color: red;" th:text="${param.message[0]}"></span>
+                </b>
+            </p>
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <td><b>Image</b></td>
                     <td><b>Name</b></td>
                     <td><b>Address</b></td>
+                    <td>Created</td>
+                    <td>Last Updated</td>
+                    <td><b>Edit</b></td>
+                    <td><b>Delete</b></td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="hotel:${hotelList}">
-                    <td th:text="${hotel.name}"></td>
-                    <td th:text="${hotel.address.getCommaSeperatedString()}"></td>
+                    <td><img class="img-circle" height="40" width="60"
+                             th:src="@{/admin/hotels/images/}+${hotel.id}"></img></td>
+                    <td th:text="${hotel?.name}"></td>
+                    <td th:text="${hotel?.address.getCommaSeperatedString()}"></td>
+                    <td th:text="${hotel?.getReadableDate(hotel.getCreated())}"></td>
+                    <td th:text="${hotel?.getReadableDate(hotel.getLastUpdated())}"></td>
+                    <td><a class="btn btn-warning" th:href="@{/admin/hotels/edit/}+${hotel.getId()}">Edit</a></td>
+                    <td>
+                        <form th:action="@{/admin/hotels/delete/}+${hotel.getId()}"
+                              onsubmit="return confirm('Do you really want to delete this article?');" method="post">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>
