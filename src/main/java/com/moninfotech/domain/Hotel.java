@@ -20,7 +20,7 @@ public class Hotel extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
     private List<Review> reviewList;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
     public String getName() {

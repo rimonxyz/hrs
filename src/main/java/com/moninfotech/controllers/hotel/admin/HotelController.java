@@ -1,7 +1,9 @@
 package com.moninfotech.controllers.hotel.admin;
 
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.User;
 import com.moninfotech.service.HotelService;
+import com.moninfotech.service.UserService;
 import com.utils.ImageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ public class HotelController {
 
     @Autowired
     private HotelService hotelService;
+    @Autowired
+    private UserService userService;
 
     // Get All Hotels paginated
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -49,9 +53,14 @@ public class HotelController {
         // set image to the hotel entity if it's valid.
         if (ImageValidator.isImageValid(multipartFile))
             hotel.setImage(multipartFile.getBytes());
-        /*
-         * SET USER INFORMATIONS WITH HOTEL ENTITY BEFORE SAVING
-         */
+
+        // first save user
+        User user = this.userService.save(hotel.getUser());
+        // save hotel address as user address by default
+        user.setAddress(hotel.getAddress());
+        // set saved user (with persisted id) to hotel
+        hotel.setUser(user);
+        // then save hotel
         hotel = this.hotelService.save(hotel);
         return "redirect:/admin/hotels?message=" + hotel.getName() + " is saved.";
     }
@@ -77,6 +86,8 @@ public class HotelController {
         if (existingHotel != null) {
             // set created date from previous entity
             hotel.setCreated(existingHotel.getCreated());
+            // set previous user to hotel entity
+            hotel.setUser(existingHotel.getUser());
             // if no image is uploaded the set previous image if available
             if (multipartFile == null) hotel.setImage(existingHotel.getImage());
         }

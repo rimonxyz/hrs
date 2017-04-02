@@ -21,7 +21,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <h3 class="right wow fadeInDown animated" data-wow-delay=".5s">
             <a th:href="@{/admin/hotels/create}">Create New</a>
         </h3>
-        <div class="contact-form">
+        <div class="contact-form contact-list">
             <p class="wow slideInDown animated" data-wow-delay=".5s">
                 <b th:if="${param.message!=null}">
                     => <span style="color: red;" th:text="${param.message[0]}"></span>
@@ -46,7 +46,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                              th:src="@{/admin/hotels/images/}+${hotel.id}"></img>
                     </td>
                     <td th:text="${hotel?.name}"></td>
-                    <td th:text="${hotel?.address.getCommaSeperatedString()}"></td>
+                    <td th:text="${hotel?.address?.getCommaSeperatedString()}"></td>
                     <td th:text="${hotel?.getReadableDate(hotel.getCreated())}"></td>
                     <td th:text="${hotel?.getReadableDate(hotel.getLastUpdated())}"></td>
                     <td><a class="btn btn-warning" th:href="@{/admin/hotels/edit/}+${hotel.getId()}">Edit</a></td>

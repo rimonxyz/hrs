@@ -27,7 +27,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 finibus interdum lectus eget scelerisque.</p>
             <form th:action="@{/admin/hotels/create}" method="post" enctype="multipart/form-data">
                 <div class="fadeInDown animated" data-wow-delay=".5s">
-                    <input name="name" type="text" placeholder="Name" required="required"></input>
+                    <input name="name" type="text" placeholder="Hotel Name" required="required"></input>
                 </div>
                 <div class="col-md-6 form-left wow fadeInDown animated" data-wow-delay=".5s">
                     <input name="address.country" class="text" type="text" placeholder="Country" required="required"></input>
@@ -49,6 +49,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="form-group" data-wow-delay=".5s">
                     <br/>
                     <input class="form-control" name="image"  type="file" placeholder="Image" required="required"></input>
+                </div>
+
+                <hr/><h3>User Informations</h3><hr/>
+                <div class="fadeInDown animated" data-wow-delay=".5s">
+                    <input name="user.name" type="text" placeholder="Name" required="required"></input>
+                </div>
+                <div class="fadeInDown animated" data-wow-delay=".5s">
+                    <input name="user.email" type="text" placeholder="Email" required="required"></input>
+                </div>
+                <div class="fadeInDown animated" data-wow-delay=".5s">
+                    <input name="user.phoneNumber" type="text" placeholder="Users Phone Number" required="required"></input>
+                </div>
+                <div class="fadeInDown animated" data-wow-delay=".5s">
+                    <input name="user.password" type="password" placeholder="Users Password" required="required"></input>
+                </div>
+                <div class="fadeInDown animated" data-wow-delay=".5s">
+                    <input id="confirmPassword" type="password" placeholder="Confirm Password" required="required"></input>
                 </div>
                 <input type="submit" value="CREATE HOTEL"></input>
             </form>

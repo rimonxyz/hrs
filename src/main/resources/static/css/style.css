@@ -1157,6 +1157,10 @@ p.twit-text {
     color: #333;
 }
 
+.contact-list{
+    width: 80%;
+}
+
 .contact h4 {
     margin: 0 0 .5em;
 }

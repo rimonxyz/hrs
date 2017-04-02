@@ -23,6 +23,4 @@ dist/
 nbdist/
 .nb-gradle/
 
-### Image Files ###
-*.jpg
-*.png
+
