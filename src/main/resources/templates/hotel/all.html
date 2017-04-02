@@ -41,8 +41,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </thead>
                 <tbody>
                 <tr th:each="hotel:${hotelList}">
-                    <td><img class="img-circle" height="40" width="60"
-                             th:src="@{/admin/hotels/images/}+${hotel.id}"></img></td>
+                    <td>
+                        <img class="img-circle" height="40" width="60"
+                             th:src="@{/admin/hotels/images/}+${hotel.id}"></img>
+                    </td>
                     <td th:text="${hotel?.name}"></td>
                     <td th:text="${hotel?.address.getCommaSeperatedString()}"></td>
                     <td th:text="${hotel?.getReadableDate(hotel.getCreated())}"></td>
