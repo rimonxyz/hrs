@@ -14,6 +14,7 @@ public class User extends BaseEntity {
     private String name;
     private String email;
     private String phoneNumber;
+    private String password;
     @Embedded
     private Address address;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -67,5 +68,13 @@ public class User extends BaseEntity {
 
     public void setBookingList(List<Booking> bookingList) {
         this.bookingList = bookingList;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

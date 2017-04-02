@@ -95,8 +95,8 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sing in &amp; Account
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Sing In</a></li>
-                        <li><a href="#">Create an account</a></li>
+                        <li><a th:href="@{/login}">Sing In</a></li>
+                        <li><a th:href="@{/register}">Create an account</a></li>
                         <li><a href="#">Your booking</a></li>
                     </ul>
                 </li>
@@ -105,6 +105,7 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/admin/hotels}">Hotels</a></li>
+                        <li><a th:href="@{/admin/users}">Users</a></li>
                     </ul>
                 </li>
                 <!--<li><a href="#" class="sign-in" data-toggle="modal" data-target="#myModal">Book Now</a></li>-->

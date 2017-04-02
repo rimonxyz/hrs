@@ -74,7 +74,7 @@ public class HotelController {
         hotel.setId(id);
 
         Hotel existingHotel = this.hotelService.findOne(id);
-        if (existingHotel != null){
+        if (existingHotel != null) {
             // set created date from previous entity
             hotel.setCreated(existingHotel.getCreated());
             // if no image is uploaded the set previous image if available
@@ -90,8 +90,8 @@ public class HotelController {
     }
 
     // Delete entity
-    @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
-    private String delete(@PathVariable Long id){
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    private String delete(@PathVariable Long id) {
         this.hotelService.delete(id);
         return "redirect:/admin/hotels?message=Successfully deleted!";
     }
