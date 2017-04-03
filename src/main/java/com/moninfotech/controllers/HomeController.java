@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sayemkcn on 3/26/17.
  */
@@ -33,13 +36,17 @@ public class HomeController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
+        // set default user
+        List<String> defaultRoles = new ArrayList<>();
+        defaultRoles.add("ROLE_USER");
+        user.setRoles(defaultRoles);
         user = this.userService.save(user);
         return "redirect:/login?message=We have sent you an email. Please confirm your identity by clicking on the confirmation link.";
     }
 
     // login
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String loginPage(){
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginPage() {
         return "login";
     }
 

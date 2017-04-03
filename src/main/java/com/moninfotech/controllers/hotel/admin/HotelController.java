@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sayemkcn on 3/26/17.
@@ -58,6 +60,10 @@ public class HotelController {
         User user = this.userService.save(hotel.getUser());
         // save hotel address as user address by default
         user.setAddress(hotel.getAddress());
+        // set default role for this user. in this case :ROLE_HOTEL
+        List<String> roles = new ArrayList<>();
+        roles.add("ROLE_HOTEL");
+        user.setRoles(roles);
         // set saved user (with persisted id) to hotel
         hotel.setUser(user);
         // then save hotel

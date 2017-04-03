@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         this.userRepo.delete(id);
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return this.userRepo.findByEmail(email);
+    }
 }
