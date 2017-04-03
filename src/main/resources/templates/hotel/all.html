@@ -35,6 +35,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <td><b>Address</b></td>
                     <td>Created</td>
                     <td>Last Updated</td>
+                    <td>Actions</td>
                     <td><b>Edit</b></td>
                     <td><b>Delete</b></td>
                 </tr>
@@ -49,6 +50,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <td th:text="${hotel?.address?.getCommaSeperatedString()}"></td>
                     <td th:text="${hotel?.getReadableDate(hotel.getCreated())}"></td>
                     <td th:text="${hotel?.getReadableDate(hotel.getLastUpdated())}"></td>
+                    <td>
+                        <form th:action="@{/admin/hotels/}+${hotel?.getId()}+@{/action(enabled=${!hotel?.user?.isEnabled()})}"
+                              method="post">
+                            <button class="btn btn-primary" th:disabled="${hotel?.user?.hasAssignedRole('ROLE_ADMIN')}"
+                                    th:text="${hotel?.user?.isEnabled()}? 'Disable' : 'Enable'"></button>
+                        </form>
+                    </td>
                     <td><a class="btn btn-warning" th:href="@{/admin/hotels/edit/}+${hotel.getId()}">Edit</a></td>
                     <td>
                         <form th:action="@{/admin/hotels/delete/}+${hotel.getId()}"

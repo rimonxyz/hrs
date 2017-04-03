@@ -51,4 +51,14 @@ public class UserController {
         return "redirect:/admin/users?message=User is deleted.";
     }
 
+    // Disable user
+    @RequestMapping(value = "/{id}/action", method = RequestMethod.POST)
+    private String disable(@PathVariable("id") Long id, @RequestParam("enabled") Boolean enabled) {
+        User user = this.userService.findOne(id);
+        if (user==null) return "redirect:/admin/users?message=User can not be found!";
+        user.setEnabled(enabled);
+        user = this.userService.save(user);
+        return "redirect:/admin/users?message="+user.getName()+" updated!";
+    }
+
 }

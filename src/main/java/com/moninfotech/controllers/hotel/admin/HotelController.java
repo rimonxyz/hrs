@@ -118,4 +118,15 @@ public class HotelController {
     private ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
         return new ResponseEntity<byte[]>(this.hotelService.findOne(id).getImage(), HttpStatus.OK);
     }
+
+    // disable user of a hotel
+    @RequestMapping(value = "/{id}/action", method = RequestMethod.POST)
+    private String disable(@PathVariable("id") Long id, @RequestParam("enabled") Boolean enabled) {
+        Hotel hotel = this.hotelService.findOne(id);
+        if (hotel == null || hotel.getUser() == null) return "redirect:/admin/hotels?message=User can not be found!";
+        hotel.getUser().setEnabled(enabled);
+        hotel = this.hotelService.save(hotel);
+        return "redirect:/admin/hotels?message=" + hotel.getName() + " updated!";
+    }
+
 }

@@ -115,6 +115,14 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
+    public boolean hasAssignedRole(String role) {
+        for (String r : this.roles) {
+            if (role.equals(r))
+                return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "User{" +
