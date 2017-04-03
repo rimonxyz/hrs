@@ -19,7 +19,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">All Users</h3>
         <!--<h3 class="right wow fadeInDown animated" data-wow-delay=".5s">-->
-            <!--<a th:href="@{/admin/users/create}">Create New</a>-->
+        <!--<a th:href="@{/admin/users/create}">Create New</a>-->
         <!--</h3>-->
         <div class="contact-form contact-list">
             <p class="wow slideInDown animated" data-wow-delay=".5s">
@@ -31,27 +31,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <thead>
                 <tr>
                     <!--<td><b>Image</b></td>-->
-                    <td><b>Name</b></td>
-                    <td><b>Email</b></td>
-                    <td><b>Address</b></td>
-                    <td><b>Created</b></td>
-                    <td><b>Last Updated</b></td>
-                    <td><b>Action</b></td>
-                    <td><b>Edit</b></td>
-                    <td><b>Delete</b></td>
+                    <td><h3 class="thead">Name</h3></td>
+                    <td><h3 class="thead">Email</h3></td>
+                    <td><h3 class="thead">Address</h3></td>
+                    <td><h3 class="thead">Created</h3></td>
+                    <td><h3 class="thead">Last Updated</h3></td>
+                    <td><h3 class="thead">Action</h3></td>
+                    <td><h3 class="thead">Edit</h3></td>
+                    <td><h3 class="thead">Delete</h3></td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="user:${userList}">
                     <!--<td>-->
-                        <!--<img class="img-circle" height="40" width="60"-->
-                             <!--th:src="@{/admin/users/images/}+${user?.id}"></img>-->
+                    <!--<img class="img-circle" height="40" width="60"-->
+                    <!--th:src="@{/admin/users/images/}+${user?.id}"></img>-->
                     <!--</td>-->
-                    <td th:text="${user?.name}"></td>
-                    <td th:text="${user?.email}"></td>
-                    <td th:text="${user?.address?.getCommaSeperatedString()}"></td>
-                    <td th:text="${user?.getReadableDate(user?.getCreated())}"></td>
-                    <td th:text="${user?.getReadableDate(user?.getLastUpdated())}"></td>
+                    <td><h4 th:text="${user?.name}"></h4></td>
+                    <td><h4 th:text="${user?.email}"></h4></td>
+                    <td><h4 th:text="${user?.address?.getCommaSeperatedString()}"></h4></td>
+                    <td><h4 th:text="${user?.getReadableDate(user?.getCreated())}"></h4></td>
+                    <td><h4 th:text="${user?.getReadableDate(user?.getLastUpdated())}"></h4></td>
                     <td>
                         <form th:action="@{/admin/users/}+${user?.getId()}+@{/action(enabled=${!user?.isEnabled()})}"
                               method="post">

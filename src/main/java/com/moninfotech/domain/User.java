@@ -1,13 +1,19 @@
 package com.moninfotech.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by sayemkcn on 3/21/17.
  */
 @Entity(name = "h_user")
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
     private String name;
     private String email;
     private String phoneNumber;
@@ -67,14 +73,29 @@ public class User extends BaseEntity {
         this.bookingList = bookingList;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorityList = new ArrayList<>();
+        this.roles.forEach(role -> {
+            authorityList.add(new SimpleGrantedAuthority(role));
+        });
+        return authorityList;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
@@ -83,6 +104,7 @@ public class User extends BaseEntity {
         this.enabled = enabled;
     }
 
+    @Override
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
@@ -91,6 +113,7 @@ public class User extends BaseEntity {
         this.accountNonExpired = accountNonExpired;
     }
 
+    @Override
     public boolean isAccountNonLocked() {
         return accountNonLocked;
     }
@@ -99,6 +122,7 @@ public class User extends BaseEntity {
         this.accountNonLocked = accountNonLocked;
     }
 
+    @Override
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
@@ -131,8 +155,6 @@ public class User extends BaseEntity {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
                 ", address=" + address +
-                ", bookingList=" + bookingList +
-                ", roles=" + roles +
                 ", enabled=" + enabled +
                 ", accountNonExpired=" + accountNonExpired +
                 ", accountNonLocked=" + accountNonLocked +
