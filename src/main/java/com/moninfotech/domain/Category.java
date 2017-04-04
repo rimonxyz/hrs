@@ -8,12 +8,11 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Category extends BaseEntity {
+    private String name;
     private int maxChildNumber;
     private int maxAdultNumber;
     @Embedded
     private Facilities facilities;
-    private boolean frontFace;
-    private boolean withCorridor;
 
     public int getMaxChildNumber() {
         return maxChildNumber;
@@ -39,30 +38,22 @@ public class Category extends BaseEntity {
         this.facilities = facilities;
     }
 
-    public boolean isFrontFace() {
-        return frontFace;
+
+    public String getName() {
+        return name;
     }
 
-    public void setFrontFace(boolean frontFace) {
-        this.frontFace = frontFace;
-    }
-
-    public boolean isWithCorridor() {
-        return withCorridor;
-    }
-
-    public void setWithCorridor(boolean withCorridor) {
-        this.withCorridor = withCorridor;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Category{" +
-                "maxChildNumber=" + maxChildNumber +
+                "name='" + name + '\'' +
+                ", maxChildNumber=" + maxChildNumber +
                 ", maxAdultNumber=" + maxAdultNumber +
                 ", facilities=" + facilities +
-                ", frontFace=" + frontFace +
-                ", withCorridor=" + withCorridor +
                 "} " + super.toString();
     }
 }

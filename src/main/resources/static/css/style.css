@@ -447,7 +447,7 @@ ul.nav.navbar-right {
 }
 
 /*---------*/
-.register input[type="text"], .register input[type="password"] {
+.register input[type="text"], .register input[type="password"], .register input[type="number"] {
     outline: none;
     font-size: 1em;
     font-weight: 400;
@@ -1240,7 +1240,7 @@ p.twit-text {
     padding-right: 0;
 }
 
-.contact input[type="text"],.contact input[type="password"],.contact input[type="email"] {
+.contact input[type="text"],.contact input[type="password"],.contact input[type="email"],input[type="number"], input[type="file"]{
     width: 100%;
     color: #999;
     background: none;

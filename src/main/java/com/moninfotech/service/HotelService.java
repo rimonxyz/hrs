@@ -1,6 +1,7 @@
 package com.moninfotech.service;
 
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.User;
 
 import java.util.List;
 
@@ -9,13 +10,16 @@ import java.util.List;
  */
 public interface HotelService {
     // returns all hotels paginated
-    public List<Hotel> findAll(int page, int size);
+     List<Hotel> findAll(int page, int size);
 
     // save a hotel
-    public Hotel save(Hotel hotel);
+    Hotel save(Hotel hotel);
 
     // find a hotel by id
-    public Hotel findOne(Long id);
+    Hotel findOne(Long id);
 
-    public void delete(Long id);
+    void delete(Long id);
+
+    Hotel findByUser(User user);
+
 }

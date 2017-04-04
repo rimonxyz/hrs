@@ -1,7 +1,6 @@
 package com.moninfotech.domain;
 
 import javax.persistence.*;
-import java.io.File;
 import java.util.List;
 
 /**
@@ -11,10 +10,11 @@ import java.util.List;
 public class Room extends BaseEntity {
     private String roomNumber;
     @OneToOne
-    private Category type;
+    private Category category;
     private int price;
     @ElementCollection(fetch = FetchType.LAZY)
-    private List<File> images;
+    @Column(length = 1000000)
+    private List<byte[]> images;
     private int discount;
     private boolean discounted;
     private int floorNumber;
@@ -31,12 +31,12 @@ public class Room extends BaseEntity {
         this.roomNumber = roomNumber;
     }
 
-    public Category getType() {
-        return type;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setType(Category type) {
-        this.type = type;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public int getPrice() {
@@ -47,11 +47,11 @@ public class Room extends BaseEntity {
         this.price = price;
     }
 
-    public List<File> getImages() {
+    public List<byte[]> getImages() {
         return images;
     }
 
-    public void setImages(List<File> images) {
+    public void setImages(List<byte[]> images) {
         this.images = images;
     }
 
@@ -99,7 +99,7 @@ public class Room extends BaseEntity {
     public String toString() {
         return "Room{" +
                 "roomNumber='" + roomNumber + '\'' +
-                ", type=" + type +
+                ", category=" + category +
                 ", price=" + price +
                 ", images=" + images +
                 ", discount=" + discount +
