@@ -1,4 +1,4 @@
-package com.utils;
+package com.moninfotech.utils;
 
 import org.springframework.web.multipart.MultipartFile;
 

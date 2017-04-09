@@ -1,4 +1,4 @@
-package com.utils;
+package com.moninfotech.utils;
 
 /**
  * Created by sayemkcn on 3/26/17.

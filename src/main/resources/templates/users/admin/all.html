@@ -62,7 +62,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <td><a class="btn btn-warning" th:href="@{/admin/users/edit/}+${user?.id}">Edit</a></td>
                     <td>
                         <form th:action="@{/admin/users/delete/}+${user?.id}"
-                              onsubmit="return confirm('Do you really want to delete this article?');" method="post">
+                              onsubmit="return confirm('Do you really want to delete this user?');" method="post">
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>

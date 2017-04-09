@@ -4,7 +4,7 @@ import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.User;
 import com.moninfotech.service.HotelService;
 import com.moninfotech.service.UserService;
-import com.utils.ImageValidator;
+import com.moninfotech.utils.ImageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ public class HotelController {
     private String all(@RequestParam(value = "page", required = false) Integer page, Model model) {
         if (page == null || page < 0) page = 0;
         model.addAttribute(hotelService.findAll(page, 10));
-        return "hotel/all";
+        return "hotel/admin/all";
     }
 
 
@@ -43,7 +43,7 @@ public class HotelController {
     // @GET
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     private String createPage() {
-        return "hotel/create";
+        return "hotel/admin/create";
     }
 
     //@POST
@@ -76,7 +76,7 @@ public class HotelController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     private String editPage(@PathVariable("id") Long id, Model model) {
         model.addAttribute("hotel", hotelService.findOne(id));
-        return "hotel/edit";
+        return "hotel/admin/edit";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)

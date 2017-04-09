@@ -1,10 +1,13 @@
 package com.moninfotech.service.impl;
 
+import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.FileIO;
 import com.moninfotech.domain.Room;
 import com.moninfotech.repository.RoomRepository;
 import com.moninfotech.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,10 +39,26 @@ public class RoomServiceImpl implements RoomService {
                 Image image = ImageIO.read(FileIO.convertToFile(multipartFile));
                 if (image != null) filesList.add(multipartFile.getBytes());
             } catch (IOException e) {
-                System.out.println(e.toString());
             }
         }
 
         return filesList;
     }
+
+    @Override
+    public Room findOne(Long id) {
+        return this.roomRepo.findOne(id);
+    }
+
+    @Override
+    public List<Room> findAll(int page, int size) {
+        return this.roomRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.roomRepo.delete(id);
+    }
+
+
 }

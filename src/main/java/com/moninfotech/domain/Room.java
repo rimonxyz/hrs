@@ -29,6 +29,14 @@ public class Room extends BaseEntity {
     @JsonBackReference
     private Hotel hotel;
 
+    @PrePersist
+    @PreUpdate
+    public void setDiscounted() {
+        if (this.discount > 0)
+            this.setDiscounted(true);
+        else this.setDiscounted(false);
+    }
+
     public String getRoomNumber() {
         return roomNumber;
     }

@@ -19,7 +19,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">My Hotel Rooms</h3>
         <h3 class="right wow fadeInDown animated" data-wow-delay=".5s">
-        <a th:href="@{/hotel/rooms/create}">Create New</a>
+            <a th:href="@{/hotel/rooms/create}">Create New</a>
         </h3>
         <div class="contact-form contact-list">
             <p class="wow slideInDown animated" data-wow-delay=".5s">
@@ -34,8 +34,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <td><h3 class="thead">ID</h3></td>
                     <td><h3 class="thead">Room Number</h3></td>
                     <td><h3 class="thead">Floor Number</h3></td>
+                    <td><h3 class="thead">Price</h3></td>
                     <td><h3 class="thead">Discount</h3></td>
                     <td><h3 class="thead">Category</h3></td>
+                    <td><h3 class="thead">Edit</h3></td>
+                    <td><h3 class="thead">Delete</h3></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,8 +46,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <td><h4 th:text="${room?.id}"></h4></td>
                     <td><h4 th:text="${room?.roomNumber}"></h4></td>
                     <td><h4 th:text="${room?.floorNumber}"></h4></td>
+                    <td><h4 th:text="${room?.price}"></h4></td>
                     <td><h4 th:text="${room?.discount}"></h4></td>
                     <td><h4 th:text="${room?.category?.name}"></h4></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/hotel/rooms/edit/}+${room?.id}">Edit</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/hotel/rooms/delete/}+${room?.id}"
+                              onsubmit="return confirm('Do you really want to delete this room?');" method="post">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
 

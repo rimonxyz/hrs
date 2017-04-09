@@ -14,7 +14,6 @@ public class FileIO {
         try (OutputStream outputStream = new FileOutputStream(file)) {
             outputStream.write(multipartFile.getBytes());
         } catch (IOException e) {
-            e.printStackTrace();
         }
         return file;
     }

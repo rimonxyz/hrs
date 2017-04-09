@@ -4,6 +4,7 @@ import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
+import com.moninfotech.logger.Log;
 import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.HotelService;
 import com.moninfotech.service.RoomService;
@@ -11,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -37,8 +35,8 @@ public class RoomController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String allRooms(@CurrentUser User user, Model model) {
         Hotel hotel = this.hotelService.findByUser(user);
-        if (hotel==null) return "redirect:/?message=You are not authorized to perform this action!";
-        model.addAttribute("roomList",hotel.getRoomList());
+        if (hotel == null) return "redirect:/?message=You are not authorized to perform this action!";
+        model.addAttribute("roomList", hotel.getRoomList());
         return "room/admin/all";
     }
 
@@ -55,10 +53,12 @@ public class RoomController {
                           @CurrentUser User user) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
         List<byte[]> files = this.roomService.convertMultipartFiles(multipartFiles);
+        // if all images aren't valid
         if (files.size() != multipartFiles.length) return "redirect:/hotel/rooms/create";
         room.setImages(files);
-        room.setHotel(this.hotelService.findByUser(user));
-        System.out.println(room.getCategory().getId());
+        Hotel hotel = this.hotelService.findByUser(user);
+        if (hotel == null) return "redirect:/?message=You are not authorized to do this action.";
+        room.setHotel(hotel);
         // check if room category was saved previously, if not then save and set to room
 //        if (room.getCategory().getId() == null)
 //            room.setCategory(this.categoryService.save(room.getCategory()));
@@ -69,4 +69,48 @@ public class RoomController {
         return "redirect:/hotel/rooms?message=Successfully added room.";
     }
 
+    // Update
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    private String editPage(@PathVariable("id") Long id, Model model) {
+        Room room = this.roomService.findOne(id);
+        if (room == null) return "redirect:/hotel/rooms?message=Room not found!";
+        model.addAttribute("categoryList", this.categoryService.findAll());
+        model.addAttribute("room", room);
+        return "room/admin/edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    private String edit(@ModelAttribute Room room, BindingResult bindingResult,
+                        @PathVariable("id") Long id,
+                        @RequestParam("images") MultipartFile[] multipartFiles,
+                        @CurrentUser User user) {
+        if (bindingResult.hasErrors()) Log.print(bindingResult.toString());
+        if (room == null) return "redirect:/hotel/rooms?message=Room not found!";
+        List<byte[]> files = this.roomService.convertMultipartFiles(multipartFiles);
+        // if all images aren't valid
+        boolean isImagesValid = files.size() == multipartFiles.length;
+        String message = "";
+        if (!isImagesValid) {
+            // set previous images
+            room.setImages(this.roomService.findOne(id).getImages());
+            message = "Successfully updated room, but images were invalid, so I updated with previous images.";
+        } else
+            room.setImages(files);
+        room.setId(id);
+        Hotel hotel = this.hotelService.findByUser(user);
+        if (hotel == null) return "redirect:/?message=You are not authorized to do this action.";
+        room.setHotel(hotel);
+        room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
+        room = this.roomService.save(room);
+        if (isImagesValid)
+            message = "Successfully updated room " + room.getRoomNumber();
+        return "redirect:/hotel/rooms?message=" + message;
+    }
+
+    // delete
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
+    private String delete(@PathVariable("id") Long id){
+        this.roomService.delete(id);
+        return "redirect:/hotel/rooms?message=Deleted!";
+    }
 }

@@ -10,5 +10,12 @@ import java.util.List;
  */
 public interface RoomService {
     Room save(Room room);
+
     List<byte[]> convertMultipartFiles(MultipartFile[] multipartFiles);
+
+    Room findOne(Long id);
+
+    List<Room> findAll(int page, int size);
+
+    void delete(Long id);
 }

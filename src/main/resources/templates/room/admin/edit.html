@@ -26,7 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 accumsan vel lacus nulla auctor cursus nunc. Maecenas ultricies dolor in urna tempus, id egestas erat
                 finibus interdum lectus eget scelerisque.</p>
 
-            <form th:action="@{/hotel/rooms/create}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/hotel/rooms/edit/}+${room?.id}" method="post" enctype="multipart/form-data">
                 <div class="fadeInDown animated" data-wow-delay=".5s">
                     <h4>Image1</h4>
                     <input name="images" id="image1" class="fadeInDown animated" type="file"></input>
@@ -36,25 +36,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <input name="images" id="image3" class="fadeInDown animated" type="file"></input>
                 </div>
                 <div class="col-md-6 form-left wow fadeInDown animated" data-wow-delay=".5s">
-                    <input name="roomNumber" type="text" placeholder="Room Number" required="required"></input>
+                    <input th:value="${room?.roomNumber}" name="roomNumber" type="text" placeholder="Room Number" required="required"></input>
                 </div>
                 <div class="col-md-6 form-right wow fadeInDown animated" data-wow-delay=".5s">
-                    <input name="floorNumber" class="text" type="number" placeholder="Floor Number"
+                    <input th:value="${room?.floorNumber}" name="floorNumber" class="text" type="number" placeholder="Floor Number"
                            required="required"></input>
                 </div>
 
                 <div class="col-md-6 form-left wow fadeInDown animated" data-wow-delay=".5s">
-                    <input name="price" class="text" type="number" placeholder="Price" required="required"></input>
+                    <input th:value="${room?.price}" name="price" class="text" type="number" placeholder="Price" required="required"></input>
                 </div>
                 <div class="col-md-6 form-right wow fadeInDown animated" data-wow-delay=".5s">
-                    <input name="discount" class="text" type="number" placeholder="Discount"></input>
+                    <input th:value="${room?.discount}" name="discount" class="text" type="number" placeholder="Discount"></input>
                 </div>
 
                 <h3>Category</h3>
 
                 <div id="select_category" th:if="${categoryList!=null and !categoryList?.isEmpty()}">
                     <select name="category.id" class="wow fadeInDown animated">
-                        <option th:each="cat : ${categoryList}" th:value="${cat.id}" th:text="${cat.name}"></option>
+                        <option th:each="cat : ${categoryList}" th:value="${cat.id}" th:text="${cat.name}" th:selected="${room?.category?.id==cat?.id}"></option>
                         <!--<option th:value="Dummy">Dummy 2</option>-->
                     </select>
                 </div>
@@ -152,21 +152,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--<script>-->
 
 
-<!--$(document).ready(function () {-->
-<!--var i = 0;-->
-<!--$("#addNewButton").on("click", function () {-->
-<!--i++;-->
-<!--if (i % 2 == 0)-->
-<!--$("#addNewButton").text("Add New");-->
-<!--else-->
-<!--$("#addNewButton").text("Existing Categories");-->
-<!--$("#select_category").toggle();-->
-<!--$("#new_category").toggle();-->
+    <!--$(document).ready(function () {-->
+        <!--var i = 0;-->
+        <!--$("#addNewButton").on("click", function () {-->
+            <!--i++;-->
+            <!--if (i % 2 == 0)-->
+                <!--$("#addNewButton").text("Add New");-->
+            <!--else-->
+                <!--$("#addNewButton").text("Existing Categories");-->
+            <!--$("#select_category").toggle();-->
+            <!--$("#new_category").toggle();-->
 
-<!--var n = $(document).height();-->
-<!--$('html, body').animate({ scrollTop:  $("#addNewButton").offset().top - 50 }, 'slow');-->
-<!--});-->
-<!--});-->
+            <!--var n = $(document).height();-->
+            <!--$('html, body').animate({ scrollTop:  $("#addNewButton").offset().top - 50 }, 'slow');-->
+        <!--});-->
+    <!--});-->
 <!--</script>-->
 </body>
 </html>
