@@ -11,7 +11,7 @@ public class Facilities {
     private boolean withCorridor;
     private boolean breakfast;
     private boolean internet;
-    private boolean ac;
+    private boolean airConditioned;
     private boolean tv;
     private boolean geyser;
 
@@ -47,12 +47,12 @@ public class Facilities {
         this.internet = internet;
     }
 
-    public boolean isAc() {
-        return ac;
+    public boolean isAirConditioned() {
+        return airConditioned;
     }
 
-    public void setAc(boolean ac) {
-        this.ac = ac;
+    public void setAirConditioned(boolean airConditioned) {
+        this.airConditioned = airConditioned;
     }
 
     public boolean isTv() {
@@ -78,7 +78,7 @@ public class Facilities {
                 ", withCorridor=" + withCorridor +
                 ", breakfast=" + breakfast +
                 ", internet=" + internet +
-                ", ac=" + ac +
+                ", airConditioned=" + airConditioned +
                 ", tv=" + tv +
                 ", geyser=" + geyser +
                 '}';

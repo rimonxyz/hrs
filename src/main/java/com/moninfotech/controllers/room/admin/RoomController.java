@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.room.admin;
 
+import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
@@ -32,11 +33,20 @@ public class RoomController {
     @Autowired
     private CategoryService categoryService;
 
+    // get all room
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    private String allRooms(@CurrentUser User user, Model model) {
+        Hotel hotel = this.hotelService.findByUser(user);
+        if (hotel==null) return "redirect:/?message=You are not authorized to perform this action!";
+        model.addAttribute("roomList",hotel.getRoomList());
+        return "room/admin/all";
+    }
+
     // create
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     private String createPage(Model model) {
         model.addAttribute("categoryList", this.categoryService.findAll());
-        return "room/create";
+        return "room/admin/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

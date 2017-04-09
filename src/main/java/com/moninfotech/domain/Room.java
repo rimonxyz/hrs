@@ -1,5 +1,8 @@
 package com.moninfotech.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,13 +17,16 @@ public class Room extends BaseEntity {
     private int price;
     @ElementCollection(fetch = FetchType.LAZY)
     @Column(length = 1000000)
+    @JsonIgnore
     private List<byte[]> images;
     private int discount;
     private boolean discounted;
     private int floorNumber;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roomList")
+    @JsonBackReference
     private List<Booking> bookingList;
     @ManyToOne
+    @JsonBackReference
     private Hotel hotel;
 
     public String getRoomNumber() {

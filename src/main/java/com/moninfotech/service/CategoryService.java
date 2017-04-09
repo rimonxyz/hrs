@@ -12,5 +12,7 @@ public interface CategoryService {
 
     List<Category> findAll();
 
+    List<Category> findAll(int page, int size);
+
     Category findOne(Long id);
 }
