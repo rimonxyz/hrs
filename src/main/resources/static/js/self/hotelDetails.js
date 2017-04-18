@@ -38,5 +38,23 @@ var isAlreadyExists = function (id) {
     });
     return exists;
 }
+var onCheckoutButtonClick = function () {
+    var ids = [];
+    $('#bookingTable tbody tr td:first-child').each(function () {
+        ids.push($(this).text());
+    });
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(ids),
+        url: "/bookings/create",
+        success: function (msg) {
+            console.log(msg);
+        },
+        error : function(e) {
+            console.log('Error: ' + e);
+        }
 
+    });
+}
 /*]]>*/

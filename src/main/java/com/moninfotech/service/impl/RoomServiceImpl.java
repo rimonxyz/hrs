@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,6 +59,11 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void delete(Long id) {
         this.roomRepo.delete(id);
+    }
+
+    @Override
+    public List<Room> findAll(Long[] ids) {
+        return this.roomRepo.findAll(Arrays.asList(ids));
     }
 
 
