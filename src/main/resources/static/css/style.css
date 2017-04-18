@@ -882,6 +882,22 @@ img.zoom-img:hover, .welcome-grids:hover img.zoom-img, .portfolio-grids:hover im
 .team-row {
     margin-top: 4em;
 }
+.room-grids {
+    border: 10px solid #404040;
+    padding: 2em 1.5em;
+    width: 22.5%;
+    height: 100px;
+    margin-right: 10px;
+    background: #fff;
+    position: relative;
+    transition: .5s all;
+    -webkit-transition: .5s all;
+    -o-transition: .5s all;
+    -moz-transition: .5s all;
+    -ms-transition: .5s all;
+    overflow: hidden;
+    text-align: center;
+}
 
 .team-grids {
     border: 10px solid #404040;
@@ -898,6 +914,7 @@ img.zoom-img:hover, .welcome-grids:hover img.zoom-img, .portfolio-grids:hover im
     overflow: hidden;
     text-align: center;
 }
+
 
 .team-grids.team-mdl {
     margin: 0 2.5em;

@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/hotel/rooms")
-public class RoomController {
+public class RoomAdminController {
 
     @Autowired
     private RoomService roomService;

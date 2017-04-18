@@ -100,11 +100,6 @@ public class Hotel extends BaseEntity {
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", address=" + address +
-                ", roomList=" + roomList +
-                ", reviewList=" + reviewList +
-                ", user=" + user +
                 "} " + super.toString();
     }
-
 }

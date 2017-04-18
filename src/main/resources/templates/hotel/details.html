@@ -14,181 +14,45 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--navigation-->
 <div th:include="fragments/navigation"></div>
 
-<!--portfolio-->
-<div id="portfolio" class="portfolio">
-    <div class="container">
-        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">Packages</h3>
-        <div class="sap_tabs">
-            <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
-                <ul class="resp-tabs-list wow fadeInUp animated" data-wow-delay=".7s">
-                    <li class="resp-tab-item"><a th:href="@{/hotels}">All</a></li>
-                    <li class="resp-tab-item"><a th:href="@{/hotels?place=Coxs Bazar}">Coxs Bazar</a></li>
-                    <li class="resp-tab-item"><span>Saint Martins</span></li>
-                    <li class="resp-tab-item"><span>Bandarbans</span></li>
-                    <li class="resp-tab-item"><span>Rangamati</span></li>
-                    <li class="resp-tab-item"><span>Sajek</span></li>
-                    <li class="resp-tab-item"><span>Sylhet</span></li>
-                    <li class="resp-tab-item"><span>Srimangal</span></li>
-                </ul>
-                <div class="clearfix"></div>
-                <div class="resp-tabs-container">
-                    <div class="tab-1 resp-tab-content">
-                        <div class="tab_img">
-                            <div class="col-md-4 portfolio-grids" th:each="hotel : ${hotelList}">
-                                <a class="wow zoomIn animated" data-wow-delay=".5s" th:href="@{/hotels/}+${hotel?.id}"
-                                   th:title="${hotel?.description}">
-                                    <img th:src="@{/hotels/images/}+${hotel?.id}" class="img-responsive zoom-img" alt=""></img>
-                                    <div class="b-wrapper">
-                                        <h5>Package 1</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <!--<div class="col-md-4 portfolio-grids">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".7s" th:href="@{/images/locations/saintmartins.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/locations/saintmartins.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Package 2</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="col-md-4 portfolio-grids">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".7s" th:href="@{/images/locations/bandarbans.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/locations/bandarbans.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Package 3</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <div class="clearfix"></div>
-                        </div>
-
-                        <!--<div class="tab_img">-->
-                            <!--<div class="col-md-4 portfolio-grids">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".9s" th:href="@{/images/g7.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also remaining essentially unchanged. ">-->
-                                    <!--<img th:src="@{/images/g7.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Package 4</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="col-md-8 portfolio-grids  portfolio-two portfolio-grids-mdl">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".5s" th:href="@{/images/g6.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/g6.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Package 5</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="clearfix"></div>-->
-                        <!--</div>-->
-                    </div>
-                    <!--<div class="tab-1 resp-tab-content">-->
-                        <!--<div class="tab_img">-->
-                            <!--<div class="col-md-4 portfolio-grids">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".5s" th:href="@{/images/g2.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/g2.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Top Vacations</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="col-md-4 portfolio-grids">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".7s" th:href="@{/images/g5.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/g5.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Top Vacations</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="clearfix"></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="tab-1 resp-tab-content">-->
-                        <!--<div class="tab_img">-->
-                            <!--<div class="col-md-8 portfolio-grids portfolio-two">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".5s" th:href="@{/images/g4.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/g4.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Top Vacations</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="col-md-4 portfolio-grids">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".7s" th:href="@{/images/g3.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/g3.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Top Vacations</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="clearfix"></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="tab-1 resp-tab-content">-->
-                        <!--<div class="tab_img">-->
-                            <!--<div class="col-md-4 portfolio-grids">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".5s" th:href="@{/images/g1.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/g1.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Top Vacations</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="col-md-8 portfolio-grids portfolio-two">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".7s" th:href="@{/images/g6.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/g6.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Top Vacations</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="clearfix"></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="tab-1 resp-tab-content">-->
-                        <!--<div class="tab_img">-->
-                            <!--<div class="col-md-8 portfolio-grids portfolio-three">-->
-                                <!--<a class="wow zoomIn animated" data-wow-delay=".5s" th:href="@{/images/g7.jpg}"-->
-                                   <!--data-lightbox="example-set"-->
-                                   <!--data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">-->
-                                    <!--<img th:src="@{/images/g7.jpg}" class="img-responsive zoom-img" alt=""></img>-->
-                                    <!--<div class="b-wrapper">-->
-                                        <!--<h5>Top Vacations</h5>-->
-                                    <!--</div>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div class="clearfix"></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                </div>
+<div class="row" style="margin-top: 20px;">
+    <div class="col-sm-4 col-sm-offset-2">
+        <div id="top" class="callbacks_container">
+            <div id="roomBox" th:each="room : ${hotel?.roomList}"
+                 th:onclick="'onRoomItemClick(this,\'' + ${room.id} + '\');'"
+                 class="col-sm-1 room-grids wow zoomInLeft animated"
+                 data-wow-delay=".5s">
+                <span hidden="hidden" id="roomId" th:text="${room.id}"></span>
+                <h6>No. <span id="roomNumber" th:text="${room?.roomNumber}"></span></h6>
+                <p>$<span id="roomPrice" th:text="${room?.price}"></span></p>
             </div>
+
+            <!--<div class="clearfix"></div>-->
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="hotelInfo">
+            <h2 th:text="${hotel?.name}"></h2>
+            <h3 th:text="${hotel?.phoneNumber}"></h3>
+            <h5 th:text="${hotel?.getAddress()?.getCommaSeperatedString()}"></h5>
+            <table id="bookingTable" class="table">
+                <thead>
+                <tr>
+                    <td id="id">ID</td>
+                    <td>Room No</td>
+                    <td>Price</td>
+                    <!--<td>Discount</td>-->
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
 </div>
-<!--//portfolio-->
+
 <!--footer-->
 <div th:include="fragments/footer"></div>
 <!--//footer-->
+<script th:src="@{/js/self/hotelDetails.js}"></script>
 <script th:src="@{/js/lightbox-plus-jquery.min.js}"></script>
 <script th:src="@{/js/easyResponsiveTabs.js}" type="text/javascript"></script>
 <script type="text/javascript">
