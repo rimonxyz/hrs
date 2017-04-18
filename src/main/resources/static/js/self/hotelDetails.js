@@ -50,6 +50,7 @@ var onCheckoutButtonClick = function () {
         url: "/bookings/create",
         success: function (msg) {
             console.log(msg);
+            window.location = "/hotels";
         },
         error : function(e) {
             console.log('Error: ' + e);

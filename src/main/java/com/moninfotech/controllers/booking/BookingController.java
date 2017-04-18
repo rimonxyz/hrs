@@ -7,7 +7,9 @@ import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.BookingService;
 import com.moninfotech.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,25 +33,27 @@ public class BookingController {
     @ResponseBody
     @CrossOrigin
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    private String createBooking(@RequestBody String idsJson, @CurrentUser User currentUser) throws UnsupportedEncodingException {
+    private ResponseEntity<Booking> createBooking(@RequestBody String idsJson, @CurrentUser User currentUser) throws UnsupportedEncodingException {
         idsJson = URLDecoder.decode(idsJson, "UTF-8");
         Long ids[] = null;
         try {
-            ids =this.bookingService.convertToIds(idsJson);
+            ids = this.bookingService.convertToIds(idsJson);
             List<Room> roomList = this.roomService.findAll(ids);
+            if (roomList.isEmpty())
+                return new ResponseEntity<Booking>(HttpStatus.NO_CONTENT);
             Booking booking = new Booking();
             booking.setRoomList(roomList);
             booking.setUser(currentUser);
             booking.setStartDate(new Date());
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
-            calendar.add(Calendar.DATE,2);
+            calendar.add(Calendar.DATE, 2);
             booking.setEndDate(calendar.getTime());
-            this.bookingService.save(booking);
-        }catch (Exception e){
-            return "redirect:/hotels?message=Can not book.";
+            booking = this.bookingService.save(booking);
+            return new ResponseEntity<Booking>(booking, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<Booking>(HttpStatus.BAD_REQUEST);
         }
-        return String.valueOf(ids);
     }
 
 }
