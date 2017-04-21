@@ -3,6 +3,7 @@ package com.moninfotech.service;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.User;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,4 +23,7 @@ public interface HotelService {
 
     Hotel findByUser(User user);
 
+    List<Hotel> findByAddressDistrict(String district);
+
+    List<Hotel> filterUnbookedHotelsByDate(List<Hotel> hotels, Date startDate, Date endDate);
 }

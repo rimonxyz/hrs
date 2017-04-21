@@ -1,5 +1,6 @@
 package com.moninfotech.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ public class User extends BaseEntity implements UserDetails {
     private Address address;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonBackReference
     private List<Booking> bookingList;
 
     @ElementCollection(fetch = FetchType.EAGER)

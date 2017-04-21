@@ -10,13 +10,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by sayemkcn on 3/26/17.
  */
 @Service
-public class HotelServiceImpl implements HotelService{
+public class HotelServiceImpl implements HotelService {
     @Autowired
     private HotelRepository hotelRepo;
 
@@ -28,13 +30,13 @@ public class HotelServiceImpl implements HotelService{
 
     // save a hotel
     @Override
-    public Hotel save(Hotel hotel){
+    public Hotel save(Hotel hotel) {
         return this.hotelRepo.save(hotel);
     }
 
     // find a hotel by id
     @Override
-    public Hotel findOne(Long id){
+    public Hotel findOne(Long id) {
         return this.hotelRepo.findOne(id);
     }
 
@@ -46,5 +48,20 @@ public class HotelServiceImpl implements HotelService{
     @Override
     public Hotel findByUser(User user) {
         return this.hotelRepo.findByUser(user);
+    }
+
+    @Override
+    public List<Hotel> findByAddressDistrict(String district) {
+        return this.hotelRepo.findByAddressDistrict(district);
+    }
+
+    @Override
+    public List<Hotel> filterUnbookedHotelsByDate(List<Hotel> hotels, Date startDate, Date endDate) {
+        List<Hotel> hotelList = new ArrayList<>();
+        for (Hotel hotel : hotels) {
+            if (hotel.hasUnbookedRoom(startDate, endDate))
+                hotelList.add(hotel);
+        }
+        return hotelList;
     }
 }

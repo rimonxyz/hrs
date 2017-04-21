@@ -2,8 +2,10 @@ package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.moninfotech.commons.DateUtils;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +37,14 @@ public class Room extends BaseEntity {
         if (this.discount > 0)
             this.setDiscounted(true);
         else this.setDiscounted(false);
+    }
+
+    public boolean isBooked(Date date1, Date date2) {
+        for (Booking booking : this.bookingList) {
+            if (DateUtils.isInBetween(booking.getStartDate(), booking.getEndDate(), date1, date2) || DateUtils.isInBetween(date1, date2, booking.getStartDate(), booking.getEndDate()))
+                return true;
+        }
+        return false;
     }
 
     public String getRoomNumber() {

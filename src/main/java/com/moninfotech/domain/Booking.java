@@ -1,5 +1,7 @@
 package com.moninfotech.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +16,7 @@ public class Booking extends BaseEntity {
     @OneToOne
     private Transaction transaction;
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Room> roomList;
     @ManyToOne
     private User user;
@@ -64,7 +67,6 @@ public class Booking extends BaseEntity {
                 "startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", transaction=" + transaction +
-                ", roomList=" + roomList +
                 ", user=" + user +
                 "} " + super.toString();
     }

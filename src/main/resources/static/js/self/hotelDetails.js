@@ -43,18 +43,34 @@ var onCheckoutButtonClick = function () {
     $('#bookingTable tbody tr td:first-child').each(function () {
         ids.push($(this).text());
     });
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
+    var data = [ids, startDate, endDate];
+    console.log(JSON.stringify(data))
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        data: JSON.stringify(ids),
+        data: JSON.stringify(data),
         url: "/bookings/create",
-        success: function (msg) {
-            console.log(msg);
-            window.location = "/hotels";
-        },
-        error : function(e) {
-            console.log('Error: ' + e);
+        statusCode: {
+            200: function (xhr) {
+                console.log(xhr.responseText);
+                window.location = "/hotels";
+            },
+            403: function (xhr) {
+                window.location = "/login";
+            },
+            400: function (xhr) {
+                window.location = "/login";
+            }
         }
+        // success: function (msg) {
+        //     console.log(msg);
+        //     window.location = "/hotels";
+        // },
+        // error : function(e) {
+        //     console.log('Error: ' + e);
+        // }
 
     });
 }

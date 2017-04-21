@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +29,14 @@ public class Hotel extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
+
+    public boolean hasUnbookedRoom(Date startDate, Date endDate) {
+        for (Room room : this.roomList) {
+            if (!room.isBooked(startDate, endDate))
+                return true;
+        }
+        return false;
+    }
 
     public String getName() {
         return name;

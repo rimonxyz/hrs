@@ -1,5 +1,7 @@
 package com.moninfotech.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
@@ -12,6 +14,7 @@ public class Category extends BaseEntity {
     private int maxChildNumber;
     private int maxAdultNumber;
     @Embedded
+    @JsonBackReference
     private Facilities facilities;
 
     public int getMaxChildNumber() {
