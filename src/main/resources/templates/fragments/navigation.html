@@ -1,4 +1,4 @@
-<div class="top-nav" xmlns:th="http://www.thymeleaf.org">
+<div class="top-nav" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="container">
         <div class="navbar-header logo">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -101,7 +101,7 @@
                         <li><a href="#">Your booking</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" sec:authorize="hasRole('ADMIN')">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -110,7 +110,7 @@
                         <li><a th:href="@{/admin/categories}">Hotel Categories</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" sec:authorize="hasRole('HOTEL')">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hotel Admin
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
