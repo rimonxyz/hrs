@@ -29,6 +29,7 @@ public class SearchController {
         List<Hotel> hotels = this.hotelService.findByAddressDistrict(location);
         hotels = this.hotelService.filterUnbookedHotelsByDate(hotels, startDate, endDate);
         model.addAttribute("hotelList", hotels);
+        model.addAttribute("areaList",this.hotelService.getAddressAreaList());
         return "index";
     }
 

@@ -27,16 +27,20 @@ public class HotelController {
 
     // Get All Hotels paginated
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String all(@RequestParam(value = "page", required = false) Integer page, Model model) {
+    private String all(@RequestParam(value = "page", required = false) Integer page,
+                       @RequestParam(value = "sortBy", required = false) String soryBy,
+                       @RequestParam(value = "isDesc", required = false) boolean isDesc,
+                       Model model) {
         if (page == null || page < 0) page = 0;
-        model.addAttribute(hotelService.findAll(page, 10));
+        model.addAttribute("isDesc",!isDesc);
+        model.addAttribute(hotelService.findAll(page, 10, soryBy, isDesc));
         return "hotel/all";
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    private String details(@PathVariable("id") Long id,Model model){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    private String details(@PathVariable("id") Long id, Model model) {
         Hotel hotel = this.hotelService.findOne(id);
-        if (hotel==null) return "redirect:/hotels?message=Hotel not found!";
+        if (hotel == null) return "redirect:/hotels?message=Hotel not found!";
         model.addAttribute(hotel);
         return "hotel/details";
     }

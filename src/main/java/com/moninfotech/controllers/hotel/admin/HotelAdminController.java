@@ -32,9 +32,12 @@ public class HotelAdminController {
 
     // Get All Hotels paginated
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String all(@RequestParam(value = "page", required = false) Integer page, Model model) {
+    private String all(@RequestParam(value = "page", required = false) Integer page,
+                       @RequestParam(value = "sortBy",required = false) String soryBy,
+                       @RequestParam(value = "desc",required = false) boolean isDesc,
+                       Model model) {
         if (page == null || page < 0) page = 0;
-        model.addAttribute(hotelService.findAll(page, 10));
+        model.addAttribute(hotelService.findAll(page, 10,soryBy,isDesc));
         return "hotel/admin/all";
     }
 

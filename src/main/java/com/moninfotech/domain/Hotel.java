@@ -38,6 +38,10 @@ public class Hotel extends BaseEntity {
         return false;
     }
 
+    public String getReadableAddress() {
+        return this.address.getArea() + ", " + address.getDistrict();
+    }
+
     public String getName() {
         return name;
     }

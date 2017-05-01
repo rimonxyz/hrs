@@ -24,8 +24,11 @@ public class HotelServiceImpl implements HotelService {
 
     // returns all hotels paginated
     @Override
-    public List<Hotel> findAll(int page, int size) {
-        return this.hotelRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
+    public List<Hotel> findAll(int page, int size, String sortBy, boolean isDesc) {
+        if (sortBy == null || sortBy.isEmpty()) sortBy = Constants.FIELD_ID;
+        if (isDesc)
+            return this.hotelRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, sortBy)).getContent();
+        return this.hotelRepo.findAll(new PageRequest(page, size, Sort.Direction.ASC, sortBy)).getContent();
     }
 
     // save a hotel
@@ -63,5 +66,14 @@ public class HotelServiceImpl implements HotelService {
                 hotelList.add(hotel);
         }
         return hotelList;
+    }
+
+    @Override
+    public List<String> getAddressAreaList() {
+        List<String> areaList = new ArrayList<>();
+        this.hotelRepo.findAll().forEach(hotel -> {
+            areaList.add(hotel.getAddress().getArea());
+        });
+        return areaList;
     }
 }

@@ -27,8 +27,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="banner-text-info">
                         <form class="form" th:action="@{/search}" method="get">
                             <datalist id="places">
-                                <option value="baal">Coxs Bazar</option>
-                                <option value="chaal">Saint Martins</option>
+                                <option th:each="area : ${areaList}" th:value="${area}" th:text="${area}">Coxs Bazar</option>
+                                <!--<option th:value="chaal">Saint Martins</option>-->
                             </datalist>
                             <div class="from-group">
                                 <label for="place" class="label">LOCATION</label>
