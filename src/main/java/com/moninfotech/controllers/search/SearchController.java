@@ -22,14 +22,16 @@ public class SearchController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String search(@RequestParam("location") String location,
-                               @RequestParam("startDate") Date startDate,
-                               @RequestParam("endDate") Date endDate,
-                               Model model) {
+                          @RequestParam("startDate") Date startDate,
+                          @RequestParam("endDate") Date endDate,
+                          @RequestParam(value = "isDesc", required = false) boolean isDesc,
+                          Model model) {
 
         List<Hotel> hotels = this.hotelService.findByAddressDistrict(location);
         hotels = this.hotelService.filterUnbookedHotelsByDate(hotels, startDate, endDate);
         model.addAttribute("hotelList", hotels);
-        model.addAttribute("areaList",this.hotelService.getAddressAreaList());
+        model.addAttribute("areaList", this.hotelService.getAddressAreaList());
+        model.addAttribute("isDesc", !isDesc);
         return "index";
     }
 

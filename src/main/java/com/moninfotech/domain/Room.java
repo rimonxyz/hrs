@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.moninfotech.commons.DateUtils;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +49,34 @@ public class Room extends BaseEntity {
         }
         return false;
     }
+
+    public String getBookingDatesAsString() {
+        // get all booked dates of this room
+        List<LocalDate> dates = new ArrayList<>();
+        if (this.bookingList != null) {
+            for (Booking booking : this.bookingList) {
+                dates.addAll(DateUtils.getDates(booking.getStartDate(), booking.getEndDate()));
+            }
+        }
+        // convert all dates into a string
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < dates.size(); i++) {
+            LocalDate localDate = dates.get(i);
+            if (localDate.isBefore(LocalDate.now()))
+                continue;
+            DateTimeFormatter formatter;
+            if (localDate.getMonth().equals(LocalDate.now().getMonth()))
+                formatter = DateTimeFormatter.ofPattern("dd");
+            else
+                formatter = DateTimeFormatter.ofPattern("dd MMM");
+            if (i == dates.size() - 1)
+                stringBuilder.append(localDate.format(formatter));
+            else
+                stringBuilder.append(localDate.format(formatter) + ",\n");
+        }
+        return stringBuilder.toString();
+    }
+
 
     public String getRoomNumber() {
         return roomNumber;
