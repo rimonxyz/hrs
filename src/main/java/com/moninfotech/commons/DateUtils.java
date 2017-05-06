@@ -14,6 +14,10 @@ public class DateUtils {
         return date1.compareTo(startDate) * endDate.compareTo(date1) >= 0 || date2.compareTo(startDate) * endDate.compareTo(date2) >= 0;
     }
 
+    public static boolean isInBetween(Date startDate, Date endDate, Date today) {
+        return today.compareTo(startDate) * endDate.compareTo(today) >= 0;
+    }
+
     public static List<LocalDate> getDates(Date startDate, Date endDate) {
         LocalDate start = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate end = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

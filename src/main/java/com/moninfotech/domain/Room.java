@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.moninfotech.commons.DateUtils;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -42,12 +44,46 @@ public class Room extends BaseEntity {
         else this.setDiscounted(false);
     }
 
+    // check if this room is booked for a given date of current month
+    public boolean isBooked(int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.set(Calendar.DATE,day);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        for (Booking booking : this.bookingList) {
+            if (DateUtils.isInBetween(booking.getStartDate(), booking.getEndDate(), cal.getTime()))
+                return true;
+        }
+        return false;
+    }
+
+
+    // gives status for two dates - checks if this room is booked on this date range
     public boolean isBooked(Date date1, Date date2) {
         for (Booking booking : this.bookingList) {
             if (DateUtils.isInBetween(booking.getStartDate(), booking.getEndDate(), date1, date2) || DateUtils.isInBetween(date1, date2, booking.getStartDate(), booking.getEndDate()))
                 return true;
         }
         return false;
+    }
+
+    public List<Integer> getDaysCurrentMonth() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        int myMonth = cal.get(Calendar.MONTH);
+
+        List<Integer> dateList = new ArrayList<>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
+        while (myMonth == cal.get(Calendar.MONTH)) {
+            System.out.print(cal.getTime());
+            dateList.add(Integer.parseInt(simpleDateFormat.format(cal.getTime())));
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return dateList;
     }
 
     public String getBookingDatesAsString() {

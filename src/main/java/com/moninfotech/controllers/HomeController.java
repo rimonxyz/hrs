@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class HomeController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String home(Model model) {
-        model.addAttribute("areaList",this.hotelService.getAddressAreaList());
+        model.addAttribute("areaList", this.hotelService.getAddressAreaList());
         return "index";
     }
 
@@ -44,8 +45,11 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@ModelAttribute User user, BindingResult bindingResult) {
+    public String register(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
+        // check if user already exists
+        if (this.userService.findByEmail(user.getEmail()) != null)
+            return "redirect:/register?message=User already registered!";
         // set default user
         List<String> defaultRoles = new ArrayList<>();
         defaultRoles.add("ROLE_USER");

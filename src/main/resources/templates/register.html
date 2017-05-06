@@ -22,9 +22,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">Register</h3>
         <div class="contact-form">
-            <p class="wow slideInDown animated" data-wow-delay=".5s">Sed ut turpis elit ullamcorper in auctor non,
+            <h2 class="wow slideInDown animated" data-wow-delay=".5s" th:if="${param.message}" th:text="${param.message[0]}">Sed ut turpis elit ullamcorper in auctor non,
                 accumsan vel lacus nulla auctor cursus nunc. Maecenas ultricies dolor in urna tempus, id egestas erat
-                finibus interdum lectus eget scelerisque.</p>
+                finibus interdum lectus eget scelerisque.</h2>
 
             <form th:action="@{/register}" method="post" enctype="multipart/form-data">
                 <div class="fadeInDown animated" data-wow-delay=".5s">
@@ -37,27 +37,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <input name="password" type="password" placeholder="Password" required="required"></input>
                 </div>
                 <div class="fadeInDown animated" data-wow-delay=".5s">
-                    <input name="confirmPassword" type="password" placeholder="Confirm Password" required="required"></input>
+                    <input name="confirmPassword" type="password" placeholder="Confirm Password"
+                           required="required"></input>
                 </div>
                 <div class="col-md-6 form-left wow fadeInDown animated" data-wow-delay=".5s">
-                    <input name="address.country" class="text" type="text" placeholder="Country" required="required"></input>
+                    <input name="address.country" class="text" type="text" placeholder="Country"
+                           required="required"></input>
                 </div>
                 <div class="col-md-6 form-right wow fadeInDown animated" data-wow-delay=".5s">
                     <input name="address.city" class="text" type="text" placeholder="City" required="required"></input>
                 </div>
                 <div class="col-md-6 form-left wow fadeInDown animated" data-wow-delay=".5s">
-                    <input name="address.district" class="text" type="text" placeholder="District" required="required"></input>
+                    <input name="address.district" class="text" type="text" placeholder="District"
+                           required="required"></input>
                 </div>
                 <div class="col-md-6 form-right wow fadeInDown animated" data-wow-delay=".5s">
                     <input name="address.area" class="text" type="text" placeholder="Area" required="required"></input>
                 </div>
                 <div class="clearfix"></div>
-                <input name="phoneNumber" class="wow fadeInDown animated" data-wow-delay=".7s" type="text" placeholder="Phone Number"
+                <input name="phoneNumber" class="wow fadeInDown animated" data-wow-delay=".7s" type="text"
+                       placeholder="Phone Number"
                        required=""></input>
 
                 <!--<div class="form-group" data-wow-delay=".5s">-->
-                    <!--<br/>-->
-                    <!--<input class="form-control" name="image"  type="file" placeholder="Image" required="required"></input>-->
+                <!--<br/>-->
+                <!--<input class="form-control" name="image"  type="file" placeholder="Image" required="required"></input>-->
                 <!--</div>-->
                 <input type="submit" value="REGISTER"></input>
             </form>

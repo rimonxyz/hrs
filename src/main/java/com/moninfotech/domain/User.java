@@ -1,11 +1,15 @@
 package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,9 +19,17 @@ import java.util.List;
  */
 @Entity(name = "h_user")
 public class User extends BaseEntity implements UserDetails {
+    @NotNull
+    @NotEmpty
     private String name;
+    @Column(unique = true,nullable = false)
+    @NotNull
+    @Email
     private String email;
+    @NotEmpty
+    @NotNull
     private String phoneNumber;
+    @Size(min = 6)
     private String password;
     @Embedded
     private Address address;
