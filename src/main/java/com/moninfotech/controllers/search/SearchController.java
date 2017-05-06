@@ -27,7 +27,7 @@ public class SearchController {
                           @RequestParam(value = "isDesc", required = false) boolean isDesc,
                           Model model) {
 
-        List<Hotel> hotels = this.hotelService.findByAddressDistrict(location);
+        List<Hotel> hotels = this.hotelService.findByAddressArea(location);
         hotels = this.hotelService.filterUnbookedHotelsByDate(hotels, startDate, endDate);
         model.addAttribute("hotelList", hotels);
         model.addAttribute("areaList", this.hotelService.getAddressAreaList());

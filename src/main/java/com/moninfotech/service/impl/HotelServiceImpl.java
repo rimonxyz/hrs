@@ -54,8 +54,8 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<Hotel> findByAddressDistrict(String district) {
-        return this.hotelRepo.findByAddressDistrict(district);
+    public List<Hotel> findByAddressArea(String area) {
+        return this.hotelRepo.findByAddressAreaIgnoreCase(area);
     }
 
     @Override

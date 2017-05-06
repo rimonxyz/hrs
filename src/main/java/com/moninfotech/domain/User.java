@@ -29,7 +29,7 @@ public class User extends BaseEntity implements UserDetails {
     @NotEmpty
     @NotNull
     private String phoneNumber;
-    @Size(min = 6)
+    @Size
     private String password;
     @Embedded
     private Address address;

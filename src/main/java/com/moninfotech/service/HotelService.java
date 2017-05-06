@@ -23,7 +23,7 @@ public interface HotelService {
 
     Hotel findByUser(User user);
 
-    List<Hotel> findByAddressDistrict(String district);
+    List<Hotel> findByAddressArea(String district);
 
     List<Hotel> filterUnbookedHotelsByDate(List<Hotel> hotels, Date startDate, Date endDate);
 
