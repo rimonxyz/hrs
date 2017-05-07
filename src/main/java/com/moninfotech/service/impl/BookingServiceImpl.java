@@ -1,11 +1,15 @@
 package com.moninfotech.service.impl;
 
 import com.moninfotech.domain.Booking;
+import com.moninfotech.domain.User;
 import com.moninfotech.repository.BookingRepository;
 import com.moninfotech.service.BookingService;
+import com.moninfotech.utils.Constants;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -21,6 +25,16 @@ import java.util.List;
 public class BookingServiceImpl implements BookingService {
     @Autowired
     private BookingRepository bookingRepo;
+
+    @Override
+    public List<Booking> findByUser(User user, int page, int size) {
+        return this.bookingRepo.findByUser(user, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
+    }
+
+    @Override
+    public Booking findOne(Long id) {
+        return this.bookingRepo.findOne(id);
+    }
 
     @Override
     public Booking save(Booking booking) {

@@ -1,5 +1,6 @@
 package com.moninfotech.commons;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -27,5 +28,9 @@ public class DateUtils {
             start = start.plusDays(1);
         }
         return totalDates;
+    }
+
+    public static SimpleDateFormat getReadableDateFormat() {
+        return new SimpleDateFormat("MMM, dd");
     }
 }

@@ -26,6 +26,9 @@ public class Hotel extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
     @JsonBackReference
     private List<Review> reviewList;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "hotel")
+    @JsonBackReference
+    private List<Booking> bookingList;
 
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
@@ -114,5 +117,13 @@ public class Hotel extends BaseEntity {
                 ", description='" + description + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 "} " + super.toString();
+    }
+
+    public List<Booking> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
     }
 }

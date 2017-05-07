@@ -1,6 +1,7 @@
 package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.moninfotech.commons.DateUtils;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,12 +22,19 @@ public class Booking extends BaseEntity {
     @ManyToOne
     private User user;
 
+    @ManyToOne
+    private Hotel hotel;
+
     public boolean isValid() {
         if (roomList == null) return false;
         for (Room room : roomList) {
             if (room.isBooked(this.startDate, this.endDate)) return false;
         }
         return true;
+    }
+
+    public String getReadableDate(Date date){
+        return DateUtils.getReadableDateFormat().format(date);
     }
 
     public Transaction getTransaction() {
@@ -79,4 +87,11 @@ public class Booking extends BaseEntity {
                 "} " + super.toString();
     }
 
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
 }
