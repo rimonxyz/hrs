@@ -8,7 +8,7 @@ var onRoomItemClick = function (element, id) {
         var roomId = $(element).find("#roomId").text();
         var roomNumber = $(element).find("#roomNumber").text();
         var roomPrice = $(element).find("#roomPrice").text();
-        var markup = "<tr><td>" + roomId + "</td><td>" + roomNumber + "</td><td>" + roomPrice + "</td></tr>";
+        var markup = "<tr><td hidden='hidden'>" + roomId + "</td><td>" + roomNumber + "</td><td>" + roomPrice + "</td></tr>";
         $("#bookingTable tbody").append(markup);
     } else {
         removeRow(id);
@@ -43,8 +43,13 @@ var onCheckoutButtonClick = function () {
     $('#bookingTable tbody tr td:first-child').each(function () {
         ids.push($(this).text());
     });
+    if (ids.length < 1) $("#messageArea").text("Please select your rooms first!");
     var startDate = $("#startDate").val();
     var endDate = $("#endDate").val();
+    if (!Date.parse(startDate) || !Date.parse(endDate)) {
+        $("#messageArea").text("Select date range!");
+        return;
+    }
     var data = [ids, startDate, endDate];
     console.log(JSON.stringify(data))
     $.ajax({
@@ -62,6 +67,9 @@ var onCheckoutButtonClick = function () {
             },
             400: function (xhr) {
                 window.location = "/login";
+            },
+            226: function (xhr) {
+                $("#messageArea").text("One or more Rooms are already booked.");
             }
         }
         // success: function (msg) {

@@ -43,21 +43,26 @@ public class BookingController {
         try {
             ids = this.bookingService.convertToIds(data);
             Date[] bookingDates = this.bookingService.getDates(data);
-            List<Room> roomList = this.roomService.findAll(ids);
+            if (bookingDates == null || bookingDates.length < 2) // user hasn't selected date range
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            List<Room> roomList = this.roomService.findAll(ids); // find rooms with that ids
             if (roomList.isEmpty())
-                return new ResponseEntity<Booking>(HttpStatus.NO_CONTENT);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             Booking booking = new Booking();
-            booking.setRoomList(roomList);
+            booking.setRoomList(roomList); // associate rooms with the booking object
             User user = this.userService.findOne(currentUser.getId());
-            if (user == null) return new ResponseEntity<Booking>(HttpStatus.FORBIDDEN);
+            if (user == null) return new ResponseEntity<>(HttpStatus.FORBIDDEN); // if user not logged in
             booking.setUser(user);
             booking.setStartDate(bookingDates[0]);
             booking.setEndDate(bookingDates[1]);
+            // check if any of these rooms are already booked during this period
+            if (!booking.isValid()) return new ResponseEntity<>(HttpStatus.IM_USED);
+
             booking = this.bookingService.save(booking);
             System.out.println(booking.toString());
-            return new ResponseEntity<Booking>(booking, HttpStatus.OK);
+            return new ResponseEntity<>(booking, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<Booking>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

@@ -71,4 +71,6 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> findAll(Long[] ids) {
         return this.bookingRepo.findAll(Arrays.asList(ids));
     }
+
+
 }

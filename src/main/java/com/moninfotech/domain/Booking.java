@@ -21,6 +21,14 @@ public class Booking extends BaseEntity {
     @ManyToOne
     private User user;
 
+    public boolean isValid() {
+        if (roomList == null) return false;
+        for (Room room : roomList) {
+            if (room.isBooked(this.startDate, this.endDate)) return false;
+        }
+        return true;
+    }
+
     public Transaction getTransaction() {
         return transaction;
     }
@@ -70,4 +78,5 @@ public class Booking extends BaseEntity {
                 ", user=" + user +
                 "} " + super.toString();
     }
+
 }

@@ -17,4 +17,5 @@ public interface BookingService {
     Date[] getDates(String jsonArray);
 
     List<Booking> findAll(Long[] id);
+
 }
