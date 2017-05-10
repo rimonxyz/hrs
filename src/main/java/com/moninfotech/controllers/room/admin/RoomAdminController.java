@@ -1,5 +1,7 @@
 package com.moninfotech.controllers.room.admin;
 
+import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
@@ -15,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,13 +39,18 @@ public class RoomAdminController {
     private String allRooms(@CurrentUser User user,
                             @RequestParam(value = "filterType", required = false) String filterType,
                             @RequestParam(value = "value", required = false) String value, Model model) {
+        if (filterType == null || filterType.isEmpty() || value == null || value.isEmpty()) {
+            filterType = FilterType.DATE;
+            value = DateUtils.getParsableDateFormat().format(new Date());
+        }
+
         Hotel hotel = this.hotelService.findByUser(user);
         if (hotel == null) return "redirect:/?message=You are not authorized to perform this action!";
         List<Room> roomList = hotel.getRoomList();
         List<Long> bookedIds = this.roomService.filterRoomIds(roomList, filterType, value);
 
         model.addAttribute("roomList", roomList);
-        model.addAttribute("categoryList",this.categoryService.findAll());
+        model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);
         model.addAttribute("filterValue", value);
         return "room/admin/allRooms";
