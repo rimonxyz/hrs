@@ -33,4 +33,8 @@ public class DateUtils {
     public static SimpleDateFormat getReadableDateFormat() {
         return new SimpleDateFormat("MMM, dd");
     }
+
+    public static SimpleDateFormat getParsableDateFormat(){
+        return new SimpleDateFormat("yyyy-MM-dd");
+    }
 }

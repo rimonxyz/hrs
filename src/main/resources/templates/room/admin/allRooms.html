@@ -14,14 +14,53 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--navigation-->
 <div th:include="fragments/navigation"></div>
 
-<!--MAIN_CONTENT HOTEL LIST-->
-<!--<div col-sm-8 col-sm-offset-2>-->
-    <!--<div>-->
-        <!---->
-    <!--</div>-->
-<!--</div>-->
+<!--welcome-->
+<div class="contact" id="contact">
+    <div class="container">
+        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">My Hotel Rooms</h3>
+        <h3 class="right wow fadeInDown animated" data-wow-delay=".5s">
+            <a th:href="@{/hotel/rooms/create}">Create New</a>
+        </h3>
+        <div class="contact-form contact-list">
+            <p class="wow slideInDown animated" data-wow-delay=".5s">
+                <b th:if="${param.message!=null}">
+                    => <span style="color: red;" th:text="${param.message[0]}"></span>
+                </b>
+            </p>
 
-<div th:include="fragments/hotels"></div>
+            <div class="panel row panel-default">
+                <!--<div class="panel-heading">Filter</div>-->
+                <div class="panel-heading col-sm-3">
+                    <form class="form" th:action="@{/hotel/rooms}" id="dateFilterForm" method="get">
+                        <input name="filterType" type="hidden" th:value="date"></input>
+                        <input class="form-control" name="value" type="date" id="dateFilter"
+                               th:value="${filterValue}"></input>
+                    </form>
+                </div>
+                <div class="panel-heading col-sm-3"></div>
+                <div class="panel-heading col-sm-3"></div>
+                <div class="panel-heading col-sm-3">
+                    <form class="form" th:action="@{/hotel/rooms}" id="catFilterForm" method="get">
+                        <input name="filterType" type="hidden" th:value="category"></input>
+                        <select class="form-control" name="value" id="categoryFilter">
+                            <option th:each="category: ${categoryList}" th:text="${category?.name}" th:selected="${filterValue?.equals(category?.name)}"></option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="panel col-sm-3" th:each="room : ${roomList}"
+                     th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary">
+                    <div class="panel-heading" th:text="${room?.category?.name}">Panel Header</div>
+                    <div class="panel-body" th:text="${room?.roomNumber}">Panel Content</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <!--footer-->
 <div th:include="fragments/footer"></div>
@@ -103,6 +142,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         });
 
     });
+</script>
+
+
+<script>
+    $("#dateFilter").on("change",function (form) {
+        $("#dateFilterForm").submit();
+    });
+    $("#categoryFilter").on("change",function (form) {
+        $("#catFilterForm").submit();
+    });
+
 </script>
 </body>
 </html>

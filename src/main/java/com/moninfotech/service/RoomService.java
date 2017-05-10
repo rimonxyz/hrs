@@ -20,4 +20,6 @@ public interface RoomService {
     void delete(Long id);
 
     List<Room> findAll(Long[] ids);
+
+    List<Long> filterRoomIds(List<Room> roomList, String filterType, String value);
 }

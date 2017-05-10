@@ -33,11 +33,19 @@ public class RoomAdminController {
 
     // get all room
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String allRooms(@CurrentUser User user, Model model) {
+    private String allRooms(@CurrentUser User user,
+                            @RequestParam(value = "filterType", required = false) String filterType,
+                            @RequestParam(value = "value", required = false) String value, Model model) {
         Hotel hotel = this.hotelService.findByUser(user);
         if (hotel == null) return "redirect:/?message=You are not authorized to perform this action!";
-        model.addAttribute("roomList", hotel.getRoomList());
-        return "room/admin/all";
+        List<Room> roomList = hotel.getRoomList();
+        List<Long> bookedIds = this.roomService.filterRoomIds(roomList, filterType, value);
+
+        model.addAttribute("roomList", roomList);
+        model.addAttribute("categoryList",this.categoryService.findAll());
+        model.addAttribute("bookedIds", bookedIds);
+        model.addAttribute("filterValue", value);
+        return "room/admin/allRooms";
     }
 
     // create
@@ -108,8 +116,8 @@ public class RoomAdminController {
     }
 
     // delete
-    @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
-    private String delete(@PathVariable("id") Long id){
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    private String delete(@PathVariable("id") Long id) {
         this.roomService.delete(id);
         return "redirect:/hotel/rooms?message=Deleted!";
     }
