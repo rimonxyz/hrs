@@ -5,9 +5,10 @@ import com.moninfotech.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,15 +23,15 @@ public class SearchController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String search(@RequestParam("location") String location,
-                          @RequestParam("startDate") Date startDate,
-                          @RequestParam("endDate") Date endDate,
                           @RequestParam(value = "isDesc", required = false) boolean isDesc,
                           Model model) {
 
         List<Hotel> hotels = this.hotelService.findByAddressArea(location);
-        hotels = this.hotelService.filterUnbookedHotelsByDate(hotels, startDate, endDate);
+        hotels.addAll(this.hotelService.findByAddressUpazila(location));
+//        // filter hotels out that are already booked
+//        hotels = this.hotelService.filterUnbookedHotelsByDate(hotels, startDate, endDate);
         model.addAttribute("hotelList", hotels);
-        model.addAttribute("areaList", this.hotelService.getAddressAreaList());
+        model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         model.addAttribute("isDesc", !isDesc);
         return "index";
     }

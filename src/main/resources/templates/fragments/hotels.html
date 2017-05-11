@@ -42,7 +42,7 @@
                 </td>
                 <td>
                     <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
-                    <h3 th:text="${hotel?.getReadableAddress()}"></h3>
+                    <h3 th:text="${hotel?.address?.getCommaSeperatedString()}"></h3>
                 </td>
                 <td><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
                     <h3 th:text="${hotel?.phoneNumber}"></h3>

@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.hotel.admin;
 
+import com.moninfotech.commons.pojo.Roles;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.User;
 import com.moninfotech.service.HotelService;
@@ -65,7 +66,7 @@ public class HotelAdminController {
         user.setAddress(hotel.getAddress());
         // set default role for this user. in this case :ROLE_HOTEL
         List<String> roles = new ArrayList<>();
-        roles.add("ROLE_HOTEL");
+        roles.add(Roles.ROLE_HOTEL);
         user.setRoles(roles);
         // set saved user (with persisted id) to hotel
         hotel.setUser(user);

@@ -33,7 +33,7 @@ public class HomeController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String home(Model model) {
-        model.addAttribute("areaList", this.hotelService.getAddressAreaList());
+        model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         return "index";
     }
 

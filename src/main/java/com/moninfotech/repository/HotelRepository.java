@@ -14,4 +14,6 @@ import java.util.List;
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
     Hotel findByUser(User user);
     List<Hotel> findByAddressAreaIgnoreCase(String area);
+
+    List<Hotel> findByAddressUpazilaIgnoreCase(String location);
 }

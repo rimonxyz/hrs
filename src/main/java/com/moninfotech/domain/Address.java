@@ -10,6 +10,7 @@ public class Address {
     private String country;
     private String city;
     private String district;
+    private String upazila;
     private String area;
 
     public String getCountry() {
@@ -44,8 +45,16 @@ public class Address {
         this.area = area;
     }
 
-    public String getCommaSeperatedString(){
-        return String.join(", ",new String[]{this.area,this.district,this.city,this.country});
+    public String getCommaSeperatedString() {
+        return String.join(", ", new String[]{this.area, this.upazila, this.district, this.city, this.country});
+    }
+
+    public String getUpazila() {
+        return upazila;
+    }
+
+    public void setUpazila(String upazila) {
+        this.upazila = upazila;
     }
 
     @Override
@@ -54,6 +63,7 @@ public class Address {
                 "country='" + country + '\'' +
                 ", city='" + city + '\'' +
                 ", district='" + district + '\'' +
+                ", upazila='" + upazila + '\'' +
                 ", area='" + area + '\'' +
                 '}';
     }

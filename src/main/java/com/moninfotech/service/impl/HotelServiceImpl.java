@@ -59,6 +59,11 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
+    public List<Hotel> findByAddressUpazila(String location) {
+        return this.hotelRepo.findByAddressUpazilaIgnoreCase(location);
+    }
+
+    @Override
     public List<Hotel> filterUnbookedHotelsByDate(List<Hotel> hotels, Date startDate, Date endDate) {
         List<Hotel> hotelList = new ArrayList<>();
         for (Hotel hotel : hotels) {
@@ -69,11 +74,15 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<String> getAddressAreaList() {
+    public List<String> getAddressAreaAndUpazilaList() {
         List<String> areaList = new ArrayList<>();
         this.hotelRepo.findAll().forEach(hotel -> {
-            areaList.add(hotel.getAddress().getArea());
+            if (hotel.getAddress().getArea() != null && !areaList.contains(hotel.getAddress().getArea()))
+                areaList.add(hotel.getAddress().getArea());
+            if (hotel.getAddress().getUpazila() != null && !areaList.contains(hotel.getAddress().getUpazila()))
+                areaList.add(hotel.getAddress().getUpazila());
         });
         return areaList;
     }
+
 }

@@ -25,8 +25,10 @@ public interface HotelService {
 
     List<Hotel> findByAddressArea(String district);
 
+    List<Hotel> findByAddressUpazila(String location);
+
     List<Hotel> filterUnbookedHotelsByDate(List<Hotel> hotels, Date startDate, Date endDate);
 
-    List<String> getAddressAreaList();
+    List<String> getAddressAreaAndUpazilaList();
 
 }

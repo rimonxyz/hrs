@@ -26,7 +26,7 @@ public class Hotel extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
     @JsonBackReference
     private List<Review> reviewList;
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "hotel")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
     @JsonBackReference
     private List<Booking> bookingList;
 
@@ -39,10 +39,6 @@ public class Hotel extends BaseEntity {
                 return true;
         }
         return false;
-    }
-
-    public String getReadableAddress() {
-        return this.address.getArea() + ", " + address.getDistrict();
     }
 
     public String getName() {
