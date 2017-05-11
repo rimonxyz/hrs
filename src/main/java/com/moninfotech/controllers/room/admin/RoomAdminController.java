@@ -53,7 +53,22 @@ public class RoomAdminController {
         model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);
         model.addAttribute("filterValue", value);
-        return "room/admin/allRooms";
+        return "room/admin/all";
+    }
+
+    // search
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    private String searchRoom(@CurrentUser User user,
+                              @RequestParam("q") String query,
+                              Model model) {
+        if (user==null) return "redirect:/login";
+        Hotel hotel = this.hotelService.findByUser(user);
+        List<Room> roomList = this.roomService.searchRooms(hotel,query);
+        if (roomList==null)
+            return "room/admin/all?message=One or more rooms can not be found!";
+        model.addAttribute("roomList",roomList);
+        model.addAttribute("categoryList", this.categoryService.findAll());
+        return "room/admin/all";
     }
 
     // create

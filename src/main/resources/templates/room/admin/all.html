@@ -27,50 +27,41 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     => <span style="color: red;" th:text="${param.message[0]}"></span>
                 </b>
             </p>
-            <table id="roomsTable" class="table table-hover">
-                <thead>
-                <tr>
-                    <!--<td><b>Image</b></td>-->
-                    <td><h3 class="thead">ID</h3></td>
-                    <td><h3 class="thead">Room Number</h3></td>
-                    <td><h3 class="thead">Floor Number</h3></td>
-                    <td><h3 class="thead">Price</h3></td>
-                    <td><h3 class="thead">Discount</h3></td>
-                    <!--<td><h3 class="thead">Booked Dates</h3></td>-->
-                    <td><h3 class="thead">Booked Dates</h3></td>
-                    <td><h3 class="thead">Category</h3></td>
-                    <td><h3 class="thead">Edit</h3></td>
-                    <td><h3 class="thead">Delete</h3></td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="room : ${roomList}">
-                    <td><h4 th:text="${room?.id}"></h4></td>
-                    <td><h4 th:text="${room?.roomNumber}"></h4></td>
-                    <td><h4 th:text="${room?.floorNumber}"></h4></td>
-                    <td><h4 th:text="${room?.price}"></h4></td>
-                    <td><h4 th:text="${room?.discount}"></h4></td>
-                    <!--<td><h4 th:text="${room?.getBookingDatesAsString()}"></h4></td>-->
-                    <td>
-                        <span th:each="day : ${room?.getDaysCurrentMonth()}">
-                            <span class="badge badge-error" th:if="${room?.isBooked(day)}" th:text="${day}"></span>
-                            <span class="badge badge-success"  th:if="${!room?.isBooked(day)}" th:text="${day}"></span>
-                        </span>
-                    </td>
-                    <td><h4 th:text="${room?.category?.name}"></h4></td>
-                    <td>
-                        <a class="btn btn-primary" th:href="@{/hotel/rooms/edit/}+${room?.id}">Edit</a>
-                    </td>
-                    <td>
-                        <form th:action="@{/hotel/rooms/delete/}+${room?.id}"
-                              onsubmit="return confirm('Do you really want to delete this room?');" method="post">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
 
-            </table>
+            <div class="panel row panel-default">
+                <!--<div class="panel-heading">Filter</div>-->
+                <div class="panel-heading col-sm-3">
+                    <form class="form" th:action="@{/hotel/rooms}" id="dateFilterForm" method="get">
+                        <input name="filterType" type="hidden" th:value="date"></input>
+                        <input class="form-control" name="value" type="date" id="dateFilter"
+                               th:value="${filterValue}"></input>
+                    </form>
+                </div>
+                <div class="panel-heading col-sm-5">
+                    <form class="form" th:action="@{/hotel/rooms/search}" method="get">
+                        <input class="form-control" name="q" type="text" placeholder="Search"></input>
+                    </form>
+                </div>
+                <div class="panel-heading col-sm-3">
+                    <form class="form" th:action="@{/hotel/rooms}" id="catFilterForm" method="get">
+                        <input name="filterType" type="hidden" th:value="category"></input>
+                        <select class="form-control" name="value" id="categoryFilter">
+                            <option th:each="category: ${categoryList}" th:text="${category?.name}"
+                                    th:selected="${filterValue?.equals(category?.name)}"></option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="panel col-sm-3" th:each="room : ${roomList}"
+                     th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary">
+                    <div class="panel-heading" th:text="${room?.category?.name}">Panel Header</div>
+                    <div class="panel-body" th:text="${room?.roomNumber}">Panel Content</div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -155,6 +146,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         });
 
     });
+</script>
+
+
+<script>
+    $("#dateFilter").on("change", function (form) {
+        $("#dateFilterForm").submit();
+    });
+    $("#categoryFilter").on("change", function (form) {
+        $("#catFilterForm").submit();
+    });
+
 </script>
 </body>
 </html>

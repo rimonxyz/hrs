@@ -4,6 +4,7 @@ import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.FileIO;
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.repository.RoomRepository;
 import com.moninfotech.service.RoomService;
@@ -78,6 +79,11 @@ public class RoomServiceImpl implements RoomService {
         else if (filterType.equals(FilterType.CATEGORY))
             return filterRoomIdsByCategory(roomList,value);
         return null;
+    }
+
+    @Override
+    public List<Room> searchRooms(Hotel hotel,String query) {
+        return this.roomRepo.findByHotelAndRoomNumberContainingIgnoreCase(hotel,query);
     }
 
     private List<Long> filterRoomIdsByCategory(List<Room> roomList, String value) {
