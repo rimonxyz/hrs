@@ -21,7 +21,7 @@ body a {
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    font-family: 'Aladin', cursive;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h3.thead{
     color: darkgreen;
@@ -94,10 +94,10 @@ ul.nav.navbar-right {
 /* Effect 11: text fill based on Lea Verou's animation http://dabblet.com/gist/6046779 */
 .top-nav ul li a {
     text-decoration: none;
-    letter-spacing: 1px;
-    font-size: 1.5em;
+    letter-spacing: 0.5px;
+    font-size: 1.2em;
     color: white;
-    font-family: 'Aladin', cursive;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     position: relative;
     padding: 0;
 }
@@ -107,7 +107,7 @@ ul.nav.navbar-right {
 }
 
 .nav > li > a:hover, .nav > li > a:focus, .top-nav ul li a.active {
-    background: none;
+    background: red;
 }
 
 /* Shylock (by @benhanks040888) */

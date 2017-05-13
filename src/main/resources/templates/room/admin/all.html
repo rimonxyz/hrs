@@ -17,7 +17,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--welcome-->
 <div class="contact" id="contact">
     <div class="container">
-        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">My Hotel Rooms</h3>
+        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">
+            <a th:href="@{/hotel/rooms}">My Hotel Rooms</a>
+        </h3>
         <h3 class="right wow fadeInDown animated" data-wow-delay=".5s">
             <a th:href="@{/hotel/rooms/create}">Create New</a>
         </h3>
@@ -57,8 +59,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="row">
                 <div class="panel col-sm-3" th:each="room : ${roomList}"
                      th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary">
-                    <div class="panel-heading" th:text="${room?.category?.name}">Panel Header</div>
-                    <div class="panel-body" th:text="${room?.roomNumber}">Panel Content</div>
+                    <div class="panel-heading">
+                        <h2 class="panel-title" th:text="${room?.category?.name}"></h2><br/>
+                        <h5 class="badge badge-primary" th:if="${room?.discounted}"
+                            th:text="${room?.getDiscountPercentage()}">Discounted</h5>
+                    </div>
+                    <div class="panel-body">
+                        <h1 th:text="${room?.roomNumber}"></h1>
+                    </div>
+                    <div class="panel-footer panel-primary clearfix">
+                        <div class="col-sm-6">
+                            <h6>Original Price</h6>
+                            <h3 th:text="${room?.price}"></h3>
+                        </div>
+                        <div class="col-sm-6" th:if="${room?.discounted}">
+                            <h6>Discounted Price</h6>
+                            <h3 th:text="${room?.getDiscountedPrice()}"></h3>
+                        </div>
+                        <!--<div class="panel-footer clearfix">-->
+                        <!--<div class="pull-right">-->
+                        <!--<a href="#" class="btn btn-primary">Add Booking</a>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
                 </div>
             </div>
 

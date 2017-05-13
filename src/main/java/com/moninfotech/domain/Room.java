@@ -44,11 +44,19 @@ public class Room extends BaseEntity {
         else this.setDiscounted(false);
     }
 
+    public int getDiscountedPrice() {
+        return this.price - this.discount;
+    }
+
+    public String getDiscountPercentage() {
+        return String.valueOf((discount * 100) / price) + "% Off";
+    }
+
     // check if this room is booked for a given date of current month
     public boolean isBooked(int day) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.set(Calendar.DATE,day);
+        cal.set(Calendar.DATE, day);
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
