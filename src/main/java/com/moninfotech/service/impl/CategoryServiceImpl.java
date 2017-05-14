@@ -31,6 +31,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category findByName(String name) {
+        return this.categoryRepo.findByName(name);
+    }
+
+    @Override
     public List<Category> findAll(int page,int size) {
         return this.categoryRepo.findAll(new PageRequest(page,size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
@@ -38,5 +43,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findOne(Long id) {
         return this.categoryRepo.findOne(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.categoryRepo.delete(id);
     }
 }

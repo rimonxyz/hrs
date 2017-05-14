@@ -12,7 +12,11 @@ public interface CategoryService {
 
     List<Category> findAll();
 
+    Category findByName(String name);
+
     List<Category> findAll(int page, int size);
 
     Category findOne(Long id);
+
+    void delete(Long id);
 }

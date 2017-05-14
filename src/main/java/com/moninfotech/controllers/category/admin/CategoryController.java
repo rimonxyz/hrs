@@ -2,16 +2,17 @@ package com.moninfotech.controllers.category.admin;
 
 import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Facilities;
+import com.moninfotech.domain.Room;
 import com.moninfotech.logger.Log;
 import com.moninfotech.service.CategoryService;
+import com.moninfotech.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by sayemkcn on 4/8/17.
@@ -20,8 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value = "/admin/categories")
 public class CategoryController {
 
+    private final CategoryService categoryService;
+    private final RoomService roomService;
+
     @Autowired
-    private CategoryService categoryService;
+    public CategoryController(CategoryService categoryService, RoomService roomService) {
+        this.categoryService = categoryService;
+        this.roomService = roomService;
+    }
+
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String allCategories(@RequestParam(value = "page", required = false) Integer page, Model model) {
@@ -46,6 +54,52 @@ public class CategoryController {
         category = this.categoryService.save(category);
         Log.print(category.toString());
         return "redirect:/admin/categories";
+    }
+
+    // CREATE
+
+    // EDIT
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    private String editPage(@PathVariable("id") Long id,
+                            Model model) {
+        Category category = this.categoryService.findOne(id);
+        if (category == null) return "redirect:/admin/categories?message=Category not found!";
+        model.addAttribute("category", category);
+        return "category/admin/edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    private String edit(@ModelAttribute Category category,
+                        @PathVariable("id") Long id, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
+        // fascilities object will be null if no checkbox is selected, so initialise new object
+        if (category.getFacilities() == null) category.setFacilities(new Facilities());
+        category.setId(id);
+        category = this.categoryService.save(category);
+        Log.print(category.toString());
+        return "redirect:/admin/categories";
+    }
+
+    // DELETE
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    private String delete(@RequestParam("delCatId") Long delCatId,
+                          @RequestParam("newCatId") Long newCatId) {
+        Category delCategory = this.categoryService.findOne(delCatId);
+        Category newCategory = this.categoryService.findOne(newCatId);
+        if (delCategory == null || newCategory == null)
+            return "redirect:/admin/categories?message=Could not find category!";
+        // transfer rooms to new category
+        List<Room> processedRoomList = this.roomService.organiseRoomListCategory(delCategory.getRoomList(), newCategory);
+        this.roomService.saveAll(processedRoomList);
+        // delete old category
+        try {
+            this.categoryService.delete(delCategory.getId());
+        }catch (Exception e){
+            return "redirect:/admin/categories?message=Can not delete category, you should select another category to transfer this category rooms.";
+        }
+        return "redirect:/admin/categories?message=Successfully deleted!";
     }
 
 }

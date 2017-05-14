@@ -1,54 +1,55 @@
-
 <div class="address wow fadeInDown animated" data-wow-delay=".5s" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container">
-        <table class="table table-hover table-striped" style="margin-left: 50px;">
-            <!--<li><i class="phon">Hotel Id</i><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><span th:text="${hotel?.id}"></span></li>-->
-            <thead>
-            <tr>
-                <th><h1>Image</h1></th>
-                <th>
-                    <i >
-                        <i th:if="${isDesc}" class="glyphicon glyphicon-chevron-down"></i>
-                        <i th:if="${!isDesc}" class="glyphicon glyphicon-chevron-up"></i>
-                        <h1><a th:href="@{/hotels?sortBy=name&amp;isDesc=}+${isDesc}">Name</a></h1>
-                    </i>
-                </th>
-                <th>
-                    <h1>Address</h1>
-                </th>
-                <th>
-                    <i >
-                        <i th:if="${isDesc}" class="glyphicon glyphicon-chevron-down"></i>
-                        <i th:if="${!isDesc}" class="glyphicon glyphicon-chevron-up"></i>
-                        <h1><a th:href="@{/hotels?sortBy=phoneNumber&amp;isDesc=}+${isDesc}">Contact</a></h1>
-                    </i>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="hotel : ${hotelList}">
-                <td>
-                    <img style="margin-top: 20px;" height="100" width="100" th:src="@{/hotels/images/}+${hotel?.id}"
-                         class="img-responsive zoom-img"
-                         alt=""></img>
-                </td>
-                <td>
-                    <i class="phon">
-                        <h2>
-                            <a th:href="@{/hotels/}+${hotel?.id}" th:text="${hotel?.name}"></a>
-                        </h2>
-                    </i><br/>
-                    <h4 th:text="${hotel?.description}">info@moninfotech.com</h4>
-                </td>
-                <td>
-                    <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
-                    <h3 th:text="${hotel?.address?.getCommaSeperatedString()}"></h3>
-                </td>
-                <td><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
-                    <h3 th:text="${hotel?.phoneNumber}"></h3>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="col-sm-10 col-sm-offset-1">
+            <table class="table table-hover table-striped">
+                <!--<li><i class="phon">Hotel Id</i><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><span th:text="${hotel?.id}"></span></li>-->
+                <thead>
+                <tr>
+                    <th><h3>Image</h3></th>
+                    <th>
+                        <i>
+                            <i th:if="${isDesc}" class="glyphicon glyphicon-chevron-down"></i>
+                            <i th:if="${!isDesc}" class="glyphicon glyphicon-chevron-up"></i>
+                            <h3><a th:href="@{/hotels?sortBy=name&amp;isDesc=}+${isDesc}">Name</a></h3>
+                        </i>
+                    </th>
+                    <th>
+                        <h3>Address</h3>
+                    </th>
+                    <th>
+                        <i>
+                            <i th:if="${isDesc}" class="glyphicon glyphicon-chevron-down"></i>
+                            <i th:if="${!isDesc}" class="glyphicon glyphicon-chevron-up"></i>
+                            <h3><a th:href="@{/hotels?sortBy=phoneNumber&amp;isDesc=}+${isDesc}">Contact</a></h3>
+                        </i>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="hotel : ${hotelList}">
+                    <td>
+                        <img style="margin-top: 20px;" height="100" width="100" th:src="@{/hotels/images/}+${hotel?.id}"
+                             class="img-responsive zoom-img"
+                             alt=""></img>
+                    </td>
+                    <td>
+                        <i class="phon">
+                            <h3>
+                                <a th:href="@{/hotels/}+${hotel?.id}" th:text="${hotel?.name}"></a>
+                            </h3>
+                        </i><br/>
+                        <h4 th:text="${hotel?.description}">info@moninfotech.com</h4>
+                    </td>
+                    <td>
+                        <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
+                        <h5 th:text="${hotel?.address?.getCommaSeperatedString()}"></h5>
+                    </td>
+                    <td><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
+                        <h4 th:text="${hotel?.phoneNumber}"></h4>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

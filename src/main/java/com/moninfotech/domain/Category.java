@@ -2,8 +2,8 @@ package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by sayemkcn on 3/21/17.
@@ -16,6 +16,13 @@ public class Category extends BaseEntity {
     @Embedded
     @JsonBackReference
     private Facilities facilities;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    private List<Room> roomList;
+
+    @PreRemove
+    private void onRemove() {
+        this.roomList.clear();
+    }
 
     public int getMaxChildNumber() {
         return maxChildNumber;
@@ -48,6 +55,15 @@ public class Category extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public List<Room> getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(List<Room> roomList) {
+        this.roomList = roomList;
     }
 
     @Override

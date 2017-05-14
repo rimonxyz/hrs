@@ -15,9 +15,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-right menu__list menu--shylock">
-                <li class="menu__item menu__item--current"><a th:href="@{/}" class="menu__link">Home</a></li>
+                <li class="menu__item menu__item--current"><a th:href="@{/}" class="menu__link"><i class="glyphicon glyphicon-home"></i>Home</a></li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hotels
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-tag"></i>Hotels
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/hotels}">All Hotels</a></li>
@@ -92,13 +92,23 @@
                         <li><a href="#">Review a Hotel</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sing in &amp; Account
+                <li class="dropdown" sec:authorize="!isAuthenticated()">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Sing in &amp; Account
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/login}">Sing In</a></li>
                         <li><a th:href="@{/register}">Create an account</a></li>
                         <li><a href="#">Your booking</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" sec:authorize="isAuthenticated()">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="glyphicon glyphicon-user"></i><span sec:authentication="principal.name"></span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">My Bookings</a></li>
+                        <li><a th:href="@{/logout}">Log out</a></li>
                     </ul>
                 </li>
                 <li class="dropdown" sec:authorize="hasRole('ADMIN')">

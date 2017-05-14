@@ -17,7 +17,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--welcome-->
 <div class="contact" id="contact">
     <div class="container">
-        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">All categorys</h3>
+        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">All categories</h3>
         <h3 class="right wow fadeInDown animated" data-wow-delay=".5s">
             <a th:href="@{/admin/categories/create}">Create New</a>
         </h3>
@@ -35,10 +35,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="category:${categoryList}">
+                <tr th:if="${categoryList != null}" th:each="category:${categoryList}">
 
                     <td><h4><span th:text="${category?.id}"></span></h4></td>
                     <td><h4><span th:text="${category?.name}"></span></h4></td>
+                    <td><a class="btn btn-primary" th:href="@{/admin/categories/edit/}+${category?.id}">Edit</a></td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" id="delButtton"
+                                data-target="#deleteCategoryModal" th:attr="data-cat-id=${category?.id}">Delete
+                        </button>
+                    </td>
 
                 </tr>
                 </tbody>
@@ -46,6 +52,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
     </div>
 </div>
+
+
+<!--modal-->
+
+<!-- Modal -->
+<div id="deleteCategoryModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Category</h4>
+            </div>
+            <div class="modal-body">
+                <p>If you delete this category you need to assign rooms of this category to another category.</p>
+                <form class="form" th:action="@{/admin/categories/delete}" method="post">
+                    <select name="newCatId" id="catSelect" class="form-control clearfix" th:if="${categoryList != null}">
+                        <option th:each="category:${categoryList}" th:text="${category?.name}"
+                                th:value="${category?.id}"></option>
+                    </select>
+                    <input name="delCatId" type="hidden" id="delCatId"></input>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Assign Rooms and Delete Category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).on("click", "#delButtton", function () {
+        var catId = $(this).data('cat-id');
+        $("#delCatId").val(catId);
+        // As pointed out in comments,
+        // it is superfluous to have to manually call the modal.
+        // $('#addBookDialog').modal('show');
+    });
+</script>
+<!--//modal-->
 
 <!--footer-->
 <div th:include="fragments/footer"></div>

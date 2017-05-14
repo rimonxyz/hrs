@@ -4,6 +4,7 @@ import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.FileIO;
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.repository.RoomRepository;
@@ -75,15 +76,31 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<Long> filterRoomIds(List<Room> roomList, String filterType, String value) {
         if (filterType.equals(FilterType.DATE))
-            return filterRoomIdsByDate(roomList,value);
+            return filterRoomIdsByDate(roomList, value);
         else if (filterType.equals(FilterType.CATEGORY))
-            return filterRoomIdsByCategory(roomList,value);
+            return filterRoomIdsByCategory(roomList, value);
         return null;
     }
 
     @Override
-    public List<Room> searchRooms(Hotel hotel,String query) {
-        return this.roomRepo.findByHotelAndRoomNumberContainingIgnoreCase(hotel,query);
+    public List<Room> searchRooms(Hotel hotel, String query) {
+        return this.roomRepo.findByHotelAndRoomNumberContainingIgnoreCase(hotel, query);
+    }
+
+    @Override
+    public List<Room> organiseRoomListCategory(List<Room> roomList, Category newCategory) {
+        List<Room> newList = new ArrayList<>();
+        roomList.forEach(room -> {
+            room.setCategory(newCategory);
+            newList.add(room);
+        });
+        roomList.clear();
+        return newList;
+    }
+
+    @Override
+    public List<Room> saveAll(List<Room> processedRoomList) {
+        return this.roomRepo.save(processedRoomList);
     }
 
     private List<Long> filterRoomIdsByCategory(List<Room> roomList, String value) {
@@ -95,13 +112,13 @@ public class RoomServiceImpl implements RoomService {
         return idsList;
     }
 
-    public List<Long> filterRoomIdsByDate(List<Room> roomList,String value){
+    public List<Long> filterRoomIdsByDate(List<Room> roomList, String value) {
         SimpleDateFormat sdf = DateUtils.getParsableDateFormat();
         List<Long> idList = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
         roomList.forEach(room -> {
             try {
-                if (room.isBooked(sdf.parse(value),sdf.parse(value))){
+                if (room.isBooked(sdf.parse(value), sdf.parse(value))) {
                     idList.add(room.getId());
                 }
             } catch (ParseException e) {

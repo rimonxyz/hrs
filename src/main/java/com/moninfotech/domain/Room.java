@@ -19,8 +19,6 @@ import java.util.List;
 @Entity
 public class Room extends BaseEntity {
     private String roomNumber;
-    @OneToOne
-    private Category category;
     private int price;
     @ElementCollection(fetch = FetchType.LAZY)
     @Column(length = 1000000)
@@ -35,6 +33,8 @@ public class Room extends BaseEntity {
     @ManyToOne
     @JsonBackReference
     private Hotel hotel;
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    private Category category;
 
     @PrePersist
     @PreUpdate
@@ -45,7 +45,10 @@ public class Room extends BaseEntity {
     }
 
     public int getDiscountedPrice() {
-        return this.price - this.discount;
+        int x = this.price - this.discount;
+        if (x < 0)
+            return 0;
+        return x;
     }
 
     public String getDiscountPercentage() {

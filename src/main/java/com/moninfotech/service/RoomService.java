@@ -1,5 +1,6 @@
 package com.moninfotech.service;
 
+import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,4 +26,8 @@ public interface RoomService {
     List<Long> filterRoomIds(List<Room> roomList, String filterType, String value);
 
     List<Room> searchRooms(Hotel hotel, String query);
+
+    List<Room> organiseRoomListCategory(List<Room> roomList, Category newCategory);
+
+    List<Room> saveAll(List<Room> processedRoomList);
 }
