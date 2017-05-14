@@ -29,6 +29,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="fadeInDown animated" data-wow-delay=".5s">
                     <input name="name" type="text" placeholder="Hotel Name" required="required"></input>
                 </div>
+                <div class="fadeInDown animated" data-wow-delay=".5s">
+                    <select class="col-md-12" name="star">
+                        <option th:value="1">1 Star</option>
+                        <option th:value="2">2 Star</option>
+                        <option th:value="3">3 Star</option>
+                        <option th:value="4">4 Star</option>
+                        <option th:value="5">5 Star</option>
+                        <option th:value="6">6 Star</option>
+                        <option th:value="7">7 Star</option>
+                    </select>
+                </div>
                 <div class="col-md-6 form-left wow fadeInDown animated" data-wow-delay=".5s">
                     <input name="address.country" class="text" type="text" placeholder="Country" required="required"></input>
                 </div>

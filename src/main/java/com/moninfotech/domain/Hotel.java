@@ -15,6 +15,7 @@ public class Hotel extends BaseEntity {
     private String name;
     private String description;
     private String phoneNumber;
+    private byte star;
     @Column(length = 1000000)
     @JsonIgnore
     private byte[] image;
@@ -121,5 +122,13 @@ public class Hotel extends BaseEntity {
 
     public void setBookingList(List<Booking> bookingList) {
         this.bookingList = bookingList;
+    }
+
+    public byte getStar() {
+        return star;
+    }
+
+    public void setStar(byte star) {
+        this.star = star;
     }
 }
