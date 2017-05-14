@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * Created by sayemkcn on 4/16/17.
  */
@@ -30,10 +32,17 @@ public class HotelController {
     private String all(@RequestParam(value = "page", required = false) Integer page,
                        @RequestParam(value = "sortBy", required = false) String soryBy,
                        @RequestParam(value = "isDesc", required = false) boolean isDesc,
+                       @RequestParam(value = "filterType", required = false) String filterType,
+                       @RequestParam(value = "filterValue", required = false) String filterValue,
                        Model model) {
         if (page == null || page < 0) page = 0;
-        model.addAttribute("isDesc",!isDesc);
-        model.addAttribute(hotelService.findAll(page, 10, soryBy, isDesc));
+        List<Hotel> hotelList = hotelService.findAll(page, 10, soryBy, isDesc);
+        if (filterType != null && !filterType.isEmpty() && filterValue != null && !filterValue.isEmpty())
+            hotelList = this.hotelService.filterHotels(hotelList, filterType, filterValue);
+        model.addAttribute("isDesc", !isDesc);
+        if (filterValue != null)
+            model.addAttribute("filterValue", filterValue);
+        model.addAttribute(hotelList);
         return "hotel/all";
     }
 

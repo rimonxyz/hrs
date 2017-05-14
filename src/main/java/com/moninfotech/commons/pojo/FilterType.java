@@ -6,4 +6,6 @@ package com.moninfotech.commons.pojo;
 public class FilterType {
     public static final String DATE = "date";
     public static final String CATEGORY = "category";
+    public static final String STAR = "star";
+    public static final String PRICE = "price";
 }

@@ -6,11 +6,50 @@
                     <h2>Filter</h2>
                 </div>
                 <div class="panel-body">
-
+                    <div>
+                        <div>
+                            <label for="starFilterDiv" class="label label-primary">By Star</label>
+                            <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
+                                <form class="form" th:action="@{/hotels/}" id="starFilterForm" method="get">
+                                    <input name="filterType" type="hidden" th:value="star"></input>
+                                    <select class="col-md-12" name="filterValue" id="starFilter">
+                                        <option th:value="1" th:selected="${filterValue?.equals('1')}">1 Star</option>
+                                        <option th:value="2" th:selected="${filterValue?.equals('2')}">2 Star</option>
+                                        <option th:value="3" th:selected="${filterValue?.equals('3')}">3 Star</option>
+                                        <option th:value="4" th:selected="${filterValue?.equals('4')}">4 Star</option>
+                                        <option th:value="5" th:selected="${filterValue?.equals('5')}">5 Star</option>
+                                        <option th:value="6" th:selected="${filterValue?.equals('6')}">6 Star</option>
+                                        <option th:value="7" th:selected="${filterValue?.equals('7')}">7 Star</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                        <div style="margin-top: 50px;">
+                            <label for="priceFilterDiv" class="label label-primary">By Price</label>
+                            <div id="priceFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
+                                <form class="form" th:action="@{/hotels/}" id="priceFilterForm" method="get">
+                                    <input name="filterType" type="hidden" th:value="price"></input>
+                                    <select class="col-md-12" name="filterValue" id="priceFilter">
+                                        <option th:value="100x1000" th:selected="${filterValue?.equals('100x1000')}">
+                                            100-1000
+                                        </option>
+                                        <option th:value="1000x10000"
+                                                th:selected="${filterValue?.equals('1000x10000')}">
+                                            1000-10000
+                                        </option>
+                                        <option th:value="10000x50000"
+                                                th:selected="${filterValue?.equals('10000x50000')}">
+                                            10000-50000
+                                        </option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-sm-offset-1">
+        <div class="col-sm-8">
             <table class="table table-hover table-striped panel panel-primary">
                 <!--<li><i class="phon">Hotel Id</i><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><span th:text="${hotel?.id}"></span></li>-->
                 <thead>
@@ -63,3 +102,13 @@
         </div>
     </div>
 </div>
+<script>
+    console.log("LOLOLOL");
+    $("#starFilter").on("change", function (form) {
+        $("#starFilterForm").submit();
+    });
+    $("#priceFilter").on("change", function (form) {
+        $("#priceFilterForm").submit();
+    });
+
+</script>

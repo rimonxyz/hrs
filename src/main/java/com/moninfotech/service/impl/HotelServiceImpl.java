@@ -1,6 +1,8 @@
 package com.moninfotech.service.impl;
 
+import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.repository.HotelRepository;
 import com.moninfotech.service.HotelService;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by sayemkcn on 3/26/17.
@@ -83,6 +86,32 @@ public class HotelServiceImpl implements HotelService {
                 areaList.add(hotel.getAddress().getUpazila());
         });
         return areaList;
+    }
+
+    @Override
+    public List<Hotel> filterHotels(List<Hotel> hotelList, String filterType, String value) {
+        try {
+            if (filterType.equals(FilterType.STAR))
+                return hotelList.stream()
+                        .filter(x -> x.getStar() == Byte.parseByte(value))
+                        .collect(Collectors.toList());
+            else if (filterType.equals(FilterType.PRICE)) {
+                String[] range = value.split("x");
+                List<Hotel> newList = new ArrayList<>();
+                for (Hotel hotel : hotelList) {
+                    for (Room room : hotel.getRoomList()) {
+                        if (room.getPrice() >= Integer.parseInt(range[0]) && room.getPrice() <= Integer.parseInt(range[1])) {
+                            newList.add(hotel);
+                            break;
+                        }
+                    }
+                }
+                return newList;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("filterHotels(List<Hotel> hotelList, String filterType, String value): " + e.toString());
+        }
+        return new ArrayList<>();
     }
 
 }
