@@ -3,7 +3,6 @@ package com.moninfotech.service;
 import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -12,8 +11,6 @@ import java.util.List;
  */
 public interface RoomService {
     Room save(Room room);
-
-    List<byte[]> convertMultipartFiles(MultipartFile[] multipartFiles);
 
     Room findOne(Long id);
 

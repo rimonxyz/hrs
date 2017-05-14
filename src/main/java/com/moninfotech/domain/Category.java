@@ -1,6 +1,7 @@
 package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +14,12 @@ public class Category extends BaseEntity {
     private String name;
     private int maxChildNumber;
     private int maxAdultNumber;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Column(length = 1000000)
+    @JsonIgnore
+    private List<byte[]> images;
+
     @Embedded
     @JsonBackReference
     private Facilities facilities;
@@ -74,5 +81,13 @@ public class Category extends BaseEntity {
                 ", maxAdultNumber=" + maxAdultNumber +
                 ", facilities=" + facilities +
                 "} " + super.toString();
+    }
+
+    public List<byte[]> getImages() {
+        return images;
+    }
+
+    public void setImages(List<byte[]> images) {
+        this.images = images;
     }
 }

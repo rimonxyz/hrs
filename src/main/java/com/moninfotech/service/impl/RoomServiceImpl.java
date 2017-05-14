@@ -2,7 +2,6 @@ package com.moninfotech.service.impl;
 
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
-import com.moninfotech.commons.FileIO;
 import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;
@@ -13,11 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,19 +34,6 @@ public class RoomServiceImpl implements RoomService {
         return this.roomRepo.save(room);
     }
 
-    @Override
-    public List<byte[]> convertMultipartFiles(MultipartFile[] multipartFiles) {
-        List<byte[]> filesList = new ArrayList<>();
-        for (MultipartFile multipartFile : multipartFiles) {
-            try {
-                Image image = ImageIO.read(FileIO.convertToFile(multipartFile));
-                if (image != null) filesList.add(multipartFile.getBytes());
-            } catch (IOException e) {
-            }
-        }
-
-        return filesList;
-    }
 
     @Override
     public Room findOne(Long id) {

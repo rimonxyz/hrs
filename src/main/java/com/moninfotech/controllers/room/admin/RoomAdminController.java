@@ -1,6 +1,7 @@
 package com.moninfotech.controllers.room.admin;
 
 import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.FileIO;
 import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
@@ -83,7 +84,7 @@ public class RoomAdminController {
                           @RequestParam("images") MultipartFile[] multipartFiles,
                           @CurrentUser User user) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
-        List<byte[]> files = this.roomService.convertMultipartFiles(multipartFiles);
+        List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
         // if all images aren't valid
         if (files.size() != multipartFiles.length) return "redirect:/hotel/rooms/create";
         room.setImages(files);
@@ -117,7 +118,7 @@ public class RoomAdminController {
                         @CurrentUser User user) {
         if (bindingResult.hasErrors()) Log.print(bindingResult.toString());
         if (room == null) return "redirect:/hotel/rooms?message=Room not found!";
-        List<byte[]> files = this.roomService.convertMultipartFiles(multipartFiles);
+        List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
         // if all images aren't valid
         boolean isImagesValid = files.size() == multipartFiles.length;
         String message = "";

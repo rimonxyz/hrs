@@ -22,13 +22,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">Create Category</h3>
         <div class="contact-form">
-            <p class="wow slideInDown animated" data-wow-delay=".5s">Sed ut turpis elit ullamcorper in auctor non,
-                accumsan vel lacus nulla auctor cursus nunc. Maecenas ultricies dolor in urna tempus, id egestas erat
-                finibus interdum lectus eget scelerisque.</p>
+            <p class="wow slideInDown animated" data-wow-delay=".5s"><span th:if="${param.message!=null}" th:text="${param.message[0]}"></span></p>
 
             <form th:action="@{/admin/categories/create}" method="post" enctype="multipart/form-data">
 
                 <div id="new_category">
+                    <div class="fadeInDown animated" data-wow-delay=".5s">
+                        <h4>Image1</h4>
+                        <input name="images" id="image1" class="fadeInDown animated" type="file"></input>
+                        <h4>Image2</h4>
+                        <input name="images" id="image2" class="fadeInDown animated" type="file"></input>
+                        <h4>Image3</h4>
+                        <input name="images" id="image3" class="fadeInDown animated" type="file"></input>
+                    </div>
+
                     <div class="wow fadeInDown animated" data-wow-delay=".5s">
                         <input name="name" class="text" type="text" placeholder="Category Name"
                                required="required"></input>
@@ -65,6 +72,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-md-6 form-left wow fadeInDown animated" data-wow-delay=".5s">
                         <input name="facilities.geyser" class="checkbox" type="checkbox">Geyser Available?</input>
                     </div>
+
                 </div>
 
                 <input class="wow fadeInDown animated" type="submit" value="CREATE CATEGORY"></input>

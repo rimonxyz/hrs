@@ -29,6 +29,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <form th:action="@{/admin/categories/edit/}+${category?.id}" method="post" enctype="multipart/form-data">
 
                 <div id="new_category">
+                    <div class="fadeInDown animated" data-wow-delay=".5s">
+                        <h4>Image1</h4>
+                        <input name="images" id="image1" class="fadeInDown animated" type="file"></input>
+                        <h4>Image2</h4>
+                        <input name="images" id="image2" class="fadeInDown animated" type="file"></input>
+                        <h4>Image3</h4>
+                        <input name="images" id="image3" class="fadeInDown animated" type="file"></input>
+                    </div>
                     <div class="wow fadeInDown animated" data-wow-delay=".5s">
                         <input name="name" class="text" type="text" placeholder="Category Name"
                                required="required" th:value="${category?.name}"></input>

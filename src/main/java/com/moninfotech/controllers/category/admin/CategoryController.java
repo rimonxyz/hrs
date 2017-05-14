@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.category.admin;
 
+import com.moninfotech.commons.FileIO;
 import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Facilities;
 import com.moninfotech.domain.Room;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -47,8 +49,14 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    private String create(@ModelAttribute Category category, BindingResult bindingResult) {
+    private String create(@ModelAttribute Category category, BindingResult bindingResult,
+                          @RequestParam("images") MultipartFile[] multipartFiles) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
+        List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
+        // if all images aren't valid
+        if (files.size() != multipartFiles.length)
+            return "redirect:/admin/categories/create?message=One or more images are invalid!";
+        category.setImages(files);
         // fascilities object will be null if no checkbox is selected, so initialise new object
         if (category.getFacilities() == null) category.setFacilities(new Facilities());
         category = this.categoryService.save(category);
@@ -70,9 +78,15 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    private String edit(@ModelAttribute Category category,
-                        @PathVariable("id") Long id, BindingResult bindingResult) {
+    private String edit(@ModelAttribute Category category, BindingResult bindingResult,
+                        @PathVariable("id") Long id,
+                        @RequestParam("images") MultipartFile[] multipartFiles) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
+        List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
+        boolean isValid = files.size() == multipartFiles.length;
+        if (!isValid)
+            category.setImages(this.categoryService.findOne(id).getImages());
+        else category.setImages(files);
         // fascilities object will be null if no checkbox is selected, so initialise new object
         if (category.getFacilities() == null) category.setFacilities(new Facilities());
         category.setId(id);
@@ -96,7 +110,7 @@ public class CategoryController {
         // delete old category
         try {
             this.categoryService.delete(delCategory.getId());
-        }catch (Exception e){
+        } catch (Exception e) {
             return "redirect:/admin/categories?message=Can not delete category, you should select another category to transfer this category rooms.";
         }
         return "redirect:/admin/categories?message=Successfully deleted!";
