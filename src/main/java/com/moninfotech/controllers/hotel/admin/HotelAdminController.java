@@ -1,9 +1,15 @@
 package com.moninfotech.controllers.hotel.admin;
 
+import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.commons.pojo.Roles;
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
+import com.moninfotech.logger.Log;
+import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.HotelService;
+import com.moninfotech.service.RoomService;
 import com.moninfotech.service.UserService;
 import com.moninfotech.utils.ImageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,19 +33,27 @@ import java.util.List;
 @RequestMapping("/admin/hotels")
 public class HotelAdminController {
 
+    private final HotelService hotelService;
+    private final UserService userService;
+    private final RoomService roomService;
+    private final CategoryService categoryService;
+
     @Autowired
-    private HotelService hotelService;
-    @Autowired
-    private UserService userService;
+    public HotelAdminController(HotelService hotelService, UserService userService, RoomService roomService, CategoryService categoryService) {
+        this.hotelService = hotelService;
+        this.userService = userService;
+        this.roomService = roomService;
+        this.categoryService = categoryService;
+    }
 
     // Get All Hotels paginated
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String all(@RequestParam(value = "page", required = false) Integer page,
-                       @RequestParam(value = "sortBy",required = false) String soryBy,
-                       @RequestParam(value = "desc",required = false) boolean isDesc,
+                       @RequestParam(value = "sortBy", required = false) String soryBy,
+                       @RequestParam(value = "desc", required = false) boolean isDesc,
                        Model model) {
         if (page == null || page < 0) page = 0;
-        model.addAttribute(hotelService.findAll(page, 10,soryBy,isDesc));
+        model.addAttribute(hotelService.findAll(page, 10, soryBy, isDesc));
         return "hotel/admin/all";
     }
 
@@ -84,9 +99,9 @@ public class HotelAdminController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    private String editPage(@ModelAttribute Hotel hotel, BindingResult bindingResult,
-                            @PathVariable("id") Long id,
-                            @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    private String edit(@ModelAttribute Hotel hotel, BindingResult bindingResult,
+                        @PathVariable("id") Long id,
+                        @RequestParam("image") MultipartFile multipartFile) throws IOException {
         if (bindingResult.hasErrors())
             System.out.println(bindingResult.toString());
         // set existing id to update
@@ -133,4 +148,123 @@ public class HotelAdminController {
         return "redirect:/admin/hotels?message=" + hotel.getName() + " updated!";
     }
 
+    // MANAGE ROOMS FOR ADMIN
+
+    // get all room
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    private String allRooms(@PathVariable("id") Long id,
+                            @RequestParam(value = "filterType", required = false) String filterType,
+                            @RequestParam(value = "value", required = false) String value, Model model) {
+        if (filterType == null || filterType.isEmpty() || value == null || value.isEmpty()) {
+            filterType = FilterType.DATE;
+            value = DateUtils.getParsableDateFormat().format(new Date());
+        }
+        Hotel hotel = this.hotelService.findOne(id);
+        if (hotel == null) return "redirect:/?message=You are not authorized to perform this action!";
+        List<Room> roomList = hotel.getRoomList();
+        List<Long> bookedIds = this.roomService.filterRoomIds(roomList, filterType, value);
+
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("roomList", roomList);
+        model.addAttribute("categoryList", this.categoryService.findAll());
+        model.addAttribute("bookedIds", bookedIds);
+        model.addAttribute("filterValue", value);
+        return "hotel/admin/allRooms";
+    }
+
+    // search
+    @RequestMapping(value = "/{id}/search", method = RequestMethod.GET)
+    private String searchRoom(@PathVariable("id") Long id,
+                              @RequestParam("q") String query,
+                              Model model) {
+        Hotel hotel = this.hotelService.findOne(id);
+        List<Room> roomList = this.roomService.searchRooms(hotel, query);
+        if (roomList == null)
+            return "hotel/admin/allRooms?message=One or more rooms can not be found!";
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("roomList", roomList);
+        model.addAttribute("categoryList", this.categoryService.findAll());
+        return "hotel/admin/allRooms";
+    }
+
+    // create
+    @RequestMapping(value = "/{id}/create", method = RequestMethod.GET)
+    private String createPage(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("hotel", this.hotelService.findOne(id));
+        model.addAttribute("categoryList", this.categoryService.findAll());
+        return "hotel/admin/createRoom";
+    }
+
+    @RequestMapping(value = "/{hotelId}/create", method = RequestMethod.POST)
+    private String create(@ModelAttribute Room room, BindingResult bindingResult,
+                          @PathVariable("hotelId") Long id,
+                          @RequestParam("images") MultipartFile[] multipartFiles) {
+        System.out.println(room.toString());
+        if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
+        List<byte[]> files = this.roomService.convertMultipartFiles(multipartFiles);
+        // if all images aren't valid
+        if (files.size() != multipartFiles.length) return "redirect:/admin/hotels";
+        room.setImages(files);
+        Hotel hotel = this.hotelService.findOne(id);
+        if (hotel == null) return "redirect:/admin/hotels?message=Hotel not found!";
+        room.setHotel(hotel);
+        // check if room category was saved previously, if not then save and set to room
+//        if (room.getCategory().getId() == null)
+//            room.setCategory(this.categoryService.save(room.getCategory()));
+//        else // else find category and set to room
+        room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
+        room = this.roomService.save(room);
+//        System.out.println(room);
+        return "redirect:/admin/hotels/" + id + "?message=Successfully added room " + room.getRoomNumber();
+    }
+
+    // UPDATE ROOM
+    @RequestMapping(value = "/{hotelId}/edit/{roomId}", method = RequestMethod.GET)
+    private String editRoomPage(@PathVariable("hotelId") Long hotelId,
+                                @PathVariable("roomId") Long roomId, Model model) {
+        Hotel hotel = this.hotelService.findOne(hotelId);
+        if (hotel == null) return "redirect:/admin/hotels/" + hotelId + "?message=Hotel not found!";
+        Room room = this.roomService.findOne(roomId);
+        if (room == null) return "redirect:/admin/hotels/" + hotelId + "?message=Room not found!";
+        model.addAttribute("categoryList", this.categoryService.findAll());
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("room", room);
+        return "hotel/admin/editRoom";
+    }
+
+    @RequestMapping(value = "/{hotelId}/edit/{roomId}", method = RequestMethod.POST)
+    private String editRoom(@ModelAttribute Room room, BindingResult bindingResult,
+                            @PathVariable("hotelId") Long hotelId,
+                            @PathVariable("roomId") Long roomId,
+                            @RequestParam("images") MultipartFile[] multipartFiles) {
+        if (bindingResult.hasErrors()) Log.print(bindingResult.toString());
+        if (room == null) return "redirect:/admin/hotels/" + hotelId + "?message=Room not found!";
+        List<byte[]> files = this.roomService.convertMultipartFiles(multipartFiles);
+        // if all images aren't valid
+        boolean isImagesValid = files.size() == multipartFiles.length;
+        String message = "";
+        if (!isImagesValid) {
+            // set previous images
+            room.setImages(this.roomService.findOne(roomId).getImages());
+            message = "Successfully updated room, but images were invalid, so I updated with previous images.";
+        } else
+            room.setImages(files);
+        room.setId(roomId);
+        Hotel hotel = this.hotelService.findOne(hotelId);
+        if (hotel == null) return "redirect:/admin/hotels/" + hotelId + "?message=Hotel not found!";
+        room.setHotel(hotel);
+        room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
+        room = this.roomService.save(room);
+        if (isImagesValid)
+            message = "Successfully updated room " + room.getRoomNumber();
+        return "redirect:/admin/hotels/" + hotelId + "?message=" + message;
+    }
+
+//    // DELETE ROOM
+//    @RequestMapping(value = "/{hotelId}/delete/{roomId}", method = RequestMethod.POST)
+//    private String deleteRoom(@PathVariable("roomId") Long roomId) {
+//
+//        this.roomService.delete(roomId);
+//        return "redirect:/hotel/rooms?message=Deleted!";
+//    }
 }

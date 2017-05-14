@@ -46,7 +46,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <img class="img-circle" height="40" width="60"
                              th:src="@{/admin/hotels/images/}+${hotel.id}"></img>
                     </td>
-                    <td><h4><span th:text="${hotel?.name}"></span></h4></td>
+                    <td><h4><a th:href="@{/admin/hotels/}+${hotel?.id}"><span th:text="${hotel?.name}"></span></a></h4></td>
                     <td><h4><span th:text="${hotel?.address?.getCommaSeperatedString()}"></span></h4></td>
                     <td><h4><span th:text="${hotel?.getReadableDate(hotel.getCreated())}"></span></h4></td>
                     <td><h4><span th:text="${hotel?.getReadableDate(hotel.getLastUpdated())}"></span></h4></td>

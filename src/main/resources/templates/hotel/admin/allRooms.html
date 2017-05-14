@@ -17,11 +17,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--welcome-->
 <div class="contact" id="contact">
     <div class="container">
-        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">
-            <a th:href="@{/hotel/rooms}">My Hotel Rooms</a>
-        </h3>
+        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s" th:text="${hotel?.name}"></h3>
         <h3 class="right wow fadeInDown animated" data-wow-delay=".5s">
-            <a th:href="@{/hotel/rooms/create}">Create New</a>
+            <a th:href="@{/admin/hotels/}+${hotel?.id}+@{/create}">Create Room</a>
         </h3>
         <div class="contact-form contact-list">
             <p class="wow slideInDown animated" data-wow-delay=".5s">
@@ -33,19 +31,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="panel row panel-default">
                 <!--<div class="panel-heading">Filter</div>-->
                 <div class="panel-heading col-sm-3">
-                    <form class="form" th:action="@{/hotel/rooms}" id="dateFilterForm" method="get">
+                    <form class="form" th:action="@{/admin/hotels/}+${hotel?.id}" id="dateFilterForm" method="get">
                         <input name="filterType" type="hidden" th:value="date"></input>
                         <input class="form-control" name="value" type="date" id="dateFilter"
                                th:value="${filterValue}"></input>
                     </form>
                 </div>
                 <div class="panel-heading col-sm-5">
-                    <form class="form" th:action="@{/hotel/rooms/search}" method="get">
+                    <form class="form" th:action="@{/admin/hotels/}+${hotel?.id}+@{/search}" method="get">
                         <input class="form-control" name="q" type="text" placeholder="Search"></input>
                     </form>
                 </div>
                 <div class="panel-heading col-sm-3">
-                    <form class="form" th:action="@{/hotel/rooms}" id="catFilterForm" method="get">
+                    <form class="form" th:action="@{/admin/hotels/}+${hotel?.id}" id="catFilterForm" method="get">
                         <input name="filterType" type="hidden" th:value="category"></input>
                         <select class="form-control" name="value" id="categoryFilter">
                             <option th:each="category: ${categoryList}" th:text="${category?.name}"
@@ -79,8 +77,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                     <div class="panel-footer panel-primary clearfix">
                         <div class="col-sm-12">
-                            <a  class="btn btn-link" th:href="@{/hotel/rooms/edit/}+${room?.id}">Edit</a>
+                            <a class="btn btn-link" th:href="@{/admin/hotels/}+${hotel?.id}+@{/edit/}+${room?.id}">Edit</a>
                         </div>
+                        <!--<div class="col-sm-6" th:if="${room?.discounted}">-->
+                            <!--<form onsubmit="return confirm('Are your sure?');" th:action="@{/admin/hotels/}+${hotel?.id}+@{/delete/}+${room?.id}" method="post">-->
+                                <!--<button class="btn btn-link" type="submit">Delete</button>-->
+                            <!--</form>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ public class Room extends BaseEntity {
     private int discount;
     private boolean discounted;
     private int floorNumber;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roomList")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "roomList")
     @JsonBackReference
     private List<Booking> bookingList;
     @ManyToOne

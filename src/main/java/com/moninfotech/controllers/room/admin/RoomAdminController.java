@@ -138,10 +138,10 @@ public class RoomAdminController {
         return "redirect:/hotel/rooms?message=" + message;
     }
 
-    // delete
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    private String delete(@PathVariable("id") Long id) {
-        this.roomService.delete(id);
-        return "redirect:/hotel/rooms?message=Deleted!";
-    }
+//    // delete
+//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+//    private String delete(@PathVariable("id") Long id) {
+//        this.roomService.delete(id);
+//        return "redirect:/hotel/rooms?message=Deleted!";
+//    }
 }
