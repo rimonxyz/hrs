@@ -22,18 +22,31 @@ public class SearchController {
     private HotelService hotelService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String search(@RequestParam("location") String location,
+    private String search(@RequestParam("query") String query,
                           @RequestParam(value = "isDesc", required = false) boolean isDesc,
+                          @RequestParam(value = "page", required = false) Integer page,
+                          @RequestParam(value = "sortBy", required = false) String soryBy,
+                          @RequestParam(value = "filterType", required = false) String filterType,
+                          @RequestParam(value = "filterValue", required = false) String filterValue,
                           Model model) {
+        if (page == null || page < 0) page = 0;
 
-        List<Hotel> hotels = this.hotelService.findByAddressArea(location);
-        hotels.addAll(this.hotelService.findByAddressUpazila(location));
+        List<Hotel> hotels = this.hotelService.findByAddressArea(query);
+        hotels.addAll(this.hotelService.findByAddressUpazila(query));
+        if (hotels.isEmpty())
+            hotels = this.hotelService.findByNameContaining(query);
+        // filter
+        if (filterType != null && !filterType.isEmpty() && filterValue != null && !filterValue.isEmpty())
+            hotels = this.hotelService.filterHotels(hotels, filterType, filterValue);
 //        // filter hotels out that are already booked
 //        hotels = this.hotelService.filterUnbookedHotelsByDate(hotels, startDate, endDate);
         model.addAttribute("hotelList", hotels);
+        if (filterValue != null)
+            model.addAttribute("filterValue", filterValue);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         model.addAttribute("isDesc", !isDesc);
-        return "index";
+        model.addAttribute("query", query);
+        return "hotel/all";
     }
 
 }

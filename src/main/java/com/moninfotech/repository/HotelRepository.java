@@ -13,7 +13,10 @@ import java.util.List;
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
     Hotel findByUser(User user);
-    List<Hotel> findByAddressAreaIgnoreCase(String area);
 
-    List<Hotel> findByAddressUpazilaIgnoreCase(String location);
+    List<Hotel> findByNameContainingIgnoreCase(String name);
+
+    List<Hotel> findByAddressAreaContainingIgnoreCase(String area);
+
+    List<Hotel> findByAddressUpazilaContainingIgnoreCase(String location);
 }

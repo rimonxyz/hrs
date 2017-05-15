@@ -29,20 +29,35 @@ public class HotelController {
 
     // Get All Hotels paginated
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String all(@RequestParam(value = "page", required = false) Integer page,
+    private String all(@RequestParam(value = "query", required = false) String query,
+                       @RequestParam(value = "page", required = false) Integer page,
                        @RequestParam(value = "sortBy", required = false) String soryBy,
                        @RequestParam(value = "isDesc", required = false) boolean isDesc,
                        @RequestParam(value = "filterType", required = false) String filterType,
                        @RequestParam(value = "filterValue", required = false) String filterValue,
                        Model model) {
         if (page == null || page < 0) page = 0;
-        List<Hotel> hotelList = hotelService.findAll(page, 10, soryBy, isDesc);
+        List<Hotel> hotelList;
+        if (query != null && !query.isEmpty()) {
+            // if search query not null filter hotels
+            hotelList = this.hotelService.findByAddressArea(query);
+            hotelList.addAll(this.hotelService.findByAddressUpazila(query));
+            if (hotelList.isEmpty())
+                hotelList = this.hotelService.findByNameContaining(query);
+        } else {
+            // else find all hotel
+            hotelList = hotelService.findAll(page, 10, soryBy, isDesc);
+        }
         if (filterType != null && !filterType.isEmpty() && filterValue != null && !filterValue.isEmpty())
             hotelList = this.hotelService.filterHotels(hotelList, filterType, filterValue);
+
         model.addAttribute("isDesc", !isDesc);
         if (filterValue != null)
             model.addAttribute("filterValue", filterValue);
+        if (query != null)
+            model.addAttribute("query", query);
         model.addAttribute(hotelList);
+        model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         return "hotel/all";
     }
 

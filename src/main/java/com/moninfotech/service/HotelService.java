@@ -32,4 +32,6 @@ public interface HotelService {
     List<String> getAddressAreaAndUpazilaList();
 
     List<Hotel> filterHotels(List<Hotel> hotelList, String filterType, String value);
+
+    List<Hotel> findByNameContaining(String query);
 }

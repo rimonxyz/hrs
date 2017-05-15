@@ -58,12 +58,12 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<Hotel> findByAddressArea(String area) {
-        return this.hotelRepo.findByAddressAreaIgnoreCase(area);
+        return this.hotelRepo.findByAddressAreaContainingIgnoreCase(area);
     }
 
     @Override
     public List<Hotel> findByAddressUpazila(String location) {
-        return this.hotelRepo.findByAddressUpazilaIgnoreCase(location);
+        return this.hotelRepo.findByAddressUpazilaContainingIgnoreCase(location);
     }
 
     @Override
@@ -112,6 +112,11 @@ public class HotelServiceImpl implements HotelService {
             System.out.println("filterHotels(List<Hotel> hotelList, String filterType, String value): " + e.toString());
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public List<Hotel> findByNameContaining(String name) {
+        return this.hotelRepo.findByNameContainingIgnoreCase(name);
     }
 
 }

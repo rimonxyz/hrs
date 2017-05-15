@@ -1,6 +1,21 @@
 <div class="address wow fadeInDown animated" data-wow-delay=".5s" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container">
         <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form" th:action="@{/search}" method="get">
+                        <datalist id="places">
+                            <option th:each="area : ${areaList}" th:value="${area}" th:text="${area}">Coxs Bazar</option>
+                        </datalist>
+                        <div class="from-group">
+                            <label for="place" class="label label-primary">SEARCH</label>
+                            <input style="height: 50px;" id="place" name="query" list="places" class="form-control"
+                                   required="required" th:value="${query}"></input>
+                        </div>
+                        <button style="margin-top: 20px;" class="form-control btn btn-default" type="submit"><i style="margin-right: 10px;" class="glyphicon glyphicon-search"></i>Search</button>
+                    </form>
+                </div>
+            </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h2>Filter</h2>
@@ -8,9 +23,10 @@
                 <div class="panel-body">
                     <div>
                         <div>
-                            <label for="starFilterDiv" class="label label-primary">By Star</label>
+                            <label for="starFilterDiv" class="label label-primary">BY STAR</label>
                             <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
-                                <form class="form" th:action="@{/hotels/}" id="starFilterForm" method="get">
+                                <form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">
+                                    <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
                                     <input name="filterType" type="hidden" th:value="star"></input>
                                     <select class="col-md-12" name="filterValue" id="starFilter">
                                         <option th:value="1" th:selected="${filterValue?.equals('1')}">1 Star</option>
@@ -25,9 +41,10 @@
                             </div>
                         </div>
                         <div style="margin-top: 50px;">
-                            <label for="priceFilterDiv" class="label label-primary">By Price</label>
+                            <label for="priceFilterDiv" class="label label-primary">BY PRICE</label>
                             <div id="priceFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                 <form class="form" th:action="@{/hotels/}" id="priceFilterForm" method="get">
+                                    <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
                                     <input name="filterType" type="hidden" th:value="price"></input>
                                     <select class="col-md-12" name="filterValue" id="priceFilter">
                                         <option th:value="100x1000" th:selected="${filterValue?.equals('100x1000')}">
