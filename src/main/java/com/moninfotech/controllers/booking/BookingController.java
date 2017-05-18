@@ -80,4 +80,11 @@ public class BookingController {
         }
     }
 
+
+    // checkout page
+    @RequestMapping(value = "/review",method = RequestMethod.GET)
+    private String reviewPage(){
+        return "booking/review";
+    }
+
 }

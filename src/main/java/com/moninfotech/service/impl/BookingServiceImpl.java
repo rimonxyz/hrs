@@ -5,8 +5,8 @@ import com.moninfotech.domain.User;
 import com.moninfotech.repository.BookingRepository;
 import com.moninfotech.service.BookingService;
 import com.moninfotech.utils.Constants;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -44,14 +44,18 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public synchronized Long[] convertToIds(String json) {
         try {
+            Long[] ids = null;
             // data json
-            JSONArray jsonArray = new JSONArray(json);
+            JSONObject jsonObject = new JSONObject(json);
             //id array json
-            jsonArray = jsonArray.getJSONArray(0);
-            Long[] ids = new Long[jsonArray.length()];
+            String idsString = jsonObject.getString("ids");
+            if (!idsString.isEmpty()) {
+                String[] splittedIds = idsString.split(",");
+                ids = new Long[splittedIds.length];
+                for (int i=0;i<splittedIds.length;i++){
+                    ids[i] = Long.parseLong(splittedIds[i]);
+                }
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                ids[i] = jsonArray.getLong(i);
             }
             return ids;
         } catch (Exception e) {
@@ -63,13 +67,11 @@ public class BookingServiceImpl implements BookingService {
     public Date[] getDates(String json) {
         try {
             // data json
-            JSONArray jsonArray = new JSONArray(json);
-            if (jsonArray.length() < 3)
-                throw new IndexOutOfBoundsException("JSON INDEX OUT OF BOUND on getDates(String jsonArray) method.");
+            JSONObject jsonObject = new JSONObject(json);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date[] dates = new Date[2];
-            dates[0] = sdf.parse(jsonArray.getString(1));
-            dates[1] = sdf.parse(jsonArray.getString(2));
+            dates[0] = sdf.parse(jsonObject.getString("startDate"));
+            dates[1] = sdf.parse(jsonObject.getString("endDate"));
             return dates;
         } catch (JSONException e) {
             throw new JSONException(e);

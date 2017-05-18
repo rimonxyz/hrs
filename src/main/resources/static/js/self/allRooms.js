@@ -1,4 +1,4 @@
-var bookingList = [];
+var roomIds = [];
 
 $("#dateFilter").on("change", function (form) {
     $("#dateFilterForm").submit();
@@ -75,21 +75,80 @@ var getPostFix = function (number) {
 
 // BOOKING
 $("#bookNowButton").on("click", function () {
+    var id = $("#dtlsRoomId").text();
+    if (!alreadyExists(roomIds,id)){
+        roomIds.push(id);
+        alert("Room "+id+" is added to the cart!");
+    }else
+        alert("Room "+id+" is already added to the cart!");
+    localStorage.setItem("roomIds",roomIds);
+
+});
+
+var alreadyExists = function (ids,id) {
+    for (var i=0;i<ids.length;i++){
+        if (ids[i] === id)
+           return true;
+    }
+    return false;
+}
+
+// checkout button click action
+$("#checkoutButton").on('click',function () {
     $("#modalRoomId").text($("#dtlsRoomId").text());
 });
 
 // click booking button
 $("#modalAddBookingButton").on("click", function () {
     var booking = {};
-    booking.id = $("#modalRoomId").text();
+    booking.ids = localStorage.getItem("roomIds");
+    if (booking.ids.length<1) {
+        alert("You haven't added any room yet!");
+        return;
+    }
     booking.startDate = $("#modalBookingDate").val();
     booking.endDate = $("#modalCheckoutDate").val();
-    if (!booking.startDate || !booking.endDate){
+    if (!Date.parse(booking.startDate) || !Date.parse(booking.endDate)){
         alert("You must enter booking date.")
         return;
     }
-    bookingList.push(booking);
-    localStorage.setItem("bookingList", bookingList);
-    $('#bookingModal').modal('toggle');
-    console.log(localStorage.getItem("bookingList"));
+    sendToServer(booking);
+    // bookingList.push(booking);
+    // localStorage.setItem("bookingList", bookingList);
+    // $('#bookingModal').modal('toggle');
+    // $('#checkoutButton').attr('hidden',false);
+    // console.log(localStorage.getItem("bookingList"));
 });
+
+var sendToServer = function (data) {
+    console.log(JSON.stringify(data));
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        url: "/bookings/create",
+        statusCode: {
+            200: function (xhr) {
+                console.log(xhr.responseText);
+                window.location = "/hotels";
+            },
+            403: function (xhr) {
+                window.location = "/login";
+            },
+            400: function (xhr) {
+                window.location = "/login";
+            },
+            226: function (xhr) {
+                $("#messageArea").text("One or more Rooms are already booked.");
+            }
+        }
+        // success: function (msg) {
+        //     console.log(msg);
+        //     window.location = "/hotels";
+        // },
+        // error : function(e) {
+        //     console.log('Error: ' + e);
+        // }
+
+    });
+}
