@@ -1,8 +1,12 @@
 package com.moninfotech.controllers.hotel;
 
+import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.Room;
+import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.HotelService;
-import com.moninfotech.service.UserService;
+import com.moninfotech.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,10 +27,16 @@ import java.util.List;
 @RequestMapping(value = "/hotels")
 public class HotelController {
 
+    private final HotelService hotelService;
+    private final RoomService roomService;
+    private final CategoryService categoryService;
+
     @Autowired
-    private HotelService hotelService;
-    @Autowired
-    private UserService userService;
+    public HotelController(HotelService hotelService, RoomService roomService, CategoryService categoryService) {
+        this.hotelService = hotelService;
+        this.roomService = roomService;
+        this.categoryService = categoryService;
+    }
 
     // Get All Hotels paginated
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -61,12 +72,41 @@ public class HotelController {
         return "hotel/all";
     }
 
+    // get all room
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    private String details(@PathVariable("id") Long id, Model model) {
+    private String allRooms(@PathVariable("id") Long id,
+                            @RequestParam(value = "filterType", required = false) String filterType,
+                            @RequestParam(value = "value", required = false) String value, Model model) {
+        if (filterType == null || filterType.isEmpty() || value == null || value.isEmpty()) {
+            filterType = FilterType.DATE;
+            value = DateUtils.getParsableDateFormat().format(new Date());
+        }
         Hotel hotel = this.hotelService.findOne(id);
-        if (hotel == null) return "redirect:/hotels?message=Hotel not found!";
-        model.addAttribute(hotel);
-        return "hotel/details";
+        if (hotel == null) return "redirect:/?message=You are not authorized to perform this action!";
+        List<Room> roomList = hotel.getRoomList();
+        List<Long> bookedIds = this.roomService.filterRoomIds(roomList, filterType, value);
+
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("roomList", roomList);
+        model.addAttribute("categoryList", this.categoryService.findAll());
+        model.addAttribute("bookedIds", bookedIds);
+        model.addAttribute("filterValue", value);
+        return "room/all";
+    }
+
+    // search
+    @RequestMapping(value = "/{id}/search", method = RequestMethod.GET)
+    private String searchRoom(@PathVariable("id") Long id,
+                              @RequestParam("q") String query,
+                              Model model) {
+        Hotel hotel = this.hotelService.findOne(id);
+        List<Room> roomList = this.roomService.searchRooms(hotel, query);
+        if (roomList == null)
+            return "hotel/admin/allRooms?message=One or more rooms can not be found!";
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("roomList", roomList);
+        model.addAttribute("categoryList", this.categoryService.findAll());
+        return "room/all";
     }
 
     // returns image with that entity id

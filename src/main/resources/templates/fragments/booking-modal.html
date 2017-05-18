@@ -1,0 +1,59 @@
+<!--modal-->
+<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body modal-spa">
+                <div class="booking-info">
+                    <h3>Book Domestic &amp; International Vacation packages</h3>
+                </div>
+                <div class="booking-form">
+                    <div hidden="hidden">
+                        <span id="modalRoomId"></span>
+                    </div>
+                    <div class="reservation">
+                        <ul>
+                            <li class="span1_of_1">
+                                <h5>Booking Date</h5>
+                                <div class="book_date">
+                                    <form>
+                                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                        <input id="modalBookingDate" type="date" value="Select date" onfocus="this.value = '';"
+                                               onblur="if (this.value == '') {this.value = 'Select date';}" required="required"></input>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="span1_of_1 left">
+                                <h5>Checkout Date</h5>
+                                <div class="book_date">
+                                    <form>
+                                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                        <input id="modalCheckoutDate"  type="date" value="Select date" onfocus="this.value = '';"
+                                               onblur="if (this.value == '') {this.value = 'Select date';}" required="required"></input>
+                                    </form>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="reservation">
+                        <ul>
+                            <li class="span1_of_3">
+                                <div class="date_btn">
+                                        <button id="modalAddBookingButton" class="btn btn-danger">Add Booking</button>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//modal-->

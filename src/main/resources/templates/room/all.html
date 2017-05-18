@@ -1,0 +1,281 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:include="fragments/head"></div>
+</head>
+<body>
+
+<!--navigation-->
+<div th:include="fragments/navigation"></div>
+
+<!--welcome-->
+<div class="contact" id="contact">
+    <div class="container">
+        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s" th:text="${hotel?.name}"></h3>
+
+        <div class="contact-form contact-list">
+            <p class="wow slideInDown animated" data-wow-delay=".5s">
+                <b th:if="${param.message!=null}">
+                    => <span style="color: red;" th:text="${param.message[0]}"></span>
+                </b>
+            </p>
+
+            <div class="panel row panel-default">
+                <!--<div class="panel-heading">Filter</div>-->
+                <div class="panel-heading col-sm-3">
+                    <form class="form" th:action="@{/hotels/}+${hotel?.id}" id="dateFilterForm" method="get">
+                        <input name="filterType" type="hidden" th:value="date"></input>
+                        <input class="form-control" name="value" type="date" id="dateFilter"
+                               th:value="${filterValue}"></input>
+                    </form>
+                </div>
+                <div class="panel-heading col-sm-5">
+                    <form class="form" th:action="@{/hotels/}+${hotel?.id}+@{/search}" method="get">
+                        <input class="form-control" name="q" type="text" placeholder="Search"></input>
+                    </form>
+                </div>
+                <div class="panel-heading col-sm-3">
+                    <form class="form" th:action="@{/hotels/}+${hotel?.id}" id="catFilterForm" method="get">
+                        <input name="filterType" type="hidden" th:value="category"></input>
+                        <select class="form-control" name="value" id="categoryFilter">
+                            <option th:each="category: ${categoryList}" th:text="${category?.name}"
+                                    th:selected="${filterValue?.equals(category?.name)}"></option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+            <!--ROOM LIST-->
+            <div class="row" id="roomListDivLarge">
+                <div class="panel col-sm-4 roomPanel" th:each="room : ${roomList}" id="roomPanel"
+                     th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary"
+                     th:onclick="'onRoomPanelClick(\'' + ${room?.id} + '\',true);'">
+                    <div class="panel-heading">
+                        <h2 class="panel-title" th:text="${room?.category?.name}"></h2><br/>
+                        <h5 class="badge badge-primary" th:if="${room?.discounted}"
+                            th:text="${room?.getDiscountPercentage()}">Discounted</h5>
+                    </div>
+                    <div id="roomPanelBody" class="panel-body">
+                        <h1 th:text="${room?.roomNumber}"></h1>
+                    </div>
+                    <div class="panel-footer panel-primary clearfix">
+                        <div class="col-sm-6">
+                            <h6>Original Price</h6>
+                            <h3 th:text="${room?.price}"></h3>
+                        </div>
+                        <div class="col-sm-6" th:if="${room?.discounted}">
+                            <h6>Discounted Price</h6>
+                            <h3 th:text="${room?.getDiscountedPrice()}"></h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--CONTAINER PANEL-->
+            <div class="row panel panel-primary" id="containerPanel" hidden="hidden">
+                <div class="panel-heading">
+                    <h3 th:onclick="'toggleVisibility();'">All Rooms</h3>
+                </div>
+                <div class="col-sm-6 panel panel-body" id="leftContainerDiv">
+                    <div class="panel col-sm-4 roomPanel" th:each="room : ${roomList}" id="roomPanel"
+                         th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary"
+                         th:onclick="'onRoomPanelClick(\'' + ${room?.id} + '\',false);'">
+                        <div class="panel-heading">
+                            <h2 class="panel-title" th:text="${room?.category?.name}"></h2><br/>
+                        </div>
+                        <div class="panel-body">
+                            <h4 th:text="${room?.roomNumber}"></h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 panel panel-default">
+
+                    <div hidden="hidden">
+                        <span id="dtlsRoomId"></span>
+                    </div>
+
+                    <div class="panel-heading"><h4 id="dtlsCategory">Category 1</h4></div>
+                    <div class="clearfix"></div>
+                    <div class="panel-body">
+                        <div id="myCarousel" style="height: 300px;" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img id="dtlsImg1" alt="Los Angeles"></img>
+                                </div>
+
+                                <div class="item">
+                                    <img id="dtlsImg2" alt="Chicago"></img>
+                                </div>
+
+                                <div class="item">
+                                    <img id="dtlsImg3" alt="New York"></img>
+                                </div>
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
+                        <!-- Details -->
+                        <br/><br/>
+                        <div class="container">
+                            <div class="row">
+                                <!-- item -->
+                                <div class="col-sm-4 text-center">
+                                    <div class="panel panel-primary panel-pricing">
+                                        <div class="panel-heading">
+                                            <i class="fa fa-desktop"></i>
+                                            <h3 id="dtlsDiscountPercentage">20% off</h3>
+                                        </div>
+                                        <div class="panel-body text-center">
+                                            <p><strong id="dtlsPrice">Price $200</strong></p>
+                                            <p><strong id="dtlsRoomNumber">D202</strong></p>
+                                            <p><strong id="dtlsFloorNumber">2nd Floor</strong></p>
+                                        </div>
+                                        <ul class="list-group text-center">
+                                            <li class="list-group-item"><i id="dtlsIsFrontFace"
+                                                                           class="glyphicon glyphicon-ok"></i> Front
+                                                Face
+                                            </li>
+                                            <li class="list-group-item"><i id="dtlsIsWithCorridor"
+                                                                           class="glyphicon glyphicon-remove"></i> With
+                                                Corridoor projects
+                                            </li>
+                                            <li class="list-group-item"><i id="dtlsIsBreakfast"
+                                                                           class="glyphicon"></i> Free Breakfast
+                                            </li>
+                                            <li class="list-group-item"><i id="dtlsIsWifi" class="glyphicon"></i> Wifi
+                                            </li>
+                                            <li class="list-group-item"><i id="dtlsIsAirConditioned"
+                                                                           class="glyphicon"></i> Air Conditioned
+                                            </li>
+                                            <li class="list-group-item"><i id="dtlsIsTv" class="glyphicon"></i> TV</li>
+                                            <li class="list-group-item"><i id="dtlsIsGeyser" class="glyphicon"></i>
+                                                Geyser
+                                            </li>
+                                        </ul>
+                                        <div class="panel-footer">
+                                            <div th:include="fragments/booking-modal"></div>
+                                            <a id="bookNowButton" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#bookingModal">BOOK NOW!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /item -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--footer-->
+<div th:include="fragments/footer"></div>
+<!--//footer-->
+<script th:src="@{/js/lightbox-plus-jquery.min.js}"></script>
+<script th:src="@{/js/easyResponsiveTabs.js}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#horizontalTab').easyResponsiveTabs({
+            type: 'default', //Types: default, vertical, accordion
+            width: 'auto', //auto or any width like 600px
+            fit: true   // 100% fit in a container
+        });
+    });
+</script>
+<!--script-->
+<!--responsive slider-->
+<script th:src="@{/js/responsiveslides.min.js}"></script>
+<!--//responsive slider-->
+<!-- start-smooth-scrolling-->
+<script type="text/javascript" th:src="@{/js/move-top.js}"></script>
+<script type="text/javascript" th:src="@{/js/easing.js}"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+        });
+    });
+</script>
+<!--//end-smooth-scrolling-->
+<!--bar-js-->
+<script th:src="@{/js/bars.js}"></script>
+<!--bar-js-->
+<!--animate-->
+<script th:src="@{/js/wow.min.js}"></script>
+<script>
+    new WOW().init();
+</script>
+<!--//end-animate-->
+<!--smooth-scrolling-of-move-up-->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+
+        $().UItoTop({easingType: 'easeOutQuart'});
+
+    });
+</script>
+<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!--//smooth-scrolling-of-move-up-->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.js}"></script>
+
+<script>
+    // You can also use "$(window).load(function() {"
+    $(function () {
+        // Slideshow 3
+        $("#slider3").responsiveSlides({
+            auto: true,
+            pager: false,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+
+    });
+</script>
+
+<script th:src="@{/js/self/allRooms.js}"></script>
+</body>
+</html>
