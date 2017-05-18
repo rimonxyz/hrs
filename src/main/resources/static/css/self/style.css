@@ -76,3 +76,10 @@
     background:#F90;
     color:#FFF;
 }
+
+#dtlsImg1, #dtlsImg2, #dtlsImg3 {
+    height: 300px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}

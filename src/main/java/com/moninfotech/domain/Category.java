@@ -21,9 +21,9 @@ public class Category extends BaseEntity {
     private List<byte[]> images;
 
     @Embedded
-    @JsonBackReference
     private Facilities facilities;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @JsonBackReference
     private List<Room> roomList;
 
     @PreRemove

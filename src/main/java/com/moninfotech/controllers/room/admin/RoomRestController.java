@@ -4,6 +4,7 @@ import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.HotelService;
+import com.moninfotech.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,14 @@ import java.util.List;
 @RequestMapping(value = "/rest/hotel/rooms")
 public class RoomRestController {
 
+    private final HotelService hotelService;
+    private final RoomService roomService;
+
     @Autowired
-    private HotelService hotelService;
+    public RoomRestController(HotelService hotelService, RoomService roomService) {
+        this.hotelService = hotelService;
+        this.roomService = roomService;
+    }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private ResponseEntity<List<Room>> allRooms(@CurrentUser User user) {
