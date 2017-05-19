@@ -27,4 +27,6 @@ public interface RoomService {
     List<Room> organiseRoomListCategory(List<Room> roomList, Category newCategory);
 
     List<Room> saveAll(List<Room> processedRoomList);
+
+    List<Room> removeRoom(List<Room> roomList, Long roomId);
 }

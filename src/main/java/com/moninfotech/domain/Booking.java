@@ -33,7 +33,29 @@ public class Booking extends BaseEntity {
         return true;
     }
 
-    public String getReadableDate(Date date){
+    public int getTotalCost() {
+        int totalCost = 0;
+        for (Room room : this.roomList)
+            totalCost += room.getPrice();
+        return totalCost;
+    }
+    public int getTotalDiscount() {
+        int totalDiscount = 0;
+        for (Room room : this.roomList)
+            totalDiscount += room.getDiscount();
+        return totalDiscount;
+    }
+    public int getTotalPayableCost() {
+        int totalPayableCost = 0;
+        for (Room room : this.roomList)
+            totalPayableCost += room.getDiscountedPrice();
+        return totalPayableCost;
+    }
+    public String getTotalDiscountPercentage(){
+        return (this.getTotalDiscount()*100)/this.getTotalCost()+"%";
+    }
+
+    public String getReadableDate(Date date) {
         return DateUtils.getReadableDateFormat().format(date);
     }
 

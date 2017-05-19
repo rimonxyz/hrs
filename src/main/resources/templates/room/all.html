@@ -24,8 +24,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     => <span style="color: red;" th:text="${param.message[0]}"></span>
                 </b>
             </p>
+            <div class="row panel panel-primary">
+                <table class="table" id="sessionTable">
+                    <thead class="panel-heading">
+                    <th>Room Number</th>
+                    <th>Price</th>
+                    <th>Discount</th>
+                    <th>Remove</th>
+                    </thead>
+                    <tbody class="panel-body"></tbody>
+                </table>
+            </div>
 
-            <div class="panel row panel-default">
+            <div class="row" style="background: whitesmoke;">
+                <div class="col-sm-8"></div>
+                <div style="padding: 10px;" class="col-sm-4">
+                    <div th:include="fragments/booking-modal"></div>
+                    <a id="checkoutButton" hidden="hidden"
+                       class="btn btn-lg btn-block btn-warning" data-toggle="modal"
+                       data-target="#bookingModal"><i class="glyphicon glyphicon-shopping-cart"></i>CHECKOUT</a>
+                </div>
+            </div>
+
+            <div class="row" style="background: whitesmoke;">
                 <!--<div class="panel-heading">Filter</div>-->
                 <div class="panel-heading col-sm-3">
                     <form class="form" th:action="@{/hotels/}+${hotel?.id}" id="dateFilterForm" method="get">
@@ -34,7 +55,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                th:value="${filterValue}"></input>
                     </form>
                 </div>
-                <div class="panel-heading col-sm-5">
+                <div class="panel-heading col-sm-6">
                     <form class="form" th:action="@{/hotels/}+${hotel?.id}+@{/search}" method="get">
                         <input class="form-control" name="q" type="text" placeholder="Search"></input>
                     </form>
@@ -176,10 +197,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             </li>
                                         </ul>
                                         <div class="panel-footer">
-                                            <div th:include="fragments/booking-modal"></div>
                                             <a id="bookNowButton" class="btn btn-lg btn-block btn-warning">BOOK NOW!</a>
-                                            <a id="checkoutButton" hidden="hidden" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#bookingModal">CHECKOUT</a>
-
                                         </div>
                                     </div>
                                 </div>

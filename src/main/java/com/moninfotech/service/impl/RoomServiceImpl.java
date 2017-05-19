@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by sayemkcn on 4/4/17.
@@ -83,6 +84,14 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<Room> saveAll(List<Room> processedRoomList) {
         return this.roomRepo.save(processedRoomList);
+    }
+
+    @Override
+    public List<Room> removeRoom(List<Room> roomList, Long roomId) {
+        if (roomList == null) return null;
+        return roomList.stream()
+                .filter(room -> !room.getId().equals(roomId))
+                .collect(Collectors.toList());
     }
 
     private List<Long> filterRoomIdsByCategory(List<Room> roomList, String value) {

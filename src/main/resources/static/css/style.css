@@ -1356,6 +1356,50 @@ p.twit-text {
 }
 
 /*--//address--*/
+
+/*--Top Bar--*/
+.top-bar {
+    background: whitesmoke;
+    padding: 1.5em 0;
+}
+
+.top-bar ul {
+    padding: 0;
+    margin: 0;
+}
+
+.top-bar ul li {
+    list-style-type: none;
+    font-size: 1.3em;
+    color: #333;
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+}
+
+.top-bar ul li i.phon {
+    font-size: 1.5em;
+    color: #E3535D;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-right: 0.5em;
+}
+
+.top-bar ul li i.glyphicon {
+    font-size: 1em;
+    color: #E3535D;
+    margin-right: 0.5em;
+}
+
+.top-bar ul li a {
+    color: #333;
+}
+
+.top-bar ul li a:hover {
+    color: #E3535D;
+}
+
+/*--//address--*/
+
 /*--footer--*/
 .footer {
     padding: 5em 0;

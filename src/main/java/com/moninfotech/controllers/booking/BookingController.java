@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.booking;
 
+import com.moninfotech.commons.SessionAttr;
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
@@ -47,8 +49,10 @@ public class BookingController {
 
     @ResponseBody
     @CrossOrigin
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<Booking> createBooking(@RequestBody String data, @CurrentUser User currentUser) throws UnsupportedEncodingException {
+    @RequestMapping(value = "/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    private ResponseEntity<Booking> orderBooking(@RequestBody String data,
+                                                 @CurrentUser User currentUser,
+                                                 HttpSession session) throws UnsupportedEncodingException {
         System.out.println(data);
         data = URLDecoder.decode(data, "UTF-8");
         System.out.println(data);
@@ -71,8 +75,7 @@ public class BookingController {
             booking.setEndDate(bookingDates[1]);
             // check if any of these rooms are already booked during this period
             if (!booking.isValid()) return new ResponseEntity<>(HttpStatus.IM_USED);
-
-            booking = this.bookingService.save(booking);
+            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
 //            System.out.println(booking.toString());
             return new ResponseEntity<>(booking, HttpStatus.OK);
         } catch (Exception e) {
@@ -80,11 +83,30 @@ public class BookingController {
         }
     }
 
-
-    // checkout page
-    @RequestMapping(value = "/review",method = RequestMethod.GET)
-    private String reviewPage(){
+    // Review
+    @RequestMapping(value = "/review", method = RequestMethod.GET)
+    private String reviewPage() {
         return "booking/review";
+    }
+
+    @RequestMapping(value = "/review/remove/{roomId}", method = RequestMethod.GET)
+    private String removeRoom(@PathVariable("roomId") Long roomId,
+                              HttpSession session) {
+        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+        if (booking != null) {
+            List<Room> updatedRoomList = this.roomService.removeRoom(booking.getRoomList(),roomId);
+            booking.setRoomList(updatedRoomList);
+            session.setAttribute(SessionAttr.SESSION_BOOKING,booking);
+        }
+        return "redirect:/bookings/review";
+    }
+
+    @RequestMapping(value = "/review/confirm",method = RequestMethod.GET)
+    private String confirmBooking(HttpSession session){
+        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+        if (booking!=null && booking.isValid())
+            booking = this.bookingService.save(booking);
+        return "redirect:/bookings";
     }
 
 }

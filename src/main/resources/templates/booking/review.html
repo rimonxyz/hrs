@@ -12,41 +12,146 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
 
 <!--navigation-->
-<div th:include="fragments/navigation"></div>
+<div th:include="fragments/navigation" style="margin-right: 25px;"></div>
 
 <!--MAIN_CONTENT HOTEL LIST-->
 <div class="address wow fadeInDown animated" data-wow-delay=".5s" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container">
-        <div class="col-sm-10 col-sm-offset-1">
-        <table class="table table-hover table-striped" th:width="400">
-            <!--<li><i class="phon">Hotel Id</i><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><span th:text="${hotel?.id}"></span></li>-->
-            <thead>
-            <tr>
-                <th>Image</th>
-                <th>Hotel Name</th>
-                <th>Booking Date</th>
-                <th>Contact Number</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:if="${bookingList != null}" th:each="booking : ${bookingList}">
-                <td><img height="50" width="50" th:src="@{/hotels/images/} + ${booking?.hotel?.id}"></img></td>
-                <td><h3 th:text="${booking?.hotel?.name}"></h3></td>
-                <td>
-                    <h5 th:text="${booking?.getReadableDate(booking?.startDate)}"></h5>-<span
-                        th:text="${booking?.getReadableDate(booking?.endDate)}"></span>
-                </td>
-                <td><h4 th:text="${booking?.hotel?.phoneNumber}"></h4></td>
-                <td>
-                    <a class="btn btn-primary">Details</a>
-                    <a class="btn btn-success">Write a review</a>
-                </td>
-                <td><a class="btn btn-warning">Cancel</a></td>
+        <div class="col-sm-4 panel panel-primary">
+            <div class="panel-heading">
+                <h1 th:text="${session.booking?.hotel?.name}"></h1>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <label for="startDate">
+                        <kdb>Check In Date</kdb>
+                    </label>
+                    <h4 id="startDate"
+                        th:text="${session.booking?.getReadableDate(session.booking?.startDate)}"></h4>
+                </div>
+                <br/>
+                <div>
+                    <label for="endDate">Check Out Date: </label>
+                    <h4 id="endDate"
+                        th:text="${session.booking?.getReadableDate(session.booking?.endDate)}"></h4>
+                </div>
+                <br/>
+                <div>
+                    <label for="address">Hotel Address</label>
+                    <h4 id="address" th:text="${session.booking?.hotel?.address?.getCommaSeperatedString()}"></h4>
+                </div>
 
-            </tr>
-            </tbody>
-        </table>
+            </div>
+            <div class="panel-footer">
+                <div>
+                    <label for="description">Description</label>
+                    <span id="description" th:text="${session.booking?.hotel?.description}"></span>
+                </div>
+                <br/>
+                <div>
+                    <label for="phoneNumber">Contact</label>
+                    <h4 id="phoneNumber" th:text="${session.booking?.hotel?.phoneNumber}"></h4>
+                </div>
+                <br/>
+                <div>
+                    <label for="star">Star</label>
+                    <h4 id="star" th:text="${session.booking?.hotel?.star}"></h4><h4> Star Hotel</h4>
+                </div>
+                <br/>
+            </div>
         </div>
+        <div class="col-sm-8">
+            <table class="table table-hover table-striped panel panel-primary" th:width="400">
+                <!--<li><i class="phon">Hotel Id</i><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><span th:text="${hotel?.id}"></span></li>-->
+                <thead class="panel-heading">
+                <tr>
+                    <th>Image</th>
+                    <th>Room Number</th>
+                    <th>Floor Number</th>
+                    <th>Price</th>
+                    <th>Discount</th>
+                    <th>Discounted Price</th>
+                    <th>Category</th>
+                    <th>Remove</th>
+                </tr>
+                </thead>
+                <tbody class="panel-body">
+                <tr th:if="${session.booking != null}" th:each="room : ${session.booking?.roomList}">
+                    <td><img height="50" width="50" th:src="@{/rooms/} + ${room?.id} +@{/image/0}"></img></td>
+                    <td><h3 th:text="${room?.roomNumber}"></h3></td>
+                    <td><h4 th:text="${room?.floorNumber}"></h4></td>
+                    <td><h4 th:text="${room?.price}"></h4></td>
+                    <td><h4 th:text="${room?.discount}"></h4></td>
+                    <td><h4 th:text="${room?.getDiscountedPrice()}"></h4></td>
+                    <td><h4 th:text="${room?.category?.name}"></h4></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/bookings/review/remove/}+${room?.id}">Remove</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot class="panel-footer">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><h4>Total Cost</h4></td>
+                    <td>
+                        <h3 class="text-right text-danger" style="color: red;"
+                            th:text="${session.booking?.getTotalCost()}"></h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><h4>Total Discount</h4></td>
+                    <td>
+                        <h3 class="text-right text-success" th:text="${session.booking?.getTotalDiscount()}"></h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><h4>Total Payable Cost</h4></td>
+                    <td>
+                        <h3 class="text-right text-primary" th:text="${session.booking?.getTotalPayableCost()}"></h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><h4>You are saving</h4></td>
+                    <td>
+                        <h3 class="text-right text-info"
+                            th:text="${session.booking?.getTotalDiscountPercentage()}"></h3>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+            <div class="row">
+                <div class="col-sm-8">
+                </div>
+                <div class="col-sm-4">
+                    <a class="btn btn-danger">Cancel</a>
+                    <a class="btn btn-success" th:href="@{/bookings/review/confirm}">Checkout</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
