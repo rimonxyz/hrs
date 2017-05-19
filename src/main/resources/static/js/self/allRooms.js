@@ -76,7 +76,7 @@ var getPostFix = function (number) {
 // BOOKING
 $("#bookNowButton").on("click", function () {
     var id = $("#dtlsRoomId").text();
-    if (!alreadyExists(roomIds,id)){
+    if (!alreadyExists(localStorage.getItem("roomIds"),id)){
         roomIds.push(id);
         alert("Room "+id+" is added to the cart!");
     }else
