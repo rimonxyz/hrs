@@ -46,7 +46,7 @@ var onRemoveFromSessionClick = function (e) {
 var loadRoomDetails = function (id, addToSessionTable) {
     $.get("/rest/rooms/" + id, function (room, status) {
         if (addToSessionTable) {
-            var markup = "<tr><td>" + room.roomNumber + "</td><td>" + room.price + "</td><td>" + room.discountPercentage + "</td><td onclick='onRemoveFromSessionClick()'><i class='glyphicon glyphicon-remove'></i>"+room.id+"</td></tr>";
+            var markup = "<tr><td>" + room.roomNumber + "</td><td>" + room.price + "</td><td>" + room.discount + "</td><td>"+room.discountPercentage+"</td></tr>";
             $("#sessionTable tbody").append(markup);
         } else {
             $("#dtlsRoomId").text(id);
@@ -154,6 +154,11 @@ $("#modalAddBookingButton").on("click", function () {
         alert("You must enter booking date.")
         return;
     }
+    if( (new Date(booking.endDate).getTime() < new Date(booking.startDate).getTime()))
+    {
+        alert("Check out date can not be earlier than check in date.");
+        return;
+    }
     sendToServer(booking);
     // bookingList.push(booking);
     // localStorage.setItem("bookingList", bookingList);
@@ -172,6 +177,7 @@ var sendToServer = function (data) {
         statusCode: {
             200: function (xhr) {
                 console.log(xhr.responseText);
+                localStorage.clear();
                 window.location = "/bookings/review";
             },
             403: function (xhr) {
