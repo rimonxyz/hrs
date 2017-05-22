@@ -37,7 +37,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
 
             <div class="row" style="background: whitesmoke;">
-                <div class="col-sm-8"></div>
+                <div style="padding: 10px;" class="col-sm-4">
+                    <div th:include="fragments/booking-modal"></div>
+                    <a id="clearButton" hidden="hidden"
+                       class="btn btn-lg btn-block btn-danger"><i class="glyphicon glyphicon-shopping-cart"></i>CLEAR ITEMS</a>
+                </div>
+                <div class="col-sm-4"></div>
                 <div style="padding: 10px;" class="col-sm-4">
                     <div th:include="fragments/booking-modal"></div>
                     <a id="checkoutButton" hidden="hidden"

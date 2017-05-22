@@ -121,6 +121,7 @@ var updateSessionTable = function (roomIds) {
 }
 
 var alreadyExists = function (ids, id) {
+    if (ids===null) return false;
     for (var i = 0; i < ids.length; i++) {
         if (ids[i] === id)
             return true;
@@ -131,6 +132,12 @@ var alreadyExists = function (ids, id) {
 // checkout button click action
 $("#checkoutButton").on('click', function () {
     $("#modalRoomId").text($("#dtlsRoomId").text());
+});
+
+// clear button action
+$("#clearButton").on('click',function () {
+    localStorage.clear();
+    updateSessionTable([]);
 });
 
 // click booking button
