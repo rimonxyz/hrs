@@ -174,7 +174,7 @@ var sendToServer = function (data) {
                 window.location = "/login";
             },
             226: function (xhr) {
-                $("#messageArea").text("One or more Rooms are already booked.");
+                alert("One or more Rooms are already booked. Please choose different dates.");
             }
         }
         // success: function (msg) {

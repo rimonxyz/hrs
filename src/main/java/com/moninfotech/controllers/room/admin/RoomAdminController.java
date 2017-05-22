@@ -62,12 +62,12 @@ public class RoomAdminController {
     private String searchRoom(@CurrentUser User user,
                               @RequestParam("q") String query,
                               Model model) {
-        if (user==null) return "redirect:/login";
+        if (user == null) return "redirect:/login";
         Hotel hotel = this.hotelService.findByUser(user);
-        List<Room> roomList = this.roomService.searchRooms(hotel,query);
-        if (roomList==null)
+        List<Room> roomList = this.roomService.searchRooms(hotel, query);
+        if (roomList == null)
             return "room/admin/all?message=One or more rooms can not be found!";
-        model.addAttribute("roomList",roomList);
+        model.addAttribute("roomList", roomList);
         model.addAttribute("categoryList", this.categoryService.findAll());
         return "room/admin/all";
     }
@@ -86,8 +86,11 @@ public class RoomAdminController {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
         List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
         // if all images aren't valid
-        if (files.size() != multipartFiles.length) return "redirect:/hotel/rooms/create";
-        room.setImages(files);
+        if (FileIO.isNotEmpty(multipartFiles)) { // if images one or more images are choosen to be uploaded
+            if (files.size() != multipartFiles.length)
+                return "redirect:/hotel/rooms/create?message=One or more images are invalid.";
+            room.setImages(files);
+        }
         Hotel hotel = this.hotelService.findByUser(user);
         if (hotel == null) return "redirect:/?message=You are not authorized to do this action.";
         room.setHotel(hotel);

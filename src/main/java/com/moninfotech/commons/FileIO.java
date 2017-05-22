@@ -34,4 +34,13 @@ public class FileIO {
 
         return filesList;
     }
+
+    public static boolean isNotEmpty(MultipartFile[] multipartFiles) {
+        if (multipartFiles == null) return false;
+        for (MultipartFile multipartFile : multipartFiles) {
+            if (!multipartFile.isEmpty())
+                return true;
+        }
+        return false;
+    }
 }
