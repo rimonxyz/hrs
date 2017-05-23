@@ -17,6 +17,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--MAIN_CONTENT HOTEL LIST-->
 <div class="address wow fadeInDown animated" data-wow-delay=".5s" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container">
+        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s" style="font-size: 30px;">Bookings Details</h3>
+        <h3 class="title wow fadeInDown animated" data-wow-delay=".5s" style="font-size: 20px;color: red;" th:if="${param.message!=null}" th:text="${param.message[0]}"></h3><br/>
+
         <div class="col-sm-4 panel panel-primary">
             <div class="panel-heading">
                 <h1 th:text="${booking?.hotel?.name}"></h1>

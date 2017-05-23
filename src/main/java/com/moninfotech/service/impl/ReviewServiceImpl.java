@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by sayemkcn on 5/23/17.
@@ -53,5 +54,18 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Review> findByRating(float rating, int page, int size) {
         return this.reviewRepo.findByRating(rating, new PageRequest(page, size, Sort.Direction.DESC, SortAttributes.FIELD_ID)).getContent();
+    }
+
+    @Override
+    public List<Review> findByUserAndHotel(User currentUser, Hotel hotel) {
+        return this.reviewRepo.findByUserAndHotel(currentUser,hotel);
+    }
+
+    @Override
+    public List<Hotel> findReviewedHotels(User user) {
+        return this.reviewRepo.findByUser(user)
+                .stream()
+                .map(Review::getHotel)
+                .collect(Collectors.toList());
     }
 }

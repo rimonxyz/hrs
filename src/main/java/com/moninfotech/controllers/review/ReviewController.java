@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.review;
 
+import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Review;
 import com.moninfotech.domain.User;
@@ -11,10 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by sayemkcn on 5/23/17.
@@ -33,6 +33,29 @@ public class ReviewController {
         this.reviewService = reviewService;
         this.bookingService = bookingService;
     }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    private String allReviews(@RequestParam(value = "page", required = false) Integer page,
+                              @RequestParam(value = "hotelId", required = false) Long hotelId,
+                              @CurrentUser User currentUser, Model model) {
+        if (page == null || page < 0) page = 0;
+        List<Review> myReviewList;
+        if (hotelId == null)
+            myReviewList = this.reviewService.findByUser(currentUser, page, SortAttributes.Page.SIZE);
+        else {
+            Hotel hotel = this.hotelService.findOne(hotelId);
+            if (hotel == null)
+                myReviewList = this.reviewService.findByUser(currentUser, page, SortAttributes.Page.SIZE);
+            else
+                myReviewList = this.reviewService.findByUserAndHotel(currentUser, hotel);
+        }
+        model.addAttribute("hotelList", this.reviewService.findReviewedHotels(currentUser));
+        model.addAttribute("reviewList", myReviewList);
+        return "review/all";
+    }
+
+
+    //CREATE REVIEW
 
     @RequestMapping(value = "/hotel/{hotelId}/create", method = RequestMethod.GET)
     private String createPage(@PathVariable("hotelId") Long hotelId,
@@ -62,7 +85,7 @@ public class ReviewController {
         review.setUser(currentUser);
         review.setHotel(hotel);
         review = this.reviewService.save(review);
-        return "redirect:/reviews/" + review.getId();
+        return "redirect:/reviews";
     }
 
 }

@@ -16,37 +16,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <!--MAIN_CONTENT HOTEL LIST-->
 <div class="address wow fadeInDown animated" data-wow-delay=".5s" xmlns:th="http://www.w3.org/1999/xhtml">
-    <h3 class="title wow fadeInDown animated" data-wow-delay=".5s" style="font-size: 30px;" th:if="${param.message!=null}" th:text="${param.message[0]}"></h3><br/>
+    <h3 class="title wow fadeInDown animated" data-wow-delay=".5s" style="font-size: 30px;">My Bookings</h3>
+    <h3 class="title wow fadeInDown animated" data-wow-delay=".5s" style="font-size: 20px;color: red;"
+        th:if="${param.message!=null}" th:text="${param.message[0]}"></h3><br/>
     <div class="container">
         <div class="col-sm-10 col-sm-offset-1">
-        <table class="table table-hover table-striped" th:width="400">
-            <!--<li><i class="phon">Hotel Id</i><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><span th:text="${hotel?.id}"></span></li>-->
-            <thead>
-            <tr>
-                <th>Image</th>
-                <th>Hotel Name</th>
-                <th>Booking Date</th>
-                <th>Contact Number</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:if="${bookingList != null}" th:each="booking : ${bookingList}">
-                <td><img height="50" width="50" th:src="@{/hotels/images/} + ${booking?.hotel?.id}"></img></td>
-                <td><h3 th:text="${booking?.hotel?.name}"></h3></td>
-                <td>
-                    <h5 th:text="${booking?.getReadableDate(booking?.startDate)}"></h5>-<span
-                        th:text="${booking?.getReadableDate(booking?.endDate)}"></span>
-                </td>
-                <td><h4 th:text="${booking?.hotel?.phoneNumber}"></h4></td>
-                <td>
-                    <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
-                    <a class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a review</a>
-                </td>
-                <td><a class="btn btn-warning">Cancel</a></td>
+            <table class="table table-hover table-striped panel panel-primary">
+                <!--<li><i class="phon">Hotel Id</i><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><span th:text="${hotel?.id}"></span></li>-->
+                <thead class="panel-heading">
+                <tr>
+                    <th>Image</th>
+                    <th>Hotel Name</th>
+                    <th>Booking Date</th>
+                    <th>Contact Number</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody class="panel-body">
+                <tr th:if="${bookingList != null}" th:each="booking : ${bookingList}">
+                    <td><img height="50" width="50" th:src="@{/hotels/images/} + ${booking?.hotel?.id}"></img></td>
+                    <td><h3 th:text="${booking?.hotel?.name}"></h3></td>
+                    <td>
+                        <h5 th:text="${booking?.getReadableDate(booking?.startDate)}"></h5>-<span
+                            th:text="${booking?.getReadableDate(booking?.endDate)}"></span>
+                    </td>
+                    <td><h4 th:text="${booking?.hotel?.phoneNumber}"></h4></td>
+                    <td>
+                        <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
+                        <a class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
+                            review</a>
+                    </td>
+                    <td><a class="btn btn-warning">Cancel</a></td>
 
-            </tr>
-            </tbody>
-        </table>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
