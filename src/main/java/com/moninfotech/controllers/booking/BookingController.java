@@ -47,6 +47,18 @@ public class BookingController {
         return "booking/all";
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    private String details(@PathVariable("id") Long id,
+                           @CurrentUser User currentUser,
+                           Model model) {
+        Booking booking = this.bookingService.findOne(id);
+        if (booking == null) return "redirect:/bookings?message=Booking not found!";
+        if (!booking.getUser().getId().equals(currentUser.getId()))
+            return "redirect:/bookings?message=You\'re not authorised to access this resource.";
+        model.addAttribute("booking", booking);
+        return "booking/details";
+    }
+
     @ResponseBody
     @CrossOrigin
     @RequestMapping(value = "/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -94,17 +106,17 @@ public class BookingController {
                               HttpSession session) {
         Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
         if (booking != null) {
-            List<Room> updatedRoomList = this.roomService.removeRoom(booking.getRoomList(),roomId);
+            List<Room> updatedRoomList = this.roomService.removeRoom(booking.getRoomList(), roomId);
             booking.setRoomList(updatedRoomList);
-            session.setAttribute(SessionAttr.SESSION_BOOKING,booking);
+            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
         }
         return "redirect:/bookings/review";
     }
 
-    @RequestMapping(value = "/review/confirm",method = RequestMethod.GET)
-    private String confirmBooking(HttpSession session){
+    @RequestMapping(value = "/review/confirm", method = RequestMethod.GET)
+    private String confirmBooking(HttpSession session) {
         Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
-        if (booking!=null && booking.isValid())
+        if (booking != null && booking.isValid())
             booking = this.bookingService.save(booking);
         return "redirect:/bookings";
     }

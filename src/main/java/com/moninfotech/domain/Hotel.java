@@ -42,6 +42,22 @@ public class Hotel extends BaseEntity {
         return false;
     }
 
+    public boolean hasBookingUser(User user) {
+        for (Booking booking : this.bookingList) {
+            if (booking.getUser().getId().equals(user.getId()))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean hasUserReview(User user) {
+        for (Review review : this.reviewList) {
+            if (review.getUser().getId().equals(user.getId()))
+                return true;
+        }
+        return false;
+    }
+
     public String getName() {
         return name;
     }

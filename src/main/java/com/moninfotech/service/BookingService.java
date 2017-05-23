@@ -1,8 +1,10 @@
 package com.moninfotech.service;
 
 import com.moninfotech.domain.Booking;
+import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.User;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +13,7 @@ import java.util.List;
  */
 public interface BookingService {
 
-    List<Booking> findByUser(User user, int page,int size);
+    List<Booking> findByUser(User user, int page, int size);
 
     Booking findOne(Long id);
 
@@ -23,4 +25,5 @@ public interface BookingService {
 
     List<Booking> findAll(Long[] id);
 
+    Collection<Booking> getBookingList(Hotel hotel, User user);
 }

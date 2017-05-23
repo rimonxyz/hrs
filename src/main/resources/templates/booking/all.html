@@ -16,6 +16,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <!--MAIN_CONTENT HOTEL LIST-->
 <div class="address wow fadeInDown animated" data-wow-delay=".5s" xmlns:th="http://www.w3.org/1999/xhtml">
+    <h3 class="title wow fadeInDown animated" data-wow-delay=".5s" style="font-size: 30px;" th:if="${param.message!=null}" th:text="${param.message[0]}"></h3><br/>
     <div class="container">
         <div class="col-sm-10 col-sm-offset-1">
         <table class="table table-hover table-striped" th:width="400">
@@ -38,8 +39,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </td>
                 <td><h4 th:text="${booking?.hotel?.phoneNumber}"></h4></td>
                 <td>
-                    <a class="btn btn-primary">Details</a>
-                    <a class="btn btn-success">Write a review</a>
+                    <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
+                    <a class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a review</a>
                 </td>
                 <td><a class="btn btn-warning">Cancel</a></td>
 

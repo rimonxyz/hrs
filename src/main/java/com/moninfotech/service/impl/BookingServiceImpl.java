@@ -1,6 +1,7 @@
 package com.moninfotech.service.impl;
 
 import com.moninfotech.domain.Booking;
+import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.User;
 import com.moninfotech.repository.BookingRepository;
 import com.moninfotech.service.BookingService;
@@ -14,9 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by sayemkcn on 4/18/17.
@@ -86,6 +85,17 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> findAll(Long[] ids) {
         return this.bookingRepo.findAll(Arrays.asList(ids));
+    }
+
+    @Override
+    public Collection<Booking> getBookingList(Hotel hotel, User user) {
+        List<Booking> myBookingList = new ArrayList<>();
+        hotel.getBookingList().forEach(booking -> {
+            if (booking.getUser().getId().equals(user.getId()))
+                myBookingList.add(booking);
+        });
+        myBookingList.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
+        return myBookingList;
     }
 
 
