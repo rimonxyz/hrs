@@ -143,10 +143,9 @@ public class BookingController {
     @RequestMapping(value = "/review/confirm", method = RequestMethod.POST)
     private String confirmBooking(@RequestParam(value = "userId", required = false) Long userId, HttpSession session) {
         Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
-        User user = this.userService.findOne(userId);
         // Set user from user id // offline booking for hotel admin for offline user
-        if (user != null)
-            booking.setUser(user);
+        if (userId != null)
+            booking.setUser(this.userService.findOne(userId));
         if (booking != null && booking.isValid())
             booking = this.bookingService.save(booking);
         return "redirect:/bookings";
