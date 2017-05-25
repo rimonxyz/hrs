@@ -22,9 +22,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">Create Room</h3>
         <div class="contact-form">
-            <p class="wow slideInDown animated" data-wow-delay=".5s">Sed ut turpis elit ullamcorper in auctor non,
-                accumsan vel lacus nulla auctor cursus nunc. Maecenas ultricies dolor in urna tempus, id egestas erat
-                finibus interdum lectus eget scelerisque.</p>
+            <p class="wow slideInDown animated" data-wow-delay=".5s"></p>
 
             <form th:action="@{/hotel/rooms/edit/}+${room?.id}" method="post" enctype="multipart/form-data">
                 <div class="fadeInDown animated" data-wow-delay=".5s">
@@ -60,7 +58,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
 
 
-                <input class="wow fadeInDown animated" type="submit" value="CREATE HOTEL"></input>
+                <input class="wow fadeInDown animated" type="submit" value="UPDATE HOTEL"></input>
             </form>
         </div>
     </div>

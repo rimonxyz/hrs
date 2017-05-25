@@ -32,14 +32,18 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/bookings")
 public class BookingController {
+    private final BookingService bookingService;
+    private final RoomService roomService;
+    private final UserService userService;
+    private final HotelService hotelService;
+
     @Autowired
-    private BookingService bookingService;
-    @Autowired
-    private RoomService roomService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private HotelService hotelService;
+    public BookingController(BookingService bookingService, RoomService roomService, UserService userService, HotelService hotelService) {
+        this.bookingService = bookingService;
+        this.roomService = roomService;
+        this.userService = userService;
+        this.hotelService = hotelService;
+    }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String myBookings(@CurrentUser User user,
@@ -117,13 +121,15 @@ public class BookingController {
             if (!hotel.getId().equals(booking.getHotel().getId()))
                 return "redirect:/hotels/" + hotel.getId() + "?message=Sorry you can\'t book for other hotels!";
             // search user by query and add to model
-            List<User> userList = new ArrayList<>();
-            User user = this.userService.findByEmail(query);
-            if (user != null) userList.add(user);
-            List<User> uList = this.userService.findByName(query);
-            if (uList != null)
-                userList.addAll(uList);
-            model.addAttribute("userList", userList);
+            if (query != null) {
+                List<User> userList = new ArrayList<>();
+                User user = this.userService.findByEmail(query);
+                if (user != null) userList.add(user);
+                List<User> uList = this.userService.findByName(query);
+                if (uList != null)
+                    userList.addAll(uList);
+                model.addAttribute("userList", userList);
+            }
         }
         return "booking/review";
     }

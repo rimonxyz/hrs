@@ -20,10 +20,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <h3 class="title wow fadeInDown animated" data-wow-delay=".5s">
             <a th:href="@{/hotel/rooms}">My Hotel Rooms</a>
         </h3>
-        <h3 class="right wow fadeInDown animated" data-wow-delay=".5s">
-            <a th:href="@{/hotel/rooms/create}">Create New</a><br/>
-            <a th:href="@{/hotels/}+${hotel?.id}">Switch to Booking Mode</a>
-        </h3>
         <div class="contact-form contact-list">
             <p class="wow slideInDown animated" data-wow-delay=".5s">
                 <b th:if="${param.message!=null}">
@@ -32,6 +28,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </p>
 
             <div class="panel row panel-default">
+                <div class="col-sm-12">
+                    <a class="col-sm-3 btn btn-success" th:href="@{/hotel/rooms/create}">Create New</a>
+                    <a class="col-sm-3 col-sm-offset-6 btn btn-warning" th:href="@{/hotels/}+${hotel?.id}">Switch to Booking Mode</a>
+                </div>
                 <!--<div class="panel-heading">Filter</div>-->
                 <div class="panel-heading col-sm-3">
                     <form class="form" th:action="@{/hotel/rooms}" id="dateFilterForm" method="get">
@@ -40,7 +40,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                th:value="${filterValue}"></input>
                     </form>
                 </div>
-                <div class="panel-heading col-sm-5">
+                <div class="panel-heading col-sm-6">
                     <form class="form" th:action="@{/hotel/rooms/search}" method="get">
                         <input class="form-control" name="q" type="text" placeholder="Search"></input>
                     </form>
@@ -80,7 +80,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                     <div class="panel-footer panel-primary clearfix">
                         <div class="col-sm-12">
-                            <a  class="btn btn-link" th:href="@{/hotel/rooms/edit/}+${room?.id}">Edit</a>
+                            <a class="btn btn-link" th:href="@{/hotel/rooms/edit/}+${room?.id}">Edit</a>
                         </div>
                     </div>
                 </div>

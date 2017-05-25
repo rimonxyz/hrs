@@ -28,12 +28,16 @@ import java.util.List;
 @RequestMapping("/hotel/rooms")
 public class RoomAdminController {
 
+    private final RoomService roomService;
+    private final HotelService hotelService;
+    private final CategoryService categoryService;
+
     @Autowired
-    private RoomService roomService;
-    @Autowired
-    private HotelService hotelService;
-    @Autowired
-    private CategoryService categoryService;
+    public RoomAdminController(RoomService roomService, HotelService hotelService, CategoryService categoryService) {
+        this.roomService = roomService;
+        this.hotelService = hotelService;
+        this.categoryService = categoryService;
+    }
 
     // get all room
     @RequestMapping(value = "", method = RequestMethod.GET)

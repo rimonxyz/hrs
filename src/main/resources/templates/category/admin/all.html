@@ -27,18 +27,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     => <span style="color: red;" th:text="${param.message[0]}"></span>
                 </b>
             </p>
-            <table class="table table-hover">
-                <thead>
+            <table class="table table-hover panel panel-primary">
+                <thead class="panel-heading">
                 <tr>
-                    <td><h3 class="thead">ID</h3></td>
-                    <td><h3 class="thead">Name</h3></td>
+                    <td><h4 class="thead">ID</h4></td>
+                    <td><h4 class="thead">Name</h4></td>
+                    <td><h4 class="thead">Edit</h4></td>
+                    <td><h4 class="thead">Delete</h4></td>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="panel-body">
                 <tr th:if="${categoryList != null}" th:each="category:${categoryList}">
 
                     <td><h4><span th:text="${category?.id}"></span></h4></td>
-                    <td><h4><span th:text="${category?.name}"></span></h4></td>
+                    <td>
+                        <h4><span th:text="${category?.name}"></span></h4><br/><br/>
+                        <div class="col-sm-12">
+                        <h6 class="col-sm-6">Max Child : </h6><h6 class="col-sm-6" th:text="${category?.maxChildNumber}"></h6>
+                        <h6 class="col-sm-6">Max Child : </h6><h6 class="col-sm-6" th:text="${category?.maxAdultNumber}"></h6>
+                        <h6 class="col-sm-6">Front Face? :</h6><h6 class="col-sm-6" th:text="${category?.facilities?.frontFace} ? 'Yes' : 'No'"></h6><br/>
+                        <h6 class="col-sm-6">With Corridor? : </h6> <h6 class="col-sm-6" th:text="${category?.facilities?.withCorridor} ? 'Yes' : 'No'"></h6><br/>
+                        <h6 class="col-sm-6">Free Breakfast : </h6><h6 class="col-sm-6" th:text="${category?.facilities?.breakfast} ? 'Yes' : 'No'"></h6><br/>
+                        <h6 class="col-sm-6">Free Wifi : </h6><h6 class="col-sm-6" th:text="${category?.facilities?.internet} ? 'Yes' : 'No'"></h6><br/>
+                        <h6 class="col-sm-6">Air Conditioned? : </h6><h6 class="col-sm-6" th:text="${category?.facilities?.airConditioned} ? 'Yes' : 'No'"></h6><br/>
+                        <h6 class="col-sm-6">TV : </h6><h6 class="col-sm-6" th:text="${category?.facilities?.tv} ? 'Yes' : 'No'"></h6><br/>
+                        <h6 class="col-sm-6">Geyser : </h6><h6 class="col-sm-6" th:text="${category?.facilities?.geyser} ? 'Yes' : 'No'"></h6>
+                        </div>
+                    </td>
                     <td><a class="btn btn-primary" th:href="@{/admin/categories/edit/}+${category?.id}">Edit</a></td>
                     <td>
                         <button type="button" class="btn btn-danger" data-toggle="modal" id="delButtton"
