@@ -17,8 +17,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final UserRepository userRepo;
+
     @Autowired
-    private UserRepository userRepo;
+    public UserServiceImpl(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
 
     @Override
     public User save(User user) {
@@ -43,5 +47,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return this.userRepo.findByEmail(email);
+    }
+
+    @Override
+    public List<User> findByName(String name) {
+        return this.userRepo.findByName(name);
     }
 }

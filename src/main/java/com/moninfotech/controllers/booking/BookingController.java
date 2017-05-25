@@ -1,11 +1,14 @@
 package com.moninfotech.controllers.booking;
 
 import com.moninfotech.commons.SessionAttr;
+import com.moninfotech.commons.pojo.Roles;
 import com.moninfotech.domain.Booking;
+import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.BookingService;
+import com.moninfotech.service.HotelService;
 import com.moninfotech.service.RoomService;
 import com.moninfotech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +38,8 @@ public class BookingController {
     private RoomService roomService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private HotelService hotelService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String myBookings(@CurrentUser User user,
@@ -97,7 +103,28 @@ public class BookingController {
 
     // Review
     @RequestMapping(value = "/review", method = RequestMethod.GET)
-    private String reviewPage() {
+    private String reviewPage(@CurrentUser User currentUser,
+                              @RequestParam(value = "query", required = false) String query,
+                              HttpSession session, Model model) {
+        // Check if logged in user is Hotel or not
+        // if hotel then make sure that he can't book for hotels rather than his own
+        if (currentUser.hasAssignedRole(Roles.ROLE_HOTEL)) {
+            Hotel hotel = this.hotelService.findByUser(currentUser);
+            Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+            if (booking == null)
+                return "redirect:/hotels/" + hotel.getId() + "?message=You haven't selected any item yet!";
+            // if it's someone else hotel
+            if (!hotel.getId().equals(booking.getHotel().getId()))
+                return "redirect:/hotels/" + hotel.getId() + "?message=Sorry you can\'t book for other hotels!";
+            // search user by query and add to model
+            List<User> userList = new ArrayList<>();
+            User user = this.userService.findByEmail(query);
+            if (user != null) userList.add(user);
+            List<User> uList = this.userService.findByName(query);
+            if (uList != null)
+                userList.addAll(uList);
+            model.addAttribute("userList", userList);
+        }
         return "booking/review";
     }
 
@@ -113,9 +140,13 @@ public class BookingController {
         return "redirect:/bookings/review";
     }
 
-    @RequestMapping(value = "/review/confirm", method = RequestMethod.GET)
-    private String confirmBooking(HttpSession session) {
+    @RequestMapping(value = "/review/confirm", method = RequestMethod.POST)
+    private String confirmBooking(@RequestParam(value = "userId", required = false) Long userId, HttpSession session) {
         Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+        User user = this.userService.findOne(userId);
+        // Set user from user id // offline booking for hotel admin for offline user
+        if (user != null)
+            booking.setUser(user);
         if (booking != null && booking.isValid())
             booking = this.bookingService.save(booking);
         return "redirect:/bookings";

@@ -142,13 +142,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </tr>
                 </tfoot>
             </table>
-            <div class="row">
-                <div class="col-sm-8">
+            <div class="row" sec:authorization="hasRole('HOTEL')">
+
+                <div class="col-sm-12">
+                    <h2>Assign User:</h2><br/>
+
+                    <form class="form" method="get">
+                        <input class="form-control" name="query" type="text"
+                               placeholder="Search user with email"></input>
+                        <button class="form-control btn btn-primary" type="submit">Search</button>
+                    </form>
+                    <br/><br/>
+
+                    <form id="hotelUserAssignForm" class="form" th:action="@{/bookings/review/confirm}" method="post">
+                        <select required="required" class="form-control" id="userAssgnSelect" name="userId"
+                                th:if="${userList != null and !userList.isEmpty()}">
+                            <option th:each="user: ${userList}" th:value="${user?.id}" th:text="${user?.name}"></option>
+                        </select>
+                    </form>
                 </div>
-                <div class="col-sm-4">
-                    <a class="btn btn-danger">Cancel</a>
-                    <a class="btn btn-success" th:href="@{/bookings/review/confirm}">Checkout</a>
-                </div>
+
+            </div>
+            <div class="row col-sm-12" style="margin-top: 20px;">
+                <a class="col-sm-5 btn btn-danger">Cancel</a>
+                <a id="hotelCheckoutButton" class="col-sm-5 col-sm-offset-2 btn btn-success"
+                   sec:authorize="hasRole('HOTEL')">Checkout</a>
+                <form th:action="@{/bookings/review/confirm}" method="post" sec:authorize="!hasRole('HOTEL')">
+                    <button class="col-sm-5 col-sm-offset-2 btn btn-success">Checkout</button>
+                </form>
             </div>
         </div>
 
@@ -235,6 +256,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         });
 
     });
+</script>
+
+<script>
+    /*<![CDATA[*/
+    $("#hotelCheckoutButton").on("click", function () {
+        var userVal = $("#userAssgnSelect").text();
+        if (userVal.length < 1)
+            alert("Select a user first!");
+        else
+            $("#hotelUserAssignForm").submit();
+
+    });
+    /*]]>*/
 </script>
 </body>
 </html>

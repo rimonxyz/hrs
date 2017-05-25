@@ -50,6 +50,7 @@ public class RoomAdminController {
         List<Room> roomList = hotel.getRoomList();
         List<Long> bookedIds = this.roomService.filterRoomIds(roomList, filterType, value);
 
+        model.addAttribute("hotel",hotel);
         model.addAttribute("roomList", roomList);
         model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);

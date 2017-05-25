@@ -18,4 +18,6 @@ public interface UserService {
     void delete(Long id);
 
     User findByEmail(String email);
+
+    List<User> findByName(String name);
 }

@@ -21,7 +21,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <a th:href="@{/hotel/rooms}">My Hotel Rooms</a>
         </h3>
         <h3 class="right wow fadeInDown animated" data-wow-delay=".5s">
-            <a th:href="@{/hotel/rooms/create}">Create New</a>
+            <a th:href="@{/hotel/rooms/create}">Create New</a><br/>
+            <a th:href="@{/hotels/}+${hotel?.id}">Switch to Booking Mode</a>
         </h3>
         <div class="contact-form contact-list">
             <p class="wow slideInDown animated" data-wow-delay=".5s">

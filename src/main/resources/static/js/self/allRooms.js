@@ -168,7 +168,7 @@ $("#modalAddBookingButton").on("click", function () {
 });
 
 var sendToServer = function (data) {
-    console.log(JSON.stringify(data));
+    alert(JSON.stringify(data));
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -181,6 +181,7 @@ var sendToServer = function (data) {
                 window.location = "/bookings/review";
             },
             403: function (xhr) {
+                alert("You are not logged in. Please login and continue.");
                 window.location = "/login";
             },
             400: function (xhr) {
