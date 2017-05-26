@@ -67,10 +67,10 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<Hotel> filterUnbookedHotelsByDate(List<Hotel> hotels, Date startDate, Date endDate) {
+    public List<Hotel> filterUnbookedHotelsByDate(List<Hotel> hotels, Date date) {
         List<Hotel> hotelList = new ArrayList<>();
         for (Hotel hotel : hotels) {
-            if (hotel.hasUnbookedRoom(startDate, endDate))
+            if (hotel.hasUnbookedRoom(date))
                 hotelList.add(hotel);
         }
         return hotelList;

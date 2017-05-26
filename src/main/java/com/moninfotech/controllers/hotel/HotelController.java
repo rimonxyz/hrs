@@ -91,7 +91,7 @@ public class HotelController {
         model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);
         model.addAttribute("filterValue", value);
-        return "room/all";
+        return "room/allRooms";
     }
 
     // search

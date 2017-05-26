@@ -1,7 +1,9 @@
 package com.moninfotech.service.impl;
 
+import com.moninfotech.commons.DateUtils;
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.repository.BookingRepository;
 import com.moninfotech.service.BookingService;
@@ -51,7 +53,7 @@ public class BookingServiceImpl implements BookingService {
             if (!idsString.isEmpty()) {
                 String[] splittedIds = idsString.split(",");
                 ids = new Long[splittedIds.length];
-                for (int i=0;i<splittedIds.length;i++){
+                for (int i = 0; i < splittedIds.length; i++) {
                     ids[i] = Long.parseLong(splittedIds[i]);
                 }
 
@@ -96,6 +98,17 @@ public class BookingServiceImpl implements BookingService {
         });
         myBookingList.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
         return myBookingList;
+    }
+
+    @Override
+    public boolean isDuplicateAttempt(Booking booking, Room room, Date date) {
+        if (booking!=null && booking.getBookingDateList() != null && booking.getBookingDateList() != null) {
+            for (int i = 0; i < booking.getRoomList().size() && i < booking.getBookingDateList().size(); i++) {
+                if (booking.getRoomList().get(i).getId().equals(room.getId()) && DateUtils.isSameDay(booking.getBookingDateList().get(i),date))
+                    return true;
+            }
+        }
+        return false;
     }
 
 

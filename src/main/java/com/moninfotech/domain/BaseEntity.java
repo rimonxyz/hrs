@@ -53,6 +53,11 @@ public abstract class BaseEntity {
         return sdf.format(date);
     }
 
+    public String getReadableDayMonth(Date date){
+        if (date==null) return "";
+        return new SimpleDateFormat("dd MMMM").format(date);
+    }
+
     @Override
     public String toString() {
         return "BaseEntity{" +

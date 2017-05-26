@@ -2,6 +2,8 @@ package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.moninfotech.commons.DateUtils;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,13 +14,17 @@ import java.util.List;
  */
 @Entity
 public class Booking extends BaseEntity {
-    private Date startDate;
-    private Date endDate;
+
     @OneToOne
     private Transaction transaction;
     @ManyToMany(fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Room> roomList;
+
+    @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Date> bookingDateList;
+
     @ManyToOne
     private User user;
 
@@ -26,9 +32,9 @@ public class Booking extends BaseEntity {
     private Hotel hotel;
 
     public boolean isValid() {
-        if (roomList == null) return false;
-        for (Room room : roomList) {
-            if (room.isBooked(this.startDate, this.endDate)) return false;
+        if (roomList == null || bookingDateList == null || roomList.size() != bookingDateList.size()) return false;
+        for (int i=0;i<roomList.size()&&i<bookingDateList.size();i++) {
+            if (this.roomList.get(i).isBooked(this.bookingDateList.get(i))) return false;
         }
         return true;
     }
@@ -39,20 +45,23 @@ public class Booking extends BaseEntity {
             totalCost += room.getPrice();
         return totalCost;
     }
+
     public int getTotalDiscount() {
         int totalDiscount = 0;
         for (Room room : this.roomList)
             totalDiscount += room.getDiscount();
         return totalDiscount;
     }
+
     public int getTotalPayableCost() {
         int totalPayableCost = 0;
         for (Room room : this.roomList)
             totalPayableCost += room.getDiscountedPrice();
         return totalPayableCost;
     }
-    public String getTotalDiscountPercentage(){
-        return (this.getTotalDiscount()*100)/this.getTotalCost()+"%";
+
+    public String getTotalDiscountPercentage() {
+        return (this.getTotalDiscount() * 100) / this.getTotalCost() + "%";
     }
 
     public String getReadableDate(Date date) {
@@ -83,31 +92,6 @@ public class Booking extends BaseEntity {
         this.user = user;
     }
 
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", transaction=" + transaction +
-                ", user=" + user +
-                "} " + super.toString();
-    }
 
     public Hotel getHotel() {
         return hotel;
@@ -115,5 +99,22 @@ public class Booking extends BaseEntity {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    public List<Date> getBookingDateList() {
+        return bookingDateList;
+    }
+
+    public void setBookingDateList(List<Date> bookingDateList) {
+        this.bookingDateList = bookingDateList;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "transaction=" + transaction +
+                ", user=" + user +
+                ", hotel=" + hotel +
+                "} " + super.toString();
     }
 }

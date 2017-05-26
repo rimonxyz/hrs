@@ -2,6 +2,7 @@ package com.moninfotech.service;
 
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 
 import java.util.Collection;
@@ -26,4 +27,6 @@ public interface BookingService {
     List<Booking> findAll(Long[] id);
 
     Collection<Booking> getBookingList(Hotel hotel, User user);
+
+    boolean isDuplicateAttempt(Booking booking, Room room, Date date);
 }

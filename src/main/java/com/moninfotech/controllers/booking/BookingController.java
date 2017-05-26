@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.booking;
 
+import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.SessionAttr;
 import com.moninfotech.commons.pojo.Roles;
 import com.moninfotech.domain.Booking;
@@ -12,16 +13,12 @@ import com.moninfotech.service.HotelService;
 import com.moninfotech.service.RoomService;
 import com.moninfotech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +35,10 @@ public class BookingController {
     private final HotelService hotelService;
 
     @Autowired
-    public BookingController(BookingService bookingService, RoomService roomService, UserService userService, HotelService hotelService) {
+    public BookingController(BookingService bookingService,
+                             RoomService roomService,
+                             UserService userService,
+                             HotelService hotelService) {
         this.bookingService = bookingService;
         this.roomService = roomService;
         this.userService = userService;
@@ -69,41 +69,95 @@ public class BookingController {
         return "booking/details";
     }
 
-    @ResponseBody
-    @CrossOrigin
-    @RequestMapping(value = "/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<Booking> orderBooking(@RequestBody String data,
-                                                 @CurrentUser User currentUser,
-                                                 HttpSession session) throws UnsupportedEncodingException {
-        System.out.println(data);
-        data = URLDecoder.decode(data, "UTF-8");
-        System.out.println(data);
-        Long ids[] = null;
+    @GetMapping("/cart/add/{roomId}")
+    private String addToCart(@PathVariable("roomId") Long roomId,
+                             @RequestParam(value = "date", required = false) String dateStr,
+                             HttpSession session) {
+        Date date = null;
         try {
-            ids = this.bookingService.convertToIds(data);
-            Date[] bookingDates = this.bookingService.getDates(data);
-            if (bookingDates == null || bookingDates.length < 2) // user hasn't selected date range
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            List<Room> roomList = this.roomService.findAll(ids); // find rooms with that ids
-            if (roomList.isEmpty())
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            Booking booking = new Booking();
-            booking.setRoomList(roomList); // associate rooms with the booking object
-            booking.setHotel(roomList.get(0).getHotel());
-            User user = this.userService.findOne(currentUser.getId());
-            if (user == null) return new ResponseEntity<>(HttpStatus.FORBIDDEN); // if user not logged in
-            booking.setUser(user);
-            booking.setStartDate(bookingDates[0]);
-            booking.setEndDate(bookingDates[1]);
-            // check if any of these rooms are already booked during this period
-            if (!booking.isValid()) return new ResponseEntity<>(HttpStatus.IM_USED);
-            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
-//            System.out.println(booking.toString());
-            return new ResponseEntity<>(booking, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            date = DateUtils.getParsableDateFormat().parse(dateStr);
+        } catch (ParseException e) {
+            date = new Date();
         }
+        Room room = this.roomService.findOne(roomId);
+        if (room == null) return "redirect:/rooms/" + roomId;
+        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+        if (booking == null || booking.getRoomList() == null || booking.getBookingDateList() == null) {
+            booking = new Booking();
+            booking.setRoomList(new ArrayList<>());
+            booking.setBookingDateList(new ArrayList<>());
+        }
+        if (this.bookingService.isDuplicateAttempt(booking, room, date))
+            return "redirect:/rooms/" + roomId + "/" + dateStr + "?message=You can't book same room twice at same day!";
+        booking.getRoomList().add(room);
+        booking.getBookingDateList().add(date);
+        session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
+
+        return "redirect:/rooms/" + roomId + "/" + dateStr;
     }
+
+    @GetMapping("/checkout")
+    private String checkout(@CurrentUser User currentUser, HttpSession session) {
+        if (currentUser == null) return "redirect:/login?message=Please login to continue.";
+        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+        if (booking == null
+                || booking.getRoomList() == null
+                || booking.getRoomList().isEmpty()
+                || booking.getBookingDateList() == null
+                || booking.getBookingDateList().isEmpty()) return "redirect:/hotels?message=No items to book!";
+        // set hotel for booking
+        Hotel hotel = booking.getRoomList().get(0).getHotel();
+        booking.setHotel(hotel);
+        // set user of booking
+        booking.setUser(currentUser);
+        // check if hotel list and booking date list are incompatible
+        if (booking.getRoomList().size() != booking.getBookingDateList().size()) {
+            session.removeAttribute(SessionAttr.SESSION_BOOKING);
+            return "redirect:/hotels/" + booking.getHotel() + "?message=There\'s something wrong. Please try again later!";
+        }
+        if (!booking.isValid()) {
+            session.removeAttribute(SessionAttr.SESSION_BOOKING);
+            return "redirect:/hotels/" + booking.getHotel().getId() + "?message=One or more room isn't available during this time. Please try again!";
+        }
+        booking = this.bookingService.save(booking);
+        return "redirect:/bookings/"+booking.getId()+"?message=Booking Successful!";
+    }
+
+//    @ResponseBody
+//    @CrossOrigin
+//    @RequestMapping(value = "/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+//    private ResponseEntity<Booking> orderBooking(@RequestBody String data,
+//                                                 @CurrentUser User currentUser,
+//                                                 HttpSession session) throws UnsupportedEncodingException {
+//        System.out.println(data);
+//        data = URLDecoder.decode(data, "UTF-8");
+//        System.out.println(data);
+//        Long ids[] = null;
+//        try {
+//            ids = this.bookingService.convertToIds(data);
+//            Date[] bookingDates = this.bookingService.getDates(data);
+//            if (bookingDates == null || bookingDates.length < 2) // user hasn't selected date range
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            List<Room> roomList = this.roomService.findAll(ids); // find rooms with that ids
+//            if (roomList.isEmpty())
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            Booking booking = new Booking();
+//            booking.setRoomList(roomList); // associate rooms with the booking object
+//            booking.setHotel(roomList.get(0).getHotel());
+//            User user = this.userService.findOne(currentUser.getId());
+//            if (user == null) return new ResponseEntity<>(HttpStatus.FORBIDDEN); // if user not logged in
+//            booking.setUser(user);
+//            booking.setStartDate(bookingDates[0]);
+//            booking.setEndDate(bookingDates[1]);
+//            // check if any of these rooms are already booked during this period
+//            if (!booking.isValid()) return new ResponseEntity<>(HttpStatus.IM_USED);
+//            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
+////            System.out.println(booking.toString());
+//            return new ResponseEntity<>(booking, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//    }
 
     // Review
     @RequestMapping(value = "/review", method = RequestMethod.GET)

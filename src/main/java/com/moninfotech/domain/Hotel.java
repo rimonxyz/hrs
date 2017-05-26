@@ -34,9 +34,9 @@ public class Hotel extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-    public boolean hasUnbookedRoom(Date startDate, Date endDate) {
+    public boolean hasUnbookedRoom(Date date) {
         for (Room room : this.roomList) {
-            if (!room.isBooked(startDate, endDate))
+            if (!room.isBooked(date))
                 return true;
         }
         return false;

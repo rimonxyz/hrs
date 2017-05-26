@@ -109,7 +109,7 @@ public class RoomServiceImpl implements RoomService {
         Calendar calendar = Calendar.getInstance();
         roomList.forEach(room -> {
             try {
-                if (room.isBooked(sdf.parse(value), sdf.parse(value))) {
+                if (room.isBooked(sdf.parse(value))) {
                     idList.add(room.getId());
                 }
             } catch (ParseException e) {
