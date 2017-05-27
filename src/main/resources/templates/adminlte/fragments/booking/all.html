@@ -1,0 +1,78 @@
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Donut chart -->
+            <div class="box box-primary">
+                <div hidden="hidden">
+                    <span id="totalCost" th:text="${bookingHelper?.getTotalCost(bookingList)}"></span>
+                    <span id="totalDiscount" th:text="${bookingHelper?.getTotalDiscount(bookingList)}"></span>
+                    <span id="totalPaid" th:text="${bookingHelper?.getTotalPaid(bookingList)}"></span>
+                </div>
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+
+                    <h3 class="box-title">Total Cost</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div id="donut-chart" style="height: 300px;"></div>
+                </div>
+                <!-- /.box-body-->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <div class="row">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Bordered Table</h3>
+            </div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Image</th>
+                    <th>Hotel Name</th>
+                    <!--<th>Total Rooms</th>-->
+                    <th>Total Cost</th>
+                    <th>You Saved</th>
+                    <th>Contact Number</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr th:if="${bookingList != null}" th:each="booking : ${bookingList}">
+                    <td><img height="50" width="50" th:src="@{/hotels/images/} + ${booking?.hotel?.id}"></img></td>
+                    <td><h5 th:text="${booking?.hotel?.name}"></h5></td>
+                    <!--<td th:text="${booking?.roomList?.size()}"></td>-->
+                    <td th:text="${booking?.getTotalPayableCost()}"></td>
+                    <td><span class="badge bg-green">90%</span></td>
+                    <td th:text="${booking?.hotel?.phoneNumber}"><h4></h4></td>
+                    <td>
+                        <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
+                        <a class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
+                            review</a>
+                    </td>
+                    <td><a class="btn btn-warning">Cancel</a></td>
+
+                </tr>
+            </table>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+
+</section>

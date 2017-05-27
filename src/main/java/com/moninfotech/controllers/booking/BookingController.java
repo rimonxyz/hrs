@@ -2,6 +2,7 @@ package com.moninfotech.controllers.booking;
 
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.SessionAttr;
+import com.moninfotech.commons.pojo.BookingHelper;
 import com.moninfotech.commons.pojo.Roles;
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.Hotel;
@@ -53,8 +54,10 @@ public class BookingController {
         if (page == null || page < 0) page = 0;
         if (size == null || !(size > 0)) size = 10;
         if (user == null) return "redirect:/login";
+
+        model.addAttribute("bookingHelper", new BookingHelper());
         model.addAttribute("bookingList", this.bookingService.findByUser(user, page, size));
-        model.addAttribute("template","fragments/dashboard");
+        model.addAttribute("template", "fragments/booking/all");
         return "adminlte/index";
     }
 
@@ -122,7 +125,7 @@ public class BookingController {
         }
         booking = this.bookingService.save(booking);
         session.removeAttribute(SessionAttr.SESSION_BOOKING);
-        return "redirect:/bookings/"+booking.getId()+"?message=Booking Successful!";
+        return "redirect:/bookings/" + booking.getId() + "?message=Booking Successful!";
     }
 
 //    @ResponseBody

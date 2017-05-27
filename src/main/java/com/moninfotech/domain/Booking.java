@@ -65,6 +65,9 @@ public class Booking extends BaseEntity {
     public String getTotalDiscountPercentage() {
         return (this.getTotalDiscount() * 100) / this.getTotalCost() + "%";
     }
+    public String getTotalDiscountPercentageNumber() {
+        return (this.getTotalDiscount() * 100) / this.getTotalCost() + "%";
+    }
 
     public String getReadableDate(Date date) {
         return DateUtils.getReadableDateFormat().format(date);
