@@ -54,7 +54,8 @@ public class BookingController {
         if (size == null || !(size > 0)) size = 10;
         if (user == null) return "redirect:/login";
         model.addAttribute("bookingList", this.bookingService.findByUser(user, page, size));
-        return "booking/all";
+        model.addAttribute("template","fragments/dashboard");
+        return "adminlte/index";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

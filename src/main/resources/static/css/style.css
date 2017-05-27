@@ -1400,7 +1400,7 @@ p.twit-text {
 
 /*--//address--*/
 
-/*--footer--*/
+/*--footer.html--*/
 .footer {
     padding: 5em 0;
     text-align: center;
@@ -1436,7 +1436,7 @@ p.twit-text {
     border-radius: 32px;
 }
 
-/*--//footer--*/
+/*--//footer.html--*/
 /*--slider-up-arrow--*/
 #toTop {
     display: none;
