@@ -120,6 +120,7 @@ public class BookingController {
             return "redirect:/hotels/" + booking.getHotel().getId() + "?message=One or more room isn't available during this time. Please try again!";
         }
         booking = this.bookingService.save(booking);
+        session.removeAttribute(SessionAttr.SESSION_BOOKING);
         return "redirect:/bookings/"+booking.getId()+"?message=Booking Successful!";
     }
 

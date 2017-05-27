@@ -69,27 +69,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <thead class="panel-heading">
                 <tr>
                     <th>Image</th>
+                    <th>Date</th>
                     <th>Room Number</th>
+                    <th>Category</th>
                     <th>Floor Number</th>
                     <th>Price</th>
                     <th>Discount</th>
                     <th>Discounted Price</th>
-                    <th>Category</th>
                 </tr>
                 </thead>
                 <tbody class="panel-body">
-                <tr th:if="${booking != null}" th:each="room : ${booking?.roomList}">
+                <tr th:if="${booking != null}" th:each="room,iter : ${booking?.roomList}">
                     <td><img height="50" width="50" th:src="@{/rooms/} + ${room?.id} +@{/image/0}"></img></td>
+                    <td><h4 th:text="${room?.getReadableDayMonth(booking?.bookingDateList?.get(iter.index))}"></h4></td>
                     <td><h3 th:text="${room?.roomNumber}"></h3></td>
+                    <td><h4 th:text="${room?.category?.name}"></h4></td>
                     <td><h4 th:text="${room?.floorNumber}"></h4></td>
                     <td><h4 th:text="${room?.price}"></h4></td>
                     <td><h4 th:text="${room?.discount}"></h4></td>
                     <td><h4 th:text="${room?.getDiscountedPrice()}"></h4></td>
-                    <td><h4 th:text="${room?.category?.name}"></h4></td>
                 </tr>
                 </tbody>
                 <tfoot class="panel-footer">
                 <tr>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -107,6 +110,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td><h4>Total Discount</h4></td>
                     <td>
                         <h3 class="text-right text-success" th:text="${booking?.getTotalDiscount()}"></h3>
@@ -118,12 +122,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td><h4>Total Payable Cost</h4></td>
                     <td>
                         <h3 class="text-right text-primary" th:text="${booking?.getTotalPayableCost()}"></h3>
                     </td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

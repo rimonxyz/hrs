@@ -34,7 +34,9 @@ public class Booking extends BaseEntity {
     public boolean isValid() {
         if (roomList == null || bookingDateList == null || roomList.size() != bookingDateList.size()) return false;
         for (int i=0;i<roomList.size()&&i<bookingDateList.size();i++) {
-            if (this.roomList.get(i).isBooked(this.bookingDateList.get(i))) return false;
+            Room room = roomList.get(i);
+            Date bookingDate = bookingDateList.get(i);
+            if (room.isBooked(bookingDate)) return false;
         }
         return true;
     }
