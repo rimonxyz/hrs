@@ -6,8 +6,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by sayemkcn on 3/23/17.
@@ -71,6 +71,13 @@ public class Booking extends BaseEntity {
 
     public String getReadableDate(Date date) {
         return DateUtils.getReadableDateFormat().format(date);
+    }
+
+    public String getAllBookingDates(){
+        Set<String> dates = new HashSet<>();
+        SimpleDateFormat dateFormat = DateUtils.getReadableDateFormat();
+        this.bookingDateList.forEach(date->dates.add(dateFormat.format(date)));
+        return String.join(", ",dates);
     }
 
     public Transaction getTransaction() {

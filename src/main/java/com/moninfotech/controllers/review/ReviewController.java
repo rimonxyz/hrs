@@ -67,7 +67,9 @@ public class ReviewController {
         // extra - booking informations in this hotel
         model.addAttribute(this.bookingService.getBookingList(hotel, currentUser));
         model.addAttribute("hotel", hotel);
-        return "review/create";
+
+        model.addAttribute("template","fragments/review/create");
+        return "adminlte/index";
     }
 
     @RequestMapping(value = "/hotel/{hotelId}/create", method = RequestMethod.POST)

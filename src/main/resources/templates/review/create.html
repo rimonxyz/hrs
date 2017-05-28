@@ -29,7 +29,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <ul class="list-group">
                     <li th:each="booking : ${bookingList}" class="list-group-item">
                         <a th:href="@{/bookings/}+${booking?.id}">
-                            <span th:text="${booking?.getReadableDate(booking?.startDate)}"></span> - <span th:text="${booking?.getReadableDate(booking?.endDate)}"></span>
+                            <span th:text="${booking?.getAllBookingDates()}"></span>
+                            <!--<span th:text="${booking?.getReadableDate(booking?.startDate)}"></span> - <span th:text="${booking?.getReadableDate(booking?.endDate)}"></span>-->
                         </a>
                     </li>
                 </ul>
