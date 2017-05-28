@@ -34,6 +34,23 @@ public class Hotel extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
+    public float getAverageRating(){
+        if (reviewList==null) return 0f;
+        float sum = (float) this.reviewList.stream()
+                .mapToDouble(review->review.getRating())
+                .sum();
+        return sum/this.reviewList.size();
+    }
+
+    public int getNumberOfAcRooms(){
+        return (int) this.roomList.stream()
+                .filter(room -> room.getCategory().getFacilities().isAirConditioned())
+                .count();
+    }
+    public int getNumberOfNonAcRooms(){
+        return this.roomList.size()-this.getNumberOfAcRooms();
+    }
+
     public boolean hasUnbookedRoom(Date date) {
         for (Room room : this.roomList) {
             if (!room.isBooked(date))

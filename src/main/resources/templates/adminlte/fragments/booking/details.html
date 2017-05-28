@@ -1,6 +1,6 @@
 <section class="content">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <!-- Donut chart -->
             <div class="box box-primary">
                 <div hidden="hidden">
@@ -66,11 +66,11 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-green">
+            <div class="small-box bg-red">
                 <div class="inner">
-                    <h3 th:text="${booking?.getTotalPayableCost()}">65</h3><h4>TK</h4>
+                    <h3 th:text="${booking?.hotel?.address?.area}">65</h3><h4 th:text="${booking?.hotel?.address?.district}"></h4>
 
-                    <p>You paid</p>
+                    <p>Area</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
@@ -80,89 +80,25 @@
                 </a>
             </div>
         </div>
-
-        <!--SMALL BOXES-->
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box bg-yellow">
-                <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text">Events</span>
-                    <span class="info-box-number">41,410</span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
-                    </div>
-                    <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box bg-red">
-                <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text">Comments</span>
-                    <span class="info-box-number">41,410</span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
-                    </div>
-                    <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
         <!-- ./col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box bg-aqua">
-                <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow-gradient">
+                <div class="inner">
+                    <h3 th:text="${booking?.getTotalDiscountPercentage()}">65</h3><h4>Of total amount</h4>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">Bookmarks</span>
-                    <span class="info-box-number">41,410</span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
-                    </div>
-                    <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
+                    <p>You saved</p>
                 </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box bg-green">
-                <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text">Likes</span>
-                    <span class="info-box-number">41,410</span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
-                    </div>
-                    <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
                 </div>
-                <!-- /.info-box-content -->
+                <a href="#" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <!-- /.info-box -->
         </div>
+        <!--SMALL BOXES-->
+
     </div>
 
     <div class="row">
@@ -187,8 +123,11 @@
                         <li><a href="#"><span class="pull-left badge bg-aqua" id="star"
                                               th:text="${booking?.hotel?.star}"></span><span>&nbsp; &nbsp;Star Hotel</span></a>
                         </li>
-                        <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
-                        <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                        <li><a href="#">Average Rating: <span class="pull-right badge bg-green" th:text="${booking?.hotel?.getAverageRating()}"></span></a></li>
+                        <li><a href="#">Total Rooms <span class="pull-right badge bg-red" th:text="${booking?.hotel?.roomList?.size()}">842</span></a></li>
+                        <li><a href="#">Number of AC Rooms <span class="pull-right badge bg-red" th:text="${booking?.hotel?.getNumberOfAcRooms()}">842</span></a></li>
+                        <li><a href="#">Number of NON AC Rooms <span class="pull-right badge bg-red" th:text="${booking?.hotel?.getNumberOfNonAcRooms()}">842</span></a></li>
+                        <li><a class="btn btn-block btn-success btn-lg" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}"><span style="color: white;">Write a Review</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -197,7 +136,7 @@
         <div class="col-sm-8">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Bordered Table</h3>
+                    <h3 class="box-title">Booking Items</h3>
                 </div>
 
                 <table class="table table-bordered">
