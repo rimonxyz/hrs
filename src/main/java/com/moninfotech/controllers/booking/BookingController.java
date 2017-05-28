@@ -70,7 +70,9 @@ public class BookingController {
         if (!booking.getUser().getId().equals(currentUser.getId()))
             return "redirect:/bookings?message=You\'re not authorised to access this resource.";
         model.addAttribute("booking", booking);
-        return "booking/details";
+
+        model.addAttribute("template","fragments/booking/details");
+        return "adminlte/index";
     }
 
     @GetMapping("/cart/add/{roomId}")

@@ -81,7 +81,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <tbody class="panel-body">
                 <tr th:if="${booking != null}" th:each="room,iter : ${booking?.roomList}">
                     <td><img height="50" width="50" th:src="@{/rooms/} + ${room?.id} +@{/image/0}"></img></td>
-                    <td><h4 th:text="${room?.getReadableDayMonth(booking?.bookingDateList?.get(iter.index))}"></h4></td>
+                    <!--<td><h4 th:text="${room?.getReadableDayMonth(booking?.bookingDateList?.get(iter.index))}"></h4></td>-->
                     <td><h3 th:text="${room?.roomNumber}"></h3></td>
                     <td><h4 th:text="${room?.category?.name}"></h4></td>
                     <td><h4 th:text="${room?.floorNumber}"></h4></td>
