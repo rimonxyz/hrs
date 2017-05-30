@@ -1,0 +1,77 @@
+
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">My Reviews</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="list-group">
+                        <li class="list-group-item"><a th:href="@{/reviews}"><b>All reviews</b></a></li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item">Reviews by hotel</li>
+                        <li th:each="hotel : ${hotelList}" class="list-group-item">
+                            <a th:href="@{/reviews(hotelId=${hotel?.id})}">
+                                <span th:text="${hotel?.name}"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+        <div class="col-md-8">
+            <div class="box box-solid" th:each="review, iter: ${reviewList}" th:classappend="${iter.index % 2 == 0} ? box-primary : box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title" th:text="${review?.title}">Collapsable</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <h4 th:text="${review?.comment}"></h4><br/><br/><br/>
+                    <div class="progress-group" style="margin-left: 50px;margin-right: 50px;">
+                        <span class="progress-text">Rating:</span>
+                        <span class="progress-number"><b th:text="${review?.rating}">4</b>/5</span>
+
+                        <div class="progress sm">
+                            <span id="ratingHidden" hidden="hidden" th:text="${review?.rating}"></span>
+                            <div id="ratingProgressBar" class="progress-bar progress-bar-aqua" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-4">
+                            <a class="btn btn-warning col-sm-6">Edit</a>
+                            <form class="col-sm-6">
+                                <button type="button" class="btn btn-danger col-sm-12">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <!-- /.box -->
+        </div>
+    </div>
+
+</section>
+

@@ -150,7 +150,7 @@
          */
         //LINE randomly generated data
 
-        var sin = [], cos = [];
+        var sin = [.2,.5,.4], cos = [.8,.0,.4];
         for (var i = 0; i < 14; i += 0.5) {
             sin.push([i, Math.sin(i)]);
             cos.push([i, Math.cos(i)]);
@@ -436,3 +436,12 @@
     });
     /*]]>*/
 </script>
+<script>
+    $(document).ready(function () {
+        var rating = $("#ratingHidden").text();
+        var width = (rating*100)/5 +"%";
+        console.log(width);
+        $("#ratingProgressBar").width(width);
+    });
+</script>
+

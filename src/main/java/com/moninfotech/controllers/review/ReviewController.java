@@ -51,7 +51,9 @@ public class ReviewController {
         }
         model.addAttribute("hotelList", this.reviewService.findReviewedHotels(currentUser));
         model.addAttribute("reviewList", myReviewList);
-        return "review/all";
+
+        model.addAttribute("template","fragments/review/all");
+        return "adminlte/index";
     }
 
 
