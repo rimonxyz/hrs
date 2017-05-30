@@ -17,13 +17,13 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <ul class="list-group">
-                        <li class="list-group-item"><a th:href="@{/reviews}"><b>All reviews</b></a></li>
+                        <li class="list-group-item"><a th:href="@{/reviews}"><h4><b>All Reviews</b></h4></a></li>
                     </ul>
                     <ul class="list-group">
-                        <li class="list-group-item">Reviews by hotel</li>
+                        <li class="list-group-item">Reviews by Hotel</li>
                         <li th:each="hotel : ${hotelList}" class="list-group-item">
                             <a th:href="@{/reviews(hotelId=${hotel?.id})}">
-                                <span th:text="${hotel?.name}"></span>
+                                <h4 th:text="${hotel?.name}"></h4>
                             </a>
                         </li>
                     </ul>
