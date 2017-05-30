@@ -58,8 +58,12 @@ public class RoomAdminController {
         model.addAttribute("roomList", roomList);
         model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);
+
+        model.addAttribute("filterType",filterType);
         model.addAttribute("filterValue", value);
-        return "room/admin/all";
+
+        model.addAttribute("template","fragments/room/admin/all");
+        return "adminlte/index";
     }
 
     // search
