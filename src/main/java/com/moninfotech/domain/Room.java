@@ -51,7 +51,7 @@ public class Room extends BaseEntity {
 
     @SuppressWarnings("UsedOnThymeleaf")
     public String getDiscountPercentage() {
-        return String.valueOf((discount * 100) / price) + "% Off";
+        return String.valueOf((discount * 100) / price) + "%";
     }
 
 //    // check if this room is booked for a given date of current month

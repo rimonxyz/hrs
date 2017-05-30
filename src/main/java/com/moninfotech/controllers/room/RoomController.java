@@ -51,7 +51,7 @@ public class RoomController {
         List<byte[]> images;
         // set images from room
         if (room.getImages() != null && !room.getImages().isEmpty())
-            images = room.getCategory().getImages();
+            images = room.getImages();
         else images = room.getCategory().getImages(); // set category images if room has no image
         if (images != null && images.size() > imageNumber) {
             return new ResponseEntity<>(images.get(imageNumber), HttpStatus.OK);

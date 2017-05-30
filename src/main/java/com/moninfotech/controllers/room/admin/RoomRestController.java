@@ -8,9 +8,7 @@ import com.moninfotech.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,7 +30,14 @@ public class RoomRestController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private ResponseEntity<List<Room>> allRooms(@CurrentUser User user) {
-        return new ResponseEntity<List<Room>>(this.hotelService.findByUser(user).getRoomList(), HttpStatus.OK);
+        return new ResponseEntity<>(this.hotelService.findByUser(user).getRoomList(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    private ResponseEntity<Room> getRoom(@PathVariable("id") Long roomId) {
+        Room room = this.roomService.findOne(roomId);
+        if (room == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(room, HttpStatus.OK);
     }
 
 }

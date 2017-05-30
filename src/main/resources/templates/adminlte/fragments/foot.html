@@ -444,12 +444,33 @@
         $("#ratingProgressBar").width(width);
     });
 </script>
+
+<!--/adminlte/fragments/room/admin/all-->
+
 <script>
+    // filter  actions
     $("#dateFilter").on("change", function (form) {
         $("#dateFilterForm").submit();
     });
     $("#categoryFilter").on("change", function (form) {
         $("#catFilterForm").submit();
     });
-
+    // on click edit button modal
+    var onRoomItemClick = function(element,roomId){
+        console.log(""+roomId);
+        $.ajax({
+            url:"/rest/hotel/rooms/"+roomId,
+            success : function (result) {
+                console.log(result);
+                $("#roomIdEdit").val( roomId );
+                $("#roomNumberEdit").val(result.roomNumber);
+                $("#floorNumberEdit").val(result.floorNumber);
+                $("#priceEdit").val(result.price);
+                $("#discountEdit").val(result.discount);
+                $("#categoryIdsEdit").val(result.category.id);
+            }
+        });
+    }
 </script>
+
+

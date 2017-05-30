@@ -1,0 +1,76 @@
+<div class="modal fade" id="modal-create-room">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <!--<h4 class="modal-title">Create Room</h4>-->
+            </div>
+            <div class="modal-body">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Create Room</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form" th:action="@{/hotel/rooms/create}" method="post" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="roomNumber">Room Number</label>
+                                <input id="roomNumber" name="roomNumber" class="form-control" type="text" placeholder="Room Number" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="floorNumber">Floor Number</label>
+                                <input name="floorNumber" id="floorNumber" class="form-control" type="number" placeholder="Floor Number"
+                                       required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input name="price" id="price" class="form-control" type="number" placeholder="Price" required="required"></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="discount">Discount</label>
+                                <input name="discount" id="discount" class="form-control" type="number" placeholder="Discount"></input>
+                            </div>
+                            <div id="select_category" th:if="${categoryList!=null and !categoryList?.isEmpty()}">
+                                <select name="category.id" class="wow fadeInDown animated" class="form-control">
+                                    <option th:each="cat : ${categoryList}" th:value="${cat.id}" th:text="${cat.name}"></option>
+                                    <!--<option th:value="Dummy">Dummy 2</option>-->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="image1">Image 1</label>
+                                <input name="images" id="image1" type="file">
+
+                                <p class="help-block">Choose your first image(Optional).</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="image2">Image 2</label>
+                                <input name="images" id="image2" type="file">
+
+                                <p class="help-block">Choose your second image(Optional).</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="image1">Image 3</label>
+                                <input name="images" id="image3" type="file">
+
+                                <p class="help-block">Choose your Third image(Optional).</p>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>-->
+                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

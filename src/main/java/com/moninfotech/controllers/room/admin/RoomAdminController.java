@@ -76,9 +76,18 @@ public class RoomAdminController {
         List<Room> roomList = this.roomService.searchRooms(hotel, query);
         if (roomList == null)
             return "room/admin/all?message=One or more rooms can not be found!";
+        // get booked ids by current date
+        List<Long> bookedIds = this.roomService.filterRoomIds(roomList, FilterType.DATE, DateUtils.getParsableDateFormat().format(new Date()));
+
+        model.addAttribute("hotel",hotel);
         model.addAttribute("roomList", roomList);
         model.addAttribute("categoryList", this.categoryService.findAll());
-        return "room/admin/all";
+        model.addAttribute("bookedIds", bookedIds);
+
+        model.addAttribute("filterType",FilterType.DATE);
+
+        model.addAttribute("template","fragments/room/admin/all");
+        return "adminlte/index";
     }
 
     // create
@@ -129,7 +138,7 @@ public class RoomAdminController {
                         @RequestParam("images") MultipartFile[] multipartFiles,
                         @CurrentUser User user) {
         if (bindingResult.hasErrors()) Log.print(bindingResult.toString());
-        if (room == null) return "redirect:/hotel/rooms?message=Room not found!";
+        if (id == null) return "redirect:/hotel/rooms?message=Room not found!";
         List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
         // if all images aren't valid
         boolean isImagesValid = files.size() == multipartFiles.length;
