@@ -69,7 +69,9 @@ public class HotelController {
             model.addAttribute("query", query);
         model.addAttribute(hotelList);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
-        return "hotel/all";
+
+        model.addAttribute("template","fragments/hotel/all");
+        return "adminlte/index";
     }
 
     // get all room
