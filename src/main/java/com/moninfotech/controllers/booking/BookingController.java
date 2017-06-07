@@ -71,7 +71,7 @@ public class BookingController {
             return "redirect:/bookings?message=You\'re not authorised to access this resource.";
         model.addAttribute("booking", booking);
 
-        model.addAttribute("template","fragments/booking/details");
+        model.addAttribute("template", "fragments/booking/details");
         return "adminlte/index";
     }
 
@@ -93,13 +93,33 @@ public class BookingController {
             booking.setRoomList(new ArrayList<>());
             booking.setBookingDateList(new ArrayList<>());
         }
+        // validate booking // if user tries to book rooms from different hotels in a same booking restrict him from doing that shit.
+        if (this.bookingService.isBookingInvalid(booking,room))
+            return "redirect:/hotels/"+room.getHotel().getId()+"?message=You can\'t book rooms from different hotels at the same time!";
         if (this.bookingService.isDuplicateAttempt(booking, room, date))
             return "redirect:/rooms/" + roomId + "/" + dateStr + "?message=You can't book same room twice at same day!";
         booking.getRoomList().add(room);
         booking.getBookingDateList().add(date);
         session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
 
-        return "redirect:/rooms/" + roomId + "/" + dateStr;
+        return "redirect:/hotels/" + room.getHotel().getId()+"?messageinfo=Room "+room.getRoomNumber()+" Added to the cart!";
+    }
+
+    @GetMapping("/cart/remove/{roomId}")
+    private String removeFromCart(@PathVariable("roomId") Long roomId,
+                                  HttpSession session) {
+        // remove item from session
+        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+        if (booking != null) {
+            List<Room> sBookingRooms = this.roomService.removeRoom(booking.getRoomList(), roomId);
+            List<Date> sBookingDates = this.bookingService.removeBookingDate(booking, roomId);
+            booking.setRoomList(sBookingRooms);
+            booking.setBookingDateList(sBookingDates);
+            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
+        }
+        Room room = this.roomService.findOne(roomId);
+        if (room==null) return "redirect:/?message=Can\'t find room!";
+        return "redirect:/hotels/" + room.getHotel().getId();
     }
 
     @GetMapping("/checkout")

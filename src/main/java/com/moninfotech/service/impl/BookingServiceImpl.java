@@ -111,5 +111,23 @@ public class BookingServiceImpl implements BookingService {
         return false;
     }
 
+    @Override
+    public List<Date> removeBookingDate(Booking booking, Long roomId) {
+        List<Date> newBookingDateList = new ArrayList<>();
+        for (int i=0;i<booking.getRoomList().size();i++){
+            if (!booking.getRoomList().get(i).getId().equals(roomId))
+                newBookingDateList.add(booking.getBookingDateList().get(i));
+        }
+        return newBookingDateList;
+    }
+
+    @Override
+    public boolean isBookingInvalid(Booking booking, Room room) {
+        // if booking has any room from different hotel
+        return booking.getRoomList().stream()
+                .filter(r->!r.getHotel().getId().equals(room.getHotel().getId()))
+                .count()>0;
+    }
+
 
 }

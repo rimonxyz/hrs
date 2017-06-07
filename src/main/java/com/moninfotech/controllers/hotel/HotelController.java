@@ -70,7 +70,7 @@ public class HotelController {
         model.addAttribute(hotelList);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
 
-        model.addAttribute("template","fragments/hotel/all");
+        model.addAttribute("template", "fragments/hotel/all");
         return "adminlte/index";
     }
 
@@ -79,6 +79,7 @@ public class HotelController {
     private String allRooms(@PathVariable("id") Long id,
                             @RequestParam(value = "filterType", required = false) String filterType,
                             @RequestParam(value = "value", required = false) String value, Model model) {
+
         if (filterType == null || filterType.isEmpty() || value == null || value.isEmpty()) {
             filterType = FilterType.DATE;
             value = DateUtils.getParsableDateFormat().format(new Date());
@@ -92,8 +93,13 @@ public class HotelController {
         model.addAttribute("roomList", roomList);
         model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);
+
+        model.addAttribute("filterType", filterType);
         model.addAttribute("filterValue", value);
-        return "room/allRooms";
+
+        model.addAttribute("sidebarCollapse",true);
+        model.addAttribute("template", "fragments/hotel/details");
+        return "adminlte/index";
     }
 
     // search

@@ -29,4 +29,8 @@ public interface BookingService {
     Collection<Booking> getBookingList(Hotel hotel, User user);
 
     boolean isDuplicateAttempt(Booking booking, Room room, Date date);
+
+    List<Date> removeBookingDate(Booking booking, Long roomId);
+
+    boolean isBookingInvalid(Booking booking, Room room);
 }

@@ -63,10 +63,12 @@ public class Booking extends BaseEntity {
     }
 
     public String getTotalDiscountPercentage() {
+        if (this.getTotalCost()==0) return this.getTotalCost()+"%";
         return (this.getTotalDiscount() * 100) / this.getTotalCost() + "%";
     }
-    public String getTotalDiscountPercentageNumber() {
-        return (this.getTotalDiscount() * 100) / this.getTotalCost() + "%";
+    public int getTotalDiscountPercentageNumber() {
+        if (this.getTotalCost()==0) return 0;
+        return (this.getTotalDiscount() * 100) / this.getTotalCost();
     }
 
     public String getReadableDate(Date date) {
