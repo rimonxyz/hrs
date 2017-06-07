@@ -31,7 +31,11 @@ public class Booking extends BaseEntity {
     @ManyToOne
     private Hotel hotel;
 
+    @OneToOne(mappedBy = "booking")
+    private Invoice invoice;
+
     public boolean isValid() {
+        // TODO: 6/7/17 TIME VALIDATION | MAKE SURE BOOKING TIME ISN'T PAST
         if (roomList == null || bookingDateList == null || roomList.size() != bookingDateList.size()) return false;
         for (int i=0;i<roomList.size()&&i<bookingDateList.size();i++) {
             Room room = roomList.get(i);
@@ -130,5 +134,13 @@ public class Booking extends BaseEntity {
                 ", user=" + user +
                 ", hotel=" + hotel +
                 "} " + super.toString();
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 }

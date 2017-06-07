@@ -147,7 +147,7 @@ public class BookingController {
         }
         booking = this.bookingService.save(booking);
         session.removeAttribute(SessionAttr.SESSION_BOOKING);
-        return "redirect:/bookings/" + booking.getId() + "?message=Booking Successful!";
+        return "redirect:/invoices/generate/" + booking.getId() + "?message=Booking Successful!";
     }
 
 //    @ResponseBody

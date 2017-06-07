@@ -155,9 +155,8 @@
                         <div class="col-sm-4"></div>
                         <div style="padding: 10px;" class="col-sm-4">
                             <div th:include="fragments/booking-modal"></div>
-                            <a id="checkoutButton" hidden="hidden"
-                               class="btn btn-lg btn-block btn-warning" data-toggle="modal"
-                               data-target="#bookingModal"><i class="glyphicon glyphicon-shopping-cart"></i>CHECKOUT</a>
+                            <a id="checkoutButton" hidden="hidden" th:href="@{/bookings/checkout}"
+                               class="btn btn-lg btn-block btn-warning"><i class="glyphicon glyphicon-shopping-cart"></i>CHECKOUT</a>
                         </div>
                     </div>
 
