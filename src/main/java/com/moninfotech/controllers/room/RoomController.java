@@ -38,9 +38,12 @@ public class RoomController {
             dateStr = DateUtils.getParsableDateFormat().format(new Date());
         Room room = this.roomService.findOne(id);
         model.addAttribute("room", room);
+        model.addAttribute("hotel",room.getHotel());
         model.addAttribute("date",dateStr);
         model.addAttribute("categoryList",this.categoryService.findAll());
-        return "room/details";
+
+        model.addAttribute("template", "fragments/room/details");
+        return "adminlte/index";
     }
 
 

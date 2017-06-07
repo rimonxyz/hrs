@@ -44,7 +44,74 @@
         <!-- Tab panes -->
         <div class="tab-content">
 
-            <div th:include="@{/adminlte/fragments/hotel/details}"></div>
+            <div class="row" style="overflow-y: scroll; height:100vh;">
+                <div class="col-sm-12" th:each="room : ${hotel?.roomList}"
+                     th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary">
+                    <!-- Widget: user widget style 1 -->
+                    <div class="box box-widget widget-user">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header"
+                             th:classappend="${bookedIds?.contains(room?.id)} ? bg-yellow : bg-aqua-active">
+                            <a th:href="@{/rooms/}+${room?.id}+@{/}+${filterValue}">
+                                <h3 class="widget-user-username" th:text="${room?.roomNumber}" style="color: white;">
+                                    Alexander
+                                    Pierce</h3>
+                                <h5 class="widget-user-desc">
+
+                        <span th:if="${bookedIds?.contains(room?.id)}">
+                            <kbd th:if="${!filterType.equals('category')}">Booked!</kbd>
+                        </span>
+                                    <span th:unless="${bookedIds?.contains(room?.id)}"><kbd>Available</kbd></span>
+
+                                </h5>
+                            </a>
+                        </div>
+                        <div class="widget-user-image">
+                            <!--<h1 style="color: white;" class="widget-user-username" th:text="${room?.roomNumber}">Alexander Pierce</h1>-->
+                            <img class="img-circle" th:src="@{/rooms/}+${room?.id}+@{/image/0}" alt="User Avatar">
+                        </div>
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <span>Price</span>
+                                        <h5 class="description-header" th:text="${room?.price}">3,200</h5>
+                                        <span class="description-text">TK</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <span>...</span>
+                                        <h5 class="description-header" th:text="${room?.getDiscountPercentage()}">
+                                            13,000</h5>
+                                        <span class="description-text">DISCOUNT</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4">
+                                    <div class="description-block">
+                                        <span>Price After</span>
+                                        <h5 class="description-header" th:text="${room?.getDiscountedPrice()}">35</h5>
+                                        <span class="description-text">TK</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!--<div class="col-sm-12">-->
+                                <!--<a th:onclick="'onRoomItemClick(this,\'' + ${room.id} + '\');'"-->
+                                <!--class="btn btn-link btn-block" id="openEditModalButton"-->
+                                <!--data-toggle="modal" data-target="#modal-edit-room"><b>Edit</b></a>-->
+                                <!--</div>-->
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+                    <!-- /.widget-user -->
+                </div>
+            </div>
 
             <!-- /.tab-pane -->
             <!-- Stats tab content -->
