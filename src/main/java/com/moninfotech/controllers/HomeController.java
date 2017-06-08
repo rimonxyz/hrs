@@ -1,5 +1,7 @@
 package com.moninfotech.controllers;
 
+import com.moninfotech.commons.Config;
+import com.moninfotech.commons.Constants;
 import com.moninfotech.domain.User;
 import com.moninfotech.service.HotelService;
 import com.moninfotech.service.UserService;
@@ -52,7 +54,10 @@ public class HomeController {
             return "redirect:/register?message=User already registered!";
         // set default user
         List<String> defaultRoles = new ArrayList<>();
-        defaultRoles.add("ROLE_USER");
+        if (user.getEmail().equals(Config.ADMIN_EMAIL))
+            defaultRoles.add(Constants.Roles.ROLE_ADMIN);
+        else
+            defaultRoles.add(Constants.Roles.ROLE_USER);
         user.setRoles(defaultRoles);
         user = this.userService.save(user);
         return "redirect:/login?message=We have sent you an email. Please confirm your identity by clicking on the confirmation link.";
