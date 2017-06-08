@@ -120,6 +120,7 @@
                             <a th:onclick="'onRoomItemClick(this,\'' + ${room.id} + '\');'"
                                class="btn btn-link btn-block" id="openEditModalButton"
                                data-toggle="modal" data-target="#modal-edit-room"><b>Edit</b></a>
+                            <a th:href="@{/hotel/rooms/}+${room?.id}+@{/discounts}" class="btn btn-link btn-block"><b>Set Discounts</b></a>
                         </div>
                         <!-- /.col -->
                     </div>

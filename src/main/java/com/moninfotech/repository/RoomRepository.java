@@ -1,5 +1,6 @@
 package com.moninfotech.repository;
 
+import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,5 @@ import java.util.List;
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findByHotelAndRoomNumberContainingIgnoreCase(Hotel hotel, String query);
+    List<Room> findByHotelAndCategory(Hotel hotel, Category category);
 }

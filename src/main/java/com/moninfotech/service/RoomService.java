@@ -4,7 +4,9 @@ import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sayemkcn on 4/4/17.
@@ -29,4 +31,10 @@ public interface RoomService {
     List<Room> saveAll(List<Room> processedRoomList);
 
     List<Room> removeRoom(List<Room> roomList, Long roomId);
+
+    List<Room> findByHotelAndCategory(Hotel hotel, Category category);
+
+    List<Room> updateDiscounts(List<Room> roomList, Map<Date, Integer> discountMap);
+
+    List<Room> save(List<Room> roomList);
 }

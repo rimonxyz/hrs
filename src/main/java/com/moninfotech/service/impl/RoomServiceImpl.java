@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -92,6 +89,27 @@ public class RoomServiceImpl implements RoomService {
         return roomList.stream()
                 .filter(room -> !room.getId().equals(roomId))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Room> findByHotelAndCategory(Hotel hotel, Category category) {
+        return this.roomRepo.findByHotelAndCategory(hotel,category);
+    }
+
+    @Override
+    public List<Room> updateDiscounts(List<Room> roomList, Map<Date, Integer> discountMap) {
+        List<Room> rooms = new ArrayList<>();
+        roomList
+                .forEach(room -> {
+                    room.setDiscountMap(new HashMap<>(discountMap));
+                    rooms.add(room);
+                });
+        return rooms;
+    }
+
+    @Override
+    public List<Room> save(List<Room> roomList) {
+        return this.roomRepo.save(roomList);
     }
 
     private List<Long> filterRoomIdsByCategory(List<Room> roomList, String value) {

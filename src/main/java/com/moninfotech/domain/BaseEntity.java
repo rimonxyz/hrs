@@ -58,6 +58,12 @@ public abstract class BaseEntity {
         return new SimpleDateFormat("dd MMMM").format(date);
     }
 
+    public String getReadableDateWithoutTime(Date date){
+        if (date == null) return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM, dd yyyy");
+        return sdf.format(date);
+    }
+
     @Override
     public String toString() {
         return "BaseEntity{" +

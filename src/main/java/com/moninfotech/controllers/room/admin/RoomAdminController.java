@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -54,15 +55,15 @@ public class RoomAdminController {
         List<Room> roomList = hotel.getRoomList();
         List<Long> bookedIds = this.roomService.filterRoomIds(roomList, filterType, value);
 
-        model.addAttribute("hotel",hotel);
+        model.addAttribute("hotel", hotel);
         model.addAttribute("roomList", roomList);
         model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);
 
-        model.addAttribute("filterType",filterType);
+        model.addAttribute("filterType", filterType);
         model.addAttribute("filterValue", value);
 
-        model.addAttribute("template","fragments/room/admin/all");
+        model.addAttribute("template", "fragments/room/admin/all");
         return "adminlte/index";
     }
 
@@ -79,14 +80,14 @@ public class RoomAdminController {
         // get booked ids by current date
         List<Long> bookedIds = this.roomService.filterRoomIds(roomList, FilterType.DATE, DateUtils.getParsableDateFormat().format(new Date()));
 
-        model.addAttribute("hotel",hotel);
+        model.addAttribute("hotel", hotel);
         model.addAttribute("roomList", roomList);
         model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);
 
-        model.addAttribute("filterType",FilterType.DATE);
+        model.addAttribute("filterType", FilterType.DATE);
 
-        model.addAttribute("template","fragments/room/admin/all");
+        model.addAttribute("template", "fragments/room/admin/all");
         return "adminlte/index";
     }
 
@@ -166,4 +167,36 @@ public class RoomAdminController {
 //        this.roomService.delete(id);
 //        return "redirect:/hotel/rooms?message=Deleted!";
 //    }
+
+    // DISCOUNTS
+
+    @GetMapping("/{roomId}/discounts")
+    private String allDiscounts(@PathVariable("roomId") Long roomId,
+                                @CurrentUser User currentUser,
+                                Model model) {
+        Room room = this.roomService.findOne(roomId);
+        if (room == null) return "/hotel/rooms?message=Room not found!";
+        if (!room.getHotel().getUser().getId().equals(currentUser.getId()))
+            return "/hotel/rooms?message=You\'re not authorized to do this action!";
+
+        model.addAttribute("room", room);
+        model.addAttribute("template", "fragments/room/admin/discounts");
+        return "adminlte/index";
+    }
+
+    @PostMapping("/{roomId}/discounts/add")
+    private String addDiscount(@PathVariable("roomId") Long roomId,
+                               @RequestParam("date") String date,
+                               @RequestParam("discount") String discount,
+                               Model model) throws ParseException {
+        Room room = this.roomService.findOne(roomId);
+        Date dDate = DateUtils.getParsableDateFormat().parse(date);
+        room.getDiscountMap().put(dDate, Integer.parseInt(discount));
+        List<Room> roomList = this.roomService.findByHotelAndCategory(room.getHotel(),room.getCategory());
+        // update all rooms in same category of that hotel
+        roomList = this.roomService.updateDiscounts(roomList,room.getDiscountMap());
+        roomList = this.roomService.save(roomList);
+
+        return "redirect:/hotel/rooms/"+room.getId()+"/discounts";
+    }
 }

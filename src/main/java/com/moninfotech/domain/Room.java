@@ -6,10 +6,7 @@ import com.moninfotech.commons.DateUtils;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by sayemkcn on 3/21/17.
@@ -22,6 +19,9 @@ public class Room extends BaseEntity {
     @Column(length = 1000000)
     @JsonIgnore
     private List<byte[]> images;
+    @ElementCollection
+    @MapKeyColumn(name = "date")
+    private Map<Date, Integer> discountMap;
     private int discount;
     private boolean discounted;
     private int floorNumber;
@@ -43,15 +43,27 @@ public class Room extends BaseEntity {
     }
 
     public int getDiscountedPrice() {
-        int x = this.price - this.discount;
+        int x = this.price - this.getDiscount();
         if (x < 0)
             return 0;
         return x;
     }
 
+    public int getDiscount() {
+        if (this.discountMap != null)
+            for (Map.Entry<Date, Integer> entry : discountMap.entrySet()) {
+                // todays discount from map
+                if (DateUtils.isSameDay(entry.getKey(), new Date()))
+                    // check if discount exceeds the original price
+                    if (entry.getValue() < this.price)
+                        return entry.getValue();
+            }
+        return discount;
+    }
+
     @SuppressWarnings("UsedOnThymeleaf")
     public String getDiscountPercentage() {
-        return String.valueOf((discount * 100) / price) + "%";
+        return String.valueOf((this.getDiscount() * 100) / price) + "%";
     }
 
 //    // check if this room is booked for a given date of current month
@@ -73,8 +85,8 @@ public class Room extends BaseEntity {
 
     // gives booking status for a specific date for a room
     public boolean isBooked(Date date) {
-        for (int i=0;i<this.bookingList.size();i++) {
-            if (DateUtils.containsDate(this.bookingList.get(i).getBookingDateList(),date))
+        for (int i = 0; i < this.bookingList.size(); i++) {
+            if (DateUtils.containsDate(this.bookingList.get(i).getBookingDateList(), date))
                 return true;
         }
         return false;
@@ -156,9 +168,6 @@ public class Room extends BaseEntity {
         this.images = images;
     }
 
-    public int getDiscount() {
-        return discount;
-    }
 
     public void setDiscount(int discount) {
         this.discount = discount;
@@ -209,5 +218,17 @@ public class Room extends BaseEntity {
                 ", bookingList=" + bookingList +
                 ", hotel=" + hotel +
                 "} " + super.toString();
+    }
+
+    public Map<Date, Integer> getDiscountMap() {
+        return discountMap;
+    }
+
+    public Map<Date, Integer> getDiscountMapSorted() {
+        return new TreeMap<>(discountMap);
+    }
+
+    public void setDiscountMap(Map<Date, Integer> discountMap) {
+        this.discountMap = discountMap;
     }
 }
