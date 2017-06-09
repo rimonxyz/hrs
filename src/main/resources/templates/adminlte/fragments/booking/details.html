@@ -157,24 +157,18 @@
                         <td><h4 th:if="${!booking?.bookingDateList?.isEmpty()}"
                                 th:text="${room?.getReadableDayMonth(booking?.bookingDateList?.get(iter.index))}"></h4>
                         </td>
-                        <td><h3 th:text="${room?.roomNumber}"></h3></td>
+                        <td><h4 th:text="${room?.roomNumber}"></h4></td>
                         <td><h4 th:text="${room?.category?.name}"></h4></td>
                         <td><h4 th:text="${room?.floorNumber}"></h4></td>
                         <td><h4 th:text="${room?.price}"></h4></td>
-                        <td><h4 th:text="${room?.getDiscount(filterValue)}"></h4></td>
-                        <td><h4 th:text="${room?.getDiscountedPrice(filterValue)}"></h4></td>
+                        <td><h4 th:text="${room?.getDiscount(booking?.bookingDateList?.get(iter.index))}"></h4></td>
+                        <td><h4 th:text="${room?.getDiscountedPrice(booking?.bookingDateList?.get(iter.index))}"></h4></td>
                     </tr>
                 </table>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
+                <a class="btn btn-block btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
             </div>
         </div>
     </div>

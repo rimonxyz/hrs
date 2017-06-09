@@ -38,7 +38,7 @@ public class InvoiceController {
                                    Model model) {
         Booking booking = this.bookingService.findOne(bookingId);
         if (!booking.getUser().getId().equals(currentUser.getId()))
-            return "/bookings?message=You\'re not authorized to do this action!";
+            return "redirect:/bookings?message=You\'re not authorized to do this action!";
         Invoice invoice;
         if (booking.getInvoice() != null) invoice = booking.getInvoice();
         else invoice = new Invoice(nextDay(), currentUser, booking);

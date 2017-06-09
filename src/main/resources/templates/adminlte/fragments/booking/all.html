@@ -86,6 +86,7 @@
                         <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
                         <a class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
                             review</a>
+                        <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
                     </td>
                     <td><a class="btn btn-warning">Cancel</a></td>
 

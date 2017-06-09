@@ -78,6 +78,10 @@ public class Room extends BaseEntity {
         return discount;
     }
 
+    public int getDiscount(){
+        return discount;
+    }
+
     public int getDiscount(String dateStr) {
         Date date = parseDate(dateStr);
         return getDiscount(date);

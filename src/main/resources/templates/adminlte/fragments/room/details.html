@@ -116,9 +116,9 @@
                         <td style="text-align: center;"
                             th:text="${room?.getReadableDayMonth(session.booking?.bookingDateList?.get(iter.index))}"></td>
                         <td style="text-align: center;" th:text="${room?.price}"></td>
-                        <td style="text-align: center;" th:text="${room?.discount}"></td>
-                        <td style="text-align: center;" th:text="${room?.getDiscountPercentage()}"></td>
-                        <td style="text-align: center;" th:text="${room?.getDiscountedPrice()}"></td>
+                        <td style="text-align: center;" th:text="${room?.getDiscount(date)}"></td>
+                        <td style="text-align: center;" th:text="${room?.getDiscountPercentage(date)}"></td>
+                        <td style="text-align: center;" th:text="${room?.getDiscountedPrice(date)}"></td>
                         <td style="text-align: center;">
                             <a th:href="@{/bookings/cart/remove/}+${room?.id}">
                                 <i class="glyphicon glyphicon-remove"></i>
@@ -165,7 +165,7 @@
                     <form class="form" th:action="@{/hotels/}+${room?.hotel?.id}" id="dateFilterForm" method="get">
                         <input name="filterType" type="hidden" th:value="date"></input>
                         <input class="form-control" name="value" type="date" id="dateFilter"
-                               th:value="${filterValue}"></input>
+                               th:value="${date}"></input>
                     </form>
                 </div>
                 <div class="panel-heading col-sm-6">
@@ -178,7 +178,7 @@
                         <input name="filterType" type="hidden" th:value="category"></input>
                         <select class="form-control" name="value" id="categoryFilter">
                             <option th:each="category: ${categoryList}" th:text="${category?.name}"
-                                    th:selected="${filterValue?.equals(category?.name)}"></option>
+                                    th:selected="${room?.category?.name?.equals(category?.name)}"></option>
                         </select>
                     </form>
                 </div>
@@ -252,14 +252,20 @@
                                                 <li><a href="#">Room Number <span class="pull-right badge bg-blue"
                                                                                   th:text="${room?.roomNumber}">31</span></a>
                                                 </li>
-                                                <li><a href="#">Room Price <span class="pull-right badge bg-aqua"
+                                                <li><a href="#">Original Price <span class="pull-right badge bg-aqua"
                                                                                  th:text="${room?.price}">5</span></a>
+                                                </li>
+                                                <li><a href="#">Discount<span class="pull-right badge bg-aqua"
+                                                                                 th:text="${room?.getDiscount(date)}">5</span></a>
+                                                </li>
+                                                <li><a href="#">Final Price<span class="pull-right badge bg-aqua"
+                                                                                 th:text="${room?.getDiscountedPrice(date)}">5</span></a>
                                                 </li>
                                                 <li><a href="#">Floor <span class="pull-right badge bg-green"
                                                                             th:text="${room?.floorNumber}">12</span></a>
                                                 </li>
                                                 <li><a href="#">Discount <span class="pull-right badge bg-red"
-                                                                               th:text="${room?.getDiscountPercentage()}">842</span></a>
+                                                                               th:text="${room?.getDiscountPercentage(date)}">842</span></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -445,12 +451,5 @@
     </div>
 
 
-    <!--MODALS-->
-    <div>
-        <!--CREATE ROOM MODAL-->
-        <div th:include="adminlte/fragments/room/admin/createRoomModal"></div>
-        <!--EDIT ROOM MODAL-->
-        <div th:include="adminlte/fragments/room/admin/editRoomModal"></div>
-    </div>
 </section>
 

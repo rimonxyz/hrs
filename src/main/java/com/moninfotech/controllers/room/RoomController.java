@@ -1,6 +1,7 @@
 package com.moninfotech.controllers.room;
 
 import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Room;
 import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.RoomService;
@@ -40,6 +41,9 @@ public class RoomController {
         model.addAttribute("room", room);
         model.addAttribute("hotel",room.getHotel());
         model.addAttribute("date",dateStr);
+
+        model.addAttribute("filterType", FilterType.DATE);
+        model.addAttribute("filterValue",dateStr);
         model.addAttribute("categoryList",this.categoryService.findAll());
 
         model.addAttribute("template", "fragments/room/details");
