@@ -102,7 +102,7 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <span>...</span>
-                                <h5 class="description-header" th:text="${room?.getDiscountPercentage()}">13,000</h5>
+                                <h5 class="description-header" th:text="${room?.getDiscountPercentage(filterValue)}">13,000</h5>
                                 <span class="description-text">DISCOUNT</span>
                             </div>
                             <!-- /.description-block -->
@@ -111,7 +111,7 @@
                         <div class="col-sm-4">
                             <div class="description-block">
                                 <span>Price After</span>
-                                <h5 class="description-header" th:text="${room?.getDiscountedPrice()}">35</h5>
+                                <h5 class="description-header" th:text="${room?.getDiscountedPrice(filterValue)}">35</h5>
                                 <span class="description-text">TK</span>
                             </div>
                             <!-- /.description-block -->

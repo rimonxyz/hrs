@@ -161,8 +161,8 @@
                         <td><h4 th:text="${room?.category?.name}"></h4></td>
                         <td><h4 th:text="${room?.floorNumber}"></h4></td>
                         <td><h4 th:text="${room?.price}"></h4></td>
-                        <td><h4 th:text="${room?.discount}"></h4></td>
-                        <td><h4 th:text="${room?.getDiscountedPrice()}"></h4></td>
+                        <td><h4 th:text="${room?.getDiscount(filterValue)}"></h4></td>
+                        <td><h4 th:text="${room?.getDiscountedPrice(filterValue)}"></h4></td>
                     </tr>
                 </table>
             </div>

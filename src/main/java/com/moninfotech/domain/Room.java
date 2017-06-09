@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.moninfotech.commons.DateUtils;
 
 import javax.persistence.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -42,18 +43,34 @@ public class Room extends BaseEntity {
         else this.setDiscounted(false);
     }
 
-    public int getDiscountedPrice() {
-        int x = this.price - this.getDiscount();
+    public int getDiscountedPrice(Date date) {
+        int x = this.price - this.getDiscount(date);
         if (x < 0)
             return 0;
         return x;
     }
 
-    public int getDiscount() {
+    public int getDiscountedPrice(String dateStr) {
+        Date date = parseDate(dateStr);
+        return getDiscountedPrice(date);
+    }
+
+    //    public int getDiscount() {
+//        if (this.discountMap != null)
+//            for (Map.Entry<Date, Integer> entry : discountMap.entrySet()) {
+//                // todays discount from map
+//                if (DateUtils.isSameDay(entry.getKey(), new Date()))
+//                    // check if discount exceeds the original price
+//                    if (entry.getValue() < this.price)
+//                        return entry.getValue();
+//            }
+//        return discount;
+//    }
+    public int getDiscount(Date date) {
         if (this.discountMap != null)
             for (Map.Entry<Date, Integer> entry : discountMap.entrySet()) {
                 // todays discount from map
-                if (DateUtils.isSameDay(entry.getKey(), new Date()))
+                if (DateUtils.isSameDay(entry.getKey(), date))
                     // check if discount exceeds the original price
                     if (entry.getValue() < this.price)
                         return entry.getValue();
@@ -61,9 +78,31 @@ public class Room extends BaseEntity {
         return discount;
     }
 
+    public int getDiscount(String dateStr) {
+        Date date = parseDate(dateStr);
+        return getDiscount(date);
+    }
+
     @SuppressWarnings("UsedOnThymeleaf")
-    public String getDiscountPercentage() {
-        return String.valueOf((this.getDiscount() * 100) / price) + "%";
+    public String getDiscountPercentage(Date date) {
+        return String.valueOf((this.getDiscount(date) * 100) / price) + "%";
+    }
+
+    @SuppressWarnings("UsedOnThymeleaf")
+    public String getDiscountPercentage(String dateStr) {
+        Date date = parseDate(dateStr);
+        return getDiscountPercentage(date);
+    }
+
+    private Date parseDate(String dateStr) {
+        Date date = new Date();
+        try {
+            if (dateStr != null)
+                date = DateUtils.getParsableDateFormat().parse(dateStr);
+        } catch (ParseException ignored) {
+
+        }
+        return date;
     }
 
 //    // check if this room is booked for a given date of current month

@@ -37,7 +37,7 @@ public class Booking extends BaseEntity {
     public boolean isValid() {
         // TODO: 6/7/17 TIME VALIDATION | MAKE SURE BOOKING TIME ISN'T PAST
         if (roomList == null || bookingDateList == null || roomList.size() != bookingDateList.size()) return false;
-        for (int i=0;i<roomList.size()&&i<bookingDateList.size();i++) {
+        for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++) {
             Room room = roomList.get(i);
             Date bookingDate = bookingDateList.get(i);
             if (room.isBooked(bookingDate)) return false;
@@ -54,24 +54,25 @@ public class Booking extends BaseEntity {
 
     public int getTotalDiscount() {
         int totalDiscount = 0;
-        for (Room room : this.roomList)
-            totalDiscount += room.getDiscount();
+        for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++)
+            totalDiscount += roomList.get(i).getDiscount(bookingDateList.get(i));
         return totalDiscount;
     }
 
     public int getTotalPayableCost() {
         int totalPayableCost = 0;
-        for (Room room : this.roomList)
-            totalPayableCost += room.getDiscountedPrice();
+        for (int i=0;i<roomList.size()&&i<bookingDateList.size();i++)
+            totalPayableCost += roomList.get(i).getDiscountedPrice(bookingDateList.get(i));
         return totalPayableCost;
     }
 
     public String getTotalDiscountPercentage() {
-        if (this.getTotalCost()==0) return this.getTotalCost()+"%";
+        if (this.getTotalCost() == 0) return this.getTotalCost() + "%";
         return (this.getTotalDiscount() * 100) / this.getTotalCost() + "%";
     }
+
     public int getTotalDiscountPercentageNumber() {
-        if (this.getTotalCost()==0) return 0;
+        if (this.getTotalCost() == 0) return 0;
         return (this.getTotalDiscount() * 100) / this.getTotalCost();
     }
 
@@ -79,11 +80,11 @@ public class Booking extends BaseEntity {
         return DateUtils.getReadableDateFormat().format(date);
     }
 
-    public String getAllBookingDates(){
+    public String getAllBookingDates() {
         Set<String> dates = new HashSet<>();
         SimpleDateFormat dateFormat = DateUtils.getReadableDateFormat();
-        this.bookingDateList.forEach(date->dates.add(dateFormat.format(date)));
-        return String.join(", ",dates);
+        this.bookingDateList.forEach(date -> dates.add(dateFormat.format(date)));
+        return String.join(", ", dates);
     }
 
     public Transaction getTransaction() {
