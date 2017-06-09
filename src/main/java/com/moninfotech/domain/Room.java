@@ -19,7 +19,7 @@ public class Room extends BaseEntity {
     @Column(length = 1000000)
     @JsonIgnore
     private List<byte[]> images;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @MapKeyColumn(name = "date")
     private Map<Date, Integer> discountMap;
     private int discount;
