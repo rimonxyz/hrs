@@ -115,9 +115,9 @@
                         <td style="text-align: center;"
                             th:text="${room?.getReadableDayMonth(session.booking?.bookingDateList?.get(iter.index))}"></td>
                         <td style="text-align: center;" th:text="${room?.price}"></td>
-                        <td style="text-align: center;" th:text="${room?.discount}"></td>
-                        <td style="text-align: center;" th:text="${room?.getDiscountPercentage(filterValue)}"></td>
-                        <td style="text-align: center;" th:text="${room?.getDiscountedPrice(filterValue)}"></td>
+                        <td style="text-align: center;" th:text="${room?.getDiscount(session.booking?.bookingDateList?.get(iter.index))}"></td>
+                        <td style="text-align: center;" th:text="${room?.getDiscountPercentage(session.booking?.bookingDateList?.get(iter.index))}"></td>
+                        <td style="text-align: center;" th:text="${room?.getDiscountedPrice(session.booking?.bookingDateList?.get(iter.index))}"></td>
                         <td style="text-align: center;">
                             <a th:href="@{/bookings/cart/remove/}+${room?.id}">
                                 <i class="glyphicon glyphicon-remove"></i>
