@@ -22,7 +22,8 @@ public class UserController {
     private String allUsers(@RequestParam(value = "page", required = false) Integer page, Model model) {
         if (page == null || page < 0) page = 0;
         model.addAttribute("userList", this.userService.findAll(page, 10));
-        return "users/admin/all";
+        model.addAttribute("template", "fragments/user/all");
+        return "adminlte/index";
     }
 
     // Edit

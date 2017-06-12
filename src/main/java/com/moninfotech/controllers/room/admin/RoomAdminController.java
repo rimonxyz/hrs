@@ -100,6 +100,7 @@ public class RoomAdminController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     private String create(@ModelAttribute Room room, BindingResult bindingResult,
+                          @RequestParam(value = "hotelId", required = false) Long hotelId,
                           @RequestParam("images") MultipartFile[] multipartFiles,
                           @CurrentUser User user) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
@@ -110,7 +111,12 @@ public class RoomAdminController {
                 return "redirect:/hotel/rooms/create?message=One or more images are invalid.";
             room.setImages(files);
         }
-        Hotel hotel = this.hotelService.findByUser(user);
+        Hotel hotel = null;
+        if (hotelId == null)
+            hotel = this.hotelService.findByUser(user);
+        else
+            hotel = this.hotelService.findOne(hotelId);
+
         if (hotel == null) return "redirect:/?message=You are not authorized to do this action.";
         room.setHotel(hotel);
         // check if room category was saved previously, if not then save and set to room
@@ -120,7 +126,8 @@ public class RoomAdminController {
         room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
         room = this.roomService.save(room);
 //        System.out.println(room);
-        return "redirect:/hotel/rooms?message=Successfully added room.";
+        if (hotelId != null) return "redirect:/admin/hotels/" + hotelId + "?messageinfo=Successfully added room.";
+        return "redirect:/hotel/rooms?messageinfo=Successfully added room.";
     }
 
     // Update
@@ -136,6 +143,7 @@ public class RoomAdminController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     private String edit(@ModelAttribute Room room, BindingResult bindingResult,
                         @PathVariable("id") Long id,
+                        @RequestParam(value = "hotelId", required = false) Long hotelId,
                         @RequestParam("images") MultipartFile[] multipartFiles,
                         @CurrentUser User user) {
         if (bindingResult.hasErrors()) Log.print(bindingResult.toString());
@@ -151,7 +159,14 @@ public class RoomAdminController {
         } else
             room.setImages(files);
         room.setId(id);
-        Hotel hotel = this.hotelService.findByUser(user);
+
+        // find hotel
+        Hotel hotel = null;
+        if (hotelId == null)
+            hotel = this.hotelService.findByUser(user);
+        else
+            hotel = this.hotelService.findOne(id);
+
         if (hotel == null) return "redirect:/?message=You are not authorized to do this action.";
         room.setHotel(hotel);
         room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
@@ -169,7 +184,6 @@ public class RoomAdminController {
 //    }
 
     // DISCOUNTS
-
     @GetMapping("/{roomId}/discounts")
     private String allDiscounts(@PathVariable("roomId") Long roomId,
                                 @CurrentUser User currentUser,
@@ -192,11 +206,11 @@ public class RoomAdminController {
         Room room = this.roomService.findOne(roomId);
         Date dDate = DateUtils.getParsableDateFormat().parse(date);
         room.getDiscountMap().put(dDate, Integer.parseInt(discount));
-        List<Room> roomList = this.roomService.findByHotelAndCategory(room.getHotel(),room.getCategory());
+        List<Room> roomList = this.roomService.findByHotelAndCategory(room.getHotel(), room.getCategory());
         // update all rooms in same category of that hotel
-        roomList = this.roomService.updateDiscounts(roomList,room.getDiscountMap());
+        roomList = this.roomService.updateDiscounts(roomList, room.getDiscountMap());
         roomList = this.roomService.save(roomList);
 
-        return "redirect:/hotel/rooms/"+room.getId()+"/discounts";
+        return "redirect:/hotel/rooms/" + room.getId() + "/discounts";
     }
 }

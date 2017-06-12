@@ -455,7 +455,7 @@
     $("#categoryFilter").on("change", function (form) {
         $("#catFilterForm").submit();
     });
-    // on click edit button modal
+    // on click edit room button modal
     var onRoomItemClick = function(element,roomId){
         console.log(""+roomId);
         $.ajax({
@@ -468,6 +468,27 @@
                 $("#priceEdit").val(result.price);
                 $("#discountEdit").val(result.discount);
                 $("#categoryIdsEdit").val(result.category.id);
+            }
+        });
+    }
+
+    // on click edit Hotel button modal
+    var onHotelItemClick = function(element,hotelId){
+        console.log(""+hotelId);
+        $.ajax({
+            url:"/rest/admin/hotels/"+hotelId,
+            success : function (result) {
+                console.log(result);
+                $("#hotelIdEdit").val(result.id);
+                $("#hotelNameEdit").val( result.name );
+                $("#addressCountryEdit").val(result.address.country);
+                $("#addressCityEdit").val(result.address.city);
+                $("#addressDistrictEdit").val(result.address.district);
+                $("#addressUpazilaEdit").val(result.address.upazila);
+                $("#addressAreaEdit").val(result.address.area);
+                $("#phoneNumberEdit").val(result.phoneNumber);
+                $("#descriptionEdit").val(result.description);
+                $("#userIdEdit").val(result.user.id);
             }
         });
     }

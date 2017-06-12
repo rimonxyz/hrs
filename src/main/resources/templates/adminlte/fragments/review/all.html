@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div class="box box-primary box-solid">
+            <div class="box box-solid">
                 <div class="box-header with-border">
                     <h3 class="box-title">My Reviews</h3>
 
@@ -65,6 +65,20 @@
                             </form>
                         </div>
                     </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <!-- /.box -->
+        </div>
+
+        <div class="col-md-8">
+            <div class="box box-solid" th:if="${reviewList==null or reviewList?.isEmpty()}">
+                <div class="box-header with-border">
+                    <h4>Your Reviews</h4>
+                </div>
+                <div class="box-body">
+                    <span>You haven't reviewed any hotel yet!</span>
                 </div>
                 <!-- /.box-body -->
             </div>

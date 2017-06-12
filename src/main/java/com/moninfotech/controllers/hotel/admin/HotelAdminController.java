@@ -55,7 +55,8 @@ public class HotelAdminController {
                        Model model) {
         if (page == null || page < 0) page = 0;
         model.addAttribute(hotelService.findAll(page, 10, soryBy, isDesc));
-        return "hotel/admin/all";
+        model.addAttribute("template", "fragments/hotel/admin/all");
+        return "adminlte/index";
     }
 
 
@@ -69,6 +70,7 @@ public class HotelAdminController {
     //@POST
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     private String create(@ModelAttribute Hotel hotel, BindingResult bindingResult,
+                          @RequestParam(value = "userId", required = false) Long userId,
                           @RequestParam("image") MultipartFile multipartFile) throws IOException {
         if (bindingResult.hasErrors())
             System.out.print("Binding ERROR: " + bindingResult.toString());
@@ -77,7 +79,20 @@ public class HotelAdminController {
             hotel.setImage(multipartFile.getBytes());
 
         // first save user
-        User user = this.userService.save(hotel.getUser());
+        User user;
+        if (userId != null) { // hotel updating
+            user = this.userService.findOne(userId);
+            // save previous created date when updating
+            if (hotel.getId() != null) {
+                Hotel existingHotel = this.hotelService.findOne(hotel.getId());
+                if (existingHotel != null)
+                    hotel.setCreated(existingHotel.getCreated());
+            }
+        } else // hotel create -new
+            user = hotel.getUser();
+
+        if (user == null) return "redirect:/admin/hotels?message=Can\'t update hotel!";
+        user = this.userService.save(user);
         // save hotel address as user address by default
         user.setAddress(hotel.getAddress());
         // set default role for this user. in this case :ROLE_HOTEL
@@ -170,7 +185,9 @@ public class HotelAdminController {
         model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);
         model.addAttribute("filterValue", value);
-        return "hotel/admin/allRooms";
+
+        model.addAttribute("template", "fragments/room/admin/all");
+        return "adminlte/index";
     }
 
     // search

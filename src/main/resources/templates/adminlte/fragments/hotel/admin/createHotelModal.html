@@ -1,0 +1,111 @@
+<div class="modal fade" id="modal-create-hotel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <!--<h4 class="modal-title">Create Room</h4>-->
+            </div>
+            <div class="modal-body">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Create Hotel</h3>
+                    </div>
+                        <form th:action="@{/admin/hotels/create}" method="post" enctype="multipart/form-data">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="name">Hotel Name</label>
+                                    <input class="form-control" name="name" id="name" type="text" placeholder="Hotel Name" required="required"></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="star">Star</label>
+                                    <select id="star" class="form-control" name="star">
+                                        <option th:value="1">1 Star</option>
+                                        <option th:value="2">2 Star</option>
+                                        <option th:value="3">3 Star</option>
+                                        <option th:value="4">4 Star</option>
+                                        <option th:value="5">5 Star</option>
+                                        <option th:value="6">6 Star</option>
+                                        <option th:value="7">7 Star</option>
+                                    </select>
+                                </div>
+
+                                <hr/><span>Hotel Address</span><hr/>
+                                <div class="form-group" id="address">
+                                    <div class="col-sm-6 form-group">
+                                        <label for="address.country">Country</label>
+                                        <input class="form-control" name="address.country" id="address.country" type="text" placeholder="Country" required="required"></input>
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label for="address.city">City</label>
+                                        <input class="form-control" name="address.city" id="address.city" type="text" placeholder="City" required="required"></input>
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label for="address.district">District</label>
+                                        <input name="address.district" class="form-control" id="address.district" type="text" placeholder="District" required="required"></input>
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label for="address.upazila">Upazila</label>
+                                        <input name="address.upazila" class="form-control" id="address.upazila" type="text" placeholder="Upazila" required="required"></input>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="address.area">Area</label>
+                                        <input name="address.area" class="form-control" id="address.area" type="text" placeholder="Area" required="required"></input>
+                                    </div>
+                                </div>
+                                <hr/><span>Extra</span><hr/>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input name="phoneNumber" class="form-control" id="phone" type="text" placeholder="Phone"
+                                       required=""></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Hotel Description</label>
+                                    <textarea name="description" id="description" class="form-control" placeholder="Hotel Description"
+                                          required="required"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Hotel Picture</label>
+                                    <input id="image" name="image"  type="file" placeholder="Image" required="required"></input>
+                                </div>
+
+                                <hr/><h3>User Informations</h3><hr/>
+                                <div class="form-group">
+                                    <label for="user.name">Name of User</label>
+                                    <input name="user.name" id="user.name" class="form-control" type="text" placeholder="Name" required="required"></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user.email">Email</label>
+                                    <input name="user.email" id="user.email" class="form-control" type="text" placeholder="Email" required="required"></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user.phoneNumber">Phone Number</label>
+                                    <input name="user.phoneNumber" id="user.phoneNumber" class="form-control" type="text" placeholder="Users Phone Number" required="required"></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user.password">Password</label>
+                                    <input name="user.password" id="user.password" class="form-control" type="password" placeholder="Users Password" required="required"></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user.email">Confirm Password</label>
+                                    <input name="user.confirmPassword" id="user.confirmPassword" class="form-control" type="password" placeholder="Confirm Password" required="required"></input>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">CANCEL</button>
+                                    <input class="btn btn-primary pull-right" type="submit" value="CREATE HOTEL"></input>
+                                </div>
+                            </div>
+
+                        </form>
+                </div>
+                <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>-->
+                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

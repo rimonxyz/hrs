@@ -152,7 +152,7 @@
                         <th>Discount</th>
                         <th>Discounted Price</th>
                     </tr>
-                    <tr th:if="${booking != null}" th:each="room,iter : ${booking?.roomList}">
+                    <tr th:if="${booking != null and booking.roomList?.size()==booking.bookingDateList?.size()}" th:each="room,iter : ${booking?.roomList}">
                         <td><img height="50" width="50" th:src="@{/rooms/} + ${room?.id} +@{/image/0}"></img></td>
                         <td><h4 th:if="${!booking?.bookingDateList?.isEmpty()}"
                                 th:text="${room?.getReadableDayMonth(booking?.bookingDateList?.get(iter.index))}"></h4>

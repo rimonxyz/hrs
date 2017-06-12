@@ -56,11 +56,15 @@
 
                                 <p class="help-block">Choose your Third image(Optional).</p>
                             </div>
+                            <div class="form-group" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <input hidden="hidden" name="hotelId" id="hotelId" type="text" th:value="${hotel?.id}">
+                            </div>
                         </div>
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">CANCEL</button>
+                                <input class="btn btn-primary pull-right" type="submit" value="CREATE ROOM"></input>
                         </div>
                     </form>
                 </div>
