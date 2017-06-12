@@ -4,16 +4,17 @@
         <div class="col-sm-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Bordered Table</h3>
+                    <h3 class="box-title">User List</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <a class="btn btn-success" th:href="@{/admin/hotels/create}">Create New Hotel</a>
+                    <!--<a class="btn btn-success" th:href="@{/admin/hotels/create}">Create New Hotel</a>-->
                     <table class="table table-hover">
                         <tr>
                         <tr>
                             <!--<td><b>Image</b></td>-->
                             <td>Name</td>
+                            <td>Status</td>
                             <td>Email</td>
                             <td>Address</td>
                             <td>Created</td>
@@ -28,7 +29,15 @@
                             <!--<img class="img-circle" height="40" width="60"-->
                             <!--th:src="@{/admin/users/images/}+${user?.id}"></img>-->
                             <!--</td>-->
-                            <td><span th:text="${user?.name}"></span><br/><span th:if="${!user?.isEnabled()}" class="badge">Disabled</span></td>
+                            <td>
+                                <span th:text="${user?.name}"></span><br/>
+                                <label class="label label-info" th:if="${user?.hasAssignedRole('ROLE_HOTEL')}">Hotel Admin</label>
+                                <label class="label label-primary" th:if="${user?.hasAssignedRole('ROLE_USER')}">User</label>
+                            </td>
+                            <td>
+                                <span th:if="${user?.isEnabled()}" class="label label-success">Enabled</span>
+                                <span th:if="${!user?.isEnabled()}" class="label label-danger">Disabled</span>
+                            </td>
                             <td th:text="${user?.email}"></td>
                             <td th:text="${user?.address?.getCommaSeperatedString()}"></td>
                             <td th:text="${user?.getReadableDate(user?.getCreated())}"></td>

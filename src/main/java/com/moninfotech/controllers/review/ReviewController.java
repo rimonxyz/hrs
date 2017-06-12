@@ -9,6 +9,8 @@ import com.moninfotech.service.BookingService;
 import com.moninfotech.service.HotelService;
 import com.moninfotech.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,7 +54,7 @@ public class ReviewController {
         model.addAttribute("hotelList", this.reviewService.findReviewedHotels(currentUser));
         model.addAttribute("reviewList", myReviewList);
 
-        model.addAttribute("template","fragments/review/all");
+        model.addAttribute("template", "fragments/review/all");
         return "adminlte/index";
     }
 
@@ -70,7 +72,7 @@ public class ReviewController {
         model.addAttribute(this.bookingService.getBookingList(hotel, currentUser));
         model.addAttribute("hotel", hotel);
 
-        model.addAttribute("template","fragments/review/create");
+        model.addAttribute("template", "fragments/review/create");
         return "adminlte/index";
     }
 
@@ -90,6 +92,14 @@ public class ReviewController {
         review.setHotel(hotel);
         review = this.reviewService.save(review);
         return "redirect:/reviews";
+    }
+
+    // get Rating
+    @GetMapping("/rating/{reviewId}")
+    private ResponseEntity<Float> getRating(@PathVariable("reviewId") Long reviewId) {
+        Review review = this.reviewService.findOne(reviewId);
+        if (review == null) return new ResponseEntity<Float>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<Float>(review.getRating(),HttpStatus.OK);
     }
 
 }

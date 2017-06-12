@@ -35,7 +35,7 @@
 
     <div th:include="adminlte/fragments/footer"></div>
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark" th:if="${hotel != null}">
+    <aside class="control-sidebar control-sidebar-dark" th:if="${hotel != null and filterValue != null}">
         <!-- Create the tabs -->
         <!--<ul class="nav nav-tabs nav-justified control-sidebar-tabs">-->
             <!--<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>-->

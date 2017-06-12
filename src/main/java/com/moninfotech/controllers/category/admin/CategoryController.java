@@ -37,7 +37,9 @@ public class CategoryController {
     private String allCategories(@RequestParam(value = "page", required = false) Integer page, Model model) {
         if (page == null || page < 0) page = 0;
         model.addAttribute("categoryList", this.categoryService.findAll());
-        return "category/admin/all";
+
+        model.addAttribute("template","fragments/category/admin/all");
+        return "adminlte/index";
     }
 
 

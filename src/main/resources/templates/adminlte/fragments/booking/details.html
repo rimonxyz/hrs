@@ -154,15 +154,15 @@
                     </tr>
                     <tr th:if="${booking != null and booking.roomList?.size()==booking.bookingDateList?.size()}" th:each="room,iter : ${booking?.roomList}">
                         <td><img height="50" width="50" th:src="@{/rooms/} + ${room?.id} +@{/image/0}"></img></td>
-                        <td><h4 th:if="${!booking?.bookingDateList?.isEmpty()}"
-                                th:text="${room?.getReadableDayMonth(booking?.bookingDateList?.get(iter.index))}"></h4>
+                        <td><span th:if="${!booking?.bookingDateList?.isEmpty()}"
+                                th:text="${room?.getReadableDayMonth(booking?.bookingDateList?.get(iter.index))}"></span>
                         </td>
-                        <td><h4 th:text="${room?.roomNumber}"></h4></td>
-                        <td><h4 th:text="${room?.category?.name}"></h4></td>
-                        <td><h4 th:text="${room?.floorNumber}"></h4></td>
-                        <td><h4 th:text="${room?.price}"></h4></td>
-                        <td><h4 th:text="${room?.getDiscount(booking?.bookingDateList?.get(iter.index))}"></h4></td>
-                        <td><h4 th:text="${room?.getDiscountedPrice(booking?.bookingDateList?.get(iter.index))}"></h4></td>
+                        <td><span th:text="${room?.roomNumber}"></span></td>
+                        <td><span th:text="${room?.category?.name}"></span></td>
+                        <td><span th:text="${room?.floorNumber}"></span></td>
+                        <td><span th:text="${room?.price}"></span></td>
+                        <td><span th:text="${room?.getDiscount(booking?.bookingDateList?.get(iter.index))}"></span></td>
+                        <td><span th:text="${room?.getDiscountedPrice(booking?.bookingDateList?.get(iter.index))}"></span></td>
                     </tr>
                 </table>
             </div>
