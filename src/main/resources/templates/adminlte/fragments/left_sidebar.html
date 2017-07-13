@@ -1,4 +1,4 @@
-<aside class="main-sidebar bg-black">
+<aside class="main-sidebar bg-black" xmlns:sec="http://www.w3.org/1999/xhtml">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar bg-black">
         <!-- Sidebar user panel -->
@@ -88,6 +88,30 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a th:href="@{/hotels}"><i class="fa fa-circle-o"></i>All Hotels</a></li>
+                </ul>
+            </li>
+            <li class="treeview" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="#">
+                    <i class="fa fa-th"></i>
+                    <span>Categories</span>
+                    <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a th:href="@{/admin/categories}"><i class="fa fa-circle-o"></i>All Categories</a></li>
+                </ul>
+            </li>
+            <li class="treeview" sec:authorize="hasRole('ADMIN')">
+                <a href="#">
+                    <i class="fa fa-th"></i>
+                    <span>Users</span>
+                    <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a th:href="@{/admin/users}"><i class="fa fa-circle-o"></i>All Users</a></li>
                 </ul>
             </li>
             <!--<li class="treeview">-->

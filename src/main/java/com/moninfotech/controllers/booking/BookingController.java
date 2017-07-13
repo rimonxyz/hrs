@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.booking;
 
+import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.SessionAttr;
 import com.moninfotech.commons.pojo.BookingHelper;
@@ -94,15 +95,15 @@ public class BookingController {
             booking.setBookingDateList(new ArrayList<>());
         }
         // validate booking // if user tries to book rooms from different hotels in a same booking restrict him from doing that shit.
-        if (this.bookingService.isBookingInvalid(booking,room))
-            return "redirect:/hotels/"+room.getHotel().getId()+"?message=You can\'t book rooms from different hotels at the same time!";
+        if (this.bookingService.isBookingInvalid(booking, room))
+            return "redirect:/hotels/" + room.getHotel().getId() + "?message=You can\'t book rooms from different hotels at the same time!";
         if (this.bookingService.isDuplicateAttempt(booking, room, date))
             return "redirect:/rooms/" + roomId + "/" + dateStr + "?message=You can't book same room twice at same day!";
         booking.getRoomList().add(room);
         booking.getBookingDateList().add(date);
         session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
 
-        return "redirect:/hotels/" + room.getHotel().getId()+"?messageinfo=Room "+room.getRoomNumber()+" Added to the cart!";
+        return "redirect:/hotels/" + room.getHotel().getId() + "?messageinfo=Room " + room.getRoomNumber() + " Added to the cart!";
     }
 
     @GetMapping("/cart/remove/{roomId}")
@@ -118,7 +119,7 @@ public class BookingController {
             session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
         }
         Room room = this.roomService.findOne(roomId);
-        if (room==null) return "redirect:/?message=Can\'t find room!";
+        if (room == null) return "redirect:/?message=Can\'t find room!";
         return "redirect:/hotels/" + room.getHotel().getId();
     }
 
@@ -134,8 +135,6 @@ public class BookingController {
         // set hotel for booking
         Hotel hotel = booking.getRoomList().get(0).getHotel();
         booking.setHotel(hotel);
-        // set user of booking
-        booking.setUser(currentUser);
         // check if hotel list and booking date list are incompatible
         if (booking.getRoomList().size() != booking.getBookingDateList().size()) {
             session.removeAttribute(SessionAttr.SESSION_BOOKING);
@@ -145,11 +144,22 @@ public class BookingController {
             session.removeAttribute(SessionAttr.SESSION_BOOKING);
             return "redirect:/hotels/" + booking.getHotel().getId() + "?message=One or more room isn't available during this time. Please try again!";
         }
+        // set user of booking
+        if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
+            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
+            return "redirect:/bookings/checkout/assignUser";
+        }
+        booking.setUser(currentUser);
         booking = this.bookingService.save(booking);
         session.removeAttribute(SessionAttr.SESSION_BOOKING);
         return "redirect:/invoices/generate/" + booking.getId() + "?message=Booking Successful!";
     }
 
+    @GetMapping("/checkout/assignUser")
+    private String assignUserToBooking(Model model){
+        model.addAttribute("template", "fragments/booking/assignUser");
+        return "adminlte/index";
+    }
 //    @ResponseBody
 //    @CrossOrigin
 //    @RequestMapping(value = "/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

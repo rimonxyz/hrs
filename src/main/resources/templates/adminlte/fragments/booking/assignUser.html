@@ -1,0 +1,26 @@
+<section class="invoice" xmlns:th="http://www.w3.org/1999/xhtml">
+    <!-- title row -->
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                <i class="fa fa-globe"></i> Hotels BD
+                <small class="pull-right" th:text="${invoice?.getReadableDate(invoice?.created)}">Date: 2/10/2014</small>
+            </h2>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- info row -->
+    <div class="row invoice-info">
+        <div class="box">
+
+            <form class="form">
+                <div class="form-group">
+                    <label for="searchQuery">Select User:</label>
+                    <input class="form-control" id="searchQuery" type="text" name="searchQuery" placeholder="Search by email or phone number" required="required"></input>
+                    <button class="btn btn-block btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>

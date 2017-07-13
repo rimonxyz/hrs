@@ -1,5 +1,6 @@
 package com.moninfotech.config;
 
+import com.moninfotech.commons.Constants;
 import com.moninfotech.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -29,10 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/bookings/cart/**","/hotels/**", "/rooms/**", "/rest/**", "/", "/search/**", "/login", "/users/exists/*", "/logout", "/register", "/fonts/**", "/js/**", "/css/**", "/images/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/hotel/**").hasAnyRole("HOTEL","ADMIN")
-                .antMatchers("/bookings/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/bookings/cart/**", "/hotels/**", "/rooms/**", "/rest/**", "/", "/search/**", "/login", "/users/exists/*", "/logout", "/register", "/fonts/**", "/js/**", "/css/**", "/images/**").permitAll()
+                .antMatchers("/admin/**").hasRole(Constants.Roles.AUTHORITY_ADMIN)
+                .antMatchers("/hotel/**").hasAnyRole(Constants.Roles.AUTHORITY_HOTEL_ADMIN, Constants.Roles.AUTHORITY_ADMIN)
+                .antMatchers("/bookings/**").hasAnyRole(Constants.Roles.RAUTHORITY_USER, Constants.Roles.AUTHORITY_HOTEL_ADMIN, Constants.Roles.AUTHORITY_ADMIN)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
