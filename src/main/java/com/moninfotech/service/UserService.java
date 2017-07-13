@@ -20,4 +20,6 @@ public interface UserService {
     User findByEmail(String email);
 
     List<User> findByName(String name);
+
+    List<User> findByEmailOrPhoneNumber(String email,String phoneNumber);
 }

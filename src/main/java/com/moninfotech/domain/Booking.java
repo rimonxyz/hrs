@@ -46,20 +46,19 @@ public class Booking extends BaseEntity {
     }
 
     public int getTotalCost() {
-        int totalCost = 0;
-        for (Room room : this.roomList)
-            totalCost += room.getPrice();
-        return totalCost;
+        return this.roomList.stream()
+                .mapToInt(Room::getPrice)
+                .sum();
     }
 
-    public int getTotalDiscount() {
+    public synchronized int getTotalDiscount() {
         int totalDiscount = 0;
         for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++)
             totalDiscount += roomList.get(i).getDiscount(bookingDateList.get(i));
         return totalDiscount;
     }
 
-    public int getTotalPayableCost() {
+    public synchronized int getTotalPayableCost() {
         int totalPayableCost = 0;
         for (int i=0;i<roomList.size()&&i<bookingDateList.size();i++)
             totalPayableCost += roomList.get(i).getDiscountedPrice(bookingDateList.get(i));

@@ -147,7 +147,7 @@ public class BookingController {
         // set user of booking
         if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
             session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
-            return "redirect:/bookings/review";
+            return "redirect:/bookings/checkout/assignUser";
         }
         booking.setUser(currentUser);
         booking = this.bookingService.save(booking);
@@ -156,9 +156,22 @@ public class BookingController {
     }
 
     @GetMapping("/checkout/assignUser")
-    private String assignUserToBooking(Model model){
+    private String assignUserToBookingPage(@RequestParam(value = "searchQuery", required = false, defaultValue = "") String searchQuery, Model model) {
+        model.addAttribute("userList", this.userService.findByEmailOrPhoneNumber(searchQuery, searchQuery));
         model.addAttribute("template", "fragments/booking/assignUser");
         return "adminlte/index";
+    }
+
+    @PostMapping("/checkout/assignUser")
+    private String assignUserToBooking(@RequestParam("userId") Long userId, HttpSession session, Model model) {
+        User user = this.userService.findOne(userId);
+        if (user == null) return "redirect:/bookings/checkout/assignUser?message=User not found!";
+        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+        if (booking != null) booking.setUser(user);
+        // DO PAYMENT PROCEEDURE
+        booking = this.bookingService.save(booking);
+        session.removeAttribute(SessionAttr.SESSION_BOOKING);
+        return "redirect:/invoices/generate/" + booking.getId() + "?message=Booking Successful!";
     }
 //    @ResponseBody
 //    @CrossOrigin

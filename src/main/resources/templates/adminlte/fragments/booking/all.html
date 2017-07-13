@@ -80,7 +80,7 @@
                     </td>
                     <!--<td th:text="${booking?.roomList?.size()}"></td>-->
                     <td th:text="${booking?.getTotalPayableCost()}"></td>
-                    <td><span class="badge bg-green">90%</span></td>
+                    <td><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
                     <td th:text="${booking?.hotel?.phoneNumber}"><h4></h4></td>
                     <td>
                         <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>

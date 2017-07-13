@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
     public List<User> findByName(String name) {
         return this.userRepo.findByNameContainingIgnoreCase(name);
     }
+
+    @Override
+    public List<User> findByEmailOrPhoneNumber(String email, String phoneNumber) {
+        return this.userRepo.findByEmailOrPhoneNumber(email,phoneNumber);
+    }
 }
