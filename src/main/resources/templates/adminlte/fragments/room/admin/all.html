@@ -10,19 +10,19 @@
                         Booking Mode</a>
                 </div>
                 <!--<div class="panel-heading">Filter</div>-->
-                <div class="panel-heading col-sm-3" sec:authorize="hasRole('ROLE_HOTEL')">
+                <div class="panel-heading col-sm-3" sec:authorize="hasRole('ROLE_HOTEL_ADMIN')">
                     <form class="form" th:action="@{/hotel/rooms}" id="dateFilterForm" method="get">
                         <input name="filterType" type="hidden" th:value="date"></input>
                         <input class="form-control" name="value" type="date" id="dateFilter"
                                th:value="${filterValue}"></input>
                     </form>
                 </div>
-                <div class="panel-heading col-sm-6" sec:authorize="hasRole('ROLE_HOTEL')">
+                <div class="panel-heading col-sm-6" sec:authorize="hasRole('ROLE_HOTEL_ADMIN')">
                     <form class="form" th:action="@{/hotel/rooms/search}" method="get">
                         <input class="form-control" name="q" type="text" placeholder="Search"></input>
                     </form>
                 </div>
-                <div class="panel-heading col-sm-3" sec:authorize="hasRole('ROLE_HOTEL')">
+                <div class="panel-heading col-sm-3" sec:authorize="hasRole('ROLE_HOTEL_ADMIN')">
                     <form class="form" th:action="@{/hotel/rooms}" id="catFilterForm" method="get">
                         <input name="filterType" type="hidden" th:value="category"></input>
                         <select class="form-control" name="value" id="categoryFilter">
@@ -120,7 +120,7 @@
                             <a th:onclick="'onRoomItemClick(this,\'' + ${room.id} + '\');'"
                                class="btn btn-link btn-block" id="openEditModalButton"
                                data-toggle="modal" data-target="#modal-edit-room"><b>Edit</b></a>
-                            <a sec:authorize="hasRole('ROLE_HOTEL')" th:href="@{/hotel/rooms/}+${room?.id}+@{/discounts}" class="btn btn-link btn-block"><b>Set Discounts</b></a>
+                            <a sec:authorize="hasRole('ROLE_HOTEL_ADMIN')" th:href="@{/hotel/rooms/}+${room?.id}+@{/discounts}" class="btn btn-link btn-block"><b>Set Discounts</b></a>
                         </div>
                         <!-- /.col -->
                     </div>

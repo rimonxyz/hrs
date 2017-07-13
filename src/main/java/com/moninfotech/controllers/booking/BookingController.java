@@ -147,7 +147,7 @@ public class BookingController {
         // set user of booking
         if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
             session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
-            return "redirect:/bookings/checkout/assignUser";
+            return "redirect:/bookings/review";
         }
         booking.setUser(currentUser);
         booking = this.bookingService.save(booking);
@@ -203,7 +203,7 @@ public class BookingController {
                               HttpSession session, Model model) {
         // Check if logged in user is Hotel or not
         // if hotel then make sure that he can't book for hotels rather than his own
-        if (currentUser.hasAssignedRole(Roles.ROLE_HOTEL)) {
+        if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
             Hotel hotel = this.hotelService.findByUser(currentUser);
             Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
             if (booking == null)
