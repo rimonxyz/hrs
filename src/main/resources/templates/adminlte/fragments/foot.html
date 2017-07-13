@@ -492,6 +492,29 @@
             }
         });
     }
+
+    // on click edit Category button modal
+    var onCategoryItemClick = function(element,categoryId){
+        console.log("Category Id: "+categoryId);
+        $.ajax({
+            url:"/rest/categories/"+categoryId,
+            success : function (result) {
+                console.log(result);
+                $("#catIdEdit").val(result.id);
+                $("#catNameEdit").val( result.name );
+                $("#maxChildNumberEdit").val(result.maxChildNumber);
+                $("#maxAdultNumberEdit").val(result.maxAdultNumber);
+                $("#catFrontFaceEdit").prop("checked",result.facilities.frontFace);
+                $("#catWithCorridorEdit").prop("checked",result.facilities.withCorridor);
+                $("#catBreakfastEdit").prop("checked",result.facilities.breakfast);
+                $("#catInternetEdit").prop("checked",result.facilities.internet);
+                $("#catAirConditionedEdit").prop("checked",result.facilities.airConditioned);
+                $("#catTvEdit").prop("checked",result.facilities.tv);
+                $("#catGeyserEdit").prop("checked",result.facilities.geyser);
+            }
+        });
+    }
+
 </script>
 
 <script>
