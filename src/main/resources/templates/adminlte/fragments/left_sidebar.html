@@ -115,6 +115,18 @@
                     <li><a th:href="@{/admin/users}"><i class="fa fa-circle-o"></i>All Users</a></li>
                 </ul>
             </li>
+            <li class="treeview" sec:authorize="hasRole('ADMIN')">
+                <a href="#">
+                    <i class="fa fa-th"></i>
+                    <span>Hotels</span>
+                    <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a th:href="@{/admin/hotels}"><i class="fa fa-circle-o"></i>Hotels</a></li>
+                </ul>
+            </li>
             <!--<li class="treeview">-->
             <!--<a href="#">-->
             <!--<i class="fa fa-files-o"></i>-->

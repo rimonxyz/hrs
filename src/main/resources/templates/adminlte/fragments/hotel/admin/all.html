@@ -32,8 +32,8 @@
                                 </a>
                             </td>
                             <td><span th:text="${hotel?.address?.getCommaSeperatedString()}"></span></td>
-                            <td><span th:text="${hotel?.getReadableDate(hotel.getCreated())}"></span></td>
-                            <td><span th:text="${hotel?.getReadableDate(hotel.getLastUpdated())}"></span></td>
+                            <td><span th:text="${hotel?.getReadableDateTime(hotel.getCreated())}"></span></td>
+                            <td><span th:text="${hotel?.getReadableDateTime(hotel.getLastUpdated())}"></span></td>
                             <td>
                                 <form th:action="@{/admin/hotels/}+${hotel?.getId()}+@{/action(enabled=${!hotel?.user?.isEnabled()})}"
                                       method="post">
