@@ -56,7 +56,7 @@ public class HomeController {
     // Register
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage() {
-        return "register";
+        return "adminlte/pages/register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
