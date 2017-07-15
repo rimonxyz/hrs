@@ -27,7 +27,7 @@ public class InvoiceController {
     private final InvoiceService invoiceService;
 
     @Autowired
-    public InvoiceController(BookingService bookingService,InvoiceService invoiceService) {
+    public InvoiceController(BookingService bookingService, InvoiceService invoiceService) {
         this.bookingService = bookingService;
         this.invoiceService = invoiceService;
     }
@@ -44,8 +44,8 @@ public class InvoiceController {
         else invoice = new Invoice(nextDay(), currentUser, booking);
         invoice = this.invoiceService.save(invoice);
 
-        model.addAttribute("invoice",invoice);
-        model.addAttribute("template","fragments/booking/invoice");
+        model.addAttribute("invoice", invoice);
+        model.addAttribute("template", "fragments/booking/invoice");
         return "adminlte/index";
     }
 

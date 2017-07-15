@@ -44,7 +44,7 @@ public class ReviewController {
         Hotel hotel = null;
         if (hotelId != null)
             hotel = this.hotelService.findOne(hotelId);
-        List<Review> myReviewList = this.reviewService.findReviews(currentUser,hotel,page,SortAttributes.Page.SIZE);
+        List<Review> myReviewList = this.reviewService.findReviews(currentUser, hotel, page, SortAttributes.Page.SIZE);
         model.addAttribute("hotelList", this.reviewService.findReviewedHotels(currentUser));
         model.addAttribute("reviewList", myReviewList);
 
@@ -55,7 +55,7 @@ public class ReviewController {
 
     //CREATE REVIEW
 
-    @RequestMapping(value = "/hotel/{hotelId}/create", method = RequestMethod.GET)
+    @GetMapping("/hotel/{hotelId}/create")
     private String createPage(@PathVariable("hotelId") Long hotelId,
                               @CurrentUser User currentUser, Model model) {
         Hotel hotel = this.hotelService.findOne(hotelId);
@@ -70,7 +70,7 @@ public class ReviewController {
         return "adminlte/index";
     }
 
-    @RequestMapping(value = "/hotel/{hotelId}/create", method = RequestMethod.POST)
+    @PostMapping("/hotel/{hotelId}/create")
     private String create(@ModelAttribute Review review, BindingResult bindingResult,
                           @PathVariable("hotelId") Long hotelId,
                           @CurrentUser User currentUser, Model model) {

@@ -82,21 +82,21 @@
         </div>
 
         <div class="col-sm-9">
-            <div class="row" th:if="${param.messageinfo}">
-                <div class="alert alert-info alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h4><i class="icon fa fa-ban"></i> Info!</h4>
-                    <span th:if="${param.messageinfo!=null}"
-                          th:text="${param.messageinfo[0]}">Danger alert preview.</span>
-                </div>
-            </div>
-            <div class="row" th:if="${param.message}">
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                    <p th:if="${param.message!=null}" th:text="${param.message[0]}">Danger alert preview.</p>
-                </div>
-            </div>
+            <!--<div class="row" th:if="${param.messageinfo}">-->
+                <!--<div class="alert alert-info alert-dismissible">-->
+                    <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
+                    <!--<h4><i class="icon fa fa-ban"></i> Info!</h4>-->
+                    <!--<span th:if="${param.messageinfo!=null}"-->
+                          <!--th:text="${param.messageinfo[0]}">Danger alert preview.</span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row" th:if="${param.message}">-->
+                <!--<div class="alert alert-danger alert-dismissible">-->
+                    <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
+                    <!--<h4><i class="icon fa fa-ban"></i> Alert!</h4>-->
+                    <!--<p th:if="${param.message!=null}" th:text="${param.message[0]}">Danger alert preview.</p>-->
+                <!--</div>-->
+            <!--</div>-->
             <!--BOOKING SESSION ITEMS-->
             <div class="row panel panel-primary"
                  th:if="${session.booking?.roomList!=null and !session.booking?.roomList.isEmpty()}">
@@ -145,14 +145,12 @@
             <!--BUTTONS AND FILTER ITEMS-->
             <div class="row" style="background: whitesmoke;">
                 <div style="padding: 10px;" class="col-sm-4">
-                    <div th:include="fragments/booking-modal"></div>
                     <a id="clearButton" hidden="hidden"
                        class="btn btn-lg btn-block btn-danger"><i class="glyphicon glyphicon-shopping-cart"></i>CLEAR
                         ITEMS</a>
                 </div>
                 <div class="col-sm-4"></div>
                 <div style="padding: 10px;" class="col-sm-4">
-                    <div th:include="fragments/booking-modal"></div>
                     <a id="checkoutButton" th:href="@{/bookings/checkout}"
                        class="btn btn-lg btn-block btn-warning">
                         <i class="glyphicon glyphicon-shopping-cart"></i>CHECKOUT</a>

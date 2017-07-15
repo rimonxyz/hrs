@@ -152,7 +152,7 @@ public class BookingController {
         booking.setUser(currentUser);
         booking = this.bookingService.save(booking);
         session.removeAttribute(SessionAttr.SESSION_BOOKING);
-        return "redirect:/invoices/generate/" + booking.getId() + "?message=Booking Successful!";
+        return "redirect:/invoices/generate/" + booking.getId() + "?messagesuccess=Booking Successful!";
     }
 
     @GetMapping("/checkout/assignUser")
@@ -171,7 +171,7 @@ public class BookingController {
         // DO PAYMENT PROCEEDURE
         booking = this.bookingService.save(booking);
         session.removeAttribute(SessionAttr.SESSION_BOOKING);
-        return "redirect:/invoices/generate/" + booking.getId() + "?message=Booking Successful!";
+        return "redirect:/invoices/generate/" + booking.getId() + "?messagesuccess=Booking Successful!";
     }
 //    @ResponseBody
 //    @CrossOrigin
