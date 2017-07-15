@@ -1,12 +1,16 @@
-package com.moninfotech.controllers;
+package com.moninfotech.controllers.invoice;
 
+import com.moninfotech.commons.Constants;
 import com.moninfotech.domain.Booking;
+import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Invoice;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.BookingService;
+import com.moninfotech.service.HotelService;
 import com.moninfotech.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +29,13 @@ public class InvoiceController {
 
     private final BookingService bookingService;
     private final InvoiceService invoiceService;
+    private final HotelService hotelService;
 
     @Autowired
-    public InvoiceController(BookingService bookingService, InvoiceService invoiceService) {
+    public InvoiceController(BookingService bookingService, InvoiceService invoiceService, HotelService hotelService) {
         this.bookingService = bookingService;
         this.invoiceService = invoiceService;
+        this.hotelService = hotelService;
     }
 
     @GetMapping("/generate/{bookingId}")
@@ -37,8 +43,10 @@ public class InvoiceController {
                                    @CurrentUser User currentUser,
                                    Model model) {
         Booking booking = this.bookingService.findOne(bookingId);
-        if (!booking.getUser().getId().equals(currentUser.getId()))
-            return "redirect:/bookings?message=You\'re not authorized to do this action!";
+        if (booking == null) return "redirect:/bookings?message=You\'re not authorized to do this action!";
+        // If this booking doesn't belong to this logged in user
+        if (!this.bookingService.belongsTo(booking, currentUser))
+            return "redirect:/bookings?message=You\'re not authorised to access this resource.";
         Invoice invoice;
         if (booking.getInvoice() != null) invoice = booking.getInvoice();
         else invoice = new Invoice(nextDay(), currentUser, booking);

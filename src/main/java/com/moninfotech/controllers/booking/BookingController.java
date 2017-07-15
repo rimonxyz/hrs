@@ -48,16 +48,19 @@ public class BookingController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String myBookings(@CurrentUser User user,
-                              @RequestParam(value = "page", required = false) Integer page,
-                              @RequestParam(value = "size", required = false) Integer size,
+    private String myBookings(@CurrentUser User currentUser,
+                              @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                              @RequestParam(value = "size", required = false, defaultValue = "10") Integer size,
                               Model model) {
-        if (page == null || page < 0) page = 0;
-        if (size == null || !(size > 0)) size = 10;
-        if (user == null) return "redirect:/login";
+//        if (page == null || page < 0) page = 0;
+//        if (size == null || !(size > 0)) size = 10;
+//        if (user == null) return "redirect:/login";
+
+        // find booking list by role
+        List<Booking> bookingList = this.bookingService.findBookings(currentUser, page, size);
 
         model.addAttribute("bookingHelper", new BookingHelper());
-        model.addAttribute("bookingList", this.bookingService.findByUser(user, page, size));
+        model.addAttribute("bookingList", bookingList);
         model.addAttribute("template", "fragments/booking/all");
         return "adminlte/index";
     }
@@ -68,10 +71,11 @@ public class BookingController {
                            Model model) {
         Booking booking = this.bookingService.findOne(id);
         if (booking == null) return "redirect:/bookings?message=Booking not found!";
-        if (!booking.getUser().getId().equals(currentUser.getId()))
+        // If this booking doesn't belong to this logged in user
+        if (!this.bookingService.belongsTo(booking, currentUser))
             return "redirect:/bookings?message=You\'re not authorised to access this resource.";
-        model.addAttribute("booking", booking);
 
+        model.addAttribute("booking", booking);
         model.addAttribute("template", "fragments/booking/details");
         return "adminlte/index";
     }

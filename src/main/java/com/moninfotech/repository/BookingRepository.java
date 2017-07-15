@@ -1,6 +1,7 @@
 package com.moninfotech.repository;
 
 import com.moninfotech.domain.Booking;
+import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,4 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     Page<Booking> findByUser(User user, Pageable pageable);
+    Page<Booking> findByHotel(Hotel hotel, Pageable pageable);
 }

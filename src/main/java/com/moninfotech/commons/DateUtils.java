@@ -49,6 +49,10 @@ public class DateUtils {
         return new SimpleDateFormat("MMM, dd");
     }
 
+    public static SimpleDateFormat getReadableDateTimeFormat() {
+        return new SimpleDateFormat("MMMM, dd yyyy hh:mm:ss a");
+    }
+
     public static SimpleDateFormat getParsableDateFormat() {
         return new SimpleDateFormat("yyyy-MM-dd");
     }

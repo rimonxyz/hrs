@@ -127,7 +127,7 @@
                         <li><a href="#">Total Rooms <span class="pull-right badge bg-red" th:text="${booking?.hotel?.roomList?.size()}">842</span></a></li>
                         <li><a href="#">Number of AC Rooms <span class="pull-right badge bg-red" th:text="${booking?.hotel?.getNumberOfAcRooms()}">842</span></a></li>
                         <li><a href="#">Number of NON AC Rooms <span class="pull-right badge bg-red" th:text="${booking?.hotel?.getNumberOfNonAcRooms()}">842</span></a></li>
-                        <li><a class="btn btn-block btn-success btn-lg" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}"><span style="color: white;">Write a Review</span></a></li>
+                        <li sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-block btn-success btn-lg" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}"><span style="color: white;">Write a Review</span></a></li>
                     </ul>
                 </div>
             </div>

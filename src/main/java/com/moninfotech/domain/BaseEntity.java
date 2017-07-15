@@ -1,6 +1,9 @@
 package com.moninfotech.domain;
 
+import com.moninfotech.commons.DateUtils;
+
 import javax.persistence.*;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -47,18 +50,24 @@ public abstract class BaseEntity {
         this.lastUpdated = new Date();
     }
 
-    public String getReadableDate(Date date) {
-        if (date == null) return "";
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM, dd yyyy hh:mm:ss a");
-        return sdf.format(date);
+    public Date getTime() {
+        if (this.lastUpdated != null)
+            return this.lastUpdated;
+        return this.created;
     }
 
-    public String getReadableDayMonth(Date date){
-        if (date==null) return "";
+    public String getReadableDateTime(Date date) {
+        if (date == null) return "";
+        DateFormat dateFormat = DateUtils.getReadableDateTimeFormat();
+        return dateFormat.format(date);
+    }
+
+    public String getReadableDayMonth(Date date) {
+        if (date == null) return "";
         return new SimpleDateFormat("dd MMMM").format(date);
     }
 
-    public String getReadableDateWithoutTime(Date date){
+    public String getReadableDateWithoutTime(Date date) {
         if (date == null) return "";
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM, dd yyyy");
         return sdf.format(date);
