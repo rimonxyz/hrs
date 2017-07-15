@@ -41,16 +41,10 @@ public class ReviewController {
                               @RequestParam(value = "hotelId", required = false) Long hotelId,
                               @CurrentUser User currentUser, Model model) {
         if (page == null || page < 0) page = 0;
-        List<Review> myReviewList;
-        if (hotelId == null)
-            myReviewList = this.reviewService.findByUser(currentUser, page, SortAttributes.Page.SIZE);
-        else {
-            Hotel hotel = this.hotelService.findOne(hotelId);
-            if (hotel == null)
-                myReviewList = this.reviewService.findByUser(currentUser, page, SortAttributes.Page.SIZE);
-            else
-                myReviewList = this.reviewService.findByUserAndHotel(currentUser, hotel);
-        }
+        Hotel hotel = null;
+        if (hotelId != null)
+            hotel = this.hotelService.findOne(hotelId);
+        List<Review> myReviewList = this.reviewService.findReviews(currentUser,hotel,page,SortAttributes.Page.SIZE);
         model.addAttribute("hotelList", this.reviewService.findReviewedHotels(currentUser));
         model.addAttribute("reviewList", myReviewList);
 
@@ -99,7 +93,7 @@ public class ReviewController {
     private ResponseEntity<Float> getRating(@PathVariable("reviewId") Long reviewId) {
         Review review = this.reviewService.findOne(reviewId);
         if (review == null) return new ResponseEntity<Float>(HttpStatus.NO_CONTENT);
-        return new ResponseEntity<Float>(review.getRating(),HttpStatus.OK);
+        return new ResponseEntity<Float>(review.getRating(), HttpStatus.OK);
     }
 
 }

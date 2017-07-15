@@ -2,13 +2,17 @@ package com.moninfotech.controllers;
 
 import com.moninfotech.commons.Config;
 import com.moninfotech.commons.Constants;
+import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.domain.User;
+import com.moninfotech.domain.annotations.CurrentUser;
+import com.moninfotech.service.BookingService;
 import com.moninfotech.service.HotelService;
 import com.moninfotech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,10 +31,13 @@ public class HomeController {
 
     private final HotelService hotelService;
 
+    private final BookingService bookingService;
+
     @Autowired
-    public HomeController(UserService userService, HotelService hotelService) {
+    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService) {
         this.userService = userService;
         this.hotelService = hotelService;
+        this.bookingService = bookingService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -39,6 +46,12 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/dashboard")
+    private String dashboard(@CurrentUser User user, Model model) {
+        model.addAttribute("bookingList", this.bookingService.findByUser(user, Config.INITIAL_PAGE, SortAttributes.Page.SIZE));
+        model.addAttribute("template", "fragments/dashboard/dashboard");
+        return "adminlte/index";
+    }
 
     // Register
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -66,7 +79,7 @@ public class HomeController {
     // login
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        return "login";
+        return "adminlte/pages/login";
     }
 
 

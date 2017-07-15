@@ -1,167 +1,998 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:include="fragments/head"></div>
+    <title>Sticky Plugin</title>
+
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <!-- //for-mobile-apps -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- styles-CSS -->
+    <link href="css/service.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/myStyle.css" rel="stylesheet" type="text/css" media="all"/>
+
+
+    <!--font-size-->
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css"/>
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <script src="js/bootstrap.js"></script>
+    <script>
+        // $(window).load(function(){
+        //   $("#header").sticky({ topSpacing: 10 });
+        // });
+    </script>
+    <!-- scrolling script -->
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+            });
+        });
+    </script>
+    <style>
+        /*body {
+          height: 10000px;
+          padding: 0;
+          margin: 0;
+        }*/
+        .header {
+            position: relative;
+            z-index: 2;
+            font-size: 15px;
+            background-color: #fff;
+            color: #000;
+            width: 100%;
+            padding: 0;
+            letter-spacing: 1px;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /*nav.navbar-default.stickytop {*/
+        div.header.stickytop {
+            position: fixed;
+            z-index: 2;
+            top: 0;
+            width: 100%;
+            font-size: 15px;
+            background-color: #fff;
+            color: #000;
+            padding: 0;
+            letter-spacing: 1px;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+    </style>
 </head>
 <body>
-<!--banner-->
-<div class="banner">
 
-    <!--navigation-->
-    <div th:include="fragments/navigation"></div>
-    <!--//navigation-->
 
-    <div class="banner-text">
-        <!--banner Slider starts Here-->
+<!-- TOP HEADER -->
+<div class="top" id="topMenu">
+    <div class="container">
+        <div class="col-xs-6">
+            <ul>
+                <div class="col-xs-2">
+                    <img title="" alt="" draggable="false" src="images/logo.png">
+                </div>
+                <div class="col-xs-6 companyTitle">
+                    <li>HotelsBD.com</li>
+                </div>
 
-        <!--//End-slider-script-->
-        <div id="top" class="callbacks_container">
-            <ul class="rslides" id="slider3">
-                <li>
-                    <div class="banner-text-info">
-                        <form class="form" th:action="@{/search}" method="get">
-                            <datalist id="places">
-                                <option th:each="area : ${areaList}" th:value="${area}" th:text="${area}">Coxs Bazar</option>
-                                <!--<option th:value="chaal">Saint Martins</option>-->
-                            </datalist>
-                            <div class="from-group">
-                                <label for="place" class="label label-primary">LOCATION OR HOTEL NAME</label>
-                                <input style="height: 50px;" id="place" name="query" list="places" class="form-control"
-                                       required="required"></input>
+
+                <!-- <li><i class="fa fa-phone" aria-hidden="true"></i> +055 3175 6666 <br/> +055 3175 6666</li> -->
+            </ul>
+        </div>
+        <div class="col-xs-6">
+            <div class="col-xs-6" style="margin-top:15px;font-size:20px;">
+                <div class="col-xs-1">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                </div>
+                <div class="col-xs-10">
+                    <p class="moto-text_normal">
+                        <a target="_self" data-action="url" class="moto-link" href="callto:#">1-800-1234-567</a>
+                    </p>
+                    <p class="moto-text_normal">
+                        <a target="_self" data-action="url" class="moto-link" href="callto:#">1-800-6547-321</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-xs-6" style="margin-top:15px;font-size:20px;">
+                <div class="col-xs-1">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                </div>
+                <div class="col-xs-10">
+                    <p class="moto-text_normal">
+                        <a target="_self" data-action="url" class="moto-link" href="callto:#">
+                            2130 Fulton Street San <br/>
+                            Diego, CA 1080 USA
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- //TOP HEADER -->
+<!-- <p>This is test this is text this is text at the top.</p> -->
+
+
+<div class="header">
+    <div class="container">
+        <nav class="navbar-default">
+            <div class="navbar-header navbar-left">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- <h1><a class="navbar-brand" href="index.html">Hotel</a></h1> -->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+
+                <nav class="cl-effect-13" id="cl-effect-13">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Why us</a></li>
+                        <li class="active"><a href="#">Hotels</a></li>
+                        <li class="active"><a href="#">Ships</a></li>
+                        <li class="active"><a href="#">Holidays</a></li>
+                        <li class="active"><a href="#">Hotels</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Services<b
+                                    class="caret"></b></a>
+                            <ul class="dropdown-menu agile_short_dropdown">
+                                <li><a href="#" class="scroll">Conference & Events</a></li>
+                                <li><a href="#" class="scroll">Car & Bus</a></li>
+                                <li><a href="#" class="scroll">Group Booking</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="#" class="scroll">Customer Service</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a href="#" class="scroll">Registration</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                        <li sec:authorize="isAuthenticated()" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                               sec:authentication="principal.name"><b class="caret"></b></a>
+                            <ul class="dropdown-menu agile_short_dropdown">
+                                <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/dashboard}">Dashboard</a></li>
+                                <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/bookings}">My Bookings</a></li>
+                                <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"><a th:href="@{/hotel/rooms}">My
+                                    Hotel</a></li>
+                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}">Admin Dashboard</a>
+                                </li>
+                                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="scroll">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </nav>
+                <!-- <div class="search">
+                  <form action="#" method="post">
+                    <input type="search" class="search1" placeholder="Search..." name="Search" required="">
+                    <input type="submit" value="">
+                  </form>
+                </div> -->
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- end menu bar -->
+
+
+<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx First pic and option  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+        <div class="tm_pb_slide tm_pb_bg_layout_light tm_pb_media_alignment_center tm_pb_slide_0 tm-pb-active-slide"
+             style="background-color:#ffffff;background-image:url(./images/slide1.jpg);">
+
+            <div class="clearfix" style="min-height: 995px;">
+                <div class="tm_pb_slide_content" style="margin-top:35px;">
+                    <p style="text-align: center;">
+                        <img class="aligncenter size-full wp-image-854"
+                             src="https://ld-wp.template-help.com/wordpress_62442/wp-content/uploads/2016/11/logo-slider.png"
+                             alt="" width="430" height="150"/>
+
+                    </p>
+
+                    <div class="tm_pb_text_4" style="margin-top:15px; color:white;">
+                        <div class="subscribe-block__message">Indianapolis’ mornings are beautiful…especially if you’re
+                            waking up in one of our hotel’s refined rooms!
+                        </div>
+                    </div>
+
+
+                    <!-- search option -->
+                    <div class="container">
+                        <form method="POST" action="#" class="subscribe-block__form">
+                            <div class="showing-form">
+                                <div class="label">Enter a Location:</div>
+                                <input type="text" class="form-control" name="arrival">
+                                <div class="mphb_sc_search-submit-button-wrapper">
+                                    <input type="submit" class="btn btn-primary-outline" value="Check Availability">
+                                </div>
                             </div>
-                            <!--<div class="form-group">-->
-                                <!--<label for="startDate" class="label">FROM</label>-->
-                                <!--<input id="startDate" class="form-control" name="startDate" type="date"-->
-                                       <!--value="Select date" onfocus="this.value = '';"-->
-                                       <!--onblur="if (this.value == '') {this.value = 'Select date';}"></input>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="endDate" class="label">TO</label>-->
-                                <!--<input class="form-control" type="date" name="endDate" id="endDate"-->
-                                       <!--required="required"></input>-->
-                            <!--</div>-->
-                            <button style="margin-top: 20px;" class="form-control btn btn-success" type="submit"><i style="margin-right: 10px;" class="glyphicon glyphicon-search"></i>Search</button>
+
+
                         </form>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!--SEARCH RESULT-->
-<div th:if="${hotelList != null and !hotelList.isEmpty()}">
-    <h3 class="title" >Search Results</h3>
-    <div th:include="fragments/hotels"></div>
+<!-- end First pic and option -->
+
+<!-- packages -->
+<div class="row">
+    <div class="container">
+        <div class="contentHeader" style="margin-top:25px;">
+            <div class="firstLine">Packages</div>
+            <div class="secondLine text-uppercase"></div>
+        </div>
+
+        <div class="sap_tabs">
+            <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                <ul class="resp-tabs-list wow fadeInUp animated animated" data-wow-delay=".7s"
+                    style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                    <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab"><span>All</span>
+                    </li>
+                    <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Coxs Bazar</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Saint Martins</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-3" role="tab"><span>Bandarbans</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-4" role="tab"><span>Rangamati</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-5" role="tab"><span>Sajek</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-6" role="tab"><span>Sylhet</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>Srimangal</span></li>
+                </ul>
+                <div class="clearfix"></div>
+                <div class="resp-tabs-container">
+                    <h2 class="resp-accordion resp-tab-active" role="tab" aria-controls="tab_item-0"><span
+                            class="resp-arrow"></span>All</h2>
+                    <div class="tab-1 resp-tab-content resp-tab-content-active" style="display:block"
+                         aria-labelledby="tab_item-0">
+                        <div class="tab_img">
+                            <div class="col-md-4 portfolio-grids">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".5s" href="images/locations/coxsbazar.jpg"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/coxsbazar.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Package 1</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4 portfolio-grids">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".7s" href="images/locations/saintmartins.jpg"
+                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/saintmartins.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Package 2</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4 portfolio-grids">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".7s" href="images/locations/bandarbans.jpg"
+                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/bandarbans.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Package 3</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="tab_img">
+                            <div class="col-md-4 portfolio-grids">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also remaining essentially unchanged. "
+                                   data-wow-delay=".9s" href="images/locations/g7.jpg"
+                                   style="visibility: visible; animation-delay: 0.9s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g7.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Package 4</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-8 portfolio-grids  portfolio-two portfolio-grids-mdl">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".5s" href="images/locations/g6.jpg"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g6.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Package 5</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-1"><span class="resp-arrow"></span>Coxs
+                        Bazar</h2>
+                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
+                        <div class="tab_img">
+                            <div class="col-md-4 portfolio-grids">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".5s" href="images/locations/g2.jpg"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g2.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Top Vacations</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4 portfolio-grids">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".7s" href="images/locations/g5.jpg"
+                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g5.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Top Vacations</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-2"><span class="resp-arrow"></span>Saint
+                        Martins</h2>
+                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+                        <div class="tab_img">
+                            <div class="col-md-8 portfolio-grids portfolio-two">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".5s" href="images/locations/g4.jpg"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g4.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Top Vacations</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4 portfolio-grids">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".7s" href="images/locations/g3.jpg"
+                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g3.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Top Vacations</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-3"><span class="resp-arrow"></span>Bandarbans
+                    </h2>
+                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
+                        <div class="tab_img">
+                            <div class="col-md-4 portfolio-grids">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".5s" href="images/locations/g1.jpg"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g1.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Top Vacations</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-8 portfolio-grids portfolio-two">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".7s" href="images/locations/g6.jpg"
+                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g6.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Top Vacations</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>Rangamati
+                    </h2>
+                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
+                        <div class="tab_img">
+                            <div class="col-md-8 portfolio-grids portfolio-three">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
+                                   data-wow-delay=".5s" href="images/locations/g7.jpg"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g7.jpg">
+                                    <div class="b-wrapper">
+                                        <h5>Top Vacations</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!--//banner-->
-<div th:include="fragments/modal"></div>
-<!--//Top Locations-->
-<div th:include="fragments/top_locations"></div>
-<!--//Holyday Packages-->
-<div th:include="fragments/packages"></div>
-<!--//Ships-->
-<div th:include="fragments/ships"></div>
+<!-- end packages -->
 
-<!--skills-->
-<!--<div th:include="fragments/skills"></div>-->
-<!--//skills-->
-<!--services-->
-<!--<div th:include="fragments/services"></div>-->
-<!--//services -->
-<!--<div th:include="fragments/team"></div>-->
-<!--portfolio-->
-<!--<div th:include="fragments/portfolio"></div>-->
-<!--end portfolio-->
+<!-- Our services -->
+<div class="serviceRow">
 
-<!--address and map-->
-<div th:include="fragments/address"></div>
-footer.htmloter-->
-<div th:include="fragments/footer"></div>
-<!footer.htmloter-->
-<script th:src="@{/js/lightbox-plus-jquery.min.js}"></script>
-<script th:src="@{/js/easyResponsiveTabs.js}" type="text/javascript"></script>
-<script type="text/javascript">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                <div class="tm_pb_text_4">
+
+                    <h2 style="color:#000;padding-bottom: 50px;">Services</h2>
+
+                </div>
+                <!-- .tm_pb_text -->
+            </div>
+            <!-- .tm_pb_column -->
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+    <div class="container">
+        <div class="more-hover-show row tm_pb_row tm_pb_row_6 tm_pb_col_padding_reset">
+
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+
+                <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
+                    <div class="tm_pb_link_box_content" style="background-image:url(images/hotel.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Hotel</h3>
+                            <p>Booking</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                    <!-- .tm_pb_blurb_content -->
+                </div>
+                <!-- .tm_pb_link_box -->
+            </div>
+            <!-- .tm_pb_column -->
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_11 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+
+                <div class="tm_pb_link_box tm_pb_link_box_1 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic007.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Air</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/air-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                    <!-- .tm_pb_blurb_content -->
+                </div>
+                <!-- .tm_pb_link_box -->
+            </div>
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic006.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Truck</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+    <div class="container">
+        <div class="more-hover-show row tm_pb_row tm_pb_row_7 tm_pb_col_padding_reset">
+
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_12 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+
+                <div class="tm_pb_link_box tm_pb_link_box_2 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic008.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Railway</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/railway-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                    <!-- .tm_pb_blurb_content -->
+                </div>
+                <!-- .tm_pb_link_box -->
+            </div>
+            <!-- .tm_pb_column -->
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_13 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+
+                <div class="tm_pb_link_box tm_pb_link_box_3 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic009.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Ocean</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                    <!-- .tm_pb_blurb_content -->
+                </div>
+                <!-- .tm_pb_link_box -->
+            </div>
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic006.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Truck</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- .tm_pb_column -->
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+
+    <div class="container" style="margin-bottom: 40px;">
+        <div class=" row tm_pb_row tm_pb_row_8">
+
+            <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_14 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                <hr class="tm_pb_module tm_pb_space tm_pb_divider_2">
+                <div class="serviceMore">
+                    <a href="#" class="btn btn-default" role="button">View all</a>
+                </div>
+            </div>
+            <!-- .tm_pb_column -->
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+
+</div>
+<!-- end our services -->
+
+
+<!-- special offer -->
+<div class="container">
+    <div class=" row">
+        <div class="col-xl-12">
+            <div class="contentHeader" style="margin-top:25px;">
+                <div class="firstLine">Special offers</div>
+                <div class="secondLine text-uppercase"></div>
+            </div>
+            <!-- .tm_pb_title -->
+            <hr>
+            <div class="textContent">
+                <p>Taste our trademark cocktails &amp; enjoy a truly unique culinary experience…&nbsp; As the sun sets
+                    and the sky turns purple, we celebrate the violet hour and the end of the day before welcoming the
+                    start of the night.</p>
+            </div>
+            <!-- .tm_pb_text -->
+            <hr>
+            <div class="inner_w3l_agile_grids">
+                <div class="col-xl-4 team-grids">
+                    <div class="thumbnail team-w3agile">
+                        <img src="images/j1.jpg" class="img-responsive" alt="">
+                        <div class="social-icons team-icons right-w3l fotw33">
+                            <div class="caption   ">
+                                <p>Mains</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 team-grids">
+                    <div class="thumbnail team-w3agile">
+                        <img src="images/j2.jpg" class="img-responsive" alt="">
+                        <div class="social-icons team-icons right-w3l fotw33">
+                            <div class="caption">
+                                <p>Drinks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 team-grids">
+                    <div class="thumbnail team-w3agile">
+                        <img src="images/j3.jpg" class="img-responsive" alt="">
+                        <div class="social-icons team-icons right-w3l fotw33">
+                            <div class="caption">
+                                <p>Desserts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="clearfix"></div>
+            </div>
+            <!-- .tm_pb_menu_categories -->
+            <hr class="tm_pb_module tm_pb_space tm_pb_divider_6">
+            <div class="serviceMore">
+                <a href="#" class="btn btn-default" role="button">See all menu</a>
+            </div>
+        </div>
+        <!-- .tm_pb_column -->
+    </div>
+    <!-- .tm_pb_row -->
+</div>
+<!--End of special offer -->
+
+
+<!-- FOLLOW US -->
+<div class="row well well__ins4 bg-5 text-center ">
+    <div class="cherry-box   box-989">
+        <div class="inner">
+            <div class="container-fluid">
+                <div class="row row-edge row-style-dark">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row  ">
+                            <div class="container">
+                                <div class="row row-edge row-style-light">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <h2 class="dash text-uppercase">follow us</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  ">
+                            <div class="container">
+                                <div class="row row-edge row-style-light">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div id="cherry-follow-items-1" class="cherry-follow_wrap social-list">
+                                            <ul class="cherry-follow_list clearfix">
+                                                <!-- <li><a href="#"><i class="fa fa-facebook"></i></a></li> -->
+                                                <li class="cherry-follow_item facebook-item"><a
+                                                        class="cherry-follow_link"
+                                                        href="https://ld-wp.template-help.com/wordpress_58517/#"
+                                                        target="_blank" rel="nofollow" title="Facebook"><span
+                                                        class="cherry-follow_label"><i
+                                                        class="fa fa-facebook"></i><br/><span style=" font-size: 16px;">Facebook</span></span></a>
+                                                </li>
+
+                                                <li class="cherry-follow_item twitter-item"><a
+                                                        class="cherry-follow_link"
+                                                        href="https://ld-wp.template-help.com/wordpress_58517/#"
+                                                        target="_blank" rel="nofollow" title="Twitter"><span
+                                                        class="cherry-follow_label"><i
+                                                        class="fa fa-twitter"></i><br/><span style=" font-size: 16px;">Twitter</span></span></a>
+                                                </li>
+
+                                                <li class="cherry-follow_item googleplus-item"><a
+                                                        class="cherry-follow_link"
+                                                        href="https://ld-wp.template-help.com/wordpress_58517/#"
+                                                        target="_blank" rel="nofollow" title="Google Plus"><span
+                                                        class="cherry-follow_label"><i
+                                                        class="fa fa-google-plus"></i><br/><span
+                                                        style=" font-size: 16px;">Google Plus</span></span></a></li>
+
+                                                <li class="cherry-follow_item pinterest-item"><a
+                                                        class="cherry-follow_link"
+                                                        href="https://ld-wp.template-help.com/wordpress_58517/#"
+                                                        target="_blank" rel="nofollow" title="Pinterest"><span
+                                                        class="cherry-follow_label"><i
+                                                        class="fa fa-linkedin"></i><br/><span style=" font-size: 16px;">linkedin</span></span></a>
+                                                </li>
+
+                                                <li class="cherry-follow_item pinterest-item"><a
+                                                        class="cherry-follow_link"
+                                                        href="https://ld-wp.template-help.com/wordpress_58517/#"
+                                                        target="_blank" rel="nofollow" title="Pinterest"><span
+                                                        class="cherry-follow_label"><i class="fa fa-pinterest"
+                                                                                       aria-hidden="true"></i><br/><span
+                                                        style=" font-size: 16px;">pinterest</span></span></a></li>
+
+                                                <li class="cherry-follow_item instagram-item"><a
+                                                        class="cherry-follow_link"
+                                                        href="https://ld-wp.template-help.com/wordpress_58517/#"
+                                                        target="_blank" rel="nofollow" title="Instagram"><span
+                                                        class="cherry-follow_label"><i class="fa fa-instagram"
+                                                                                       aria-hidden="true"></i><br/><span
+                                                        style=" font-size: 16px;">instagram</span></span></a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  ">
+                            <div class="container">
+                                <div class="row row-edge row-style-light">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <p>Our Business Company is a global business network of more than 21,000
+                                            companies that deliver innovative software solutions based on our software.
+                                            Through access to our company’s premier products, education, technical
+                                            services, marketing and sales support.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  ">
+                            <div class="container">
+                                <div class="row row-edge row-style-light">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="aligncenter  -wrapper"><a
+                                                class="cherry-btn cherry-btn-primary cherry-btn-extra-large cherry-btn-inline cherry-btn-fade   button-767"
+                                                target="_self"
+                                                href="https://ld-wp.template-help.com/wordpress_58517/contacts/">Read
+                                            More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of FOLLOW US -->
+
+<!-- our partners -->
+<div id="partners" class="tm_pb_section tm_pb_anchor tm_pb_section_9 tm_section_regular tm_section_transparent">
+    <hr/>
+    <div class="container">
+        <div class=" row tm_pb_row tm_pb_row_14">
+
+            <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_27 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
+
+                <div class="dashblue text-uppercase text-center">
+
+                    <h3>Our Partners</h3>
+
+
+                </div>
+                <div class="partner_contents">
+
+                    <div class="row tm_pb_brands_showcase_module__brands">
+                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                            <div class="tm_pb_brands_showcase_module__item__wrapper">
+                                <a class="tm_pb_brands_showcase_module__item">
+                                    <img class="tm_pb_brands_showcase_module__item__logo"
+                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home04.png">
+                                    <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
+                            </div>
+                        </div>
+
+                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                            <div class="tm_pb_brands_showcase_module__item__wrapper">
+                                <a class="tm_pb_brands_showcase_module__item">
+                                    <img class="tm_pb_brands_showcase_module__item__logo"
+                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home05.png">
+                                    <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
+                            </div>
+                        </div>
+
+                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                            <div class="tm_pb_brands_showcase_module__item__wrapper">
+                                <a class="tm_pb_brands_showcase_module__item">
+                                    <img class="tm_pb_brands_showcase_module__item__logo"
+                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home06.png">
+                                    <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
+                            </div>
+                        </div>
+
+                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                            <div class="tm_pb_brands_showcase_module__item__wrapper">
+                                <a class="tm_pb_brands_showcase_module__item">
+                                    <img class="tm_pb_brands_showcase_module__item__logo"
+                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home07.png">
+                                    <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
+                            </div>
+                        </div>
+
+                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                            <div class="tm_pb_brands_showcase_module__item__wrapper">
+                                <a class="tm_pb_brands_showcase_module__item">
+                                    <img class="tm_pb_brands_showcase_module__item__logo"
+                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home08.png">
+                                    <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- .tm_pb_brands_showcase_module__wrapper -->
+
+            </div>
+            <!-- .tm_pb_column -->
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+    <hr/>
+</div>
+<!-- End our partners -->
+
+<!-- News letter -->
+<div class="tm_pb_news">
+
+    <div class="row">
+
+        <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_11 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
+
+            <div class="tm_pb_title tm_pb_title_6 invert tm_pb_module dashgreen">
+                <div class="h2-style tm_pb_title__super-title">Sign up for</div>
+                <div class="h1-style tm_pb_title__title">Newsletter</div>
+            </div>
+            <!-- .tm_pb_title -->
+            <!-- <hr class="tm_pb_module tm_pb_space tm_pb_divider_14"> -->
+            <div class="tm_pb_widget_area cherry-sidebars-2 tm_pb_widget_area_left clearfix tm_pb_module tm_pb_bg_layout_light  tm_pb_sidebar_2">
+                <aside id="hotelbliss_widget_subscribe_follow-2" class="widget widget-subscribe">
+                    <div class="subscribe-follow__wrap">
+                        <div class="subscribe-block">
+
+                            <div class="subscribe-block__content">
+                                <div class="subscribe-block__message">AND NEVER MISS THE HOTEL'S SPECIAL OFFERS AND
+                                    NEWS!
+                                </div>
+                            </div>
+
+                            <form method="POST" action="#" class="subscribe-block__form">
+                                <input type="hidden" name="nonce" value="fbe36e053a"/>
+                                <div class="subscribe-block__input-group">
+                                    <div class="subscribe-block__input-wrap">
+                                        <i class="linearicon linearicon-envelope"></i>
+                                        <input class="subscribe-block__input" type="email" name="subscribe-mail"
+                                               value="" placeholder="e-mail or phone number">
+                                    </div>
+                                    <a href="#" class="subscribe-block__submit btn btn-secondary">Subscribe!</a>
+                                </div>
+                                <div class="subscribe-block__messages">
+                                    <div class="subscribe-block__success hidden">You successfully subscribed</div>
+                                    <div class="subscribe-block__error hidden"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <!-- .tm_pb_widget_area -->
+        </div>
+        <!-- .tm_pb_column -->
+
+    </div>
+    <!-- .tm_pb_row -->
+
+</div>
+<!-- End News letter -->
+<!-- location and map -->
+<div class="tm_pb_section tm_pb_anchor tm_pb_section_9 tm_section_regular tm_section_transparent">
+
+    <div class="col-md-6 contact-left">
+        <div class="tm_pb_column tm_pb_column_4_4 tm_pb_column_inner  tm_pb_column_inner_0 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
+            <hr class="tm_pb_module tm_pb_space tm_pb_divider_9">
+            <div class="dashblue tm_pb_title tm_pb_title_5 tm_pb_module text-center">
+                <div class="h2-style tm_pb_title__super-title">Location and map</div>
+                <div class="h1-style tm_pb_title__title">Driving Directions</div>
+            </div>
+            <hr class="tm_pb_module tm_pb_space tm_pb_divider_10">
+            <div class="tm_pb_text_4">
+                <p>Follow the 14th street and then turn right.</p>
+            </div>
+            <hr class="tm_pb_module tm_pb_space tm_pb_divider_11">
+        </div>
+        <div class="row tm_pb_row_inner tm_pb_row_inner_1">
+            <div class=" aligncenter tm_pb_column tm_pb_column_1_2 tm_pb_column_inner  tm_pb_column_inner_1 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 tm_pb_vertical_alligment_start">
+                <div class="tm_pb_text_5 ">
+                    <p><strong><span style="color: #51cba3;">5.4 km</span></strong></p>
+                </div>
+                <div class="tm_pb_text tm_pb_module tm_pb_bg_layout_light tm_pb_text_align_center  tm_pb_text_6">
+                    <h4>Away from the<br>
+                        Town hall
+                    </h4>
+                </div>
+            </div>
+            <div class=" aligncenter tm_pb_column tm_pb_column_1_2 tm_pb_column_inner  tm_pb_column_inner_1 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 tm_pb_vertical_alligment_start">
+                <div class="tm_pb_text_5 ">
+                    <p><strong><span style="color: #51cba3;">18 km</span></strong></p>
+                </div>
+                <div class="tm_pb_text tm_pb_module tm_pb_bg_layout_light tm_pb_text_align_center  tm_pb_text_6">
+                    <h4>Away from the<br>
+                        Airport
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="col-md-6 contact-left">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29209.340376031865!2d90.38669685778817!3d23.77704731900873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd75e6a88605a6663!2z4Kaa4Kao4KeN4Kam4KeN4Kaw4Ka_4Kau4Ka-IOCmieCmpuCnjeCmr-CmvuCmqA!5e0!3m2!1sbn!2sbd!4v1498404009372"
+                width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+</div>
+<!-- end location and map -->
+
+
+<script type="text/javascript" src="js/easyResponsiveTabs.js"></script>
+<script>
+    $(function () {
+        var clientHeight = document.getElementById('topMenu').clientHeight;
+        $(window).scroll(function () {
+            if ($(this).scrollTop() >= clientHeight) {
+                // $('nav.navbar-default').addClass('stickytop');
+                $('div.header').addClass('stickytop');
+            }
+            else {
+                // $('nav.navbar-default').removeClass('stickytop');
+                $('div.header').removeClass('stickytop');
+            }
+        });
+    });
+
+</script>
+<script>
     $(document).ready(function () {
         $('#horizontalTab').easyResponsiveTabs({
             type: 'default', //Types: default, vertical, accordion
             width: 'auto', //auto or any width like 600px
             fit: true   // 100% fit in a container
         });
-    });
-</script>
-<!--script-->
-<!--responsive slider-->
-<script th:src="@{/js/responsiveslides.min.js}"></script>
-<!--//responsive slider-->
-<!-- start-smooth-scrolling-->
-<script type="text/javascript" th:src="@{/js/move-top.js}"></script>
-<script type="text/javascript" th:src="@{/js/easing.js}"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $(".scroll").click(function (event) {
-            event.preventDefault();
-            $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-        });
-    });
-</script>
-<!--//end-smooth-scrolling-->
-<!--bar-js-->
-<script th:src="@{/js/bars.js}"></script>
-<!--bar-js-->
-<!--animate-->
-<script th:src="@{/js/wow.min.js}"></script>
-<script>
-    new WOW().init();
-</script>
-<!--//end-animate-->
-<!--smooth-scrolling-of-move-up-->
-<script type="text/javascript">
-    $(document).ready(function () {
 
-        var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-        };
-
-        $().UItoTop({easingType: 'easeOutQuart'});
-
-    });
-</script>
-<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-<!--//smooth-scrolling-of-move-up-->
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script th:src="@{/js/bootstrap.js}"></script>
-
-<script>
-    // You can also use "$(window).load(function() {"
-    $(function () {
-        // Slideshow 3
-        $("#slider3").responsiveSlides({
-            auto: true,
-            pager: false,
-            nav: true,
-            speed: 500,
-            namespace: "callbacks",
-            before: function () {
-                $('.events').append("<li>before event fired.</li>");
+        $(".dropdown").hover(
+            function () {
+                $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                $(this).toggleClass('open');
             },
-            after: function () {
-                $('.events').append("<li>after event fired.</li>");
+            function () {
+                $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                $(this).toggleClass('open');
             }
-        });
-
+        );
     });
 </script>
+
 </body>
 </html>

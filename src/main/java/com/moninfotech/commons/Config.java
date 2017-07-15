@@ -5,4 +5,6 @@ package com.moninfotech.commons;
  */
 public final class Config {
     public static final String ADMIN_EMAIL = "sayemkcn@gmail.com";
+
+    public static final int INITIAL_PAGE = 0;
 }

@@ -14,9 +14,12 @@ public interface ReviewService {
     Review findOne(Long id);
     List<Review> findAll();
     List<Review> findByUser(User user,int page,int size);
+
     List<Review> findByHotel(Hotel hotel,int page,int size);
     List<Review> findByRating(float rating,int page,int size);
 
     List<Review> findByUserAndHotel(User currentUser, Hotel hotel);
     List<Hotel> findReviewedHotels(User user);
+
+    public List<Review> findReviews(User user, Hotel hotel, int page, int size);
 }

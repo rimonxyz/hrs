@@ -1,9 +1,11 @@
 package com.moninfotech.service.impl;
 
+import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Review;
 import com.moninfotech.domain.User;
+import com.moninfotech.repository.HotelRepository;
 import com.moninfotech.repository.ReviewRepository;
 import com.moninfotech.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,12 @@ import java.util.stream.Collectors;
 @Service
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepo;
+    private final HotelRepository hotelRepo;
 
     @Autowired
-    public ReviewServiceImpl(ReviewRepository reviewRepo) {
+    public ReviewServiceImpl(ReviewRepository reviewRepo, HotelRepository hotelRepo) {
         this.reviewRepo = reviewRepo;
+        this.hotelRepo = hotelRepo;
     }
 
     @Override
@@ -58,7 +62,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<Review> findByUserAndHotel(User currentUser, Hotel hotel) {
-        return this.reviewRepo.findByUserAndHotel(currentUser,hotel);
+        return this.reviewRepo.findByUserAndHotel(currentUser, hotel);
     }
 
     @Override
@@ -67,5 +71,24 @@ public class ReviewServiceImpl implements ReviewService {
                 .stream()
                 .map(Review::getHotel)
                 .collect(Collectors.toList());
+    }
+
+    public List<Review> findAll(int page, int size) {
+        return this.reviewRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, SortAttributes.FIELD_ID)).getContent();
+    }
+
+    @Override
+    public List<Review> findReviews(User user, Hotel hotel, int page, int size) {
+        if (user.hasAssignedRole(Constants.Roles.ROLE_USER)) {
+            if (hotel != null)
+                return this.findByUserAndHotel(user,hotel);
+            return this.findByUser(user, page, size);
+        } else if (user.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN))
+            return this.findByHotel(this.hotelRepo.findByUser(user), page, size);
+        else {
+            if (hotel != null)
+                return this.findByHotel(hotel, page, size);
+            return this.findAll(page, size);
+        }
     }
 }
