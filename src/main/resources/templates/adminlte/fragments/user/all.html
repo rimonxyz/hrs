@@ -40,8 +40,8 @@
                             </td>
                             <td th:text="${user?.email}"></td>
                             <td th:text="${user?.address?.getCommaSeperatedString()}"></td>
-                            <td th:text="${user?.getReadableDate(user?.getCreated())}"></td>
-                            <td th:text="${user?.getReadableDate(user?.getLastUpdated())}"></td>
+                            <td th:text="${user?.getReadableDateTime(user?.getCreated())}"></td>
+                            <td th:text="${user?.getReadableDateTime(user?.getLastUpdated())}"></td>
                             <td>
                                 <form th:action="@{/admin/users/}+${user?.getId()}+@{/action(enabled=${!user?.isEnabled()})}"
                                       method="post">
