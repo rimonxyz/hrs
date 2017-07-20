@@ -1,14 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sticky Plugin</title>
+    <title>Hotels Wave</title>
 
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css" media="all">
     <!-- //for-mobile-apps -->
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
     <!-- styles-CSS -->
-    <link href="css/service.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="css/myStyle.css" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/service.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/css/myStyle.css}" rel="stylesheet" type="text/css" media="all"/>
 
 
     <!--font-size-->
@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-2.1.4.min.js}"></script>
 
 
     <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css"/>
@@ -27,7 +27,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-    <script src="js/bootstrap.js"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
     <script>
         // $(window).load(function(){
         //   $("#header").sticky({ topSpacing: 10 });
@@ -229,12 +229,12 @@
                         <form method="POST" action="#" class="subscribe-block__form">
                             <div class="showing-form">
                                 <div class="label">Enter a Location:</div>
-                                <input type="text" class="form-control" name="arrival">
+                                <input style="margin-top: 20px;margin-bottom:10px;height: 50px; width: 350px;"
+                                       type="text" class="form-control" name="arrival">
                                 <div class="mphb_sc_search-submit-button-wrapper">
                                     <input type="submit" class="btn btn-primary-outline" value="Check Availability">
                                 </div>
                             </div>
-
 
                         </form>
                     </div>
@@ -246,11 +246,207 @@
 
 <!-- end First pic and option -->
 
+
+<!-- Welcome page -->
+<div class="tm_pb_section  tm_pb_section_2 tm_pb_with_background tm_section_regular tm_pb_section_sticky">
+
+    <div class="container">
+        <div class="row welcomeRow">
+
+            <div class="welcomeLogo col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+
+                <div>
+                    <img th:src="@{/images/award.png}" alt="award" title="award" width="100%"/>
+                </div>
+            </div>
+            <!-- .tm_pb_column -->
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+
+                <!-- <hr class="tm_pb_module tm_pb_space tm_pb_divider_0"> -->
+                <div class="welcomeTitle">
+                    <div class="h2-style tm_pb_title__super-title">Welcome to the</div>
+                    <div class="h1-style tm_pb_title__title">Best Modern Hotel in florida!</div>
+                </div>
+                <!-- .tm_pb_title -->
+                <hr class="tm_pb_module tm_pb_space tm_pb_divider_1">
+                <div class="welcomeText">
+
+                    <p>The HotelBliss hotel, located at the very heart of Indianapolis is a welcoming retreat both for
+                        people traveling across the country and for businessmen, visiting our Rustbelt state for some
+                        commercial affairs. Here, we always make sure that you will have any of your needs satisfied, be
+                        it a comfortable hotel room.</p>
+
+                </div>
+                <!-- .tm_pb_text -->
+            </div>
+            <!-- .tm_pb_column -->
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+
+</div>
+<!-- end Welcome page -->
+
+
+<!-- Our services -->
+<div class="serviceRow">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                <div class="tm_pb_text_4">
+
+                    <h2 style="color:#000;padding-bottom: 50px;" id="services">Services</h2>
+
+                </div>
+                <!-- .tm_pb_text -->
+            </div>
+            <!-- .tm_pb_column -->
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+    <div class="container">
+        <div class="more-hover-show row tm_pb_row tm_pb_row_6 tm_pb_col_padding_reset">
+
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+
+                <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
+                    <div class="tm_pb_link_box_content" style="background-image:url(images/hotel.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Hotel</h3>
+                            <p>Booking</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                    <!-- .tm_pb_blurb_content -->
+                </div>
+                <!-- .tm_pb_link_box -->
+            </div>
+            <!-- .tm_pb_column -->
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_11 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+
+                <div class="tm_pb_link_box tm_pb_link_box_1 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic007.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Air</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/air-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                    <!-- .tm_pb_blurb_content -->
+                </div>
+                <!-- .tm_pb_link_box -->
+            </div>
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic006.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Truck</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+    <div class="container">
+        <div class="more-hover-show row tm_pb_row tm_pb_row_7 tm_pb_col_padding_reset">
+
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_12 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+
+                <div class="tm_pb_link_box tm_pb_link_box_2 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic008.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Railway</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/railway-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                    <!-- .tm_pb_blurb_content -->
+                </div>
+                <!-- .tm_pb_link_box -->
+            </div>
+            <!-- .tm_pb_column -->
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_13 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+
+                <div class="tm_pb_link_box tm_pb_link_box_3 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic009.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Ocean</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                    <!-- .tm_pb_blurb_content -->
+                </div>
+                <!-- .tm_pb_link_box -->
+            </div>
+            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
+                    <div class="tm_pb_link_box_content"
+                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic006.jpg);">
+                        <div class="tm_pb_blurb_content">
+                            <h3>Truck</h3>
+                            <p>Shipping</p>
+                        </div>
+                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
+                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
+                            INFO</a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- .tm_pb_column -->
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+
+    <div class="container" style="margin-bottom: 40px;">
+        <div class=" row tm_pb_row tm_pb_row_8">
+
+            <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_14 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                <hr class="tm_pb_module tm_pb_space tm_pb_divider_2">
+                <div class="serviceMore">
+                    <a href="#" class="btn btn-default" role="button">View all</a>
+                </div>
+            </div>
+            <!-- .tm_pb_column -->
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+
+</div>
+<!-- end our services -->
+
+
 <!-- packages -->
 <div class="row">
     <div class="container">
         <div class="contentHeader" style="margin-top:25px;">
-            <div class="firstLine">Packages</div>
+            <div class="firstLine" id="packages">Packages</div>
             <div class="secondLine text-uppercase"></div>
         </div>
 
@@ -449,165 +645,13 @@
 </div>
 <!-- end packages -->
 
-<!-- Our services -->
-<div class="serviceRow">
-
-    <div class="container">
-        <div class="row">
-
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
-                <div class="tm_pb_text_4">
-
-                    <h2 style="color:#000;padding-bottom: 50px;">Services</h2>
-
-                </div>
-                <!-- .tm_pb_text -->
-            </div>
-            <!-- .tm_pb_column -->
-
-        </div>
-        <!-- .tm_pb_row -->
-    </div>
-    <div class="container">
-        <div class="more-hover-show row tm_pb_row tm_pb_row_6 tm_pb_col_padding_reset">
-
-            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-
-                <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
-                    <div class="tm_pb_link_box_content" style="background-image:url(images/hotel.jpg);">
-                        <div class="tm_pb_blurb_content">
-                            <h3>Hotel</h3>
-                            <p>Booking</p>
-                        </div>
-                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
-                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
-                            INFO</a></div>
-                    </div>
-                    <!-- .tm_pb_blurb_content -->
-                </div>
-                <!-- .tm_pb_link_box -->
-            </div>
-            <!-- .tm_pb_column -->
-            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_11 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-
-                <div class="tm_pb_link_box tm_pb_link_box_1 tm_pb_module">
-                    <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic007.jpg);">
-                        <div class="tm_pb_blurb_content">
-                            <h3>Air</h3>
-                            <p>Shipping</p>
-                        </div>
-                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
-                                                                     href="https://ld-wp.template-help.com/wordpress_60054/air-shipping">MORE
-                            INFO</a></div>
-                    </div>
-                    <!-- .tm_pb_blurb_content -->
-                </div>
-                <!-- .tm_pb_link_box -->
-            </div>
-            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
-                    <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic006.jpg);">
-                        <div class="tm_pb_blurb_content">
-                            <h3>Truck</h3>
-                            <p>Shipping</p>
-                        </div>
-                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
-                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
-                            INFO</a></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- .tm_pb_row -->
-    </div>
-    <div class="container">
-        <div class="more-hover-show row tm_pb_row tm_pb_row_7 tm_pb_col_padding_reset">
-
-            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_12 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-
-                <div class="tm_pb_link_box tm_pb_link_box_2 tm_pb_module">
-                    <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic008.jpg);">
-                        <div class="tm_pb_blurb_content">
-                            <h3>Railway</h3>
-                            <p>Shipping</p>
-                        </div>
-                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
-                                                                     href="https://ld-wp.template-help.com/wordpress_60054/railway-shipping">MORE
-                            INFO</a></div>
-                    </div>
-                    <!-- .tm_pb_blurb_content -->
-                </div>
-                <!-- .tm_pb_link_box -->
-            </div>
-            <!-- .tm_pb_column -->
-            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_13 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-
-                <div class="tm_pb_link_box tm_pb_link_box_3 tm_pb_module">
-                    <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic009.jpg);">
-                        <div class="tm_pb_blurb_content">
-                            <h3>Ocean</h3>
-                            <p>Shipping</p>
-                        </div>
-                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
-                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
-                            INFO</a></div>
-                    </div>
-                    <!-- .tm_pb_blurb_content -->
-                </div>
-                <!-- .tm_pb_link_box -->
-            </div>
-            <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
-                    <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic006.jpg);">
-                        <div class="tm_pb_blurb_content">
-                            <h3>Truck</h3>
-                            <p>Shipping</p>
-                        </div>
-                        <div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"
-                                                                     href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE
-                            INFO</a></div>
-                    </div>
-                </div>
-            </div>
-            <!-- .tm_pb_column -->
-
-        </div>
-        <!-- .tm_pb_row -->
-    </div>
-
-    <div class="container" style="margin-bottom: 40px;">
-        <div class=" row tm_pb_row tm_pb_row_8">
-
-            <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_14 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
-                <hr class="tm_pb_module tm_pb_space tm_pb_divider_2">
-                <div class="serviceMore">
-                    <a href="#" class="btn btn-default" role="button">View all</a>
-                </div>
-            </div>
-            <!-- .tm_pb_column -->
-
-        </div>
-        <!-- .tm_pb_row -->
-    </div>
-
-</div>
-<!-- end our services -->
-
 
 <!-- special offer -->
 <div class="container">
     <div class=" row">
         <div class="col-xl-12">
             <div class="contentHeader" style="margin-top:25px;">
-                <div class="firstLine">Special offers</div>
+                <div class="firstLine" id="specialOffers">Special offers</div>
                 <div class="secondLine text-uppercase"></div>
             </div>
             <!-- .tm_pb_title -->
@@ -906,7 +950,7 @@
 </div>
 <!-- End News letter -->
 <!-- location and map -->
-<div class="tm_pb_section tm_pb_anchor tm_pb_section_9 tm_section_regular tm_section_transparent">
+<div class="row">
 
     <div class="col-md-6 contact-left">
         <div class="tm_pb_column tm_pb_column_4_4 tm_pb_column_inner  tm_pb_column_inner_0 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
@@ -955,8 +999,40 @@
 </div>
 <!-- end location and map -->
 
+<!-- footer -->
+<div class="footer ">
+    <div class="container">
+        <div class="col-md-4 footer-left">
+            <h3>Navigation</h3>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#specialOffers">Special offers</a></li>
+        </div>
+        <div class="col-md-4 footer-left">
+            <h3>For Members</h3>
+            <li><a href="#">Forums</a></li>
+            <li><a href="#">Promotions</a></li>
+            <li><a href="login.html">Sign In</a></li>
+            <li><a href="#">News</a></li>
+        </div>
 
-<script type="text/javascript" src="js/easyResponsiveTabs.js"></script>
+        <div class="col-md-4 footer-left">
+            <h3>Our Location</h3>
+            <li><i class="fa fa-map-marker fa-lg"></i> </i>Chandrima Udyan</li>
+            <li><i class="fa fa-phone fa-lg"></i>+880 1978 567189</li>
+            <li><i class="fa fa-envelope fa-lg"></i><a href="mailto:nazmuldipu@gmail.com"> admin@gmail.com</a></li>
+        </div>
+        <div class="col-md-12 footerName">
+            <p>Copyrights © 2017 MonInfoTech. All rights reserved | Design by <a href="http://www.moninfotech.com/">MonInfoTech</a>
+            </p>
+        </div>
+    </div>
+    <a href="#" id="toTop" style="display: block;"><span id="toTopHover"></span><span id="toTopHover"
+                                                                                      style="opacity: 0;"></span> <span
+            id="toTopHover" style="opacity: 0;"> </span></a>
+</div>
+<!-- end footer -->
+<script type="text/javascript" th:src="@{/js/easyResponsiveTabs.js}"></script>
 <script>
     $(function () {
         var clientHeight = document.getElementById('topMenu').clientHeight;

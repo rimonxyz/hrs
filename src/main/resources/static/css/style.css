@@ -3580,3 +3580,101 @@ h2.resp-accordion {
 
 /*end responsive*/
 
+
+
+/*fotter*/
+.footer {
+    background-color: #222;
+    padding: 3em 0;
+}
+.footer h3 {
+    font-size: 1.7em;
+    color: #fff;
+    margin: 0 0 1em;
+    font-weight: 700;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    letter-spacing: 1px;
+}
+.footer-left li {
+    display: block;
+    font-size: 1em;
+    color: #92F9FF;
+    line-height: 1.8em;
+}
+.footer li a {
+    color: #92F9FF;
+    font-size: 1em;
+    line-height: 1.8em;
+    text-decoration: none;
+}
+i.add {
+    width: 17px;
+    height: 24px;
+    display: inline-block;
+    background: url(../images/spr.png) no-repeat -6px -3px;
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
+i.phone {
+    width: 19px;
+    height: 21px;
+    display: inline-block;
+    background: url(../images/spr.png) no-repeat -5px -31px;
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
+i.mail{
+    width: 17px;
+    height: 14px;
+    display: inline-block;
+    background: url(../images/spr.png) no-repeat -6px -68px;
+    margin-right: 0.5em;
+    vertical-align: middle;
+}
+.footerName p{
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    color: #ffffff;
+}
+.footerName p a{
+    color: #aaaaaa;
+}
+/*end fotter*/
+
+
+/*welcome page*/
+.welcomeRow{
+    margin-top:30px;
+    margin-bottom: 30px;
+}
+.welcomeLogo{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.welcomeTitle{
+    text-align: center;
+}
+.welcomeText p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.72;
+    /*font-family: Roboto, sans-serif;*/
+    font-family: "Segoe UI",Arial,sans-serif;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #777777;
+    margin-left: 20px;
+}
+/*.welcomeText{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.72;
+    font-family: Roboto, sans-serif;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #777777;
+}*/
+/*end welcome page*/
