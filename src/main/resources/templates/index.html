@@ -84,10 +84,14 @@
         <div class="col-xs-6">
             <ul>
                 <div class="col-xs-2">
-                    <img title="" alt="" draggable="false" src="images/logo.png">
+                    <a th:href="@{/}">
+                        <img title="" alt="" draggable="false" src="images/logo.png">
+                    </a>
                 </div>
                 <div class="col-xs-6 companyTitle">
-                    <li>HotelsBD.com</li>
+                    <li>
+                        <a th:href="@{/}">HotelsWave</a>
+                    </li>
                 </div>
 
 
@@ -232,13 +236,17 @@
 
                     <!-- search option -->
                     <div class="container">
-                        <form method="POST" action="#" class="subscribe-block__form">
+                        <form th:action="@{/search}" method="get"class="subscribe-block__form">
+                            <datalist id="places">
+                                <option th:each="area : ${areaList}" th:value="${area}" th:text="${area}">Coxs Bazar</option>
+                                <!--<option th:value="chaal">Saint Martins</option>-->
+                            </datalist>
                             <div class="showing-form">
                                 <div class="label">Enter a Location:</div>
                                 <input style="margin-top: 20px;margin-bottom:10px;height: 50px; width: 350px;"
-                                       type="text" class="form-control" name="arrival">
+                                       type="text" class="form-control" id="place" name="query" list="places" required="required">
                                 <div class="mphb_sc_search-submit-button-wrapper">
-                                    <input type="submit" class="btn btn-primary-outline" value="Check Availability">
+                                    <button type="submit" class="btn btn-primary-outline"><i style="margin-right: 10px;" class="glyphicon glyphicon-search"></i>Search</button>
                                 </div>
                             </div>
 
@@ -1029,8 +1037,8 @@
             <li><i class="fa fa-envelope fa-lg"></i><a href="mailto:nazmuldipu@gmail.com"> admin@gmail.com</a></li>
         </div>
         <div class="col-md-12 footerName">
-            <h6>Copyrights © 2017 MonInfoTech. All rights reserved | Design by <a href="http://www.moninfotech.com/">MonInfoTech</a>
-            </h6>
+            <br/><br/><h5>Copyrights © 2017 MonInfoTech. All rights reserved | Design by <a href="http://www.moninfotech.com/">MonInfoTech</a>
+            </h5>
         </div>
     </div>
     <a href="#" id="toTop" style="display: block;"><span id="toTopHover"></span><span id="toTopHover"
