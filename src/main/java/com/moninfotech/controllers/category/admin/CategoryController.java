@@ -116,6 +116,7 @@ public class CategoryController {
             return "redirect:/admin/categories?message=Can not delete category, you should select another category to transfer this category rooms.";
         }
         return "redirect:/admin/categories?message=Successfully deleted!";
+
     }
 
 }

@@ -24,12 +24,12 @@ public class SearchController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String search(@RequestParam("query") String query,
                           @RequestParam(value = "isDesc", required = false) boolean isDesc,
-                          @RequestParam(value = "page", required = false) Integer page,
+                          @RequestParam(value = "page", required = false,defaultValue = "0") Integer page,
                           @RequestParam(value = "sortBy", required = false) String soryBy,
                           @RequestParam(value = "filterType", required = false) String filterType,
                           @RequestParam(value = "filterValue", required = false) String filterValue,
                           Model model) {
-        if (page == null || page < 0) page = 0;
+        if (page < 0) page = 0;
 
         List<Hotel> hotels = this.hotelService.findByAddressArea(query);
         hotels.addAll(this.hotelService.findByAddressUpazila(query));

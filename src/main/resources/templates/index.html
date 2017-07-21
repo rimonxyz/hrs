@@ -152,10 +152,9 @@
                 <nav class="cl-effect-13" id="cl-effect-13">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Why us</a></li>
-                        <li class="active"><a href="#">Hotels</a></li>
+                        <li class="active"><a th:href="@{/hotels}">Hotels</a></li>
                         <li class="active"><a href="#">Ships</a></li>
                         <li class="active"><a href="#">Holidays</a></li>
-                        <li class="active"><a href="#">Hotels</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Services<b
                                     class="caret"></b></a>
@@ -167,8 +166,14 @@
                         </li>
 
                         <li><a href="#" class="scroll">Customer Service</a></li>
-                        <li sec:authorize="!isAuthenticated()"><a href="#" class="scroll">Registration</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/registration}"
+                                                                  class="scroll">Registration</a></li>
                         <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                        <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"><a th:href="@{/hotel/rooms}">My
+                            Hotel</a></li>
+                        <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/bookings}">My Bookings</a></li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}">Admin Dashboard</a>
+                        </li>
                         <li sec:authorize="isAuthenticated()" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                sec:authentication="principal.name"><b class="caret"></b></a>
@@ -179,10 +184,11 @@
                                     Hotel</a></li>
                                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}">Admin Dashboard</a>
                                 </li>
-                                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="scroll">Logout</a>
+                                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a>
                                 </li>
                             </ul>
                         </li>
+
                     </ul>
 
                 </nav>
@@ -1023,8 +1029,8 @@
             <li><i class="fa fa-envelope fa-lg"></i><a href="mailto:nazmuldipu@gmail.com"> admin@gmail.com</a></li>
         </div>
         <div class="col-md-12 footerName">
-            <p>Copyrights © 2017 MonInfoTech. All rights reserved | Design by <a href="http://www.moninfotech.com/">MonInfoTech</a>
-            </p>
+            <h6>Copyrights © 2017 MonInfoTech. All rights reserved | Design by <a href="http://www.moninfotech.com/">MonInfoTech</a>
+            </h6>
         </div>
     </div>
     <a href="#" id="toTop" style="display: block;"><span id="toTopHover"></span><span id="toTopHover"
