@@ -468,6 +468,13 @@
                 $("#priceEdit").val(result.price);
                 $("#discountEdit").val(result.discount);
                 $("#categoryIdsEdit").val(result.category.id);
+                $("#fascFrontFaceEdit").prop("checked",result.facilities.frontFace);
+                $("#fascWithCorridorEdit").prop("checked",result.facilities.withCorridor);
+                $("#fascBreakfastEdit").prop("checked",result.facilities.breakfast);
+                $("#fascInternetEdit").prop("checked",result.facilities.internet);
+                $("#fascAirConditionedEdit").prop("checked",result.facilities.airConditioned);
+                $("#fascTvEdit").prop("checked",result.facilities.tv);
+                $("#fascGeyserEdit").prop("checked",result.facilities.geyser);
             }
         });
     }
@@ -504,13 +511,6 @@
                 $("#catNameEdit").val( result.name );
                 $("#maxChildNumberEdit").val(result.maxChildNumber);
                 $("#maxAdultNumberEdit").val(result.maxAdultNumber);
-                $("#catFrontFaceEdit").prop("checked",result.facilities.frontFace);
-                $("#catWithCorridorEdit").prop("checked",result.facilities.withCorridor);
-                $("#catBreakfastEdit").prop("checked",result.facilities.breakfast);
-                $("#catInternetEdit").prop("checked",result.facilities.internet);
-                $("#catAirConditionedEdit").prop("checked",result.facilities.airConditioned);
-                $("#catTvEdit").prop("checked",result.facilities.tv);
-                $("#catGeyserEdit").prop("checked",result.facilities.geyser);
             }
         });
     }
