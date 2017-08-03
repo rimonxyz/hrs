@@ -9,21 +9,22 @@ import com.moninfotech.domain.annotations.CurrentUser;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sayemkcn on 4/18/17.
  */
 public interface BookingService {
 
-    List<Booking> findByUser(User user, int page, int size);
+    List<Booking> findByUser(User user, Integer page, Integer size);
 
-    List<Booking> findByHotel(Hotel hotel,int page,int size);
+    List<Booking> findByHotel(Hotel hotel, Integer page, Integer size);
 
     Booking findOne(Long id);
 
-    List<Booking> findAll(int page,int size);
+    List<Booking> findAll(Integer page, Integer size);
 
-    boolean belongsTo(Booking booking,User user);
+    boolean belongsTo(Booking booking, User user);
 
     Booking save(Booking booking);
 
@@ -42,5 +43,16 @@ public interface BookingService {
 
     boolean isBookingInvalid(Booking booking, Room room);
 
+    /**
+     * Returns booking list according to logged in user. For user, returns their booking list, for hotel, returns booking list that was placed
+     * on that hotel, for super admin returns all booking items
+     *
+     * @param currentUser
+     * @param page
+     * @param size
+     * @return List<Booking>
+     */
     List<Booking> findBookings(User currentUser, Integer page, Integer size);
+
+    List<Booking> findFiltered(User currentUser, boolean isManual);
 }

@@ -21,6 +21,8 @@ public class Booking extends BaseEntity {
     @JsonBackReference
     private List<Room> roomList;
 
+    private boolean manualBooking;
+
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Date> bookingDateList;
@@ -127,14 +129,6 @@ public class Booking extends BaseEntity {
         this.bookingDateList = bookingDateList;
     }
 
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "transaction=" + transaction +
-                ", user=" + user +
-                ", hotel=" + hotel +
-                "} " + super.toString();
-    }
 
     public Invoice getInvoice() {
         return invoice;
@@ -142,5 +136,26 @@ public class Booking extends BaseEntity {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+    public boolean isManualBooking() {
+        return manualBooking;
+    }
+
+    public void setManualBooking(boolean manualBooking) {
+        this.manualBooking = manualBooking;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "transaction=" + transaction +
+                ", roomList=" + roomList +
+                ", manualBooking=" + manualBooking +
+                ", bookingDateList=" + bookingDateList +
+                ", user=" + user +
+                ", hotel=" + hotel +
+                ", invoice=" + invoice +
+                '}';
     }
 }

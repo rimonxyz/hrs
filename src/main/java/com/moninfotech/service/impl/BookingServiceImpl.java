@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by sayemkcn on 4/18/17.
@@ -36,12 +37,16 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> findByUser(User user, int page, int size) {
+    public List<Booking> findByUser(User user, Integer page, Integer size) {
+        if (page == null || size == null)
+            return this.bookingRepo.findByUser(user);
         return this.bookingRepo.findByUser(user, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
 
     @Override
-    public List<Booking> findByHotel(Hotel hotel, int page, int size) {
+    public List<Booking> findByHotel(Hotel hotel, Integer page, Integer size) {
+        if (page == null || size == null)
+            return this.bookingRepo.findByHotel(hotel);
         return this.bookingRepo.findByHotel(hotel, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
 
@@ -51,16 +56,18 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> findAll(int page, int size) {
+    public List<Booking> findAll(Integer page, Integer size) {
+        if (page == null || size == null)
+            return this.bookingRepo.findAll();
         return this.bookingRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
 
     @Override
     public boolean belongsTo(Booking booking, User user) {
         // If this booking doesn't belong to this logged in user
-        if (!booking.getUser().getId().equals(user.getId())){
+        if (!booking.getUser().getId().equals(user.getId())) {
             // check if logged in user is hotel admin.
-            if (user.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)){
+            if (user.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
                 // check if this booking isn't belongs to his/her hotel, then restrict and send redirect with message
                 Hotel hotel = this.hotelService.findByUser(user);
                 if (!booking.getHotel().getId().equals(hotel.getId()))
@@ -176,5 +183,13 @@ public class BookingServiceImpl implements BookingService {
         return bookingList;
     }
 
+    @Override
+    public List<Booking> findFiltered(User currentUser, boolean isManual) {
+        List<Booking> bookingList = this.findBookings(currentUser, null, null);
+        return bookingList
+                .stream()
+                .filter(booking -> booking.isManualBooking() == isManual)
+                .collect(Collectors.toList());
+    }
 
 }

@@ -154,6 +154,9 @@ public class BookingController {
             return "redirect:/bookings/checkout/assignUser";
         }
         booking.setUser(currentUser);
+
+        // HANDLE PAYMENT
+
         booking = this.bookingService.save(booking);
         session.removeAttribute(SessionAttr.SESSION_BOOKING);
         return "redirect:/invoices/generate/" + booking.getId() + "?messagesuccess=Booking Successful!";
@@ -171,8 +174,11 @@ public class BookingController {
         User user = this.userService.findOne(userId);
         if (user == null) return "redirect:/bookings/checkout/assignUser?message=User not found!";
         Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
-        if (booking != null) booking.setUser(user);
-        // DO PAYMENT PROCEEDURE
+        if (booking == null) return "redirect:/checkout/assignUser?message=User not found!";
+        booking.setUser(user);
+        booking.setManualBooking(true);
+        // HANDLE PAYMENT PROCEEDURE
+
         booking = this.bookingService.save(booking);
         session.removeAttribute(SessionAttr.SESSION_BOOKING);
         return "redirect:/invoices/generate/" + booking.getId() + "?messagesuccess=Booking Successful!";

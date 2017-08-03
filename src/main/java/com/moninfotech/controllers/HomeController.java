@@ -3,6 +3,8 @@ package com.moninfotech.controllers;
 import com.moninfotech.commons.Config;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.SortAttributes;
+import com.moninfotech.commons.pojo.BookingHelper;
+import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.BookingService;
@@ -47,8 +49,12 @@ public class HomeController {
     }
 
     @GetMapping("/dashboard")
-    private String dashboard(@CurrentUser User user, Model model) {
-        model.addAttribute("bookingList", this.bookingService.findByUser(user, Config.INITIAL_PAGE, SortAttributes.Page.SIZE));
+    private String dashboard(@CurrentUser User currentUser, Model model) {
+        model.addAttribute("bookingHelper", new BookingHelper());
+
+        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser,null,null));
+        model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser,true));
+        model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser,false));
         model.addAttribute("template", "fragments/dashboard/dashboard");
         return "adminlte/index";
     }

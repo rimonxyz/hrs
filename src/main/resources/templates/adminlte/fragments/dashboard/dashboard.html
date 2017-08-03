@@ -1,25 +1,35 @@
 <!-- Info boxes -->
 <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+            <!--<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>-->
 
             <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
-                <span class="info-box-number">90<small>%</small></span>
+                <span class="info-box-text">Total Booking</span>
+                <span class="info-box-number">
+                    <span th:text="${totalBookingList?.size()}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
+                    <span>
+                        <span>100</span><small>%</small>
+                    </span>
+                </span>
             </div>
             <!-- /.info-box-content -->
         </div>
         <!-- /.info-box -->
     </div>
     <!-- /.col -->
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+            <!--<span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>-->
 
             <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">HotelsWave.com Booking</span>
+                <span class="info-box-number">
+                    <span th:text="${autoBookingList?.size()}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
+                    <span>
+                        <span th:text="${autoBookingList?.size()*100/totalBookingList?.size()}">100</span><small>%</small>
+                    </span>
+                </span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -30,34 +40,122 @@
     <!-- fix for small devices only -->
     <div class="clearfix visible-sm-block"></div>
 
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+            <!--<span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>-->
 
             <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">760</span>
+                <span class="info-box-text">Hotel Booking</span>
+                <span class="info-box-number">
+                    <span th:text="${manualBookingList?.size()}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
+                    <span>
+                        <span th:text="${manualBookingList?.size()*100/totalBookingList?.size()}">100</span><small>%</small>
+                    </span>
+                </span>
             </div>
             <!-- /.info-box-content -->
         </div>
         <!-- /.info-box -->
     </div>
-    <!-- /.col -->
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-md-12">
+        <!-- Donut chart -->
+        <div class="box box-primary">
+            <div hidden="hidden">
+                <span id="totalBooking" th:text="${totalBookingList?.size()}"></span>
+                <span id="autoBooking" th:text="${autoBookingList.size()}"></span>
+                <span id="manualBooking" th:text="${manualBookingList.size()}"></span>
             </div>
-            <!-- /.info-box-content -->
+            <div class="box-header with-border">
+                <i class="fa fa-bar-chart-o"></i>
+
+                <h3 class="box-title">Booking Statistics</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div id="donut-chart" style="height: 300px;"></div>
+            </div>
+            <!-- /.box-body-->
         </div>
-        <!-- /.info-box -->
+        <!-- /.box -->
     </div>
     <!-- /.col -->
 </div>
-<!-- /.row -->
+
+
+<div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <!--<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>-->
+
+            <div class="info-box-content">
+                <span class="info-box-text">Total Sales</span>
+                <span class="info-box-number">
+                    <span th:text="${bookingHelper.getTotalPaid(totalBookingList)}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
+                    <span>
+                        <span>100</span><small>%</small>
+                    </span>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <!--<span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>-->
+
+            <div class="info-box-content">
+                <span class="info-box-text">HotelsWave.com Sales</span>
+                <span class="info-box-number">
+                    <span th:text="${bookingHelper.getTotalPaid(autoBookingList)}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
+                    <span>
+                        <span th:text="${bookingHelper.getTotalPaid(autoBookingList)*100/bookingHelper.getTotalPaid(totalBookingList)}">100</span><small>%</small>
+                    </span>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix visible-sm-block"></div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <!--<span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>-->
+
+            <div class="info-box-content">
+                <span class="info-box-text">Hotel Sales</span>
+                <span class="info-box-number">
+                    <span th:text="${bookingHelper.getTotalPaid(manualBookingList)}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
+                    <span>
+                        <span th:text="${bookingHelper.getTotalPaid(manualBookingList)*100/bookingHelper.getTotalPaid(totalBookingList)}">100</span><small>%</small>
+                    </span>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+
+</div>
+
+
+
+
+
 
 <div class="row">
     <div class="col-md-12">
