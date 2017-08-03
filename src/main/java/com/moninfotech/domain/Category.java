@@ -20,8 +20,6 @@ public class Category extends BaseEntity {
     @JsonIgnore
     private List<byte[]> images;
 
-    @Embedded
-    private Facilities facilities;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     @JsonBackReference
     private List<Room> roomList;
@@ -47,15 +45,6 @@ public class Category extends BaseEntity {
         this.maxAdultNumber = maxAdultNumber;
     }
 
-    public Facilities getFacilities() {
-        return facilities;
-    }
-
-    public void setFacilities(Facilities facilities) {
-        this.facilities = facilities;
-    }
-
-
     public String getName() {
         return name;
     }
@@ -73,21 +62,22 @@ public class Category extends BaseEntity {
         this.roomList = roomList;
     }
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "name='" + name + '\'' +
-                ", maxChildNumber=" + maxChildNumber +
-                ", maxAdultNumber=" + maxAdultNumber +
-                ", facilities=" + facilities +
-                "} " + super.toString();
-    }
-
     public List<byte[]> getImages() {
         return images;
     }
 
     public void setImages(List<byte[]> images) {
         this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                ", maxChildNumber=" + maxChildNumber +
+                ", maxAdultNumber=" + maxAdultNumber +
+                ", images=" + images +
+                ", roomList=" + roomList +
+                '}';
     }
 }

@@ -64,6 +64,30 @@
                                 <input hidden="hidden" name="hotelId" id="hotelId" type="text" th:value="${hotel?.id}">
                             </div>
                         </div>
+
+                        <!--FASCILITIES-->
+                        <div class="col-md-6 form-left" data-wow-delay=".5s">
+                            <input name="facilities.frontFace" class="checkbox" id="catFrontFaceEdit" type="checkbox">With Front Face?</input>
+                        </div>
+                        <div class="col-md-6 form-right" data-wow-delay=".5s">
+                            <input name="facilities.withCorridor" class="checkbox" id="catWithCorridorEdit"  type="checkbox">With Corridor?</input>
+                        </div>
+                        <div class="col-md-6 form-left" data-wow-delay=".5s">
+                            <input name="facilities.breakfast" class="checkbox" id="catBreakfastEdit" type="checkbox">Breakfast Available?</input>
+                        </div>
+                        <div class="col-md-6 form-right" data-wow-delay=".5s">
+                            <input name="facilities.internet" class="checkbox" id="catInternetEdit" type="checkbox">Internet Available?</input>
+                        </div>
+                        <div class="col-md-6 form-left" data-wow-delay=".5s">
+                            <input name="facilities.airConditioned" class="checkbox" id="catAirConditionedEdit" type="checkbox">AC Available?</input>
+                        </div>
+                        <div class="col-md-6 form-right" data-wow-delay=".5s">
+                            <input name="facilities.tv" class="checkbox" type="checkbox" id="catTvEdit">TV Available?</input>
+                        </div>
+                        <div class="col-md-6 form-left" data-wow-delay=".5s">
+                            <input name="facilities.geyser" class="checkbox" type="checkbox" id="catGeyserEdit">Geyser Available?</input>
+                        </div>
+
                         <!-- /.box-body -->
 
                         <div class="box-footer">

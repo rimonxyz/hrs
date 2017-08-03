@@ -42,6 +42,8 @@ public abstract class BaseEntity {
     }
 
     public Date getLastUpdated() {
+        if (lastUpdated == null)
+            return created;
         return lastUpdated;
     }
 

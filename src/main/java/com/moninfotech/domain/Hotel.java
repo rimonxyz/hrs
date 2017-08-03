@@ -44,7 +44,7 @@ public class Hotel extends BaseEntity {
 
     public int getNumberOfAcRooms(){
         return (int) this.roomList.stream()
-                .filter(room -> room.getCategory().getFacilities().isAirConditioned())
+                .filter(room -> room.getFacilities().isAirConditioned())
                 .count();
     }
     public int getNumberOfNonAcRooms(){

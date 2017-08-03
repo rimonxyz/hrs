@@ -35,6 +35,9 @@ public class Room extends BaseEntity {
     @ManyToOne(cascade = CascadeType.REMOVE)
     private Category category;
 
+    @Embedded
+    private Facilities facilities;
+
     @PrePersist
     @PreUpdate
     public void setDiscounted() {
@@ -273,5 +276,13 @@ public class Room extends BaseEntity {
 
     public void setDiscountMap(Map<Date, Integer> discountMap) {
         this.discountMap = discountMap;
+    }
+
+    public Facilities getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(Facilities facilities) {
+        this.facilities = facilities;
     }
 }

@@ -3,6 +3,7 @@ package com.moninfotech.controllers.room.admin;
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.FileIO;
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.domain.Facilities;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
@@ -119,6 +120,9 @@ public class RoomAdminController {
 
         if (hotel == null) return "redirect:/?message=You are not authorized to do this action.";
         room.setHotel(hotel);
+
+        // Room Fascilities
+        if (room.getFacilities()==null) room.setFacilities(new Facilities());
         // check if room category was saved previously, if not then save and set to room
 //        if (room.getCategory().getId() == null)
 //            room.setCategory(this.categoryService.save(room.getCategory()));
@@ -169,6 +173,10 @@ public class RoomAdminController {
 
         if (hotel == null) return "redirect:/?message=You are not authorized to do this action.";
         room.setHotel(hotel);
+
+        // Room Fascilities
+        if (room.getFacilities()==null) room.setFacilities(new Facilities());
+
         room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
         room = this.roomService.save(room);
         if (isImagesValid)

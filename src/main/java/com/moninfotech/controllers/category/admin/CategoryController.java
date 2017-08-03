@@ -59,8 +59,8 @@ public class CategoryController {
         if (files.size() != multipartFiles.length)
             return "redirect:/admin/categories/create?message=One or more images are invalid!";
         category.setImages(files);
-        // fascilities object will be null if no checkbox is selected, so initialise new object
-        if (category.getFacilities() == null) category.setFacilities(new Facilities());
+//        // fascilities object will be null if no checkbox is selected, so initialise new object
+//        if (category.getFacilities() == null) category.setFacilities(new Facilities());
         category = this.categoryService.save(category);
         Log.print(category.toString());
         return "redirect:/admin/categories";
@@ -90,7 +90,7 @@ public class CategoryController {
             category.setImages(this.categoryService.findOne(id).getImages());
         else category.setImages(files);
         // fascilities object will be null if no checkbox is selected, so initialise new object
-        if (category.getFacilities() == null) category.setFacilities(new Facilities());
+//        if (category.getFacilities() == null) category.setFacilities(new Facilities());
         category.setId(id);
         category = this.categoryService.save(category);
         Log.print(category.toString());
