@@ -37,7 +37,21 @@
                     <li><a th:href="@{/hotels}"><i class="fa fa-circle-o"></i>All Hotels</a></li>
                 </ul>
             </li>
-
+            <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')" class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>My Hotel</span>
+                    <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a th:href="@{/hotel/rooms}"><i class="fa fa-circle-o"></i>My Rooms</a></li>
+                    <!--<li><a th:href="@{/hotel/rooms/create}"><i class="fa fa-circle-o"></i>Create New Room</a></li>-->
+                    <li><a th:if="${hotel}" th:href="@{/hotels/}+${hotel?.id}"><i class="fa fa-circle-o"></i>Offline
+                        Booking</a></li>
+                </ul>
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
@@ -70,24 +84,12 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/reviews}"><i class="fa fa-circle-o"></i>My Reviews</a></li>
-                    <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"><a th:href="@{/reviews}"><i class="fa fa-circle-o"></i>My Hotel Reviews</a></li>
-                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/reviews}"><i class="fa fa-circle-o"></i>All Reviews</a></li>
-                </ul>
-            </li>
-            <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')" class="treeview">
-                <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span>My Hotel</span>
-                    <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a th:href="@{/hotel/rooms}"><i class="fa fa-circle-o"></i>My Rooms</a></li>
-                    <!--<li><a th:href="@{/hotel/rooms/create}"><i class="fa fa-circle-o"></i>Create New Room</a></li>-->
-                    <li><a th:if="${hotel}" th:href="@{/hotels/}+${hotel?.id}"><i class="fa fa-circle-o"></i>Offline
-                        Booking</a></li>
+                    <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/reviews}"><i class="fa fa-circle-o"></i>My
+                        Reviews</a></li>
+                    <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"><a th:href="@{/reviews}"><i
+                            class="fa fa-circle-o"></i>My Hotel Reviews</a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/reviews}"><i class="fa fa-circle-o"></i>All
+                        Reviews</a></li>
                 </ul>
             </li>
 
