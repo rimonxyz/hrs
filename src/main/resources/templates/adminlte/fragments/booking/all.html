@@ -1,60 +1,93 @@
 
 
 <section class="content">
+
+
     <div class="row">
-        <div class="col-md-6">
-            <!-- Donut chart -->
-            <div class="box box-primary">
-                <div hidden="hidden">
-                    <span id="totalCost" th:text="${bookingHelper?.getTotalCost(bookingList)}"></span>
-                    <span id="totalDiscount" th:text="${bookingHelper?.getTotalDiscount(bookingList)}"></span>
-                    <span id="totalPaid" th:text="${bookingHelper?.getTotalPaid(bookingList)}"></span>
-                </div>
+        <div class="col-sm-6">
+            <div class="box">
                 <div class="box-header with-border">
-                    <i class="fa fa-bar-chart-o"></i>
-
-                    <h3 class="box-title">Total Cost</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
+                    <h3 class="box-title">Todays Bookings (Order placed today)</h3><br/>
+                    <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
                 </div>
-                <div class="box-body">
-                    <div id="donut-chart" style="height: 300px;"></div>
-                </div>
-                <!-- /.box-body-->
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Sl</th>
+                        <th>Room No</th>
+                        <th>Category</th>
+                        <th>Booking Dates</th>
+                        <th>Total Order</th>
+                        <th>Room Rent</th>
+                    </tr>
+                    <tr th:if="${todaysPlacedRoomList != null}" th:each="room,iter : ${todaysPlacedRoomList}">
+                        <td th:text="${iter.index+1}"></td>
+                        <td>
+                            <!--<a th:href="@{/rooms/}+${room?.id}">-->
+                            <h5 th:text="${room?.roomNumber}"></h5>
+                            <!--</a>-->
+                        </td>
+                        <td th:text="${room?.category?.name}"></td>
+                        <td th:text="${room?.getBookingDatesString(true)}"></td>
+                        <td th:text="${todaysPlacedRoomListSize}"></td>
+                        <td th:text="${room?.getDiscountedPrice(todaysDate)}"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,todaysDate)*todaysPlacedRoomListSize}"></td>
+                    </tr>
+                </table>
             </div>
-            <!-- /.box -->
+            <!-- /.box-body -->
         </div>
-        <!-- /.col -->
 
-        <div class="col-md-4">
-            <!-- Widget: user widget style 1 -->
-            <div class="box box-widget widget-user-2">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-yellow">
-                    <div class="widget-user-image">
-                        <img class="img-circle" th:src="@{/adminlte/dist/img/user7-128x128.jpg}" alt="User Avatar">
-                    </div>
-                    <!-- /.widget-user-image -->
-                    <h3 class="widget-user-username">Nadia Carmichael</h3>
-                    <h5 class="widget-user-desc">Lead Developer</h5>
+        <div class="col-sm-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Todays Sales (Todays Booked Rooms)</h3><br/>
+                    <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
                 </div>
-                <div class="box-footer no-padding">
-                    <ul class="nav nav-stacked">
-                        <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
-                        <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
-                        <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
-                        <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
-                    </ul>
-                </div>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Sl</th>
+                        <th>Room No</th>
+                        <th>Category</th>
+                        <th>Room Rent</th>
+
+                    </tr>
+                    <tr th:if="${bookedRoomList != null}" th:each="room,iter : ${bookedRoomList}">
+                        <td th:text="${iter.index+1}"></td>
+                        <td>
+                            <!--<a th:href="@{/rooms/}+${room?.id}">-->
+                            <h5 th:text="${room?.roomNumber}"></h5>
+                            <!--</a>-->
+                        </td>
+                        <td th:text="${room?.category?.name}"></td>
+                        <td th:text="${room?.getDiscountedPrice(todaysDate)}"></td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,todaysDate)}"></td>
+                    </tr>
+                </table>
             </div>
-            <!-- /.widget-user -->
+            <!-- /.box-body -->
+
         </div>
+
     </div>
-    <div class="row">
+
+
+
+    <div class="row" sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">My Bookings</h3>
@@ -62,23 +95,20 @@
 
             <table class="table table-bordered">
                 <tr>
-                    <th>Image</th>
+                    <th>Sl</th>
                     <th>Hotel Name</th>
                     <!--<th>Total Rooms</th>-->
-                    <th>Total Cost</th>
+                    <th>Room Rent</th>
                     <th>You Saved</th>
                     <th>Placed On</th>
-                    <th></th>
-                    <th></th>
                 </tr>
-                <tr th:if="${bookingList != null}" th:each="booking : ${bookingList}">
-                    <td><img height="50" width="50" th:src="@{/hotels/images/} + ${booking?.hotel?.id}"></img></td>
+                <tr th:if="${bookingList != null}" th:each="booking,iter : ${bookingList}">
+                    <td th:text="${iter.index+1}"></td>
                     <td>
                         <a th:href="@{/bookings/}+${booking?.id}">
                         <h5 th:text="${booking?.hotel?.name}"></h5>
                         </a>
                     </td>
-                    <!--<td th:text="${booking?.roomList?.size()}"></td>-->
                     <td th:text="${booking?.getTotalPayableCost()}"></td>
                     <td><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
                     <td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>
@@ -88,7 +118,6 @@
                             review</a>
                         <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
                     </td>
-                    <td><a class="btn btn-warning">Cancel</a></td>
 
                 </tr>
             </table>

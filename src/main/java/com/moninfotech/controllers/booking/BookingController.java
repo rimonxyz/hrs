@@ -58,9 +58,15 @@ public class BookingController {
 
         // find booking list by role
         List<Booking> bookingList = this.bookingService.findBookings(currentUser, page, size);
+        List<Room> todaysBookedRoomList = this.bookingService.findFilteredRoomList(currentUser,new Date());
+        List<Room> todaysPlacedRoomList = this.bookingService.findFilteredRoomListByPlacementDateDistinct(currentUser,new Date());
 
         model.addAttribute("bookingHelper", new BookingHelper());
+        model.addAttribute("todaysDate", DateUtils.getParsableDateFormat().format(new Date()));
         model.addAttribute("bookingList", bookingList);
+        model.addAttribute("todaysPlacedRoomList", todaysPlacedRoomList);
+        model.addAttribute("todaysPlacedRoomListSize", this.bookingService.findFilteredRoomListByPlacementDate(currentUser,new Date()).size());
+        model.addAttribute("bookedRoomList", todaysBookedRoomList);
         model.addAttribute("template", "fragments/booking/all");
         return "adminlte/index";
     }

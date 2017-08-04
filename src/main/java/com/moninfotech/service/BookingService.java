@@ -54,5 +54,16 @@ public interface BookingService {
      */
     List<Booking> findBookings(User currentUser, Integer page, Integer size);
 
+    // returns filtered booking list by booking creation type
     List<Booking> findFiltered(User currentUser, boolean isManual);
+
+    // returns all of the booking list which order is placed today
+    List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date);
+
+    // returns all of the booking list (Distinct) which order is placed today
+    List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser, Date date);
+
+    // returns all rooms that are booked on current day
+    List<Room> findFilteredRoomList(User currentUser, Date date);
+
 }

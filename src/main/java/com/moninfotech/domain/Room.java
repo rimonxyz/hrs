@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by sayemkcn on 3/21/17.
@@ -81,7 +82,7 @@ public class Room extends BaseEntity {
         return discount;
     }
 
-    public int getDiscount(){
+    public int getDiscount() {
         return discount;
     }
 
@@ -136,6 +137,40 @@ public class Room extends BaseEntity {
                 return true;
         }
         return false;
+    }
+
+    // returns booking dates(String) for that room placed on today
+    public String getBookingDatesString(boolean placedToday) {
+        return this.getBookingDates(placedToday).stream()
+                .map(date -> DateUtils.getReadableDateFormat().format(date))
+                .collect(Collectors.joining(" | "));
+    }
+
+    // returns booking dates for that room placed on today
+    public List<Date> getBookingDates(boolean placedToday) {
+        List<Date> dateList = new ArrayList<>();
+        for (Booking booking : this.bookingList) {
+            if (placedToday) {
+                // filter bookings of this room by todays date
+                if (DateUtils.isSameDay(booking.getCreated(), new Date())) {
+                    dateList.addAll(this.getBookingDates(this, booking));
+                }
+            } else {
+                dateList = this.getBookingDates(this, booking);
+            }
+        }
+        return dateList;
+    }
+
+    private List<Date> getBookingDates(Room room, Booking booking) {
+        List<Date> dateList = new ArrayList<>();
+        for (int i = 0; i < booking.getRoomList().size() && i < booking.getBookingDateList().size(); i++) {
+            // if this rooms are same
+            if (room.getId().equals(booking.getRoomList().get(i).getId())) {
+                dateList.add(booking.getBookingDateList().get(i));
+            }
+        }
+        return dateList;
     }
 
     public List<Integer> getDaysCurrentMonth() {

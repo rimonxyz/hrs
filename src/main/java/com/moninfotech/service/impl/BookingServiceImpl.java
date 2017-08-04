@@ -3,10 +3,8 @@ package com.moninfotech.service.impl;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.SortAttributes;
-import com.moninfotech.domain.Booking;
-import com.moninfotech.domain.Hotel;
-import com.moninfotech.domain.Room;
-import com.moninfotech.domain.User;
+import com.moninfotech.commons.Utils;
+import com.moninfotech.domain.*;
 import com.moninfotech.repository.BookingRepository;
 import com.moninfotech.service.BookingService;
 import com.moninfotech.service.HotelService;
@@ -190,6 +188,40 @@ public class BookingServiceImpl implements BookingService {
                 .stream()
                 .filter(booking -> booking.isManualBooking() == isManual)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date) {
+        List<Booking> bookingList = this.findBookings(currentUser, null, null);
+        List<Room> roomList = new ArrayList<>();
+        for (Booking booking:bookingList){
+            if (DateUtils.isSameDay(booking.getCreated(),date))
+                roomList.addAll(booking.getRoomList());
+        }
+        return roomList;
+    }
+
+    @Override
+    public List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser,Date date){
+        return this.findFilteredRoomListByPlacementDate(currentUser,date).stream()
+                .filter(Utils.distinctByKey(BaseEntity::getId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Room> findFilteredRoomList(User currentUser, Date date) {
+        List<Booking> bookingList = this.findBookings(currentUser, null, null);
+
+        List<Room> bookedRooms = new ArrayList<>();
+        for (Booking booking : bookingList) {
+            List<Room> roomList = booking.getRoomList();
+            List<Date> bookingDateList = booking.getBookingDateList();
+            for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++) {
+                if (DateUtils.isSameDay(bookingDateList.get(i), date))
+                    bookedRooms.add(roomList.get(i));
+            }
+        }
+        return bookedRooms;
     }
 
 }

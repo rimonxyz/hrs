@@ -298,6 +298,30 @@
                 show: false
             }
         });
+        var donutDataCosts = [
+            {label: "Total Cost", data: $("#totalCost").text(), color: "red"},
+            {label: "Total Discount", data: $("#totalDiscount").text(), color: "#00c0ef"},
+            {label: "Total Paid", data: $("#totalPaid").text(), color: "#00a65a"}
+        ];
+        $.plot("#donut-chart-booking-cost", donutDataCosts, {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    innerRadius: 0.5,
+                    label: {
+                        show: true,
+                        radius: 2 / 3,
+                        formatter: labelFormatter,
+                        threshold: 0.1
+                    }
+
+                }
+            },
+            legend: {
+                show: false
+            }
+        });
         /*
          * END DONUT CHART
          */
