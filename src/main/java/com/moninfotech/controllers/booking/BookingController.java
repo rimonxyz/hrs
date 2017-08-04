@@ -61,6 +61,8 @@ public class BookingController {
         List<Room> todaysBookedRoomList = this.bookingService.findFilteredRoomList(currentUser,new Date());
         List<Room> todaysPlacedRoomList = this.bookingService.findFilteredRoomListByPlacementDateDistinct(currentUser,new Date());
 
+        // find total placement price and count
+
         model.addAttribute("bookingHelper", new BookingHelper());
         model.addAttribute("todaysDate", DateUtils.getParsableDateFormat().format(new Date()));
         model.addAttribute("bookingList", bookingList);

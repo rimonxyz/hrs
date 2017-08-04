@@ -27,7 +27,7 @@
                 <span class="info-box-number">
                     <span th:text="${autoBookingList?.size()}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
                     <span>
-                        <span th:text="${autoBookingList?.size()*100/totalBookingList?.size()}">100</span><small>%</small>
+                        <span th:if="${totalBookingList?.size()!=0}" th:text="${autoBookingList?.size()*100/totalBookingList?.size()}">100</span><small>%</small>
                     </span>
                 </span>
             </div>
@@ -49,7 +49,7 @@
                 <span class="info-box-number">
                     <span th:text="${manualBookingList?.size()}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
                     <span>
-                        <span th:text="${manualBookingList?.size()*100/totalBookingList?.size()}">100</span><small>%</small>
+                        <span th:if="${totalBookingList?.size()!=0}" th:text="${manualBookingList?.size()*100/totalBookingList?.size()}">100</span><small>%</small>
                     </span>
                 </span>
             </div>
@@ -119,7 +119,7 @@
                 <span class="info-box-number">
                     <span th:text="${bookingHelper.getTotalPaid(autoBookingList)}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
                     <span>
-                        <span th:text="${bookingHelper.getTotalPaid(autoBookingList)*100/bookingHelper.getTotalPaid(totalBookingList)}">100</span><small>%</small>
+                        <span th:if="${bookingHelper.getTotalPaid(totalBookingList)!=0}" th:text="${bookingHelper.getTotalPaid(autoBookingList)*100/bookingHelper.getTotalPaid(totalBookingList)}">100</span><small>%</small>
                     </span>
                 </span>
             </div>
@@ -141,7 +141,7 @@
                 <span class="info-box-number">
                     <span th:text="${bookingHelper.getTotalPaid(manualBookingList)}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
                     <span>
-                        <span th:text="${bookingHelper.getTotalPaid(manualBookingList)*100/bookingHelper.getTotalPaid(totalBookingList)}">100</span><small>%</small>
+                        <span th:if="${bookingHelper.getTotalPaid(totalBookingList)!=0}" th:text="${bookingHelper.getTotalPaid(manualBookingList)*100/bookingHelper.getTotalPaid(totalBookingList)}">100</span><small>%</small>
                     </span>
                 </span>
             </div>
