@@ -83,7 +83,7 @@
                                 <h5 class="widget-user-desc">
 
                         <span th:if="${bookedIds?.contains(room?.id)}">
-                            <kbd th:if="${!filterType.equals('category')}">Booked!</kbd>
+                            <kbd th:if="${filterType != null and !filterType.equals('category')}">Booked!</kbd>
                         </span>
                                     <span th:unless="${bookedIds?.contains(room?.id)}"><kbd>Available</kbd></span>
 

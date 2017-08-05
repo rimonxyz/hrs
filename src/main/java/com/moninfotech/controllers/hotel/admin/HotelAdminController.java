@@ -185,6 +185,7 @@ public class HotelAdminController {
         model.addAttribute("roomList", roomList);
         model.addAttribute("categoryList", this.categoryService.findAll());
         model.addAttribute("bookedIds", bookedIds);
+        model.addAttribute("filterType", filterType);
         model.addAttribute("filterValue", value);
 
         model.addAttribute("template", "fragments/room/admin/all");
