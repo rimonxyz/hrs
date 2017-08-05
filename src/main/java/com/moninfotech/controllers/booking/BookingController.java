@@ -51,16 +51,17 @@ public class BookingController {
     private String myBookings(@CurrentUser User currentUser,
                               @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                               @RequestParam(value = "size", required = false, defaultValue = "10") Integer size,
-                              Model model) {
-//        if (page == null || page < 0) page = 0;
-//        if (size == null || !(size > 0)) size = 10;
-//        if (user == null) return "redirect:/login";
+                              @RequestParam(value = "filterType",required = false,defaultValue = "") String filterType,
+                              @RequestParam(value = "filterValue",required = false,defaultValue = "") String filterValue,
+                              Model model) throws ParseException {
 
         // find booking list by role
         List<Booking> bookingList = this.bookingService.findBookings(currentUser, page, size);
         List<Room> todaysBookedRoomList = this.bookingService.findFilteredRoomList(currentUser,new Date());
         List<Room> todaysPlacedRoomList = this.bookingService.findFilteredRoomListByPlacementDateDistinct(currentUser,new Date());
 
+        if (!filterType.isEmpty() && !filterValue.isEmpty())
+            bookingList = this.bookingService.filterBookingList(bookingList,filterType,filterValue);
         // find total placement price and count
 
         model.addAttribute("bookingHelper", new BookingHelper());
@@ -69,6 +70,8 @@ public class BookingController {
         model.addAttribute("todaysPlacedRoomList", todaysPlacedRoomList);
         model.addAttribute("todaysPlacedRoomListSize", this.bookingService.findFilteredRoomListByPlacementDate(currentUser,new Date()).size());
         model.addAttribute("bookedRoomList", todaysBookedRoomList);
+        model.addAttribute("hotelList",this.hotelService.findAll());
+
         model.addAttribute("template", "fragments/booking/all");
         return "adminlte/index";
     }

@@ -8,4 +8,6 @@ public class FilterType {
     public static final String CATEGORY = "category";
     public static final String STAR = "star";
     public static final String PRICE = "price";
+
+    public static final String HOTEL_NAME = "hotelName";
 }

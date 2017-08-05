@@ -22,8 +22,17 @@ import java.util.stream.Collectors;
  */
 @Service
 public class HotelServiceImpl implements HotelService {
+    private final HotelRepository hotelRepo;
+
     @Autowired
-    private HotelRepository hotelRepo;
+    public HotelServiceImpl(HotelRepository hotelRepo) {
+        this.hotelRepo = hotelRepo;
+    }
+
+    @Override
+    public List<Hotel> findAll() {
+        return this.hotelRepo.findAll();
+    }
 
     // returns all hotels paginated
     @Override

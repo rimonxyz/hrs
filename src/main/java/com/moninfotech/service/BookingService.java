@@ -6,6 +6,7 @@ import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -65,5 +66,7 @@ public interface BookingService {
 
     // returns all rooms that are booked on current day
     List<Room> findFilteredRoomList(User currentUser, Date date);
+
+    List<Booking> filterBookingList(List<Booking> bookingList, String filterType, String filterValue) throws ParseException;
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface HotelService {
     // returns all hotels paginated
+    List<Hotel> findAll();
     List<Hotel> findAll(int page, int size, String sortBy, boolean isDesc);
 
     // save a hotel

@@ -4,6 +4,7 @@ import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.Utils;
+import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.*;
 import com.moninfotech.repository.BookingRepository;
 import com.moninfotech.service.BookingService;
@@ -194,16 +195,16 @@ public class BookingServiceImpl implements BookingService {
     public List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date) {
         List<Booking> bookingList = this.findBookings(currentUser, null, null);
         List<Room> roomList = new ArrayList<>();
-        for (Booking booking:bookingList){
-            if (DateUtils.isSameDay(booking.getCreated(),date))
+        for (Booking booking : bookingList) {
+            if (DateUtils.isSameDay(booking.getCreated(), date))
                 roomList.addAll(booking.getRoomList());
         }
         return roomList;
     }
 
     @Override
-    public List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser,Date date){
-        return this.findFilteredRoomListByPlacementDate(currentUser,date).stream()
+    public List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser, Date date) {
+        return this.findFilteredRoomListByPlacementDate(currentUser, date).stream()
                 .filter(Utils.distinctByKey(BaseEntity::getId))
                 .collect(Collectors.toList());
     }
@@ -222,6 +223,24 @@ public class BookingServiceImpl implements BookingService {
             }
         }
         return bookedRooms;
+    }
+
+    @Override
+    public List<Booking> filterBookingList(List<Booking> bookingList, String filterType, String filterValue) throws ParseException {
+        if (bookingList == null || bookingList.isEmpty() || filterType == null || filterType.isEmpty() || filterValue == null || filterValue.isEmpty())
+            return bookingList;
+
+        if (filterType.equals(FilterType.HOTEL_NAME)) {
+            return bookingList.stream()
+                    .filter(booking -> booking.getHotel().getName().equals(filterValue))
+                    .collect(Collectors.toList());
+        }else if (filterType.equals(FilterType.DATE)){
+            Date filterDate = DateUtils.getParsableDateFormat().parse(filterValue);
+            return bookingList.stream()
+                    .filter(booking -> DateUtils.isSameDay(booking.getCreated(),filterDate))
+                    .collect(Collectors.toList());
+        }
+        return bookingList;
     }
 
 }
