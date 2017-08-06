@@ -407,6 +407,8 @@ a:focus, a:hover {
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     color:#4CAF50;
+    background-color: rgba(0, 0, 0, 0.24) ! important;
+    color: #fff ! important;
 }
 .nav > li > a,.agile_short_dropdown li a {
 }

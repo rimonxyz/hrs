@@ -37,11 +37,13 @@
                                 <input name="discount" id="discountEdit" th:value="${room?.getDiscount()}"  class="form-control" type="number" placeholder="Discount"></input>
                             </div>
                             <div id="select_category" th:if="${categoryList!=null and !categoryList?.isEmpty()}">
+                                <label for="categoryIdsEdit">Category</label>
                                 <select id="categoryIdsEdit" name="category.id" class="wow fadeInDown animated" class="form-control">
                                     <option th:each="cat : ${categoryList}" th:value="${cat.id}" th:text="${cat.name}" th:selected="${room?.category?.id==cat?.id}"></option>
                                     <!--<option th:value="Dummy">Dummy 2</option>-->
                                 </select>
-                            </div>
+                            </div><br/>
+
                             <div class="form-group">
                                 <label for="image1">Image 1</label>
                                 <input name="images" id="image1" type="file">
@@ -65,6 +67,9 @@
                             </div>
 
                             <!--FASCILITIES-->
+                            <div class="form-group">
+                                <label>Fascilities</label>
+                            </div><hr/>
                             <div class="col-md-6 form-left" data-wow-delay=".5s">
                                 <input name="facilities.frontFace" class="checkbox" id="fascFrontFaceEdit" type="checkbox">With Front Face?</input>
                             </div>

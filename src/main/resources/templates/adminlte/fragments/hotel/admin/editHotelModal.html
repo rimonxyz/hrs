@@ -21,8 +21,8 @@
                                 <input class="form-control" name="name" id="hotelNameEdit" type="text" placeholder="Hotel Name" required="required"></input>
                             </div>
                             <div class="form-group">
-                                <label for="star">Star</label>
-                                <select id="star" class="form-control" name="star">
+                                <label for="starEdit">Star</label>
+                                <select id="starEdit" class="form-control" name="star">
                                     <option th:value="1">1 Star</option>
                                     <option th:value="2">2 Star</option>
                                     <option th:value="3">3 Star</option>
@@ -31,7 +31,15 @@
                                 </select>
                             </div>
 
-                            <hr/><span>Hotel Address</span><hr/>
+                            <div class="form-group">
+                                <label for="typeEdit">Type</label>
+                                <select id="typeEdit" class="form-control" name="type">
+                                    <option th:value="Hotel">Hotel</option>
+                                    <option th:value="Ship">Ship</option>
+                                </select>
+                            </div>
+
+                            <hr/><span><b>Hotel Address</b></span><hr/>
                             <div class="form-group" id="address">
                                 <div class="col-sm-6 form-group">
                                     <label for="addressCountryEdit">Country</label>
@@ -54,7 +62,8 @@
                                     <input name="address.area" class="form-control" id="addressAreaEdit" type="text" placeholder="Area" required="required"></input>
                                 </div>
                             </div>
-                            <hr/><span>Extra</span><hr/>
+
+                            <hr/><span><b>Extra</b></span><hr/>
                             <div class="form-group">
                                 <label for="phoneNumberEdit">Phone Number</label>
                                 <input name="phoneNumber" class="form-control" id="phoneNumberEdit" type="text" placeholder="Phone"

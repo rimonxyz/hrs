@@ -1,5 +1,6 @@
 package com.moninfotech.service.impl;
 
+import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
@@ -37,7 +38,7 @@ public class HotelServiceImpl implements HotelService {
     // returns all hotels paginated
     @Override
     public List<Hotel> findAll(int page, int size, String sortBy, boolean isDesc) {
-        if (sortBy == null || sortBy.isEmpty()) sortBy = Constants.FIELD_ID;
+        if (sortBy == null || sortBy.isEmpty()) sortBy = SortAttributes.FIELD_ID;
         if (isDesc)
             return this.hotelRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, sortBy)).getContent();
         return this.hotelRepo.findAll(new PageRequest(page, size, Sort.Direction.ASC, sortBy)).getContent();
@@ -121,6 +122,13 @@ public class HotelServiceImpl implements HotelService {
             System.out.println("filterHotels(List<Hotel> hotelList, String filterType, String value): " + e.toString());
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public List<Hotel> filterHotels(List<Hotel> hotelList, String type) {
+        return hotelList.stream()
+                .filter(hotel -> hotel.getType().equals(type))
+                .collect(Collectors.toList());
     }
 
     @Override

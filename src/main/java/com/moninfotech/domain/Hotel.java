@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class Hotel extends BaseEntity {
     private String name;
     private String description;
     private String phoneNumber;
+    private String type;
     private byte star;
     @Column(length = 1000000)
     @JsonIgnore
@@ -34,21 +36,30 @@ public class Hotel extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-    public float getAverageRating(){
-        if (reviewList==null) return 0f;
-        float sum = (float) this.reviewList.stream()
-                .mapToDouble(review->review.getRating())
-                .sum();
-        return sum/this.reviewList.size();
+    public static final class Type {
+        private Type() {
+        }
+
+        public static final String HOTEL = "Hotel";
+        public static final String SHIP = "Ship";
     }
 
-    public int getNumberOfAcRooms(){
+    public float getAverageRating() {
+        if (reviewList == null) return 0f;
+        float sum = (float) this.reviewList.stream()
+                .mapToDouble(review -> review.getRating())
+                .sum();
+        return sum / this.reviewList.size();
+    }
+
+    public int getNumberOfAcRooms() {
         return (int) this.roomList.stream()
                 .filter(room -> room.getFacilities().isAirConditioned())
                 .count();
     }
-    public int getNumberOfNonAcRooms(){
-        return this.roomList.size()-this.getNumberOfAcRooms();
+
+    public int getNumberOfNonAcRooms() {
+        return this.roomList.size() - this.getNumberOfAcRooms();
     }
 
     public boolean hasUnbookedRoom(Date date) {
@@ -140,15 +151,6 @@ public class Hotel extends BaseEntity {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "Hotel{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                "} " + super.toString();
-    }
-
     public List<Booking> getBookingList() {
         return bookingList;
     }
@@ -163,5 +165,30 @@ public class Hotel extends BaseEntity {
 
     public void setStar(byte star) {
         this.star = star;
+    }
+
+    public String getType() {
+        return type == null ? Type.HOTEL : type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", type='" + type + '\'' +
+                ", star=" + star +
+                ", image=" + Arrays.toString(image) +
+                ", address=" + address +
+                ", roomList=" + roomList +
+                ", reviewList=" + reviewList +
+                ", bookingList=" + bookingList +
+                ", user=" + user +
+                '}';
     }
 }

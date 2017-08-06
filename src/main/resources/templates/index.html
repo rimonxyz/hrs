@@ -156,15 +156,43 @@
                 <nav class="cl-effect-13" id="cl-effect-13">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Why us</a></li>
-                        <li class="active"><a th:href="@{/hotels}">Hotels</a></li>
-                        <li class="active"><a href="#">Ships</a></li>
+                        <li class="dropdown">
+                            <a th:href="@{/hotels}" class="dropdown-toggle" data-toggle="dropdown">Hotels<b
+                                    class="caret"></b></a>
+                            <ul class="dropdown-menu agile_short_dropdown">
+                                <li><a th:href="@{/hotels}">All Hotels</a></li>
+                                <li><a th:href="@{/hotels?query=Cox}">Cox’s Bazar</a></li>
+                                <li><a th:href="@{/hotels?query=Martins}">Saint Martin</a></li>
+                                <li><a th:href="@{/hotels?query=Bandarban}">Bandarban</a></li>
+                                <li><a th:href="@{/hotels?query=Rangamati}">Rangamati</a></li>
+                                <li><a th:href="@{/hotels?query=Khagra}">Khagrachari</a></li>
+                                <li><a th:href="@{/hotels?query=Sylhet}">Sylhet</a></li>
+                                <li><a th:href="@{/hotels?query=Srimangal}">Srimangal</a></li>
+                                <li><a th:href="@{/hotels?query=Khulna}">Khulna</a></li>
+                            </ul>
+                        </li>
+                        <!--<li class="active"><a th:href="@{/hotels}">Hotels</a></li>-->
+                        <li class="dropdown">
+                            <a th:href="@{/ships}" class="dropdown-toggle" data-toggle="dropdown">Ships<b
+                                    class="caret"></b></a>
+                            <ul class="dropdown-menu agile_short_dropdown">
+                                <li><a th:href="@{/ships}">All Ships</a></li>
+                                <li><a th:href="@{/ships?query=Keari Sindbad}">Keari Sindbad</a></li>
+                                <li><a th:href="@{/ships?query=Keari Cruise}">Keari Cruise &amp; Dine</a></li>
+                                <li><a th:href="@{/ships?query=Kutubdia}">L.C.T. Kutubdia</a></li>
+                                <li><a th:href="@{/ships?query=Bangali}">M.V. Bangali</a></li>
+                                <li><a th:href="@{/ships?query=Bay Cruiser}">M.V. Bay Cruiser-1</a></li>
+                            </ul>
+                        </li>
                         <li class="active"><a href="#">Holidays</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Services<b
                                     class="caret"></b></a>
                             <ul class="dropdown-menu agile_short_dropdown">
-                                <li><a href="https://www.facebook.com/groups/intelligenttouristaid" class="scroll">Conference & Events</a></li>
-                                <li><a href="https://www.facebook.com/groups/intelligenttouristaid" class="scroll">Car & Bus</a></li>
+                                <li><a href="https://www.facebook.com/groups/intelligenttouristaid" class="scroll">Conference
+                                    & Events</a></li>
+                                <li><a href="https://www.facebook.com/groups/intelligenttouristaid" class="scroll">Car &
+                                    Bus</a></li>
                                 <li><a href="#" class="scroll">Group Booking</a></li>
                             </ul>
                         </li>
@@ -173,21 +201,16 @@
                         <li sec:authorize="!isAuthenticated()"><a th:href="@{/registration}"
                                                                   class="scroll">Registration</a></li>
                         <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
-                        <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"><a th:href="@{/hotel/rooms}">My
-                            Hotel</a></li>
-                        <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/bookings}">My Bookings</a></li>
-                        <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}">Admin Dashboard</a>
-                        </li>
+                        <!--<li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"><a th:href="@{/hotel/rooms}">My-->
+                        <!--Hotel</a></li>-->
+                        <!--<li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/bookings}">My Bookings</a></li>-->
+                        <!--<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}">Admin Dashboard</a>-->
+                        <!--</li>-->
                         <li sec:authorize="isAuthenticated()" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                sec:authentication="principal.name"><b class="caret"></b></a>
                             <ul class="dropdown-menu agile_short_dropdown">
-                                <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/dashboard}">Dashboard</a></li>
-                                <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/bookings}">My Bookings</a></li>
-                                <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"><a th:href="@{/hotel/rooms}">My
-                                    Hotel</a></li>
-                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}">Admin Dashboard</a>
-                                </li>
+                                <li><a th:href="@{/dashboard}">Dashboard</a></li>
                                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a>
                                 </li>
                             </ul>
@@ -222,30 +245,34 @@
                 <div class="tm_pb_slide_content" style="margin-top:35px;">
                     <p style="text-align: center;">
                         <img class="aligncenter size-full wp-image-854"
-                             th:src="@{/images/hotelswavelogo.jpg}"
+                             th:src="@{/images/hotelswavelogo.png}"
                              alt="" width="430" height="150"/>
 
                     </p>
 
                     <div class="tm_pb_text_4" style="margin-top:15px; color:white;">
-                        <div class="subscribe-block__message">Find your hotel for the best price
+                        <div class="subscribe-block__message" style="color: #000;">Find your hotel for the best price
                         </div>
                     </div>
 
 
                     <!-- search option -->
                     <div class="container">
-                        <form th:action="@{/search}" method="get"class="subscribe-block__form">
+                        <form th:action="@{/search}" method="get" class="subscribe-block__form">
                             <datalist id="places">
-                                <option th:each="area : ${areaList}" th:value="${area}" th:text="${area}">Coxs Bazar</option>
+                                <option th:each="area : ${areaList}" th:value="${area}" th:text="${area}">Coxs Bazar
+                                </option>
                                 <!--<option th:value="chaal">Saint Martins</option>-->
                             </datalist>
                             <div class="showing-form">
-                                <div class="label">Enter a Location:</div>
+                                <div class="label" style="color: #000;"><b>Enter a Location:</b></div>
                                 <input style="margin-top: 20px;margin-bottom:10px;height: 50px; width: 350px;"
-                                       type="text" class="form-control" id="place" name="query" list="places" required="required">
+                                       type="text" class="form-control" id="place" name="query" list="places"
+                                       required="required">
                                 <div class="mphb_sc_search-submit-button-wrapper">
-                                    <button type="submit" class="btn btn-primary-outline"><i style="margin-right: 10px;" class="glyphicon glyphicon-search"></i>Search</button>
+                                    <button type="submit" class="btn btn-primary-outline"><i style="margin-right: 10px;"
+                                                                                             class="glyphicon glyphicon-search"></i>Search
+                                    </button>
                                 </div>
                             </div>
 
@@ -268,9 +295,9 @@
 
             <!--<div class="welcomeLogo col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">-->
 
-                <!--<div>-->
-                    <!--<img th:src="@{/images/award.png}" alt="award" title="award" width="100%"/>-->
-                <!--</div>-->
+            <!--<div>-->
+            <!--<img th:src="@{/images/award.png}" alt="award" title="award" width="100%"/>-->
+            <!--</div>-->
             <!--</div>-->
             <!-- .tm_pb_column -->
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -279,7 +306,8 @@
                 <div class="welcomeTitle">
                     <div class="h2-style tm_pb_title__super-title">Why us</div>
                     <div class="h1-style tm_pb_title__title">Largest and easiest complete online hotel booking
-                        platform</div>
+                        platform
+                    </div>
                 </div>
                 <!-- .tm_pb_title -->
                 <hr class="tm_pb_module tm_pb_space tm_pb_divider_1">
@@ -294,17 +322,22 @@
                     </p>
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            &nbsp;<a data-toggle="collapse" href="#collapse1" style="color: blue;">Why hotelswave.com is different?</a>
+                            &nbsp;<a data-toggle="collapse" href="#collapse1" style="color: blue;">Why hotelswave.com is
+                            different?</a>
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse">
                         <ul class="list-group" style="padding: 20px;">
                             <li class="list-group-item">Showing desired rooms’ availability on any particular date.</li>
                             <li class="list-group-item">Price updates of different rooms on different dates.</li>
-                            <li class="list-group-item">Easy payment system through Bkash, Rocket, Credit/Debit Card or Cash.</li>
+                            <li class="list-group-item">Easy payment system through Bkash, Rocket, Credit/Debit Card or
+                                Cash.
+                            </li>
                             <li class="list-group-item">Exclusive discount on group booking.</li>
                             <li class="list-group-item">Providing instant booking confirmation copy on payment.</li>
-                            <li class="list-group-item">Decide by comparing guest reviews &amp; facilities among hundreds of hotels.</li>
+                            <li class="list-group-item">Decide by comparing guest reviews &amp; facilities among
+                                hundreds of hotels.
+                            </li>
                             <li class="list-group-item">Pointing hotels location on Google map.</li>
                             <li class="list-group-item">Indicating Hotel’s distance from important spots.</li>
                             <li class="list-group-item">Android apps.</li>
@@ -317,7 +350,8 @@
                     <p>
                         For standard quality service in case of hotel booking, you can always choose
                         Hotelswave.com.
-                        Please go through our website and <a href="https://www.facebook.com/hotelswave">facebook page</a> for details
+                        Please go through our website and <a href="https://www.facebook.com/hotelswave">facebook
+                        page</a> for details
                     </p>
                 </div>
                 <!-- .tm_pb_text -->
@@ -497,8 +531,7 @@
             <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
                 <ul class="resp-tabs-list wow fadeInUp animated animated" data-wow-delay=".7s"
                     style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-                    <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab"><span>All</span>
-                    </li>
+                    <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab"><span>All</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Coxs Bazar</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Saint Martins</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-3" role="tab"><span>Bandarbans</span></li>
@@ -836,8 +869,10 @@
                                 <div class="row row-edge row-style-light">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <p>Our company is the largest and easiest complete online hotel booking
-                                            website. It runs with the slogan of &quot;Easy Booking&quot;. You can book your desired
-                                            rooms yourself by analyzing price &amp; facilities with available date from various
+                                            website. It runs with the slogan of &quot;Easy Booking&quot;. You can book
+                                            your desired
+                                            rooms yourself by analyzing price &amp; facilities with available date from
+                                            various
                                             hotels of an area.</p>
                                     </div>
                                 </div>
@@ -1024,7 +1059,8 @@
 
 
     <div class="col-md-6 contact-left">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.273833243833!2d90.3817477148468!3d23.73761259518198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8c80ca23e0d%3A0x8f11a59195a58c5c!2sKhan+Plaza!5e0!3m2!1sen!2sbd!4v1502007951445" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.273833243833!2d90.3817477148468!3d23.73761259518198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8c80ca23e0d%3A0x8f11a59195a58c5c!2sKhan+Plaza!5e0!3m2!1sen!2sbd!4v1502007951445"
+                width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>
 </div>
 <!-- end location and map -->
@@ -1053,8 +1089,9 @@
             <li><i class="fa fa-envelope fa-lg"></i><a href="mailto:nazmuldipu@gmail.com"> admin@gmail.com</a></li>
         </div>
         <div class="col-md-12 footerName">
-            <br/><br/><h5>Copyrights © 2017 MonInfoTech. All rights reserved | Design by <a href="http://www.moninfotech.com/">MonInfoTech</a>
-            </h5>
+            <br/><br/><h5>Copyrights © 2017 MonInfoTech. All rights reserved | Design by <a
+                href="http://www.moninfotech.com/">MonInfoTech</a>
+        </h5>
         </div>
     </div>
     <a href="#" id="toTop" style="display: block;"><span id="toTopHover"></span><span id="toTopHover"

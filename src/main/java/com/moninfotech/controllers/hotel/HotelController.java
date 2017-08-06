@@ -40,9 +40,10 @@ public class HotelController {
 
     // Get All Hotels paginated
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String all(@RequestParam(value = "query", required = false) String query,
+    public String all(@RequestParam(value = "query", required = false) String query,
+                       @RequestParam(value = "type",required = false, defaultValue = Hotel.Type.HOTEL) String type,
                        @RequestParam(value = "page", required = false) Integer page,
-                       @RequestParam(value = "sortBy", required = false) String soryBy,
+                       @RequestParam(value = "sortBy", required = false) String sortBy,
                        @RequestParam(value = "isDesc", required = false) boolean isDesc,
                        @RequestParam(value = "filterType", required = false) String filterType,
                        @RequestParam(value = "filterValue", required = false) String filterValue,
@@ -57,10 +58,14 @@ public class HotelController {
                 hotelList = this.hotelService.findByNameContaining(query);
         } else {
             // else find all hotel
-            hotelList = hotelService.findAll(page, 10, soryBy, isDesc);
+            hotelList = hotelService.findAll(page, 10, sortBy, isDesc);
         }
+        // filter hotels if filter exists
         if (filterType != null && !filterType.isEmpty() && filterValue != null && !filterValue.isEmpty())
             hotelList = this.hotelService.filterHotels(hotelList, filterType, filterValue);
+
+        // filter by type
+            hotelList = this.hotelService.filterHotels(hotelList,type);
 
         model.addAttribute("isDesc", !isDesc);
         if (filterValue != null)

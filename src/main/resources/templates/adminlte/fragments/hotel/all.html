@@ -55,10 +55,6 @@
                                         </option>
                                         <option th:value="5" th:selected="${filterValue?.equals('5')}">5 Star
                                         </option>
-                                        <option th:value="6" th:selected="${filterValue?.equals('6')}">6 Star
-                                        </option>
-                                        <option th:value="7" th:selected="${filterValue?.equals('7')}">7 Star
-                                        </option>
                                     </select>
                                 </form>
                             </div>
@@ -125,14 +121,6 @@
                             <th>
                                 <h3>Address</h3>
                             </th>
-                            <th>
-                                <i>
-                                    <i th:if="${isDesc}" class="glyphicon glyphicon-chevron-down"></i>
-                                    <i th:if="${!isDesc}" class="glyphicon glyphicon-chevron-up"></i>
-                                    <h3><a th:href="@{/hotels?sortBy=phoneNumber&amp;isDesc=}+${isDesc}">Contact</a>
-                                    </h3>
-                                </i>
-                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -148,15 +136,13 @@
                                     <h3>
                                         <a th:href="@{/hotels/}+${hotel?.id}" th:text="${hotel?.name}"></a>
                                     </h3>
-                                </i><br/>
+                                </i>
+                                <h4><kbd th:text="${hotel?.type}"></kbd></h4>
                                 <h4 th:text="${hotel?.description}">info@moninfotech.com</h4>
                             </td>
                             <td>
                                 <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
                                 <h5 th:text="${hotel?.address?.getCommaSeperatedString()}"></h5>
-                            </td>
-                            <td><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
-                                <h4 th:text="${hotel?.phoneNumber}"></h4>
                             </td>
                         </tr>
                         </tbody>

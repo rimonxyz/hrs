@@ -33,11 +33,14 @@
                                 <input name="discount" id="discount" class="form-control" type="number" placeholder="Discount"></input>
                             </div>
                             <div id="select_category" th:if="${categoryList!=null and !categoryList?.isEmpty()}">
-                                <select name="category.id" class="wow fadeInDown animated" class="form-control">
+                                <label for="category">Category</label>
+                                <select id="category" name="category.id" class="wow fadeInDown animated" class="form-control">
                                     <option th:each="cat : ${categoryList}" th:value="${cat.id}" th:text="${cat.name}"></option>
                                     <!--<option th:value="Dummy">Dummy 2</option>-->
                                 </select>
-                            </div>
+                            </div><br/>
+
+                            <!--IMAGES-->
                             <div class="form-group">
                                 <label for="image1">Image 1</label>
                                 <input name="images" id="image1" type="file">
@@ -58,9 +61,12 @@
                             </div>
                             <div class="form-group" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <input hidden="hidden" name="hotelId" id="hotelId" type="text" th:value="${hotel?.id}">
-                            </div>
+                            </div><br/>
 
                             <!--FASCILITIES-->
+                            <div class="form-group">
+                                <label>Fascilities</label>
+                            </div><hr/>
                             <div class="col-md-6 form-left" data-wow-delay=".5s">
                                 <input name="facilities.frontFace" class="checkbox" type="checkbox">With Front Face?</input>
                             </div>

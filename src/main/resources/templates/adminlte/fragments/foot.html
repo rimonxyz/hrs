@@ -511,6 +511,8 @@
                 console.log(result);
                 $("#hotelIdEdit").val(result.id);
                 $("#hotelNameEdit").val(result.name);
+                $("#starEdit").val(result.star);
+                $("#typeEdit").val(result.type);
                 $("#addressCountryEdit").val(result.address.country);
                 $("#addressCityEdit").val(result.address.city);
                 $("#addressDistrictEdit").val(result.address.district);
@@ -541,7 +543,7 @@
 </script>
 
 <script>
-    console.log("LOLOLOL");
+
     $("#starFilter").on("change", function (form) {
         $("#starFilterForm").submit();
     });

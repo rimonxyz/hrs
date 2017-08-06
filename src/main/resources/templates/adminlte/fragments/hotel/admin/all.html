@@ -13,6 +13,7 @@
                         <tr>
                             <td>Image</td>
                             <td>Hotel Name</td>
+                            <td>Type</td>
                             <td>Address</td>
                             <td>Created</td>
                             <td>Last Updated</td>
@@ -31,6 +32,7 @@
                                     <span class="badge badge-warning" th:if="${!hotel?.user?.isEnabled()}">Disabled</span>
                                 </a>
                             </td>
+                            <td><kbd th:text="${hotel?.type}"></kbd></td>
                             <td><span th:text="${hotel?.address?.getCommaSeperatedString()}"></span></td>
                             <td><span th:text="${hotel?.getReadableDateTime(hotel.getCreated())}"></span></td>
                             <td><span th:text="${hotel?.getReadableDateTime(hotel.getLastUpdated())}"></span></td>
