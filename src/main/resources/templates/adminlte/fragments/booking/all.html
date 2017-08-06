@@ -86,70 +86,69 @@
     </div>
 
 
+    <div class="row">
+        <div class="col-sm-12" sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="col-sm-8">
+                        <h3 class="box-title" sec:authorize="hasRole('ROLE_USER')">
+                            <a th:href="@{/bookings}">My Bookings</a>
+                        </h3>
+                        <h3 class="box-title" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a th:href="@{/bookings}">All Bookings</a>
+                        </h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <form class="form" th:action="@{/bookings}" method="get">
+                            <input type="hidden" name="filterType" value="hotelName">
+                            <datalist id="hotels" th:if="${hotelList!=null}">
+                                <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}" th:text="${hotel?.name}"></option>
+                                <!--<option th:value="chaal">Saint Martins</option>-->
+                            </datalist>
+                            <input class="form-control" type="text" name="filterValue" placeholder="Hotel Name" list="hotels">
+                        </form>
+                    </div>
+                </div>
 
-    <div class="row col-sm-12" sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
-        <div class="box">
-            <div class="box-header with-border">
-                <div class="col-sm-8">
-                    <h3 class="box-title" sec:authorize="hasRole('ROLE_USER')">
-                        <a th:href="@{/bookings}">My Bookings</a>
-                    </h3>
-                    <h3 class="box-title" sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{/bookings}">All Bookings</a>
-                    </h3>
-                </div>
-                <div class="col-sm-4">
-                    <form class="form" th:action="@{/bookings}" method="get">
-                        <input type="hidden" name="filterType" value="hotelName">
-                        <datalist id="hotels" th:if="${hotelList!=null}">
-                            <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}" th:text="${hotel?.name}"></option>
-                            <!--<option th:value="chaal">Saint Martins</option>-->
-                        </datalist>
-                        <input class="form-control" type="text" name="filterValue" placeholder="Hotel Name" list="hotels">
-                    </form>
-                </div>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Sl</th>
+                        <th>Hotel Name</th>
+                        <!--<th>Total Rooms</th>-->
+                        <th>Room Rent</th>
+                        <th sec:authorize="hasRole('ROLE_USER')">You Saved</th>
+                        <th>Placed On</th>
+                    </tr>
+                    <tr th:if="${bookingList != null}" th:each="booking,iter : ${bookingList}">
+                        <td th:text="${iter.index+1}"></td>
+                        <td>
+                            <a th:href="@{/bookings/}+${booking?.id}">
+                            <h5 th:text="${booking?.hotel?.name}"></h5>
+                            </a>
+                        </td>
+                        <td th:text="${booking?.getTotalPayableCost()}"></td>
+                        <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
+                        <td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>
+                        <td>
+                            <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
+                            <a class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
+                                review</a>
+                            <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
+                        </td>
+
+                    </tr>
+                </table>
             </div>
-
-            <table class="table table-bordered">
-                <tr>
-                    <th>Sl</th>
-                    <th>Hotel Name</th>
-                    <!--<th>Total Rooms</th>-->
-                    <th>Room Rent</th>
-                    <th sec:authorize="hasRole('ROLE_USER')">You Saved</th>
-                    <th>Placed On</th>
-                </tr>
-                <tr th:if="${bookingList != null}" th:each="booking,iter : ${bookingList}">
-                    <td th:text="${iter.index+1}"></td>
-                    <td>
-                        <a th:href="@{/bookings/}+${booking?.id}">
-                        <h5 th:text="${booking?.hotel?.name}"></h5>
-                        </a>
-                    </td>
-                    <td th:text="${booking?.getTotalPayableCost()}"></td>
-                    <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
-                    <td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>
-                    <td>
-                        <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
-                        <a class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
-                            review</a>
-                        <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
-                    </td>
-
-                </tr>
-            </table>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-    </div>
-
 </section>

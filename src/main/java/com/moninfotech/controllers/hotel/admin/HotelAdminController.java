@@ -104,7 +104,7 @@ public class HotelAdminController {
         hotel.setUser(user);
         // then save hotel
         hotel = this.hotelService.save(hotel);
-        return "redirect:/admin/hotels?message=" + hotel.getName() + " is saved.";
+        return "redirect:/admin/hotels?messageinfo=" + hotel.getName() + " is saved.";
     }
 
     // Edit hotel informations by admin
@@ -139,7 +139,7 @@ public class HotelAdminController {
             // else return with error message
         else return "redirect:/admin/hotels/edit/" + id + "?message=Image is invalid!";
         hotel = this.hotelService.save(hotel);
-        return "redirect:/admin/hotels?message=" + hotel.getName() + " informations are updated!";
+        return "redirect:/admin/hotels?messageinfo=" + hotel.getName() + " informations are updated!";
     }
 
     // Delete entity
