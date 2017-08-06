@@ -74,7 +74,6 @@
                 </div>
             </div>
 
-
         </div>
 
         <div class="col-sm-9">
@@ -95,6 +94,11 @@
             <div class="row">
                 <img class="img img-responsive" style="height: 400px;width: 100%;margin-bottom: 20px;"
                      th:src="@{/hotels/images/}+${hotel?.id}">
+            </div>
+            <div class="row">
+                <p hidden="hidden" id="mapSource">Coxs Bazar</p>
+                <p hidden="hidden" id="mapDestination" th:text="${hotel?.address?.getCommaSeperatedString()}"></p>
+                <iframe id="directionMap" class="col-sm-12" height="300"></iframe>
             </div>
             <!--BOOKING SESSION ITEMS-->
             <div class="row panel panel-primary"

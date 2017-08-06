@@ -19,7 +19,7 @@
                     <ul class="list-group">
                         <li class="list-group-item"><a th:href="@{/reviews}"><h4><b>All Reviews</b></h4></a></li>
                     </ul>
-                    <ul class="list-group">
+                    <ul class="list-group" sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
                         <li class="list-group-item">Reviews by Hotel</li>
                         <li th:each="hotel : ${hotelList}" class="list-group-item">
                             <a th:href="@{/reviews(hotelId=${hotel?.id})}">

@@ -1,4 +1,3 @@
-
 <!-- jQuery 3.1.1 -->
 <script th:src="@{/adminlte/plugins/jQuery/jquery-3.1.1.min.js}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -150,7 +149,7 @@
          */
         //LINE randomly generated data
 
-        var sin = [.2,.5,.4], cos = [.8,.0,.4];
+        var sin = [.2, .5, .4], cos = [.8, .0, .4];
         for (var i = 0; i < 14; i += 0.5) {
             sin.push([i, Math.sin(i)]);
             cos.push([i, Math.cos(i)]);
@@ -463,7 +462,7 @@
 <script>
     $(document).ready(function () {
         var rating = $(".ratingHidden").text();
-        var width = (rating*100)/5 +"%";
+        var width = (rating * 100) / 5 + "%";
         console.log(width);
         $(".ratingProgressBar").width(width);
     });
@@ -480,38 +479,38 @@
         $("#catFilterForm").submit();
     });
     // on click edit room button modal
-    var onRoomItemClick = function(element,roomId){
-        console.log(""+roomId);
+    var onRoomItemClick = function (element, roomId) {
+        console.log("" + roomId);
         $.ajax({
-            url:"/rest/hotel/rooms/"+roomId,
-            success : function (result) {
+            url: "/rest/hotel/rooms/" + roomId,
+            success: function (result) {
                 console.log(result);
-                $("#roomIdEdit").val( roomId );
+                $("#roomIdEdit").val(roomId);
                 $("#roomNumberEdit").val(result.roomNumber);
                 $("#floorNumberEdit").val(result.floorNumber);
                 $("#priceEdit").val(result.price);
                 $("#discountEdit").val(result.discount);
                 $("#categoryIdsEdit").val(result.category.id);
-                $("#fascFrontFaceEdit").prop("checked",result.facilities.frontFace);
-                $("#fascWithCorridorEdit").prop("checked",result.facilities.withCorridor);
-                $("#fascBreakfastEdit").prop("checked",result.facilities.breakfast);
-                $("#fascInternetEdit").prop("checked",result.facilities.internet);
-                $("#fascAirConditionedEdit").prop("checked",result.facilities.airConditioned);
-                $("#fascTvEdit").prop("checked",result.facilities.tv);
-                $("#fascGeyserEdit").prop("checked",result.facilities.geyser);
+                $("#fascFrontFaceEdit").prop("checked", result.facilities.frontFace);
+                $("#fascWithCorridorEdit").prop("checked", result.facilities.withCorridor);
+                $("#fascBreakfastEdit").prop("checked", result.facilities.breakfast);
+                $("#fascInternetEdit").prop("checked", result.facilities.internet);
+                $("#fascAirConditionedEdit").prop("checked", result.facilities.airConditioned);
+                $("#fascTvEdit").prop("checked", result.facilities.tv);
+                $("#fascGeyserEdit").prop("checked", result.facilities.geyser);
             }
         });
     }
 
     // on click edit Hotel button modal
-    var onHotelItemClick = function(element,hotelId){
-        console.log(""+hotelId);
+    var onHotelItemClick = function (element, hotelId) {
+        console.log("" + hotelId);
         $.ajax({
-            url:"/rest/admin/hotels/"+hotelId,
-            success : function (result) {
+            url: "/rest/admin/hotels/" + hotelId,
+            success: function (result) {
                 console.log(result);
                 $("#hotelIdEdit").val(result.id);
-                $("#hotelNameEdit").val( result.name );
+                $("#hotelNameEdit").val(result.name);
                 $("#addressCountryEdit").val(result.address.country);
                 $("#addressCityEdit").val(result.address.city);
                 $("#addressDistrictEdit").val(result.address.district);
@@ -525,14 +524,14 @@
     }
 
     // on click edit Category button modal
-    var onCategoryItemClick = function(element,categoryId){
-        console.log("Category Id: "+categoryId);
+    var onCategoryItemClick = function (element, categoryId) {
+        console.log("Category Id: " + categoryId);
         $.ajax({
-            url:"/rest/categories/"+categoryId,
-            success : function (result) {
+            url: "/rest/categories/" + categoryId,
+            success: function (result) {
                 console.log(result);
                 $("#catIdEdit").val(result.id);
-                $("#catNameEdit").val( result.name );
+                $("#catNameEdit").val(result.name);
                 $("#maxChildNumberEdit").val(result.maxChildNumber);
                 $("#maxAdultNumberEdit").val(result.maxAdultNumber);
             }
@@ -548,6 +547,18 @@
     });
     $("#priceFilter").on("change", function (form) {
         $("#priceFilterForm").submit();
+    });
+
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        var mapSource = $("#mapSource").text();
+        var mapDestination = $("#mapDestination").text();
+        var url = "https://www.google.com/maps/embed/v1/directions?origin=" + mapSource + "&destination=" + mapDestination + ",bd&key=AIzaSyCOCtIc_RrQDlw-zPZm3jaSQ0kWF7oTSic";
+        $("#directionMap").prop("src", url);
+        console.log("URL: "+url);
     });
 
 </script>
