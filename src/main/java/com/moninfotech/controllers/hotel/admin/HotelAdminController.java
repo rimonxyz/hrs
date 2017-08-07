@@ -3,6 +3,7 @@ package com.moninfotech.controllers.hotel.admin;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.FileIO;
+import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.commons.pojo.Roles;
 import com.moninfotech.domain.Hotel;
@@ -50,12 +51,17 @@ public class HotelAdminController {
 
     // Get All Hotels paginated
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String all(@RequestParam(value = "page", required = false) Integer page,
-                       @RequestParam(value = "sortBy", required = false) String soryBy,
-                       @RequestParam(value = "desc", required = false) boolean isDesc,
+    private String all(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                       @RequestParam(value = "sortBy", required = false, defaultValue = SortAttributes.FIELD_ID) String soryBy,
+                       @RequestParam(value = "desc", required = false, defaultValue = "true") boolean isDesc,
+                       @RequestParam(value = "filterType", required = false) String filterType,
+                       @RequestParam(value = "filterValue", required = false) String filterValue,
                        Model model) {
-        if (page == null || page < 0) page = 0;
-        model.addAttribute(hotelService.findAll(page, 10, soryBy, isDesc));
+        if (page <= 0) page = 0;
+        List<Hotel> hotelList = hotelService.findAll(page, SortAttributes.Page.SIZE, soryBy, isDesc);
+        if (filterType != null && !filterType.isEmpty() && filterValue != null && !filterValue.isEmpty())
+            hotelList = this.hotelService.filterHotels(hotelList, filterType, filterValue);
+        model.addAttribute(hotelList);
         model.addAttribute("template", "fragments/hotel/admin/all");
         return "adminlte/index";
     }

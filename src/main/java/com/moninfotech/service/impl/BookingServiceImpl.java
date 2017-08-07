@@ -232,7 +232,7 @@ public class BookingServiceImpl implements BookingService {
 
         if (filterType.equals(FilterType.HOTEL_NAME)) {
             return bookingList.stream()
-                    .filter(booking -> booking.getHotel().getName().equals(filterValue))
+                    .filter(booking -> booking.getHotel().getName().toLowerCase().contains(filterValue.toLowerCase()))
                     .collect(Collectors.toList());
         }else if (filterType.equals(FilterType.DATE)){
             Date filterDate = DateUtils.getParsableDateFormat().parse(filterValue);

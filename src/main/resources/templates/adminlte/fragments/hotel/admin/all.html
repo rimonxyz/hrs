@@ -4,7 +4,19 @@
         <div class="col-sm-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">All Hotels</h3>
+                    <div class="col-sm-8">
+                        <h3 class="box-title">All Hotels</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <form class="form" th:action="@{/admin/hotels}" method="get">
+                            <input type="hidden" name="filterType" value="hotelName">
+                            <datalist id="hotels" th:if="${hotelList!=null}">
+                                <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}" th:text="${hotel?.name}"></option>
+                                <!--<option th:value="chaal">Saint Martins</option>-->
+                            </datalist>
+                            <input class="form-control" type="text" name="filterValue" placeholder="Hotel Name" list="hotels">
+                        </form>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

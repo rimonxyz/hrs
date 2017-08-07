@@ -101,27 +101,32 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public List<Hotel> filterHotels(List<Hotel> hotelList, String filterType, String value) {
         try {
-            if (filterType.equals(FilterType.STAR))
-                return hotelList.stream()
-                        .filter(x -> x.getStar() == Byte.parseByte(value))
-                        .collect(Collectors.toList());
-            else if (filterType.equals(FilterType.PRICE)) {
-                String[] range = value.split("x");
-                List<Hotel> newList = new ArrayList<>();
-                for (Hotel hotel : hotelList) {
-                    for (Room room : hotel.getRoomList()) {
-                        if (room.getPrice() >= Integer.parseInt(range[0]) && room.getPrice() <= Integer.parseInt(range[1])) {
-                            newList.add(hotel);
-                            break;
+            switch (filterType) {
+                case FilterType.HOTEL_NAME:
+                    return hotelList.stream()
+                            .filter(hotel -> hotel.getName().toLowerCase().contains(value.toLowerCase()))
+                            .collect(Collectors.toList());
+                case FilterType.STAR:
+                    return hotelList.stream()
+                            .filter(x -> x.getStar() == Byte.parseByte(value))
+                            .collect(Collectors.toList());
+                case FilterType.PRICE:
+                    String[] range = value.split("x");
+                    List<Hotel> newList = new ArrayList<>();
+                    for (Hotel hotel : hotelList) {
+                        for (Room room : hotel.getRoomList()) {
+                            if (room.getPrice() >= Integer.parseInt(range[0]) && room.getPrice() <= Integer.parseInt(range[1])) {
+                                newList.add(hotel);
+                                break;
+                            }
                         }
                     }
-                }
-                return newList;
+                    return newList;
             }
         } catch (NumberFormatException e) {
             System.out.println("filterHotels(List<Hotel> hotelList, String filterType, String value): " + e.toString());
         }
-        return new ArrayList<>();
+        return hotelList;
     }
 
     @Override
