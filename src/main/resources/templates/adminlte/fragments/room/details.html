@@ -32,6 +32,39 @@
                         <li><a href="#">Number of NON AC Rooms <span class="pull-right badge bg-red"
                                                                      th:text="${room?.hotel?.getNumberOfNonAcRooms()}">842</span></a>
                         </li>
+                        <li><a href="#"><h3>Hotel Facilities </h3><span class="pull-right badge bg-red"
+                                                                     ></span></a>
+                        </li>
+                        <li><a href="#">Restaurant<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.restaurant? 'yes' : 'No'}">842</span></a>
+                        </li>
+                        <li><a href="#">Lift<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.lift? 'yes' : 'No'}">842</span></a>
+                        </li>
+                        <li><a href="#">Wifi<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.wifi? 'yes' : 'No'}">842</span></a>
+                        </li>
+                        <li><a href="#">Conference Room<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.conferenceRoom? 'yes' : 'No'}">842</span></a>
+                        </li>
+                        <li><a href="#">Swiming Pool<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.swimingPool? 'yes' : 'No'}">842</span></a>
+                        </li>
+                        <li><a href="#">Sports Zone<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.sportsZone? 'yes' : 'No'}">842</span></a>
+                        </li>
+                        <li><a href="#">Gymnesiam<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.gym? 'yes' : 'No'}">842</span></a>
+                        </li>
+                        <li><a href="#">SPA<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.spa? 'yes' : 'No'}">842</span></a>
+                        </li>
+                        <li><a href="#">Bar<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.bar? 'yes' : 'No'}">842</span></a>
+                        </li>
+                        <li><a href="#">Helipad<span class="pull-right badge bg-red"
+                                                                     th:text="${room?.hotel?.facilities?.helipad? 'yes' : 'No'}">842</span></a>
+                        </li>
 
                     </ul>
                 </div>
