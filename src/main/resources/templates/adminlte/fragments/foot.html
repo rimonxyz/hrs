@@ -521,6 +521,17 @@
                 $("#phoneNumberEdit").val(result.phoneNumber);
                 $("#descriptionEdit").val(result.description);
                 $("#userIdEdit").val(result.user.id);
+                // facilities
+                $("#restaurantEdit").prop("checked",result.facilities.restaurant);
+                $("#liftEdit").prop("checked",result.facilities.lift);
+                $("#wifiEdit").prop("checked",result.facilities.wifi);
+                $("#conferenceRoomEdit").prop("checked",result.facilities.conferenceRoom);
+                $("#swimingPoolEdit").prop("checked",result.facilities.swimingPool);
+                $("#sportsZoneEdit").prop("checked",result.facilities.sportsZone);
+                $("#gymEdit").prop("checked",result.facilities.gym);
+                $("#spaEdit").prop("checked",result.facilities.spa);
+                $("#barEdit").prop("checked",result.facilities.bar);
+                $("#helipadEdit").prop("checked",result.facilities.helipad);
             }
         });
     }

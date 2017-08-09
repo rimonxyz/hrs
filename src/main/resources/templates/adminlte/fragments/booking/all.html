@@ -114,6 +114,7 @@
                     <tr>
                         <th>Sl</th>
                         <th>Hotel Name</th>
+                        <th>Rooms</th>
                         <!--<th>Total Rooms</th>-->
                         <th>Room Rent</th>
                         <th sec:authorize="hasRole('ROLE_USER')">You Saved</th>
@@ -126,6 +127,7 @@
                             <h5 th:text="${booking?.hotel?.name}"></h5>
                             </a>
                         </td>
+                        <td th:text="${booking?.getRoomNumbersString()}"></td>
                         <td th:text="${booking?.getTotalPayableCost()}"></td>
                         <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
                         <td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>

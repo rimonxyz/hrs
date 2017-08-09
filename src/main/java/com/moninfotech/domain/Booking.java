@@ -8,6 +8,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by sayemkcn on 3/23/17.
@@ -62,7 +63,7 @@ public class Booking extends BaseEntity {
 
     public synchronized int getTotalPayableCost() {
         int totalPayableCost = 0;
-        for (int i=0;i<roomList.size()&&i<bookingDateList.size();i++)
+        for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++)
             totalPayableCost += roomList.get(i).getDiscountedPrice(bookingDateList.get(i));
         return totalPayableCost;
     }
@@ -86,6 +87,12 @@ public class Booking extends BaseEntity {
         SimpleDateFormat dateFormat = DateUtils.getReadableDateFormat();
         this.bookingDateList.forEach(date -> dates.add(dateFormat.format(date)));
         return String.join(", ", dates);
+    }
+
+    public String getRoomNumbersString() {
+        return this.roomList.stream()
+                .map(Room::getRoomNumber)
+                .collect(Collectors.joining(","));
     }
 
     public Transaction getTransaction() {

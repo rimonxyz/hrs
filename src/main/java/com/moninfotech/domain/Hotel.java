@@ -23,6 +23,9 @@ public class Hotel extends BaseEntity {
     private byte[] image;
     @Embedded
     private Address address;
+    @Embedded
+    private HotelFacilities facilities;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
     @JsonBackReference
     private List<Room> roomList;
@@ -35,6 +38,14 @@ public class Hotel extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
+
+    public HotelFacilities getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(HotelFacilities facilities) {
+        this.facilities = facilities;
+    }
 
     public static final class Type {
         private Type() {
