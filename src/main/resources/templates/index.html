@@ -198,8 +198,7 @@
                         </li>
 
                         <li><a href="https://www.facebook.com/groups/intelligenttouristaid">Customer Service</a></li>
-                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/registration}"
-                                                                  class="scroll">Registration</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Registration</a></li>
                         <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
                         <!--<li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"><a th:href="@{/hotel/rooms}">My-->
                         <!--Hotel</a></li>-->

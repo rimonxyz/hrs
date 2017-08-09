@@ -3,6 +3,7 @@ package com.moninfotech.service.impl;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.domain.User;
 import com.moninfotech.repository.UserRepository;
+import com.moninfotech.service.MailService;
 import com.moninfotech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -18,14 +19,17 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
+    private final MailService mailService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepo) {
+    public UserServiceImpl(UserRepository userRepo, MailService mailService) {
         this.userRepo = userRepo;
+        this.mailService = mailService;
     }
 
     @Override
     public User save(User user) {
+        this.mailService.sendEmail(user.getEmail(), "HotelsWave Registration", "Please confirm your email by clicking this link https://blog.rimon.xyz");
         return this.userRepo.save(user);
     }
 
@@ -35,8 +39,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll(int page,int size) {
-        return this.userRepo.findAll(new PageRequest(page,size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
+    public List<User> findAll(int page, int size) {
+        return this.userRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
 
     @Override
@@ -56,6 +60,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByEmailOrPhoneNumber(String email, String phoneNumber) {
-        return this.userRepo.findByEmailOrPhoneNumber(email,phoneNumber);
+        return this.userRepo.findByEmailOrPhoneNumber(email, phoneNumber);
     }
 }
