@@ -1,11 +1,15 @@
 package com.moninfotech.service.impl;
 
 import com.moninfotech.commons.Constants;
+import com.moninfotech.commons.SessionIdentifierGenerator;
+import com.moninfotech.domain.AcValidationToken;
 import com.moninfotech.domain.User;
 import com.moninfotech.repository.UserRepository;
+import com.moninfotech.service.AcValidationTokenService;
 import com.moninfotech.service.MailService;
 import com.moninfotech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -20,17 +24,44 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
     private final MailService mailService;
+    private final AcValidationTokenService acValidationTokenService;
+
+    @Value("${baseUrl}")
+    private String baseUrl;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepo, MailService mailService) {
+    public UserServiceImpl(UserRepository userRepo, MailService mailService, AcValidationTokenService acValidationTokenService) {
         this.userRepo = userRepo;
         this.mailService = mailService;
+        this.acValidationTokenService = acValidationTokenService;
     }
 
     @Override
     public User save(User user) {
-        this.mailService.sendEmail(user.getEmail(), "HotelsWave Registration", "Please confirm your email by clicking this link https://blog.rimon.xyz");
-        return this.userRepo.save(user);
+        boolean isNewUser = user.getId() == null;
+        // save user
+        user = this.userRepo.save(user);
+        // for new user registration
+        // send email for validation
+        if (isNewUser)
+            this.requireAccountValidationByEmail(user);
+        return user;
+    }
+
+    private void requireAccountValidationByEmail(User user) {
+
+        SessionIdentifierGenerator sessionIdentifierGenerator = new SessionIdentifierGenerator();
+        AcValidationToken acValidationToken = new AcValidationToken();
+        acValidationToken.setToken(sessionIdentifierGenerator.nextSessionId());
+        acValidationToken.setTokenValid(true);
+        acValidationToken.setUser(user);
+        // save acvalidationtoken
+        acValidationToken = this.acValidationTokenService.save(acValidationToken);
+        // build confirmation link
+        String confirmationLink = baseUrl.trim() + "/user/validation?token=" + acValidationToken.getToken() + "&enabled=true";
+        // send link by email
+        this.mailService.sendEmail(user.getEmail(), "HotelsWave Registration", "Please confirm your email by clicking this link " + confirmationLink);
+
     }
 
     @Override

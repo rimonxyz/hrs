@@ -4,18 +4,17 @@ import com.moninfotech.commons.Config;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.BookingHelper;
+import com.moninfotech.domain.AcValidationToken;
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -37,13 +36,16 @@ public class HomeController {
 
     private final OfferService offerService;
 
+    private final AcValidationTokenService acValidationTokenService;
+
     @Autowired
-    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService, PackageService packageService, OfferService offerService) {
+    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService, PackageService packageService, OfferService offerService, AcValidationTokenService acValidationTokenService) {
         this.userService = userService;
         this.hotelService = hotelService;
         this.bookingService = bookingService;
         this.packageService = packageService;
         this.offerService = offerService;
+        this.acValidationTokenService = acValidationTokenService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -85,7 +87,7 @@ public class HomeController {
             defaultRoles.add(Constants.Roles.ROLE_USER);
         user.setRoles(defaultRoles);
         user = this.userService.save(user);
-        return "redirect:/login?message=We have sent you an email. Please confirm your identity by clicking on the confirmation link.";
+        return "redirect:/login?messageinfo=We have sent you an email. Please confirm your identity by clicking on the confirmation link.";
     }
 
     // login
@@ -94,5 +96,17 @@ public class HomeController {
         return "adminlte/pages/login";
     }
 
+    @GetMapping("/user/validation")
+    private String validateUser(@RequestParam("token") String validationToken,
+                                @RequestParam("enabled") boolean enabled) {
+        AcValidationToken acToken = this.acValidationTokenService.findByToken(validationToken);
+        if (acToken == null || !acToken.isTokenValid()) return "redirect:/login?message=Confirmation link is invalid!";
+        User user = acToken.getUser();
+        user.setEnabled(enabled);
+        acToken.setTokenValid(false);
+        this.userService.save(user);
+        this.acValidationTokenService.save(acToken);
+        return "redirect:/login?messageinfo=Account \""+user.getName()+"\" is Activated. Please logged in to continue.";
+    }
 
 }

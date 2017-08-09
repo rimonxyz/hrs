@@ -15,8 +15,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final CustomUserDetailsService userDetailsService;
+
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -30,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/bookings/cart/**", "/hotels/**","/ships/**","/packages/**","/offers/**", "/rooms/**", "/rest/**", "/", "/search/**", "/login", "/users/exists/*", "/logout", "/register", "/fonts/**", "/js/**", "/css/**", "/images/**").permitAll()
+                .antMatchers("/bookings/cart/**", "/hotels/**","/ships/**","/packages/**","/offers/**","/user/validation/**", "/rooms/**", "/rest/**", "/", "/search/**", "/login", "/users/exists/*", "/logout", "/register", "/fonts/**", "/js/**", "/css/**", "/images/**").permitAll()
                 .antMatchers("/admin/**").hasRole(Constants.Roles.AUTHORITY_ADMIN)
                 .antMatchers("/hotel/**").hasAnyRole(Constants.Roles.AUTHORITY_HOTEL_ADMIN, Constants.Roles.AUTHORITY_ADMIN)
                 .antMatchers("/bookings/**").hasAnyRole(Constants.Roles.RAUTHORITY_USER, Constants.Roles.AUTHORITY_HOTEL_ADMIN, Constants.Roles.AUTHORITY_ADMIN)

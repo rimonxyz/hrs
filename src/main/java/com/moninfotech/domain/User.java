@@ -40,7 +40,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
-    private boolean enabled = true;
+    private boolean enabled;
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;

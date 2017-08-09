@@ -110,7 +110,7 @@ public class HotelAdminController {
         hotel.setUser(user);
         // then save hotel
         hotel = this.hotelService.save(hotel);
-        return "redirect:/admin/hotels?messageinfo=" + hotel.getName() + " is saved.";
+        return "redirect:/admin/hotels?messageinfo=" + hotel.getName() + " is saved. A confirmation link is sent to the hotel admin\'s email address. Please ask them to confirm their account by clicking the link on that email. Or alternatively you can enable this user by clicking \'enable\' button.";
     }
 
     // Edit hotel informations by admin
@@ -168,7 +168,7 @@ public class HotelAdminController {
         if (hotel == null || hotel.getUser() == null) return "redirect:/admin/hotels?message=User can not be found!";
         hotel.getUser().setEnabled(enabled);
         hotel = this.hotelService.save(hotel);
-        return "redirect:/admin/hotels?message=" + hotel.getName() + " updated!";
+        return "redirect:/admin/hotels?messageinfo=" + hotel.getName() + " updated!";
     }
 
     // MANAGE ROOMS FOR ADMIN
@@ -241,7 +241,7 @@ public class HotelAdminController {
         room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
         room = this.roomService.save(room);
 //        System.out.println(room);
-        return "redirect:/admin/hotels/" + id + "?message=Successfully added room " + room.getRoomNumber();
+        return "redirect:/admin/hotels/" + id + "?messageinfo=Successfully added room " + room.getRoomNumber();
     }
 
     // UPDATE ROOM
