@@ -18,6 +18,7 @@ public class Package extends BaseEntity {
     @Column(nullable = false)
     @NotNull
     private String location;
+    @Column(length = 10000)
     private String description;
 
     public byte[] getImage() {

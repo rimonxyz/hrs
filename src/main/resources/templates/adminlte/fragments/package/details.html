@@ -1,0 +1,22 @@
+<section class="content">
+
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <h2 th:text="${pckg?.title}" class="title"></h2>
+            <h4>
+                <span>Location: </span>
+                <span th:text="${pckg?.location}"></span>
+            </h4>
+            <hr/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive pull-left"
+                 style="width: 200px; margin-right: 20px;margin-bottom: 20px;">
+            <p th:text="${pckg?.description}"></p>
+        </div>
+    </div>
+
+</section>
+

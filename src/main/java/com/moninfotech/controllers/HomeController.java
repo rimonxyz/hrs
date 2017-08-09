@@ -9,6 +9,7 @@ import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.BookingService;
 import com.moninfotech.service.HotelService;
+import com.moninfotech.service.PackageService;
 import com.moninfotech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,16 +36,20 @@ public class HomeController {
 
     private final BookingService bookingService;
 
+    private final PackageService packageService;
+
     @Autowired
-    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService) {
+    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService,PackageService packageService) {
         this.userService = userService;
         this.hotelService = hotelService;
         this.bookingService = bookingService;
+        this.packageService = packageService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String home(Model model) {
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
+        model.addAttribute("packageList",this.packageService.findAll(null,null));
         return "index";
     }
 

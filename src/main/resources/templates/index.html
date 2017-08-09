@@ -547,65 +547,18 @@
                     <div class="tab-1 resp-tab-content resp-tab-content-active" style="display:block"
                          aria-labelledby="tab_item-0">
                         <div class="tab_img">
-                            <div class="col-md-4 portfolio-grids">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
                                    data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" href="images/locations/coxsbazar.jpg"
+                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/coxsbazar.jpg">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
-                                        <h5>Package 1</h5>
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-md-4 portfolio-grids">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".7s" href="images/locations/saintmartins.jpg"
-                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/saintmartins.jpg">
-                                    <div class="b-wrapper">
-                                        <h5>Package 2</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4 portfolio-grids">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".7s" href="images/locations/bandarbans.jpg"
-                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/bandarbans.jpg">
-                                    <div class="b-wrapper">
-                                        <h5>Package 3</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
 
-                        <div class="tab_img">
-                            <div class="col-md-4 portfolio-grids">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also remaining essentially unchanged. "
-                                   data-wow-delay=".9s" href="images/locations/g7.jpg"
-                                   style="visibility: visible; animation-delay: 0.9s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g7.jpg">
-                                    <div class="b-wrapper">
-                                        <h5>Package 4</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-8 portfolio-grids  portfolio-two portfolio-grids-mdl">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" href="images/locations/g6.jpg"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g6.jpg">
-                                    <div class="b-wrapper">
-                                        <h5>Package 5</h5>
-                                    </div>
-                                </a>
-                            </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -613,25 +566,14 @@
                         Bazar</h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
                         <div class="tab_img">
-                            <div class="col-md-4 portfolio-grids">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('coxs bazar')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
                                    data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" href="images/locations/g2.jpg"
+                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g2.jpg">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
-                                        <h5>Top Vacations</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4 portfolio-grids">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".7s" href="images/locations/g5.jpg"
-                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g5.jpg">
-                                    <div class="b-wrapper">
-                                        <h5>Top Vacations</h5>
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
                                     </div>
                                 </a>
                             </div>
@@ -642,25 +584,14 @@
                         Martins</h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
                         <div class="tab_img">
-                            <div class="col-md-8 portfolio-grids portfolio-two">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('saint martins')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
                                    data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" href="images/locations/g4.jpg"
+                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g4.jpg">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
-                                        <h5>Top Vacations</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4 portfolio-grids">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".7s" href="images/locations/g3.jpg"
-                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g3.jpg">
-                                    <div class="b-wrapper">
-                                        <h5>Top Vacations</h5>
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
                                     </div>
                                 </a>
                             </div>
@@ -671,25 +602,14 @@
                     </h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
                         <div class="tab_img">
-                            <div class="col-md-4 portfolio-grids">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('bandarbans')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
                                    data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" href="images/locations/g1.jpg"
+                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g1.jpg">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
-                                        <h5>Top Vacations</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-8 portfolio-grids portfolio-two">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".7s" href="images/locations/g6.jpg"
-                                   style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g6.jpg">
-                                    <div class="b-wrapper">
-                                        <h5>Top Vacations</h5>
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
                                     </div>
                                 </a>
                             </div>
@@ -700,14 +620,14 @@
                     </h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
                         <div class="tab_img">
-                            <div class="col-md-8 portfolio-grids portfolio-three">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('rangamati')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
                                    data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" href="images/locations/g7.jpg"
+                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img alt="" class="img-responsive zoom-img" src="images/locations/g7.jpg">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
-                                        <h5>Top Vacations</h5>
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
                                     </div>
                                 </a>
                             </div>
