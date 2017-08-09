@@ -140,6 +140,19 @@
                     <li><a th:href="@{/admin/hotels}"><i class="fa fa-circle-o"></i>Hotels</a></li>
                 </ul>
             </li>
+            <li class="treeview" sec:authorize="hasRole('ADMIN')">
+                <a href="#">
+                    <i class="fa fa-th"></i>
+                    <span>Packages &amp Offers</span>
+                    <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a th:href="@{/admin/packages}"><i class="fa fa-circle-o"></i>Packages</a></li>
+                    <li><a th:href="@{/admin/offers}"><i class="fa fa-circle-o"></i>Offers</a></li>
+                </ul>
+            </li>
             <!--<li class="treeview">-->
             <!--<a href="#">-->
             <!--<i class="fa fa-files-o"></i>-->
