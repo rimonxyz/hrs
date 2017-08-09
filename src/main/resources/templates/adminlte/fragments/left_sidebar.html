@@ -153,6 +153,18 @@
                     <li><a th:href="@{/admin/offers}"><i class="fa fa-circle-o"></i>Offers</a></li>
                 </ul>
             </li>
+            <li class="treeview" sec:authorize="hasRole('ADMIN')">
+                <a href="#">
+                    <i class="fa fa-th"></i>
+                    <span>User Feedbacks</span>
+                    <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a th:href="@{/admin/feedback}"><i class="fa fa-circle-o"></i>Feedbacks</a></li>
+                </ul>
+            </li>
             <!--<li class="treeview">-->
             <!--<a href="#">-->
             <!--<i class="fa fa-files-o"></i>-->
