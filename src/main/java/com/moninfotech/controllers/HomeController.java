@@ -7,10 +7,7 @@ import com.moninfotech.commons.pojo.BookingHelper;
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
-import com.moninfotech.service.BookingService;
-import com.moninfotech.service.HotelService;
-import com.moninfotech.service.PackageService;
-import com.moninfotech.service.UserService;
+import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,18 +35,22 @@ public class HomeController {
 
     private final PackageService packageService;
 
+    private final OfferService offerService;
+
     @Autowired
-    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService,PackageService packageService) {
+    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService, PackageService packageService, OfferService offerService) {
         this.userService = userService;
         this.hotelService = hotelService;
         this.bookingService = bookingService;
         this.packageService = packageService;
+        this.offerService = offerService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String home(Model model) {
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
-        model.addAttribute("packageList",this.packageService.findAll(null,null));
+        model.addAttribute("packageList", this.packageService.findAll(null, null));
+        model.addAttribute("offerList", this.offerService.findAll(null, null));
         return "index";
     }
 
@@ -57,9 +58,9 @@ public class HomeController {
     private String dashboard(@CurrentUser User currentUser, Model model) {
         model.addAttribute("bookingHelper", new BookingHelper());
 
-        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser,null,null));
-        model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser,true));
-        model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser,false));
+        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser, null, null));
+        model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser, true));
+        model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser, false));
         model.addAttribute("template", "fragments/dashboard/dashboard");
         return "adminlte/index";
     }

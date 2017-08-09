@@ -499,21 +499,6 @@
         <!-- .tm_pb_row -->
     </div>
 
-    <div class="container" style="margin-bottom: 40px;">
-        <div class=" row tm_pb_row tm_pb_row_8">
-
-            <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_14 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
-                <hr class="tm_pb_module tm_pb_space tm_pb_divider_2">
-                <div class="serviceMore">
-                    <a href="#" class="btn btn-default" role="button">View all</a>
-                </div>
-            </div>
-            <!-- .tm_pb_column -->
-
-        </div>
-        <!-- .tm_pb_row -->
-    </div>
 
 </div>
 <!-- end our services -->
@@ -653,52 +638,36 @@
             <!-- .tm_pb_title -->
             <hr>
             <div class="textContent">
-                <p>Taste our trademark cocktails &amp; enjoy a truly unique culinary experience…&nbsp; As the sun sets
-                    and the sky turns purple, we celebrate the violet hour and the end of the day before welcoming the
-                    start of the night.</p>
+                <p>
+                    <!--OFFER TEXT-->
+                </p>
             </div>
             <!-- .tm_pb_text -->
             <hr>
             <div class="inner_w3l_agile_grids">
-                <div class="col-xl-4 team-grids">
+
+                <div class="col-xl-4 team-grids" th:each="offer: ${offerList}">
                     <div class="thumbnail team-w3agile">
-                        <img src="images/j1.jpg" class="img-responsive" alt="">
+                        <img th:src="@{/offers/image/}+${offer?.id}" class="img-responsive" alt="">
                         <div class="social-icons team-icons right-w3l fotw33">
                             <div class="caption   ">
-                                <p>Mains</p>
+                                <p th:text="${offer?.title}">Mains</p>
+                            </div>
+                            <div>
+                                <p th:text="${offer?.shortTag}" style="color: #FFFFFF;">lol</p>
+                            </div>
+                            <div>
+                                <a th:href="${offer?.linkToOpen}"><span style="color: lightblue;">See More</span></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 team-grids">
-                    <div class="thumbnail team-w3agile">
-                        <img src="images/j2.jpg" class="img-responsive" alt="">
-                        <div class="social-icons team-icons right-w3l fotw33">
-                            <div class="caption">
-                                <p>Drinks</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 team-grids">
-                    <div class="thumbnail team-w3agile">
-                        <img src="images/j3.jpg" class="img-responsive" alt="">
-                        <div class="social-icons team-icons right-w3l fotw33">
-                            <div class="caption">
-                                <p>Desserts</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 
                 <div class="clearfix"></div>
             </div>
             <!-- .tm_pb_menu_categories -->
             <hr class="tm_pb_module tm_pb_space tm_pb_divider_6">
-            <div class="serviceMore">
-                <a href="#" class="btn btn-default" role="button">See all menu</a>
-            </div>
+
         </div>
         <!-- .tm_pb_column -->
     </div>
