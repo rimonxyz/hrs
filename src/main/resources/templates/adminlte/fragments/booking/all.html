@@ -3,7 +3,7 @@
 <section class="content">
 
 
-    <div class="row">
+    <div class="row" sec:authorize="!hasRole('ROLE_USER')">
         <div class="col-sm-6">
             <div class="box">
                 <div class="box-header with-border">
