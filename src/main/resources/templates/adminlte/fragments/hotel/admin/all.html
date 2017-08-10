@@ -31,7 +31,7 @@
                             <td>Last Updated</td>
                             <td>Actions</td>
                             <td>Edit</td>
-                            <td>Delete</td>
+                            <!--<td>Delete</td>-->
                         </tr>
                         <tr th:each="hotel:${hotelList}" th:classappend="${hotel?.user?.isEnabled()}? '' : 'danger'">
                             <td>
@@ -58,12 +58,12 @@
                             </td>
                             <td><a class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-hotel"
                                    th:onclick="'onHotelItemClick(this,\'' + ${hotel?.id} + '\');'">Edit</a></td>
-                            <td>
-                                <form th:action="@{/admin/hotels/delete/}+${hotel.getId()}"
-                                      onsubmit="return confirm('Do you really want to delete this article?');" method="post">
-                                    <button class="btn btn-danger" type="submit">Delete</button>
-                                </form>
-                            </td>
+                            <!--<td>-->
+                                <!--<form th:action="@{/admin/hotels/delete/}+${hotel.getId()}"-->
+                                      <!--onsubmit="return confirm('Do you really want to delete this article?');" method="post">-->
+                                    <!--<button class="btn btn-danger" type="submit">Delete</button>-->
+                                <!--</form>-->
+                            <!--</td>-->
                         </tr>
                         </tbody>
                     </table>

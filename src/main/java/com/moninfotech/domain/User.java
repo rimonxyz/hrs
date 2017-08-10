@@ -29,7 +29,8 @@ public class User extends BaseEntity implements UserDetails {
     @NotEmpty
     @NotNull
     private String phoneNumber;
-    @Size
+    @NotNull
+//    @Size(min = 6,max = 100,message = "Password must be between 6 to 100 characters!")
     private String password;
     @Embedded
     private Address address;
