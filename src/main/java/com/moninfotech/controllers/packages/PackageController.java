@@ -25,6 +25,7 @@ public class PackageController {
     @GetMapping("/{id}")
     private String getPackage(@PathVariable("id") Long id, Model model){
         model.addAttribute("pckg",this.packageService.findOne(id));
+        model.addAttribute("pckgList",this.packageService.findAll(null,null));
 
         model.addAttribute("template", "fragments/package/details");
         return "adminlte/index";

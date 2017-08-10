@@ -1,22 +1,54 @@
 <section class="content">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="box">
+                <div class="box-header">
+                    <h2 th:text="${pckg?.title}" class="title"></h2>
+                    <h4>
+                        <span>Location: </span>
+                        <span th:text="${pckg?.location}"></span>
+                    </h4>
+                </div>
+                <div class="box-body">
+                    <img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive"
+                         style="height: 300px; margin-right: 20px;margin-bottom: 20px;">
+                    <p th:text="${pckg?.description}"></p>
+                </div>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-            <h2 th:text="${pckg?.title}" class="title"></h2>
-            <h4>
-                <span>Location: </span>
-                <span th:text="${pckg?.location}"></span>
-            </h4>
-            <hr/>
+        <div class="col-sm-4">
+            <div class="box box-widget widget-user" th:each="p: ${pckgList}">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-black"  th:style="'background:url(' + @{/offers/image/}+${p?.id} + ') center center;'">
+                    <h3 class="widget-user-username" th:text="${p?.title}" style="color: #000; font-family: 'Arial Rounded MT Bold'"></h3>
+                    <h5 class="widget-user-desc" th:text="${p?.location}" style="color: #000;"></h5>
+
+                    <div class="col-sm-12">
+                        <a class="btn btn-primary pull-right" th:href="@{/packages/}+${p?.id}">Details</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-            <img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive pull-left"
-                 style="width: 200px; margin-right: 20px;margin-bottom: 20px;">
-            <p th:text="${pckg?.description}"></p>
-        </div>
-    </div>
+
+    <!--<div class="row">-->
+        <!--<div class="col-sm-8 col-sm-offset-2">-->
+            <!--<h2 th:text="${pckg?.title}" class="title"></h2>-->
+            <!--<h4>-->
+                <!--<span>Location: </span>-->
+                <!--<span th:text="${pckg?.location}"></span>-->
+            <!--</h4>-->
+            <!--<hr/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+        <!--<div class="col-sm-8 col-sm-offset-2">-->
+            <!--<img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive pull-left"-->
+                 <!--style="width: 200px; margin-right: 20px;margin-bottom: 20px;">-->
+            <!--<p th:text="${pckg?.description}"></p>-->
+        <!--</div>-->
+    <!--</div>-->
 
 </section>
 

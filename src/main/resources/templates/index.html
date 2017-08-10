@@ -537,8 +537,7 @@
                         <div class="tab_img">
                             <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
+                                   th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
                                     <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
@@ -556,8 +555,7 @@
                         <div class="tab_img">
                             <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('coxs bazar')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
+                                    th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
                                     <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
@@ -574,8 +572,7 @@
                         <div class="tab_img">
                             <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('saint martins')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
+                                  th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
                                     <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
@@ -592,8 +589,7 @@
                         <div class="tab_img">
                             <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('bandarbans')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
+                                     th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
                                     <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
@@ -610,8 +606,7 @@
                         <div class="tab_img">
                             <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('rangamati')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen."
-                                   data-wow-delay=".5s" th:href="@{/packages/}+${pckg?.id}"
+                                   th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
                                     <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
                                     <div class="b-wrapper">
@@ -622,6 +617,57 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>Sajek</h2>
+                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
+                        <div class="tab_img">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('sajek')}">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   th:href="@{/packages/}+${pckg?.id}"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
+                                    <div class="b-wrapper">
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>Srimangal
+                    </h2>
+                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
+                        <div class="tab_img">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('srimangal')}">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   th:href="@{/packages/}+${pckg?.id}"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
+                                    <div class="b-wrapper">
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>Sylhet
+                    </h2>
+                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
+                        <div class="tab_img">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}" th:if="${pckg?.location?.toLowerCase().equals('sylhet')}">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   th:href="@{/packages/}+${pckg?.id}"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt="" class="img-responsive zoom-img">
+                                    <div class="b-wrapper">
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -630,7 +676,7 @@
 <!-- end packages -->
 
 
-<!-- special offer -->
+<!-- special offers -->
 <div class="container">
     <div class=" row">
         <div class="col-xl-12">
@@ -653,14 +699,14 @@
                     <div class="thumbnail team-w3agile">
                         <img th:src="@{/offers/image/}+${offer?.id}" class="img-responsive" alt="">
                         <div class="social-icons team-icons right-w3l fotw33">
-                            <div class="caption   ">
+                            <div class="caption">
                                 <p th:text="${offer?.title}">Mains</p>
                             </div>
                             <div>
                                 <p th:text="${offer?.shortTag}" style="color: #FFFFFF;">lol</p>
                             </div>
                             <div>
-                                <a th:href="${offer?.linkToOpen}"><span style="color: lightblue;">See More</span></a>
+                                <a th:href="@{/offers/}+${offer?.id}"><span style="color: lightblue;">See More</span></a>
                             </div>
                         </div>
                     </div>

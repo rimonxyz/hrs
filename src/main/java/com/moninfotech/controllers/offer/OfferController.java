@@ -26,8 +26,9 @@ public class OfferController {
     @GetMapping("/{id}")
     private String getPackage(@PathVariable("id") Long id, Model model){
         model.addAttribute("offer",this.offerService.findOne(id));
+        model.addAttribute("offerList",this.offerService.findAll(null,null));
 
-        model.addAttribute("template", "fragments/package/details");
+        model.addAttribute("template", "fragments/offer/details");
         return "adminlte/index";
     }
 
