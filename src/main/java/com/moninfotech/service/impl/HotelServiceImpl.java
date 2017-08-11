@@ -122,6 +122,10 @@ public class HotelServiceImpl implements HotelService {
                         }
                     }
                     return newList;
+                case FilterType.RATING:
+                    return hotelList.stream()
+                            .filter(hotel -> Math.round(hotel.getAverageRating()) == Math.round(Float.parseFloat(value)))
+                            .collect(Collectors.toList());
             }
         } catch (NumberFormatException e) {
             System.out.println("filterHotels(List<Hotel> hotelList, String filterType, String value): " + e.toString());

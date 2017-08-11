@@ -451,6 +451,7 @@
         $('#stars').on('starrr:change', function (e, value) {
             $('#count').html(value);
             $('#ratingCount').val(value);
+            $('#ratingFilterForm').submit();
         });
 
         $('#stars-existing').on('starrr:change', function (e, value) {
