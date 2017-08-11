@@ -50,7 +50,7 @@
                                         </option>
                                         <option th:value="2" th:selected="${filterValue?.equals('2')}">2 Star
                                         </option>
-                                        <option th:value="3" th:selected="${filterValue?.equals('3')}">3 Star
+                                        <option th:value="3" th:selected="${filterValue?.equals('3')}">3 Star Standard
                                         </option>
                                         <option th:value="4" th:selected="${filterValue?.equals('4')}">4 Star
                                         </option>
@@ -68,17 +68,21 @@
                                     <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
                                     <input name="filterType" type="hidden" th:value="price"></input>
                                     <select class="form-control" name="filterValue" id="priceFilter">
-                                        <option th:value="100x1000"
-                                                th:selected="${filterValue?.equals('100x1000')}">
-                                            100-1000
+                                        <option th:value="500x1500"
+                                                th:selected="${filterValue?.equals('500x1500')}">
+                                            500-1500
                                         </option>
-                                        <option th:value="1000x10000"
-                                                th:selected="${filterValue?.equals('1000x10000')}">
-                                            1000-10000
+                                        <option th:value="1501x2500"
+                                                th:selected="${filterValue?.equals('1501x2500')}">
+                                            1501-2500
                                         </option>
-                                        <option th:value="10000x50000"
-                                                th:selected="${filterValue?.equals('10000x50000')}">
-                                            10000-50000
+                                        <option th:value="2501x4000"
+                                                th:selected="${filterValue?.equals('2501x4000')}">
+                                            2501-4000
+                                        </option>
+                                        <option th:value="4001x500000"
+                                                th:selected="${filterValue?.equals('4001x500000')}">
+                                            4001- Above
                                         </option>
                                     </select>
                                 </form>
