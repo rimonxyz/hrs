@@ -113,7 +113,7 @@
 .menu{
     background-size: 0 0;
     position:fixed;
-    top = 0;
+    top : 0;
     /*z-index:100;*/
     /*display: inline-block;
     overflow: hidden;
