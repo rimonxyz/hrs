@@ -5,7 +5,7 @@
             <div class="panel row panel-default">
                 <div class="col-sm-12">
                     <a class="col-sm-3 btn btn-success" data-toggle="modal" data-target="#modal-create-room">Create
-                        New</a>
+                        New Room</a>
                     <a class="col-sm-3 col-sm-offset-6 btn btn-warning" th:href="@{/hotels/}+${hotel?.id}">Switch to
                         Booking Mode</a>
                 </div>
@@ -74,7 +74,10 @@
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header"
                      th:classappend="${bookedIds?.contains(room?.id)} ? bg-yellow : bg-aqua-active">
-                    <h3 class="widget-user-username" th:text="${room?.roomNumber}">Alexander Pierce</h3>
+                    <h3 class="widget-user-username">
+                        <span th:text="${room?.roomNumber}">Alexander Pierce</span>
+                        <span th:text="${room?.category?.name}" class="pull-right"></span>
+                    </h3>
                     <h5 class="widget-user-desc">
 
                         <span th:if="${bookedIds?.contains(room?.id)}">
@@ -102,7 +105,8 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <span>...</span>
-                                <h5 class="description-header" th:text="${room?.getDiscountPercentage(filterValue)}">13,000</h5>
+                                <h5 class="description-header" th:text="${room?.getDiscountPercentage(filterValue)}">
+                                    13,000</h5>
                                 <span class="description-text">DISCOUNT</span>
                             </div>
                             <!-- /.description-block -->
@@ -111,7 +115,8 @@
                         <div class="col-sm-4">
                             <div class="description-block">
                                 <span>Price After</span>
-                                <h5 class="description-header" th:text="${room?.getDiscountedPrice(filterValue)}">35</h5>
+                                <h5 class="description-header" th:text="${room?.getDiscountedPrice(filterValue)}">
+                                    35</h5>
                                 <span class="description-text">TK</span>
                             </div>
                             <!-- /.description-block -->
@@ -120,7 +125,9 @@
                             <a th:onclick="'onRoomItemClick(this,\'' + ${room.id} + '\');'"
                                class="btn btn-link btn-block" id="openEditModalButton"
                                data-toggle="modal" data-target="#modal-edit-room"><b>Edit</b></a>
-                            <a sec:authorize="hasRole('ROLE_HOTEL_ADMIN')" th:href="@{/hotel/rooms/}+${room?.id}+@{/discounts}" class="btn btn-link btn-block"><b>Set Discounts</b></a>
+                            <a sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"
+                               th:href="@{/hotel/rooms/}+${room?.id}+@{/discounts}" class="btn btn-link btn-block"><b>Set
+                                Discounts</b></a>
                         </div>
                         <!-- /.col -->
                     </div>

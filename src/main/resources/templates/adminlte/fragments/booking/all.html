@@ -14,14 +14,16 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>Sl</th>
+                        <th sec:authorize="hasRole('ROLE_ADMIN')">Hotel Name</th>
                         <th>Room No</th>
                         <th>Category</th>
                         <th>Booking Dates</th>
-                        <th>Total Order</th>
+                        <!--<th>Total Order</th>-->
                         <th>Room Rent</th>
                     </tr>
                     <tr th:if="${todaysPlacedRoomList != null}" th:each="room,iter : ${todaysPlacedRoomList}">
                         <td th:text="${iter.index+1}"></td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${room?.hotel?.name}"></td>
                         <td>
                             <!--<a th:href="@{/rooms/}+${room?.id}">-->
                             <h5 th:text="${room?.roomNumber}"></h5>
@@ -29,11 +31,10 @@
                         </td>
                         <td th:text="${room?.category?.name}"></td>
                         <td th:text="${room?.getBookingDatesString(true)}"></td>
-                        <td th:text="${todaysPlacedRoomListSize}"></td>
+                        <!--<td th:text="${todaysPlacedRoomListSize}"></td>-->
                         <td th:text="${room?.getDiscountedPrice(todaysDate)}"></td>
                     </tr>
                     <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -55,6 +56,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>Sl</th>
+                        <th sec:authorize="hasRole('ROLE_ADMIN')">Hotel Name</th>
                         <th>Room No</th>
                         <th>Category</th>
                         <th>Room Rent</th>
@@ -62,6 +64,7 @@
                     </tr>
                     <tr th:if="${bookedRoomList != null}" th:each="room,iter : ${bookedRoomList}">
                         <td th:text="${iter.index+1}"></td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${room?.hotel?.name}"></td>
                         <td>
                             <!--<a th:href="@{/rooms/}+${room?.id}">-->
                             <h5 th:text="${room?.roomNumber}"></h5>
@@ -87,7 +90,7 @@
 
 
     <div class="row">
-        <div class="col-sm-12" sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
+        <div class="col-sm-12">
             <div class="box">
                 <div class="box-header with-border">
                     <div class="col-sm-8">
@@ -113,7 +116,8 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>Sl</th>
-                        <th>Hotel Name</th>
+                        <th sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">Hotel Name</th>
+                        <th sec:authorize="!hasRole('ROLE_USER')">User's Name</th>
                         <th>Rooms</th>
                         <!--<th>Total Rooms</th>-->
                         <th>Room Rent</th>
@@ -122,18 +126,19 @@
                     </tr>
                     <tr th:if="${bookingList != null}" th:each="booking,iter : ${bookingList}">
                         <td th:text="${iter.index+1}"></td>
-                        <td>
+                        <td sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
                             <a th:href="@{/bookings/}+${booking?.id}">
                             <h5 th:text="${booking?.hotel?.name}"></h5>
                             </a>
                         </td>
+                        <td sec:authorize="!hasRole('ROLE_USER')" th:text="${booking?.user?.name}"></td>
                         <td th:text="${booking?.getRoomNumbersString()}"></td>
                         <td th:text="${booking?.getTotalPayableCost()}"></td>
                         <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
                         <td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>
                         <td>
                             <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
-                            <a class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
+                            <a sec:authorize="!hasAnyRole('ROLE_ADMIN','ROLE_HOTEL_ADMIN')" class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
                                 review</a>
                             <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
                         </td>

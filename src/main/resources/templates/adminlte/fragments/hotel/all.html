@@ -50,7 +50,9 @@
                                         </option>
                                         <option th:value="2" th:selected="${filterValue?.equals('2')}">2 Star
                                         </option>
-                                        <option th:value="3" th:selected="${filterValue?.equals('3')}">3 Star Standard
+                                        <option th:value="2" th:selected="${filterValue?.equals('2')}">3 Star Standard
+                                        </option>
+                                        <option th:value="3" th:selected="${filterValue?.equals('3')}">3 Star
                                         </option>
                                         <option th:value="4" th:selected="${filterValue?.equals('4')}">4 Star
                                         </option>
@@ -134,11 +136,12 @@
                         <tr>
                             <th><h3>Image</h3></th>
                             <th>
-                                <i>
-                                    <i th:if="${isDesc}" class="glyphicon glyphicon-chevron-down"></i>
-                                    <i th:if="${!isDesc}" class="glyphicon glyphicon-chevron-up"></i>
-                                    <h3><a th:href="@{/hotels?sortBy=name&amp;isDesc=}+${isDesc}">Name</a></h3>
-                                </i>
+                                <h3>Name</h3>
+                                <!--<i>-->
+                                <!--<i th:if="${isDesc}" class="glyphicon glyphicon-chevron-down"></i>-->
+                                <!--<i th:if="${!isDesc}" class="glyphicon glyphicon-chevron-up"></i>-->
+                                <!--<h3><a th:href="@{/hotels?sortBy=name&amp;isDesc=}+${isDesc}">Name</a></h3>-->
+                                <!--</i>-->
                             </th>
                             <th>
                                 <h3>Address</h3>

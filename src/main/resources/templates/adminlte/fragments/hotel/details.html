@@ -237,9 +237,10 @@
                         <div class="widget-user-header"
                              th:classappend="${bookedIds?.contains(room?.id)} ? bg-yellow : bg-aqua-active">
                             <a th:href="@{/rooms/}+${room?.id}+@{/}+${filterValue}">
-                                <h3 class="widget-user-username" th:text="${room?.roomNumber}" style="color: white;">
-                                    Alexander
-                                    Pierce</h3>
+                                <h3 class="widget-user-username"  style="color: white;">
+                                    <span th:text="${room?.roomNumber}"></span>
+                                    <span th:text="${room?.category?.name}" class="pull-right" style="font-size: 20px;"></span>
+                                </h3>
                                 <h5 class="widget-user-desc">
 
                         <span th:if="${bookedIds?.contains(room?.id)}">
