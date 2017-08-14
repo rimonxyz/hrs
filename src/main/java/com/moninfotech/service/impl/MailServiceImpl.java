@@ -1,11 +1,14 @@
 package com.moninfotech.service.impl;
 
 import com.moninfotech.service.MailService;
+import com.sun.mail.util.MailConnectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import java.net.UnknownHostException;
 
 @Service
 public class MailServiceImpl implements MailService {
@@ -24,7 +27,11 @@ public class MailServiceImpl implements MailService {
         mailMessage.setTo(email);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
-        javaMailSender.send(mailMessage);
+        try {
+            javaMailSender.send(mailMessage);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 
 }

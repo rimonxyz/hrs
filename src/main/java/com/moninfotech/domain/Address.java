@@ -12,6 +12,7 @@ public class Address {
     private String district;
     private String upazila;
     private String area;
+    private String mapDirectionFrom;
 
     public String getCountry() {
         return country;
@@ -57,6 +58,14 @@ public class Address {
         this.upazila = upazila;
     }
 
+    public String getMapDirectionFrom() {
+        return mapDirectionFrom;
+    }
+
+    public void setMapDirectionFrom(String mapDirectionFrom) {
+        this.mapDirectionFrom = mapDirectionFrom;
+    }
+
     @Override
     public String toString() {
         return "Address{" +
@@ -65,6 +74,7 @@ public class Address {
                 ", district='" + district + '\'' +
                 ", upazila='" + upazila + '\'' +
                 ", area='" + area + '\'' +
+                ", mapDirectionFrom='" + mapDirectionFrom + '\'' +
                 '}';
     }
 }
