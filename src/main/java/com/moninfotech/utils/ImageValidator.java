@@ -18,7 +18,7 @@ public class ImageValidator {
             if (image != null)
                 return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
         return false;
     }

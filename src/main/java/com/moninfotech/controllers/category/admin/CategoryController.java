@@ -38,7 +38,7 @@ public class CategoryController {
         if (page == null || page < 0) page = 0;
         model.addAttribute("categoryList", this.categoryService.findAll());
 
-        model.addAttribute("template","fragments/category/admin/all");
+        model.addAttribute("template", "fragments/category/admin/all");
         return "adminlte/index";
     }
 
@@ -56,9 +56,16 @@ public class CategoryController {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
         List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
         // if all images aren't valid
-        if (files.size() != multipartFiles.length)
-            return "redirect:/admin/categories/create?message=One or more images are invalid!";
-        category.setImages(files);
+        boolean isValid = files.size() == multipartFiles.length;
+        if (!isValid) {
+            // set existing images
+            if (category.getId()!=null) {
+                Category existingCat = this.categoryService.findOne(category.getId());
+                if (existingCat != null)
+                    category.setImages(existingCat.getImages());
+            }
+        } else
+            category.setImages(files);
 //        // fascilities object will be null if no checkbox is selected, so initialise new object
 //        if (category.getFacilities() == null) category.setFacilities(new Facilities());
         category = this.categoryService.save(category);

@@ -84,7 +84,13 @@ public class HotelAdminController {
         // set image to the hotel entity if it's valid.
         if (ImageValidator.isImageValid(multipartFile))
             hotel.setImage(multipartFile.getBytes());
-
+        else {
+            if (hotel.getId() != null) {
+                Hotel existingHotel = this.hotelService.findOne(hotel.getId());
+                if (existingHotel != null)
+                    hotel.setImage(existingHotel.getImage());
+            }
+        }
         // first save user
         User user;
         if (userId != null) { // hotel updating
