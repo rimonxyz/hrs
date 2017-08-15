@@ -160,10 +160,10 @@ public class BookingController {
             return "redirect:/hotels/" + booking.getHotel().getId() + "?message=One or more room isn't available during this time. Please try again!";
         }
         // set user of booking
-        if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
-            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
-            return "redirect:/bookings/checkout/assignUser";
-        }
+//        if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
+//            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
+//            return "redirect:/bookings/checkout/assignUser";
+//        }
         booking.setUser(currentUser);
 
         // HANDLE PAYMENT
