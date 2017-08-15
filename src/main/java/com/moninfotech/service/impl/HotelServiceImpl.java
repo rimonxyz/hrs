@@ -108,7 +108,7 @@ public class HotelServiceImpl implements HotelService {
                             .collect(Collectors.toList());
                 case FilterType.STAR:
                     return hotelList.stream()
-                            .filter(x -> x.getStar() == Byte.parseByte(value))
+                            .filter(x -> x.getStar().equals(value))
                             .collect(Collectors.toList());
                 case FilterType.PRICE:
                     String[] range = value.split("x");

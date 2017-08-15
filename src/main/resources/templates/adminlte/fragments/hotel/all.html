@@ -46,17 +46,17 @@
                                     <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
                                     <input name="filterType" type="hidden" th:value="star"></input>
                                     <select class="form-control" name="filterValue" id="starFilter">
-                                        <option th:value="1" th:selected="${filterValue?.equals('1')}">1 Star
+                                        <option value="1 star" th:selected="${filterValue?.equals('1 star')}">1 Star
                                         </option>
-                                        <option th:value="2" th:selected="${filterValue?.equals('2')}">2 Star
+                                        <option value="2 star" th:selected="${filterValue?.equals('2 star')}">2 Star
                                         </option>
-                                        <option th:value="2" th:selected="${filterValue?.equals('2')}">3 Star Standard
+                                        <option value="3 star standard" th:selected="${filterValue?.equals('3 star standard')}">3 Star Standard
                                         </option>
-                                        <option th:value="3" th:selected="${filterValue?.equals('3')}">3 Star
+                                        <option value="3 star" th:selected="${filterValue?.equals('3 star')}">3 Star
                                         </option>
-                                        <option th:value="4" th:selected="${filterValue?.equals('4')}">4 Star
+                                        <option value="4 star" th:selected="${filterValue?.equals('4 star')}">4 Star
                                         </option>
-                                        <option th:value="5" th:selected="${filterValue?.equals('5')}">5 Star
+                                        <option value="5 star" th:selected="${filterValue?.equals('5 star')}">5 Star
                                         </option>
                                     </select>
                                 </form>

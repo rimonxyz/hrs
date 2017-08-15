@@ -18,54 +18,63 @@
                             </div>
                             <div class="form-group">
                                 <label for="hotelNameEdit">Hotel Name</label>
-                                <input class="form-control" name="name" id="hotelNameEdit" type="text" placeholder="Hotel Name" required="required"></input>
+                                <input class="form-control" name="name" id="hotelNameEdit" type="text"
+                                       placeholder="Hotel Name" required="required"></input>
                             </div>
                             <div class="form-group">
                                 <label for="starEdit">Star</label>
                                 <select id="starEdit" class="form-control" name="star">
-                                    <option th:value="1">1 Star</option>
-                                    <option th:value="2">2 Star</option>
-                                    <option th:value="3">3 Star</option>
-                                    <option th:value="4">4 Star</option>
-                                    <option th:value="5">5 Star</option>
+                                    <option value="1 star">1 Star</option>
+                                    <option value="2 star">2 Star</option>
+                                    <option value="3 star standard">3 Star Standard</option>
+                                    <option value="3 star">3 Star</option>
+                                    <option value="4 star">4 Star</option>
+                                    <option value="5 star">5 Star</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="typeEdit">Type</label>
                                 <select id="typeEdit" class="form-control" name="type">
-                                    <option th:value="Hotel">Hotel</option>
-                                    <option th:value="Ship">Ship</option>
+                                    <option value="Hotel">Hotel</option>
+                                    <option value="Ship">Ship</option>
                                 </select>
                             </div>
 
                             <!--Facilities-->
                             <div class="col-md-6 form-left">
-                                <input id="restaurantEdit" name="facilities.restaurant" class="checkbox" type="checkbox">Restaurant</input>
+                                <input id="restaurantEdit" name="facilities.restaurant" class="checkbox"
+                                       type="checkbox">Restaurant</input>
                             </div>
 
                             <div class="col-md-6 form-right">
-                                <input id="liftEdit" name="facilities.lift" class="checkbox" type="checkbox">Lift</input>
+                                <input id="liftEdit" name="facilities.lift" class="checkbox"
+                                       type="checkbox">Lift</input>
                             </div>
 
                             <div class="col-md-6 form-left">
-                                <input id="wifiEdit" name="facilities.wifi" class="checkbox" type="checkbox">Wifi</input>
+                                <input id="wifiEdit" name="facilities.wifi" class="checkbox"
+                                       type="checkbox">Wifi</input>
                             </div>
 
                             <div class="col-md-6 form-right">
-                                <input id="conferenceRoomEdit" name="facilities.conferenceRoom" class="checkbox" type="checkbox">Conference Room</input>
+                                <input id="conferenceRoomEdit" name="facilities.conferenceRoom" class="checkbox"
+                                       type="checkbox">Conference Room</input>
                             </div>
 
                             <div class="col-md-6 form-left">
-                                <input id="swimingPoolEdit" name="facilities.swimingPool" class="checkbox" type="checkbox">Swiming Pool</input>
+                                <input id="swimingPoolEdit" name="facilities.swimingPool" class="checkbox"
+                                       type="checkbox">Swiming Pool</input>
                             </div>
 
                             <div class="col-md-6 form-right">
-                                <input id="sportsZoneEdit" name="facilities.sportsZone" class="checkbox" type="checkbox">Sports Zone</input>
+                                <input id="sportsZoneEdit" name="facilities.sportsZone" class="checkbox"
+                                       type="checkbox">Sports Zone</input>
                             </div>
 
                             <div class="col-md-6 form-left">
-                                <input id="gymEdit" name="facilities.gym" class="checkbox" type="checkbox">Gymnesiam</input>
+                                <input id="gymEdit" name="facilities.gym" class="checkbox"
+                                       type="checkbox">Gymnesiam</input>
                             </div>
 
                             <div class="col-md-6 form-right">
@@ -82,48 +91,61 @@
                             </div>
 
 
-                            <hr/><span><b>Hotel Address</b></span><hr/>
+                            <hr/>
+                            <span><b>Hotel Address</b></span>
+                            <hr/>
                             <div class="form-group" id="address">
                                 <div class="col-sm-6 form-group">
                                     <label for="addressCountryEdit">Country</label>
-                                    <input class="form-control" name="address.country" id="addressCountryEdit" type="text" placeholder="Country" required="required"></input>
+                                    <input class="form-control" name="address.country" id="addressCountryEdit"
+                                           type="text" placeholder="Country" required="required"></input>
                                 </div>
                                 <div class="col-sm-6 form-group">
                                     <label for="addressCityEdit">City</label>
-                                    <input class="form-control" name="address.city" id="addressCityEdit" type="text" placeholder="City" required="required"></input>
+                                    <input class="form-control" name="address.city" id="addressCityEdit" type="text"
+                                           placeholder="City" required="required"></input>
                                 </div>
                                 <div class="col-sm-6 form-group">
                                     <label for="addressDistrictEdit">District</label>
-                                    <input name="address.district" class="form-control" id="addressDistrictEdit" type="text" placeholder="District" required="required"></input>
+                                    <input name="address.district" class="form-control" id="addressDistrictEdit"
+                                           type="text" placeholder="District" required="required"></input>
                                 </div>
                                 <div class="col-sm-6 form-group">
                                     <label for="addressUpazilaEdit">Upazila</label>
-                                    <input name="address.upazila" class="form-control" id="addressUpazilaEdit" type="text" placeholder="Upazila" required="required"></input>
+                                    <input name="address.upazila" class="form-control" id="addressUpazilaEdit"
+                                           type="text" placeholder="Upazila" required="required"></input>
                                 </div>
                                 <div class="col-sm-12 form-group">
                                     <label for="addressAreaEdit">Area</label>
-                                    <input name="address.area" class="form-control" id="addressAreaEdit" type="text" placeholder="Area" required="required"></input>
+                                    <input name="address.area" class="form-control" id="addressAreaEdit" type="text"
+                                           placeholder="Area" required="required"></input>
                                 </div>
                                 <div class="col-sm-12 form-group">
                                     <label for="addressMapDirectionFromEdit">Area</label>
-                                    <input name="address.mapDirectionFrom" class="form-control" id="addressMapDirectionFromEdit" type="text" placeholder="Direction from" required="required"></input>
+                                    <input name="address.mapDirectionFrom" class="form-control"
+                                           id="addressMapDirectionFromEdit" type="text" placeholder="Direction from"
+                                           required="required"></input>
                                 </div>
                             </div>
 
-                            <hr/><span><b>Extra</b></span><hr/>
+                            <hr/>
+                            <span><b>Extra</b></span>
+                            <hr/>
                             <div class="form-group">
                                 <label for="phoneNumberEdit">Phone Number</label>
-                                <input name="phoneNumber" class="form-control" id="phoneNumberEdit" type="text" placeholder="Phone"
+                                <input name="phoneNumber" class="form-control" id="phoneNumberEdit" type="text"
+                                       placeholder="Phone"
                                        required=""></input>
                             </div>
                             <div class="form-group">
                                 <label for="descriptionEdit">Hotel Description</label>
-                                <textarea name="description" id="descriptionEdit" class="form-control" placeholder="Hotel Description"
+                                <textarea name="description" id="descriptionEdit" class="form-control"
+                                          placeholder="Hotel Description"
                                           required="required"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="image">Hotel Picture</label>
-                                <input id="image" name="image"  type="file" placeholder="Image"></input>
+                                <input id="image" name="image" type="file" placeholder="Image"></input>
                             </div>
 
                             <!--User info-->
@@ -132,7 +154,8 @@
                             </div>
 
                             <div class="box-footer">
-                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">CANCEL</button>
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">CANCEL
+                                </button>
                                 <input class="btn btn-primary pull-right" type="submit" value="UPDATE HOTEL"></input>
                             </div>
                         </div>
