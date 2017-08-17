@@ -37,6 +37,8 @@ public class Booking extends BaseEntity {
     @OneToOne(mappedBy = "booking")
     private Invoice invoice;
 
+    private boolean cancelled;
+
     public boolean isValid() {
         // TODO: 6/7/17 TIME VALIDATION | MAKE SURE BOOKING TIME ISN'T PAST
         if (roomList == null || bookingDateList == null || roomList.size() != bookingDateList.size()) return false;
@@ -153,6 +155,14 @@ public class Booking extends BaseEntity {
         this.manualBooking = manualBooking;
     }
 
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
     @Override
     public String toString() {
         return "Booking{" +
@@ -163,6 +173,7 @@ public class Booking extends BaseEntity {
                 ", user=" + user +
                 ", hotel=" + hotel +
                 ", invoice=" + invoice +
-                '}';
+                ", cancelled=" + cancelled +
+                "} " + super.toString();
     }
 }

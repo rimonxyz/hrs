@@ -297,6 +297,32 @@
                 show: false
             }
         });
+
+        var donutDataSales = [
+//            {label: "Total Cost", data: $("#totalCost").text(), color: "red"},
+            {label: "HotelsWave.com", data: $("#autoSales").text(), color: "#00c0ef"},
+            {label: "Manual", data: $("#manualSales").text(), color: "#00a65a"}
+        ];
+        $.plot("#donut-chart-sales", donutDataSales, {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    innerRadius: 0.5,
+                    label: {
+                        show: true,
+                        radius: 2 / 3,
+                        formatter: labelFormatter,
+                        threshold: 0.1
+                    }
+
+                }
+            },
+            legend: {
+                show: false
+            }
+        });
+
         var donutDataCosts = [
 //            {label: "Total Cost", data: $("#totalCost").text(), color: "red"},
             {label: "Total Discount", data: $("#totalDiscount").text(), color: "#00c0ef"},
@@ -321,6 +347,7 @@
                 show: false
             }
         });
+
         /*
          * END DONUT CHART
          */
