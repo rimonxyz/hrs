@@ -1,3 +1,14 @@
+<section class="content-header">
+    <h1>
+        <span style="font-size: 50px; color: green;" th:text="${hotel?.name}"></span>
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a th:href="@{/admin/hotels}">All Hotels(Admin)</a></li>
+        <li class="active" th:text="${hotel?.name}"></li>
+    </ol>
+</section>
 <section class="content">
 
     <div class="row">
