@@ -140,7 +140,10 @@
                             <h5 th:text="${booking?.hotel?.name}"></h5>
                             </a>
                         </td>
-                        <td sec:authorize="!hasRole('ROLE_USER')" th:text="${booking?.user?.name}"></td>
+                        <td sec:authorize="!hasRole('ROLE_USER')">
+                            <span th:if="${!booking?.manualBooking}" th:text="${booking?.user?.name}"></span>
+                            <span th:if="${booking?.manualBooking}" th:text="${booking?.hotel?.name}"></span>
+                        </td>
                         <td th:text="${booking?.getRoomNumbersString()}"></td>
                         <td th:text="${booking?.getTotalPayableCost()}"></td>
                         <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
