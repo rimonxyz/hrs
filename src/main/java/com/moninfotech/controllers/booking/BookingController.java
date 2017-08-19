@@ -51,26 +51,32 @@ public class BookingController {
     private String myBookings(@CurrentUser User currentUser,
                               @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                               @RequestParam(value = "size", required = false, defaultValue = "10") Integer size,
-                              @RequestParam(value = "filterType",required = false,defaultValue = "") String filterType,
-                              @RequestParam(value = "filterValue",required = false,defaultValue = "") String filterValue,
+                              @RequestParam(value = "filterType", required = false, defaultValue = "") String filterType,
+                              @RequestParam(value = "filterValue", required = false, defaultValue = "") String filterValue,
+                              @RequestParam(value = "analDate", required = false, defaultValue = "") String analDate,
                               Model model) throws ParseException {
 
         // find booking list by role
         List<Booking> bookingList = this.bookingService.findBookings(currentUser, page, size);
-        List<Room> todaysBookedRoomList = this.bookingService.findFilteredRoomList(currentUser,new Date());
-        List<Room> todaysPlacedRoomList = this.bookingService.findFilteredRoomListByPlacementDateDistinct(currentUser,new Date());
+
+        Date date = null;
+        if (analDate == null || analDate.isEmpty()) date = new Date();
+        else date = DateUtils.getParsableDateFormat().parse(analDate);
+
+        List<Room> todaysBookedRoomList = this.bookingService.findFilteredRoomList(currentUser, date);
+        List<Room> todaysPlacedRoomList = this.bookingService.findFilteredRoomListByPlacementDateDistinct(currentUser, date);
 
         if (!filterType.isEmpty() && !filterValue.isEmpty())
-            bookingList = this.bookingService.filterBookingList(bookingList,filterType,filterValue);
+            bookingList = this.bookingService.filterBookingList(bookingList, filterType, filterValue);
         // find total placement price and count
 
         model.addAttribute("bookingHelper", new BookingHelper());
-        model.addAttribute("todaysDate", DateUtils.getParsableDateFormat().format(new Date()));
+        model.addAttribute("todaysDate", DateUtils.getParsableDateFormat().format(date));
         model.addAttribute("bookingList", bookingList);
         model.addAttribute("todaysPlacedRoomList", todaysPlacedRoomList);
-        model.addAttribute("todaysPlacedRoomListSize", this.bookingService.findFilteredRoomListByPlacementDate(currentUser,new Date()).size());
+        model.addAttribute("todaysPlacedRoomListSize", this.bookingService.findFilteredRoomListByPlacementDate(currentUser, new Date()).size());
         model.addAttribute("bookedRoomList", todaysBookedRoomList);
-        model.addAttribute("hotelList",this.hotelService.findAll());
+        model.addAttribute("hotelList", this.hotelService.findAll());
 
         model.addAttribute("template", "fragments/booking/all");
         return "adminlte/index";

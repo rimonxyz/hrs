@@ -11,13 +11,17 @@
 </section>
 
 <section class="content">
-
     <div class="row" sec:authorize="!hasRole('ROLE_USER')">
         <div class="col-sm-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Todays Bookings (Order placed today)</h3><br/>
+                    <h3 class="box-title">Bookings (Order placed by date)</h3><br/>
                     <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
+                    <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormBookings" method="get">
+                        <input class="form-control" name="analDate" type="date" id="analDateFilterBookings"
+                               th:value="${date}" th:value="${todaysDate}"></input>
+                    </form>
+                    <!--<h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>-->
                 </div>
 
                 <table class="table table-bordered">
@@ -58,8 +62,12 @@
         <div class="col-sm-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Todays Sales (Todays Booked Rooms)</h3><br/>
+                    <h3 class="box-title">Sales (Booked Rooms by date)</h3><br/>
                     <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
+                    <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormSales" method="get">
+                        <input class="form-control" name="analDate" type="date" id="analDateFilterSales"
+                               th:value="${date}" th:value="${todaysDate}"></input>
+                    </form>
                 </div>
 
                 <table class="table table-bordered">
@@ -102,7 +110,7 @@
         <div class="col-sm-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <h3 class="box-title" sec:authorize="hasRole('ROLE_USER')">
                             <a th:href="@{/bookings}">My Bookings</a>
                         </h3>
@@ -110,8 +118,12 @@
                             <a th:href="@{/bookings}">All Bookings</a>
                         </h3>
                     </div>
-                    <div class="col-sm-4">
-                        <form class="form" th:action="@{/bookings}" method="get">
+                    <div class="col-sm-8">
+                        <form class="form col-sm-6" th:action="@{/bookings}" id="dateFilterForm" method="get">
+                            <input name="filterType" type="hidden" value="date"></input>
+                            <input class="form-control" name="filterValue" type="date" id="dateFilter"/>
+                        </form>
+                        <form class="form col-sm-6" th:action="@{/bookings}" method="get">
                             <input type="hidden" name="filterType" value="hotelName">
                             <datalist id="hotels" th:if="${hotelList!=null}">
                                 <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}" th:text="${hotel?.name}"></option>

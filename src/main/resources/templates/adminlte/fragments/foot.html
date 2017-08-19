@@ -506,6 +506,12 @@
     $("#categoryFilter").on("change", function (form) {
         $("#catFilterForm").submit();
     });
+    $("#analDateFilterBookings").on("change", function (form) {
+        $("#analDateFilterFormBookings").submit();
+    });
+    $("#analDateFilterSales").on("change", function (form) {
+        $("#analDateFilterFormSales").submit();
+    });
     // on click edit room button modal
     var onRoomItemClick = function (element, roomId) {
         console.log("" + roomId);

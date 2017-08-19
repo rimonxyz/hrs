@@ -17,6 +17,8 @@ import java.util.List;
 @Component
 public class DateUtils {
 
+    public static final String PARSABLE_DATE_FORMAT = "yyyy-MM-dd";
+
     public static boolean isSameDay(Date date1, Date date2) {
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
@@ -54,7 +56,7 @@ public class DateUtils {
     }
 
     public static SimpleDateFormat getParsableDateFormat() {
-        return new SimpleDateFormat("yyyy-MM-dd");
+        return new SimpleDateFormat(DateUtils.PARSABLE_DATE_FORMAT);
     }
 
     public static boolean containsDate(List<Date> bookingDateList, Date date) {
@@ -73,4 +75,5 @@ public class DateUtils {
         }
         return true;
     }
+
 }
