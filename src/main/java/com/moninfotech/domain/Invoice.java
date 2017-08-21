@@ -1,8 +1,6 @@
 package com.moninfotech.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -19,8 +17,18 @@ public class Invoice extends BaseEntity {
     @OneToOne
     private Booking booking;
 
+    private boolean paid;
+
     public Invoice() {
     }
+
+//    @PrePersist
+//    @PreUpdate
+//    void confirmBooking(){
+//        if (this.isPaid()) {
+//            this.booking.setConfirmed(true);
+//        }
+//    }
 
     public Invoice(Date dueDate, User user, Booking booking) {
         this.dueDate = dueDate;
@@ -54,5 +62,14 @@ public class Invoice extends BaseEntity {
 
     public void setBooking(Booking booking) {
         this.booking = booking;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.booking.setConfirmed(paid);
+        this.paid = paid;
     }
 }

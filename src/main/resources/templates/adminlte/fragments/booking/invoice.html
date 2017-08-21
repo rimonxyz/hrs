@@ -4,7 +4,10 @@
         <div class="col-xs-12">
             <h2 class="page-header">
                 <i class="fa fa-globe"></i> Hotels BD
-                <small class="pull-right" th:text="${invoice?.getReadableDateTime(invoice?.created)}">Date: 2/10/2014</small>
+                <div class="pull-right">
+                    <strong th:text="${invoice?.paid}?'Paid':'Unpaid' "></strong><br/>
+                    <small th:text="${invoice?.getReadableDateTime(invoice?.created)}">Date: 2/10/2014</small>
+                </div>
             </h2>
         </div>
         <!-- /.col -->
@@ -88,6 +91,7 @@
             <img th:src="@{/adminlte/dist/img/credit/american-express.png}" alt="American Express">
             <img th:src="@{/adminlte/dist/img/credit/paypal2.png}" alt="Paypal">
 
+
             <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
                 Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
                 dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
@@ -122,7 +126,58 @@
     <div class="row no-print">
         <div class="col-xs-12">
             <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-            <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
+            <form class="pull-right" id="payment_gw" name="payment_gw" method="POST" action="https://sandbox.sslcommerz.com/gwprocess/v3/process.php">
+                <input type="hidden" name="total_amount" value="1150.00" />
+                <input type="hidden" name="store_id" value="testbox" />
+                <input type="hidden" name="tran_id" value="REF011212" />
+                <input type="hidden" name="success_url" th:value="@{http://localhost:8080/invoices/}+${invoice?.id}+@{/payment/success}" />
+                <input type="hidden" name="fail_url" value="URL/fail.php" />
+                <input type="hidden" name="cancel_url" value="URL/cancel.php" />
+                <input type="hidden" name="version" value="3.00" />
+
+                <!-- Customer Information !-->
+                <input type="hidden" name="cus_name" value="ABC XYZ">
+                <input type="hidden" name="cus_email" value="abc.xyz@mail.com">
+                <input type="hidden" name="cus_add1" value="Address Line One">
+                <input type="hidden" name="cus_add2" value="Address Line Two">
+                <input type="hidden" name="cus_city" value="City Name">
+                <input type="hidden" name="cus_state" value="State Name">
+                <input type="hidden" name="cus_postcode" value="Post Code">
+                <input type="hidden" name="cus_country" value="Country">
+                <input type="hidden" name="cus_phone" value="01111111111">
+                <input type="hidden" name="cus_fax" value="01711111111">
+
+                <!-- Shipping Information !-->
+                <input type="hidden" name="ship_name" value="ABC XYZ">
+                <input type="hidden" name="ship_add1" value="Address Line One">
+                <input type="hidden" name="ship_add2" value="Address Line Two">
+                <input type="hidden" name="ship_city" value="City Name">
+                <input type="hidden" name="ship_state" value="State Name">
+                <input type="hidden" name="ship_postcode" value="Post Code">
+                <input type="hidden" name="ship_country" value="Country">
+
+                <!-- Optional Parameters which will be stored and returned at the end !-->
+                <input type="hidden" name="value_a" value="ref001">
+                <input type="hidden" name="value_b" value="ref002">
+                <input type="hidden" name="value_c" value="ref003">
+                <input type="hidden" name="value_d" value="ref004">
+
+                <!-- PRODUCT 1 !-->
+                <input type="hidden" name="cart[0][product]" value="FRESH HOME MADE BREAD 350GM" />
+                <input type="hidden" name="cart[0][amount]" value="500.00" />
+
+                <!-- PRODUCT 2 !-->
+                <input type="hidden" name="cart[1][product]" value="FRESH HOME MADE BREAD 350GM Quantity(1)" />
+                <input type="hidden" name="cart[1][amount]" value="600.00">
+
+                <!-- PRODUCT 3 !-->
+                <input type="hidden" name="cart[2][product]" value="SHIPMENT CHARGE" />
+                <input type="hidden" name="cart[2][amount]" value="50.00" />
+
+                <!-- SUBMIT REQUEST  !-->
+                <button class="btn btn-danger" type="submit" name="submit"><i class="fa fa-credit-card"></i>&nbsp;Pay Now</button>
+            </form>
+            <!--<button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment-->
             </button>
             <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
                 <i class="fa fa-download"></i> Generate PDF
