@@ -239,6 +239,10 @@ public class BookingServiceImpl implements BookingService {
             return bookingList.stream()
                     .filter(booking -> DateUtils.isSameDay(booking.getCreated(),filterDate))
                     .collect(Collectors.toList());
+        }else if (filterType.equals(FilterType.HOTEL_TYPE)){
+            return bookingList.stream()
+                    .filter(booking -> booking.getHotel().getType().toLowerCase().equals(filterValue.toLowerCase()))
+                    .collect(Collectors.toList());
         }
         return bookingList;
     }

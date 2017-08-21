@@ -11,4 +11,6 @@ public class FilterType {
     public static final String RATING = "rating";
 
     public static final String HOTEL_NAME = "hotelName";
+    public static final String HOTEL_TYPE = "hotelType";
+
 }

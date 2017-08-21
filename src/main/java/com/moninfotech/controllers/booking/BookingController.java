@@ -77,6 +77,7 @@ public class BookingController {
         model.addAttribute("todaysPlacedRoomListSize", this.bookingService.findFilteredRoomListByPlacementDate(currentUser, new Date()).size());
         model.addAttribute("bookedRoomList", todaysBookedRoomList);
         model.addAttribute("hotelList", this.hotelService.findAll());
+        model.addAttribute("filterValue",filterValue);
 
         model.addAttribute("template", "fragments/booking/all");
         return "adminlte/index";

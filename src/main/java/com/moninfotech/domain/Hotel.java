@@ -58,7 +58,7 @@ public class Hotel extends BaseEntity {
     public float getAverageRating() {
         if (reviewList == null) return 0f;
         float sum = (float) this.reviewList.stream()
-                .mapToDouble(review -> review.getRating())
+                .mapToDouble(Review::getRating)
                 .sum();
         return sum / this.reviewList.size();
     }

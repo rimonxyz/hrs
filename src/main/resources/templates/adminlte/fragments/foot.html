@@ -500,6 +500,9 @@
 
 <script>
     // filter  actions
+    $("#typeFilter").on("change", function (form) {
+        $("#typeFilterForm").submit();
+    });
     $("#dateFilter").on("change", function (form) {
         $("#dateFilterForm").submit();
     });

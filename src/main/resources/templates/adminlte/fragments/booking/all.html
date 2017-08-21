@@ -19,7 +19,7 @@
                     <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
                     <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormBookings" method="get">
                         <input class="form-control" name="analDate" type="date" id="analDateFilterBookings"
-                               th:value="${date}" th:value="${todaysDate}"></input>
+                                th:value="${todaysDate}"></input>
                     </form>
                     <!--<h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>-->
                 </div>
@@ -45,14 +45,15 @@
                         <td th:text="${room?.category?.name}"></td>
                         <td th:text="${room?.getBookingDatesString(true)}"></td>
                         <!--<td th:text="${todaysPlacedRoomListSize}"></td>-->
-                        <td th:text="${room?.getDiscountedPrice(todaysDate)}"></td>
+                        <td>৳<span th:text="${room?.getDiscountedPrice(todaysDate)}"></span></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td>Total</td>
-                        <td th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,todaysDate)*todaysPlacedRoomListSize}"></td>
+                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,todaysDate)*todaysPlacedRoomListSize}"></span></td>
                     </tr>
                 </table>
             </div>
@@ -66,7 +67,7 @@
                     <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
                     <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormSales" method="get">
                         <input class="form-control" name="analDate" type="date" id="analDateFilterSales"
-                               th:value="${date}" th:value="${todaysDate}"></input>
+                               th:value="${todaysDate}"></input>
                     </form>
                 </div>
 
@@ -88,14 +89,15 @@
                             <!--</a>-->
                         </td>
                         <td th:text="${room?.category?.name}"></td>
-                        <td th:text="${room?.getDiscountedPrice(todaysDate)}"></td>
+                        <td>৳<span th:text="${room?.getDiscountedPrice(todaysDate)}"></span></td>
 
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td>Total</td>
-                        <td th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,todaysDate)}"></td>
+                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,todaysDate)}"></span></td>
                     </tr>
                 </table>
             </div>
@@ -119,11 +121,18 @@
                         </h3>
                     </div>
                     <div class="col-sm-8">
-                        <form class="form col-sm-6" th:action="@{/bookings}" id="dateFilterForm" method="get">
+                        <form sec:authorize="hasRole('ROLE_ADMIN')" class="form col-sm-4" th:action="@{/bookings}" id="typeFilterForm" method="get">
+                            <input name="filterType" type="hidden" value="hotelType"></input>
+                            <select class="form-control" name="filterValue" id="typeFilter">
+                                <option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel</option>
+                                <option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship</option>
+                            </select>
+                        </form>
+                        <form class="form col-sm-4" th:action="@{/bookings}" id="dateFilterForm" method="get">
                             <input name="filterType" type="hidden" value="date"></input>
                             <input class="form-control" name="filterValue" type="date" id="dateFilter"/>
                         </form>
-                        <form class="form col-sm-6" th:action="@{/bookings}" method="get">
+                        <form class="form col-sm-4" th:action="@{/bookings}" method="get">
                             <input type="hidden" name="filterType" value="hotelName">
                             <datalist id="hotels" th:if="${hotelList!=null}">
                                 <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}" th:text="${hotel?.name}"></option>
@@ -137,16 +146,18 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>Sl</th>
+                        <th>Booking ID</th>
                         <th sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">Hotel Name</th>
                         <th sec:authorize="!hasRole('ROLE_USER')">User's Name</th>
                         <th>Rooms</th>
                         <!--<th>Total Rooms</th>-->
                         <th>Room Rent</th>
                         <th sec:authorize="hasRole('ROLE_USER')">You Saved</th>
-                        <th>Placed On</th>
+                        <!--<th>Placed On</th>-->
                     </tr>
                     <tr th:if="${bookingList != null}" th:each="booking,iter : ${bookingList}">
                         <td th:text="${iter.index+1}"></td>
+                        <td th:text="${booking?.id}"></td>
                         <td sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
                             <a th:href="@{/bookings/}+${booking?.id}">
                             <h5 th:text="${booking?.hotel?.name}"></h5>
@@ -157,9 +168,9 @@
                             <span th:if="${booking?.manualBooking}" th:text="${booking?.hotel?.name}"></span>
                         </td>
                         <td th:text="${booking?.getRoomNumbersString()}"></td>
-                        <td th:text="${booking?.getTotalPayableCost()}"></td>
+                        <td>৳<span th:text="${booking?.getTotalPayableCost()}"></span></td>
                         <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
-                        <td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>
+                        <!--<td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>-->
                         <td>
                             <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
                             <a sec:authorize="!hasAnyRole('ROLE_ADMIN','ROLE_HOTEL_ADMIN')" class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
