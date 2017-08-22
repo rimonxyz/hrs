@@ -153,6 +153,7 @@
                         <!--<th>Total Rooms</th>-->
                         <th>Room Rent</th>
                         <th sec:authorize="hasRole('ROLE_USER')">You Saved</th>
+                        <th>Confirmed</th>
                         <!--<th>Placed On</th>-->
                     </tr>
                     <tr th:if="${bookingList != null}" th:each="booking,iter : ${bookingList}">
@@ -171,6 +172,7 @@
                         <td>৳<span th:text="${booking?.getTotalPayableCost()}"></span></td>
                         <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
                         <!--<td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>-->
+                        <td th:text="${booking?.confirmed}"></td>
                         <td>
                             <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
                             <a sec:authorize="!hasAnyRole('ROLE_ADMIN','ROLE_HOTEL_ADMIN')" class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a

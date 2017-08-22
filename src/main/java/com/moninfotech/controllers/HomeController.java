@@ -60,7 +60,7 @@ public class HomeController {
     private String dashboard(@CurrentUser User currentUser, Model model) {
         model.addAttribute("bookingHelper", new BookingHelper());
 
-        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser, null, null));
+        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser,true, null, null));
         model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser, true));
         model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser, false));
         model.addAttribute("template", "fragments/dashboard/dashboard");
