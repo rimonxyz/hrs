@@ -10,10 +10,7 @@ import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
-import com.moninfotech.service.BookingService;
-import com.moninfotech.service.HotelService;
-import com.moninfotech.service.RoomService;
-import com.moninfotech.service.UserService;
+import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,16 +32,18 @@ public class BookingController {
     private final RoomService roomService;
     private final UserService userService;
     private final HotelService hotelService;
+    private final InvoiceService invoiceService;
 
     @Autowired
     public BookingController(BookingService bookingService,
                              RoomService roomService,
                              UserService userService,
-                             HotelService hotelService) {
+                             HotelService hotelService, InvoiceService invoiceService) {
         this.bookingService = bookingService;
         this.roomService = roomService;
         this.userService = userService;
         this.hotelService = hotelService;
+        this.invoiceService = invoiceService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -77,6 +76,7 @@ public class BookingController {
         model.addAttribute("todaysPlacedRoomListSize", this.bookingService.findFilteredRoomListByPlacementDate(currentUser, new Date()).size());
         model.addAttribute("bookedRoomList", todaysBookedRoomList);
         model.addAttribute("hotelList", this.hotelService.findAll());
+        model.addAttribute("invoiceList",this.invoiceService.findByUser(currentUser,false));
         model.addAttribute("filterValue",filterValue);
 
         model.addAttribute("template", "fragments/booking/all");

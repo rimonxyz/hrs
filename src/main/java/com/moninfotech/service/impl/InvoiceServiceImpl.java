@@ -33,8 +33,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public List<Invoice> findByUser(User user) {
-        return this.invoiceRepo.findByUser(user);
+    public List<Invoice> findByUser(User user, boolean isPaid) {
+        return this.invoiceRepo.findByUserAndPaid(user, isPaid);
     }
 
     @Override

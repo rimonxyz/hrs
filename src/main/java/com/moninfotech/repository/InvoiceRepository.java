@@ -13,6 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice,Long>{
-    List<Invoice> findByUser(User user);
+    List<Invoice> findByUserAndPaid(User user,boolean paid);
     Invoice findByBooking(Booking booking);
 }

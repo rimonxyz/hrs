@@ -71,7 +71,7 @@
                     <td th:text="${iter.index}">1</td>
                     <td th:text="${room?.roomNumber}">Call of Duty</td>
                     <td th:text="${room?.getReadableDayMonth(invoice?.booking?.getBookingDateList()?.get(iter.index))}">455-981-221</td>
-                    <td th:text="${room?.getDiscount(invoice?.booking?.bookingDateList?.get(iter.index))}">El snort testosterone trophy driving gloves handsome</td>
+                    <td>৳<span th:text="${room?.getDiscount(invoice?.booking?.bookingDateList?.get(iter.index))}"></span></td>
                     <td>৳<span th:text="${room?.getDiscountedPrice(invoice?.booking?.bookingDateList?.get(iter.index))}"></span></td>
                 </tr>
 
