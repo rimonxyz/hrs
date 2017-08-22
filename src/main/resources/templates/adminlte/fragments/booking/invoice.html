@@ -175,7 +175,7 @@
                 <input type="hidden" name="cart[2][amount]" value="50.00" />
 
                 <!-- SUBMIT REQUEST  !-->
-                <button class="btn btn-danger" type="submit" name="submit"><i class="fa fa-credit-card"></i>&nbsp;Pay Now</button>
+                <button class="btn btn-danger" th:disabled="${invoice?.paid}" name="submit"><i class="fa fa-credit-card"></i>&nbsp;Pay Now</button>
             </form>
             <!--<button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment-->
             </button>
