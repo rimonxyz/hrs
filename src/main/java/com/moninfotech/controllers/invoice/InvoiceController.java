@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -55,6 +53,14 @@ public class InvoiceController {
         model.addAttribute("invoice", invoice);
         model.addAttribute("template", "fragments/booking/invoice");
         return "adminlte/index";
+    }
+
+    @PostMapping("/{invoiceId}/payment/success")
+    private String paymentSuccess(@PathVariable("invoiceId")Long invoiceId){
+        Invoice invoice = this.invoiceService.findOne(invoiceId);
+        invoice.setPaid(true);
+        invoice = this.invoiceService.save(invoice);
+        return "redirect:/invoices/generate/"+invoice.getBooking().getId()+"?messagesuccess=Payment Successful!";
     }
 
     private Date nextDay() {

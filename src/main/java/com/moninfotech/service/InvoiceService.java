@@ -14,7 +14,7 @@ public interface InvoiceService {
 
     Invoice findOne(Long id);
 
-    List<Invoice> findByUser(User user);
+    List<Invoice> findByUser(User user,boolean isPaid);
 
     Invoice findByBooking(Booking booking);
 

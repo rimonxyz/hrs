@@ -37,6 +37,7 @@ public class Booking extends BaseEntity {
     @OneToOne(mappedBy = "booking")
     private Invoice invoice;
 
+    private boolean confirmed;
     private boolean cancelled;
 
     public boolean isValid() {
@@ -175,5 +176,13 @@ public class Booking extends BaseEntity {
                 ", invoice=" + invoice +
                 ", cancelled=" + cancelled +
                 "} " + super.toString();
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
     }
 }

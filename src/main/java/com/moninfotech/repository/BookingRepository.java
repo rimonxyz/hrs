@@ -16,8 +16,15 @@ import java.util.List;
  */
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    List<Booking> findByUser(User user);
-    List<Booking> findByHotel(Hotel hotel);
-    Page<Booking> findByUser(User user, Pageable pageable);
-    Page<Booking> findByHotel(Hotel hotel, Pageable pageable);
+    List<Booking> findByCancelledFalseAndConfirmed(boolean isConfirmed);
+
+    List<Booking> findByUserAndCancelledFalseAndConfirmed(User user, boolean isConfirmed);
+
+    List<Booking> findByHotelAndCancelledFalseAndConfirmed(Hotel hotel, boolean isConfirmed);
+
+    Page<Booking> findByUserAndCancelledFalseAndConfirmed(User user, boolean isConfirmed, Pageable pageable);
+
+    Page<Booking> findByHotelAndCancelledFalseAndConfirmed(Hotel hotel, boolean isConfirmed, Pageable pageable);
+
+    Page<Booking> findByCancelledFalseAndConfirmed(boolean isConfirmed, Pageable pageable);
 }

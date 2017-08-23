@@ -132,9 +132,11 @@ public class Room extends BaseEntity {
 
     // gives booking status for a specific date for a room
     public boolean isBooked(Date date) {
-        for (int i = 0; i < this.bookingList.size(); i++) {
-            if (DateUtils.containsDate(this.bookingList.get(i).getBookingDateList(), date))
-                return true;
+        for (Booking booking : this.bookingList) {
+            // check if booking is confirmed
+            if (booking.isConfirmed() && !booking.isCancelled())
+                if (DateUtils.containsDate(booking.getBookingDateList(), date))
+                    return true;
         }
         return false;
     }
@@ -150,18 +152,22 @@ public class Room extends BaseEntity {
     public List<Date> getBookingDates(boolean placedToday) {
         List<Date> dateList = new ArrayList<>();
         for (Booking booking : this.bookingList) {
-            if (placedToday) {
-                // filter bookings of this room by todays date
-                if (DateUtils.isSameDay(booking.getCreated(), new Date())) {
-                    dateList.addAll(this.getBookingDates(this, booking));
+            // check if booking is confirmed
+            if (booking.isConfirmed() && !booking.isCancelled()) {
+                if (placedToday) {
+                    // filter bookings of this room by todays date
+                    if (DateUtils.isSameDay(booking.getCreated(), new Date())) {
+                        dateList.addAll(this.getBookingDates(this, booking));
+                    }
+                } else {
+                    dateList = this.getBookingDates(this, booking);
                 }
-            } else {
-                dateList = this.getBookingDates(this, booking);
             }
         }
         return dateList;
     }
 
+    // all booking dates for a room in a booking
     private List<Date> getBookingDates(Room room, Booking booking) {
         List<Date> dateList = new ArrayList<>();
         for (int i = 0; i < booking.getRoomList().size() && i < booking.getBookingDateList().size(); i++) {
