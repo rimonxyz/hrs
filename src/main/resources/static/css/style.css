@@ -71,7 +71,8 @@ a:focus, a:hover {
 .top {
 
     border-bottom: 1px solid #bbb;
-    padding: 25px;
+    padding: 0px;
+    /*padding: 25px;*/
 }
 .top-left {
     float: left;

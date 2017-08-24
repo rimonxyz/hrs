@@ -34,36 +34,25 @@
 
                         <li><a href="#"><h3>Hotel Facilities </h3><span class="pull-right badge bg-red"
                         ></span></a>
+                        <li th:if="${hotel?.facilities?.restaurant}"><a href="#">Restaurant<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
-                        <li><a href="#">Restaurant<span class="pull-right badge bg-red"
-                                                        th:text="${hotel?.facilities?.restaurant? 'yes' : 'No'}">842</span></a>
+                        <li th:if="${hotel?.facilities?.lift}"><a href="#">Lift<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
-                        <li><a href="#">Lift<span class="pull-right badge bg-red"
-                                                  th:text="${hotel?.facilities?.lift? 'yes' : 'No'}">842</span></a>
+                        <li th:if="${hotel?.facilities?.wifi}"><a href="#">Wifi<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
-                        <li><a href="#">Wifi<span class="pull-right badge bg-red"
-                                                  th:text="${hotel?.facilities?.wifi? 'yes' : 'No'}">842</span></a>
+                        <li th:if="${hotel?.facilities?.conferenceRoom}"><a href="#">Conference Room<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
-                        <li><a href="#">Conference Room<span class="pull-right badge bg-red"
-                                                             th:text="${hotel?.facilities?.conferenceRoom? 'yes' : 'No'}">842</span></a>
+                        <li th:if="${hotel?.facilities?.swimingPool}"><a href="#">Swiming Pool<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
-                        <li><a href="#">Swiming Pool<span class="pull-right badge bg-red"
-                                                          th:text="${hotel?.facilities?.swimingPool? 'yes' : 'No'}">842</span></a>
+                        <li th:if="${hotel?.facilities?.sportsZone}"><a href="#">Sports Zone<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
-                        <li><a href="#">Sports Zone<span class="pull-right badge bg-red"
-                                                         th:text="${hotel?.facilities?.sportsZone? 'yes' : 'No'}">842</span></a>
+                        <li th:if="${hotel?.facilities?.gym}"><a href="#">Gymnesiam<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
-                        <li><a href="#">Gymnesiam<span class="pull-right badge bg-red"
-                                                       th:text="${hotel?.facilities?.gym? 'yes' : 'No'}">842</span></a>
+                        <li th:if="${hotel?.facilities?.spa}"><a href="#">SPA<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
-                        <li><a href="#">SPA<span class="pull-right badge bg-red"
-                                                 th:text="${hotel?.facilities?.spa? 'yes' : 'No'}">842</span></a>
+                        <li th:if="${hotel?.facilities?.bar}"><a href="#">Bar<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
-                        <li><a href="#">Bar<span class="pull-right badge bg-red"
-                                                 th:text="${hotel?.facilities?.bar? 'yes' : 'No'}">842</span></a>
-                        </li>
-                        <li><a href="#">Helipad<span class="pull-right badge bg-red"
-                                                     th:text="${hotel?.facilities?.helipad? 'yes' : 'No'}">842</span></a>
+                        <li th:if="${hotel?.facilities?.helipad}"><a href="#">Helipad<i class="glyphicon glyphicon-ok pull-right"></i></a>
                         </li>
 
                     </ul>
@@ -243,11 +232,11 @@
                                 </h3>
                                 <h5 class="widget-user-desc">
 
-                        <span th:if="${bookedIds?.contains(room?.id)}">
-                            <kbd th:if="${!filterType.equals('category')}">Booked!</kbd>
-                        </span>
+                                    <span th:if="${bookedIds?.contains(room?.id)}">
+                                        <kbd th:if="${!filterType.equals('category')}">Booked!</kbd>
+                                    </span>
                                     <span th:unless="${bookedIds?.contains(room?.id)}"><kbd>Available</kbd></span>
-
+                                    <kbd class="pull-right" th:text="${room?.facilities?.airConditioned? 'AC' : 'Non AC'}">NON AC</kbd>
                                 </h5>
                             </a>
                         </div>

@@ -44,10 +44,20 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="active"><a th:href="@{/dashboard}"><i class="fa fa-circle-o"></i>Dashboard</a></li>
-                    <li><a th:href="@{/hotels}"><i class="fa fa-circle-o"></i>All Hotels</a></li>
-                    <li><a th:href="@{/ships}"><i class="fa fa-circle-o"></i>All Ships</a></li>
                 </ul>
             </li>
+            <!--<li class="treeview">-->
+                <!--<a href="#">-->
+                    <!--<i class="fa fa-dashboard"></i> <span>Dashboard</span>-->
+                    <!--<span class="pull-right-container">-->
+                      <!--<i class="fa fa-angle-left pull-right"></i>-->
+                    <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a th:href="@{/hotels}"><i class="fa fa-circle-o"></i>All Hotels</a></li>-->
+                    <!--<li><a th:href="@{/ships}"><i class="fa fa-circle-o"></i>All Ships</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
             <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')" class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
@@ -57,10 +67,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a th:href="@{/hotel/rooms}"><i class="fa fa-circle-o"></i>My Rooms</a></li>
+                    <li><a th:href="@{/hotel/rooms}"><i class="fa fa-circle-o"></i>My Hotel</a></li>
                     <!--<li><a th:href="@{/hotel/rooms/create}"><i class="fa fa-circle-o"></i>Create New Room</a></li>-->
-                    <li><a th:if="${hotel}" th:href="@{/hotels/}+${hotel?.id}"><i class="fa fa-circle-o"></i>Offline
-                        Booking</a></li>
+                    <!--<li><a th:if="${hotel}" th:href="@{/hotels/}+${hotel?.id}"><i class="fa fa-circle-o"></i>Offline-->
+                        <!--Booking</a></li>-->
                 </ul>
             </li>
             <li class="treeview">
@@ -82,7 +92,7 @@
                         <a th:href="@{/bookings}"><i class="fa fa-circle-o"></i>All Bookings</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_USER')">
-                        <a th:href="@{/hotels}"><i class="fa fa-circle-o"></i> New Booking</a>
+                        <a th:href="@{/hotels}"><i class="fa fa-circle-o"></i> Book Now</a>
                     </li>
                 </ul>
             </li>
