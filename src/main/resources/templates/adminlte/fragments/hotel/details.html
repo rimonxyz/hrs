@@ -119,9 +119,37 @@
                      th:src="@{/hotels/images/}+${hotel?.id}">
             </div>
             <div class="row">
-                <p hidden="hidden" id="mapSource" th:text="${hotel?.address?.mapDirectionFrom}">Coxs Bazar</p>
-                <p hidden="hidden" id="mapDestination" th:text="${hotel?.address?.getCommaSeperatedString()}"></p>
-                <iframe id="directionMap" class="col-sm-12" height="300"></iframe>
+                <!--all room number-->
+                <div sec:authorize="hasRole('ROLE_HOTEL_ADMIN')" id="partners" class="tm_pb_section tm_pb_anchor tm_pb_section_9 tm_section_regular tm_section_transparent">
+                    <hr/>
+                    <div class="container">
+                        <div class=" row tm_pb_row tm_pb_row_14">
+                            <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_27 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
+                                <div class="dashblue text-uppercase text-center">
+                                    <h3>Room numbers</h3>
+                                </div>
+
+                                <div class="allRoomNumber">
+                                    <div class="col-xs-1 roomBox" th:each="room : ${roomList}"
+                                         th:classappend="${bookedIds?.contains(room?.id)} ? bg-yellow : bg-aqua-active">
+                                        <span th:text="${room?.roomNumber}"></span>
+                                    </div>
+                                </div>
+                                <!-- .tm_pb_brands_showcase_module__wrapper -->
+                            </div>
+                            <!-- .tm_pb_column -->
+                        </div>
+                        <!-- .tm_pb_row -->
+                    </div>
+                    <hr/>
+                </div>
+                <!--end all room number-->
+
+                <div sec:authorize="hasRole('ROLE_USER')">
+                    <p hidden="hidden" id="mapSource" th:text="${hotel?.address?.mapDirectionFrom}">Coxs Bazar</p>
+                    <p hidden="hidden" id="mapDestination" th:text="${hotel?.address?.getCommaSeperatedString()}"></p>
+                    <iframe id="directionMap" class="col-sm-12" height="300"></iframe>
+                </div>
             </div>
             <!--BOOKING SESSION ITEMS-->
             <div class="row panel panel-primary"

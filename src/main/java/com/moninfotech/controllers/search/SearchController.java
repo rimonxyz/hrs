@@ -18,11 +18,15 @@ import java.util.List;
 @RequestMapping(value = "/search")
 public class SearchController {
 
+    private final HotelService hotelService;
+
     @Autowired
-    private HotelService hotelService;
+    public SearchController(HotelService hotelService) {
+        this.hotelService = hotelService;
+    }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String search(@RequestParam("query") String query,
+    private String search(@RequestParam(value = "query",required = false,defaultValue = "") String query,
                           @RequestParam(value = "isDesc", required = false) boolean isDesc,
                           @RequestParam(value = "page", required = false,defaultValue = "0") Integer page,
                           @RequestParam(value = "sortBy", required = false) String soryBy,
