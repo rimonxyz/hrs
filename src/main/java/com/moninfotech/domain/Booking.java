@@ -18,6 +18,7 @@ public class Booking extends BaseEntity {
 
     @OneToOne
     private Transaction transaction;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Room> roomList;

@@ -1,21 +1,26 @@
 package com.moninfotech.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  * Created by sayemkcn on 3/23/17.
  */
 @Entity
 public class Transaction extends BaseEntity {
-    private boolean status;
+    private boolean success;
     private int amount;
+    private boolean isDebit;
 
-    public boolean isStatus() {
-        return status;
+    @OneToOne(mappedBy = "transaction")
+    private PaymentInfo paymentInfo;
+
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public int getAmount() {
@@ -26,11 +31,29 @@ public class Transaction extends BaseEntity {
         this.amount = amount;
     }
 
+    public boolean isDebit() {
+        return isDebit;
+    }
+
+    public void setDebit(boolean debit) {
+        isDebit = debit;
+    }
+
+    public PaymentInfo getPaymentInfo() {
+        return paymentInfo;
+    }
+
+    public void setPaymentInfo(PaymentInfo paymentInfo) {
+        this.paymentInfo = paymentInfo;
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +
-                "status=" + status +
+                "success=" + success +
                 ", amount=" + amount +
+                ", isDebit=" + isDebit +
+                ", paymentInfo=" + paymentInfo +
                 "} " + super.toString();
     }
 }

@@ -1,10 +1,7 @@
 package com.moninfotech.controllers.invoice;
 
 import com.moninfotech.commons.Constants;
-import com.moninfotech.domain.Booking;
-import com.moninfotech.domain.Hotel;
-import com.moninfotech.domain.Invoice;
-import com.moninfotech.domain.User;
+import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.BookingService;
 import com.moninfotech.service.HotelService;
@@ -13,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
@@ -27,13 +25,11 @@ public class InvoiceController {
 
     private final BookingService bookingService;
     private final InvoiceService invoiceService;
-    private final HotelService hotelService;
 
     @Autowired
     public InvoiceController(BookingService bookingService, InvoiceService invoiceService, HotelService hotelService) {
         this.bookingService = bookingService;
         this.invoiceService = invoiceService;
-        this.hotelService = hotelService;
     }
 
     @GetMapping("/generate/{bookingId}")
@@ -56,11 +52,29 @@ public class InvoiceController {
     }
 
     @PostMapping("/{invoiceId}/payment/success")
-    private String paymentSuccess(@PathVariable("invoiceId")Long invoiceId){
+    private String paymentSuccess(@CurrentUser User currentUser,
+                                  @PathVariable("invoiceId") Long invoiceId,
+                                  @ModelAttribute PaymentInfo paymentInfo, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            System.out.println("PaymentInfoBindingError: " + bindingResult);
         Invoice invoice = this.invoiceService.findOne(invoiceId);
-        invoice.setPaid(true);
+
+        // NEEDS PAYMENT VALIDATION
+        if (paymentInfo==null || !paymentInfo.isValid())
+            return "redirect:/invoices/generate/" + invoice.getBooking().getId() + "?message=Payment Invalid!";
+
+        if (!invoice.getBooking().getUser().getId().equals(currentUser.getId()))
+            return "redirect:/invoices/generate/" + invoice.getBooking().getId() + "?messageinfo=You can't pay for others lol!";
+        invoice.getBooking().getTransaction().setSuccess(true);
+        invoice.setPaid(invoice.getBooking().getTransaction().isSuccess());
         invoice = this.invoiceService.save(invoice);
-        return "redirect:/invoices/generate/"+invoice.getBooking().getId()+"?messagesuccess=Payment Successful!";
+        return "redirect:/invoices/generate/" + invoice.getBooking().getId() + "?messagesuccess=Payment Successful!";
+    }
+
+    @PostMapping("/{invoiceId}/payment/failed")
+    private String paymentFailed(@PathVariable("invoiceId") Long invoiceId) {
+        Invoice invoice = this.invoiceService.findOne(invoiceId);
+        return "redirect:/invoices/generate/" + invoice.getBooking().getId() + "?message=Payment Failed!";
     }
 
     private Date nextDay() {

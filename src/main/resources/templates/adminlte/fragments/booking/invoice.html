@@ -128,11 +128,11 @@
             <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
             <form class="pull-right" id="payment_gw" name="payment_gw" method="POST" action="https://sandbox.sslcommerz.com/gwprocess/v3/process.php">
                 <input type="hidden" name="total_amount" th:value="${invoice?.booking?.getTotalPayableCost()}" />
-                <input type="hidden" name="store_id" th:value="${invoice?.booking?.hotel?.id}" />
-                <input type="hidden" name="tran_id" value="REF011212" />
-                <input type="hidden" name="success_url" th:value="@{http://localhost:8080/invoices/}+${invoice?.id}+@{/payment/success}" />
-                <input type="hidden" name="fail_url" value="URL/fail.php" />
-                <input type="hidden" name="cancel_url" value="URL/cancel.php" />
+                <input type="hidden" name="store_id" th:value="testbox" />
+                <input type="hidden" name="tran_id" th:value="${invoice?.booking?.transaction?.id}" />
+                <input type="hidden" name="success_url" th:value="${@environment.getProperty('baseUrl')}+@{/invoices/}+${invoice?.id}+@{/payment/success}" />
+                <input type="hidden" name="fail_url" th:value="${@environment.getProperty('baseUrl')}+@{/invoices/}+${invoice?.id}+@{/payment/failed}" />
+                <input type="hidden" name="cancel_url" value="${@environment.getProperty('baseUrl')}+@{/invoices/}+${invoice?.id}+@{/payment/failed}" />
                 <input type="hidden" name="version" value="3.00" />
 
                 <!-- Customer Information !-->
@@ -148,31 +148,31 @@
                 <input type="hidden" name="cus_fax" value="">
 
                 <!-- Shipping Information !-->
-                <input type="hidden" name="ship_name" value="ABC XYZ">
-                <input type="hidden" name="ship_add1" value="Address Line One">
-                <input type="hidden" name="ship_add2" value="Address Line Two">
-                <input type="hidden" name="ship_city" value="City Name">
-                <input type="hidden" name="ship_state" value="State Name">
-                <input type="hidden" name="ship_postcode" value="Post Code">
-                <input type="hidden" name="ship_country" value="Country">
+                <input type="hidden" name="ship_name" value="">
+                <input type="hidden" name="ship_add1" value="">
+                <input type="hidden" name="ship_add2" value="">
+                <input type="hidden" name="ship_city" value="">
+                <input type="hidden" name="ship_state" value="">
+                <input type="hidden" name="ship_postcode" value="">
+                <input type="hidden" name="ship_country" value="">
 
                 <!-- Optional Parameters which will be stored and returned at the end !-->
-                <input type="hidden" name="value_a" value="ref001">
-                <input type="hidden" name="value_b" value="ref002">
-                <input type="hidden" name="value_c" value="ref003">
-                <input type="hidden" name="value_d" value="ref004">
+                <input type="hidden" name="value_a" th:value="${invoice?.booking?.transaction?.id}+'SAyEM'+${invoice?.booking?.getTotalPayableCost()}">
+                <input type="hidden" name="value_b" value="">
+                <input type="hidden" name="value_c" value="">
+                <input type="hidden" name="value_d" value="">
 
                 <!-- PRODUCT 1 !-->
-                <input type="hidden" name="cart[0][product]" value="FRESH HOME MADE BREAD 350GM" />
-                <input type="hidden" name="cart[0][amount]" value="500.00" />
+                <!--<input type="hidden" name="cart[0][product]" value="FRESH HOME MADE BREAD 350GM" />-->
+                <!--<input type="hidden" name="cart[0][amount]" value="500.00" />-->
 
-                <!-- PRODUCT 2 !-->
-                <input type="hidden" name="cart[1][product]" value="FRESH HOME MADE BREAD 350GM Quantity(1)" />
-                <input type="hidden" name="cart[1][amount]" value="600.00">
+                <!--&lt;!&ndash; PRODUCT 2 !&ndash;&gt;-->
+                <!--<input type="hidden" name="cart[1][product]" value="FRESH HOME MADE BREAD 350GM Quantity(1)" />-->
+                <!--<input type="hidden" name="cart[1][amount]" value="600.00">-->
 
-                <!-- PRODUCT 3 !-->
-                <input type="hidden" name="cart[2][product]" value="SHIPMENT CHARGE" />
-                <input type="hidden" name="cart[2][amount]" value="50.00" />
+                <!--&lt;!&ndash; PRODUCT 3 !&ndash;&gt;-->
+                <!--<input type="hidden" name="cart[2][product]" value="SHIPMENT CHARGE" />-->
+                <!--<input type="hidden" name="cart[2][amount]" value="50.00" />-->
 
                 <!-- SUBMIT REQUEST  !-->
                 <button class="btn btn-danger" th:disabled="${invoice?.paid}" name="submit"><i class="fa fa-credit-card"></i>&nbsp;Pay Now</button>

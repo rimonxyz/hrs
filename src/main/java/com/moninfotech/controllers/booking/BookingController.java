@@ -5,10 +5,7 @@ import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.SessionAttr;
 import com.moninfotech.commons.pojo.BookingHelper;
 import com.moninfotech.commons.pojo.Roles;
-import com.moninfotech.domain.Booking;
-import com.moninfotech.domain.Hotel;
-import com.moninfotech.domain.Room;
-import com.moninfotech.domain.User;
+import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +30,19 @@ public class BookingController {
     private final UserService userService;
     private final HotelService hotelService;
     private final InvoiceService invoiceService;
+    private final TransactionService transactionService;
 
     @Autowired
     public BookingController(BookingService bookingService,
                              RoomService roomService,
                              UserService userService,
-                             HotelService hotelService, InvoiceService invoiceService) {
+                             HotelService hotelService, InvoiceService invoiceService, TransactionService transactionService) {
         this.bookingService = bookingService;
         this.roomService = roomService;
         this.userService = userService;
         this.hotelService = hotelService;
         this.invoiceService = invoiceService;
+        this.transactionService = transactionService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -56,7 +55,7 @@ public class BookingController {
                               Model model) throws ParseException {
 
         // find booking list by role
-        List<Booking> bookingList = this.bookingService.findBookings(currentUser,true, page, size);
+        List<Booking> bookingList = this.bookingService.findBookings(currentUser, true, page, size);
 
         Date date = null;
         if (analDate == null || analDate.isEmpty()) date = new Date();
@@ -76,8 +75,8 @@ public class BookingController {
         model.addAttribute("todaysPlacedRoomListSize", this.bookingService.findFilteredRoomListByPlacementDate(currentUser, new Date()).size());
         model.addAttribute("bookedRoomList", todaysBookedRoomList);
         model.addAttribute("hotelList", this.hotelService.findAll());
-        model.addAttribute("invoiceList",this.invoiceService.findByUser(currentUser,false));
-        model.addAttribute("filterValue",filterValue);
+        model.addAttribute("invoiceList", this.invoiceService.findByUser(currentUser, false));
+        model.addAttribute("filterValue", filterValue);
 
         model.addAttribute("template", "fragments/booking/all");
         return "adminlte/index";
@@ -172,8 +171,12 @@ public class BookingController {
 //            return "redirect:/bookings/checkout/assignUser";
 //        }
         booking.setUser(currentUser);
-
-        // HANDLE PAYMENT
+        // Transaction
+        Transaction transaction = new Transaction();
+        transaction.setAmount(booking.getTotalPayableCost());
+        transaction.setDebit(true);
+        transaction = this.transactionService.save(transaction);
+        booking.setTransaction(transaction);
 
         booking = this.bookingService.save(booking);
         session.removeAttribute(SessionAttr.SESSION_BOOKING);
