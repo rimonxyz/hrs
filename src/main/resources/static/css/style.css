@@ -121,11 +121,12 @@ a:focus, a:hover {
     height: 45px;
 }
 /* //top header */
-.moto-text_normal a {
+.moto-text_normal,.moto-text_normal a {
     color: #6f6f6f;
     text-decoration: none;
     font-size: 16px;
     font-weight: 400;
+    font-family: "Segoe UI",Arial,sans-serif;
     font-style: normal;
 }
 /*-- banner --*/
@@ -3670,14 +3671,60 @@ i.mail{
     color: #777777;
     margin-left: 20px;
 }
-/*.welcomeText{
-    font-style: normal;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 1.72;
-    font-family: Roboto, sans-serif;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #777777;
-}*/
-/*end welcome page*/
+.searchBox{
+    text-align: center;
+}
+.searchBox .searchForm{
+    width: 300px;
+    height: 45px;
+    font-family: "Segoe UI",Arial,sans-serif;
+    /*background: #2b303b;*/
+    border: none;
+    font-size: 10pt;
+    color: #63717f;
+    padding-left: 15px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 15px;
+}
+
+
+.searchBox .searchBtn{
+    position: absolute;
+    /*top: 50%;*/
+    margin-left: -45px;
+    margin-top: 6px;
+    font-size: 30px;
+    color: #4f5b66;
+    background: transparent;
+    border: transparent;
+    z-index: 1;
+}
+.whyHotelsWeb{
+    font-family: "Segoe UI",Arial,sans-serif;
+    border: 1px solid black;
+
+    /* add box shadows */
+    -moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+}
+.allRoomNumber{
+    margin-top: 50px;
+    width: 100%;
+    font-family: "Segoe UI",Arial,sans-serif;
+    /*border: 1px solid black;*/
+    /* add box shadows */
+    -moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+}
+
+.roomBox{
+    border: 1px solid black;
+    width: 30px;
+    padding: 0px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}

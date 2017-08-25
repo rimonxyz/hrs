@@ -101,44 +101,19 @@
         <div class="col-xs-6" style="padding-top: 30px;">
             <p class="moto-text_normal">
                 <i class="fa fa-phone" aria-hidden="true"></i>
-                <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477707</a>
+                <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477707,</a>
                 <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477759</a>
             </p>
             <p class="moto-text_normal">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-            <a target="_self" data-action="url" class="moto-link" href="callto:#">
+            <!--<a target="_self" data-action="url" class="moto-link" href="callto:#">-->
+                <span class="moto-link">
                 32/1, Khan Plaza ( 3rd floor),
                 Mirpur Road, Dhanmondi, Dhaka- 1205
-            </a>
+                </span>
+            <!--</a>-->
             </p>
-            <!--<div class="col-xs-6" style="margin-top:15px;font-size:20px;">-->
-                <!--<div class="col-xs-1">-->
-                    <!--<i class="fa fa-phone" aria-hidden="true"></i>-->
-                <!--</div>-->
-                <!--<div class="col-xs-10">-->
-                    <!--<p class="moto-text_normal">-->
-                        <!--<a target="_self" data-action="url" class="moto-link" href="callto:#">01840477707</a>-->
-                    <!--</p>-->
-                    <!--<p class="moto-text_normal">-->
-                        <!--<a target="_self" data-action="url" class="moto-link" href="callto:#">01840477759</a>-->
-                    <!--</p>-->
-                <!--</div>-->
-            <!--</div>-->
 
-            <!--<div class="col-xs-6" style="margin-top:15px;font-size:20px;">-->
-                <!--<div class="col-xs-1">-->
-                    <!--<i class="fa fa-map-marker" aria-hidden="true"></i>-->
-                <!--</div>-->
-                <!--<div class="col-xs-10">-->
-                    <!--<p class="moto-text_normal">-->
-                        <!--<a target="_self" data-action="url" class="moto-link" href="callto:#">-->
-                            <!--32/1, khan Plaza(3f)<br/>-->
-                            <!--Mirpur Road, Dhanmondi, Dhaka- 1205-->
-                        <!--</a>-->
-                    <!--</p>-->
-
-                <!--</div>-->
-            <!--</div>-->
 
         </div>
         <div class="clearfix"></div>
@@ -277,29 +252,14 @@
 
                     <!-- search option -->
                     <div class="container">
-                        <form th:action="@{/search}" method="get" class="subscribe-block__form">
-                            <datalist id="places">
-                                <option th:each="area : ${areaList}" th:value="${area}" th:text="${area}">Coxs Bazar
-                                </option>
-                                <!--<option th:value="chaal">Saint Martins</option>-->
-                            </datalist>
-                            <div class="showing-form">
-                                <!--<div class="label" style="color: #000;">-->
-                                    <!--<span style="color: white;background: #51cba3;padding: 10px;-moz-border-radius: 6px; border-radius: 6px;">-->
-                                        <!--<b>Enter a Location</b>-->
-                                    <!--</span>-->
-                                <!--</div>-->
-                                <input style="margin-top: 20px;margin-bottom:10px;height: 50px; width: 350px;"
-                                       type="text" class="form-control" id="place" name="query" list="places"
-                                       required="required">
-                                <div class="mphb_sc_search-submit-button-wrapper">
-                                    <button type="submit" class="btn btn-primary-outline"><i style="margin-right: 10px;"
-                                                                                             class="glyphicon glyphicon-search"></i>Search
-                                    </button>
-                                </div>
-                            </div>
-
-                        </form>
+                        <div class="row searchBox">
+                            <form th:action="@{/search}" method="get" class="subscribe-block__form">
+                                <input type="search" class="searchForm" id="search" placeholder="Enter your location" />
+                                <button type="submit" class="searchBtn">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -316,13 +276,6 @@
     <div class="container">
         <div class="row welcomeRow">
 
-            <!--<div class="welcomeLogo col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">-->
-
-            <!--<div>-->
-            <!--<img th:src="@{/images/award.png}" alt="award" title="award" width="100%"/>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!-- .tm_pb_column -->
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
                 <!-- <hr class="tm_pb_module tm_pb_space tm_pb_divider_0"> -->
@@ -345,31 +298,58 @@
 
                     </p>
                     <div class="panel-heading">
-                        <h4 class="panel-title">
-                            &nbsp;<a data-toggle="collapse" href="#collapse1" style="color: blue;">Why hotelswave.com is
-                            different?</a>
-                        </h4>
+                        <div class="h1-style tm_pb_title__title" style="font-size: 30px; text-align: center">
+                            Why <a href="www.hotelswave.com"><b> hotelswave.com </b></a>is different
+                        </div>
                     </div>
-                    <div id="collapse1" class="panel-collapse collapse">
-                        <ul class="list-group" style="padding: 20px;">
-                            <li class="list-group-item">Showing desired rooms’ availability on any particular date.</li>
-                            <li class="list-group-item">Price updates of different rooms on different dates.</li>
-                            <li class="list-group-item">Easy payment system through Bkash, Rocket, Credit/Debit Card or
-                                Cash.
-                            </li>
-                            <li class="list-group-item">Exclusive discount on group booking.</li>
-                            <li class="list-group-item">Providing instant booking confirmation copy on payment.</li>
-                            <li class="list-group-item">Decide by comparing guest reviews &amp; facilities among
-                                hundreds of hotels.
-                            </li>
-                            <li class="list-group-item">Pointing hotels location on Google map.</li>
-                            <li class="list-group-item">Indicating Hotel’s distance from important spots.</li>
-                            <li class="list-group-item">Android apps.</li>
-                            <li class="list-group-item">Applying no extra charge or hidden cost.</li>
-                            <li class="list-group-item">Availability of related tour packages.</li>
-                            <li class="list-group-item">Ship ticketing for Saint Martin’s Island.</li>
-                            <li class="list-group-item">Customer service.</li>
-                        </ul>
+                    <div>
+                        <table class="table whyHotelsWeb">
+                            <tr>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Showing desired rooms’ availability on any particular date.
+                                </td>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Price updates of different rooms on different dates.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Easy payment system through Bkash, Rocket, Credit/Debit Card or Cash.</td>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Exclusive discount on group booking.</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Providing instant booking confirmation copy on payment.</td>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Decide by comparing guest reviews &amp; facilities among hundreds of hotels.</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Pointing hotels location on Google map.</td>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Indicating Hotel’s distance from important spots.</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Android apps.</td>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Applying no extra charge or hidden cost.</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Availability of related tour packages.</td>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Ship ticketing for Saint Martin’s Island.</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                    Customer service.</td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+
                     </div>
                     <p>
                         For standard quality service in case of hotel booking, you can always choose
@@ -960,6 +940,215 @@
     <hr/>
 </div>
 <!-- End our partners -->
+
+
+<!--all room number-->
+<div id="partners" class="tm_pb_section tm_pb_anchor tm_pb_section_9 tm_section_regular tm_section_transparent">
+    <hr/>
+    <div class="container">
+        <div class=" row tm_pb_row tm_pb_row_14">
+
+            <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_27 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
+
+                <div class="dashblue text-uppercase text-center">
+
+                    <h3>Room numbers</h3>
+
+
+                </div>
+
+                <div class="allRoomNumber">
+
+                    <div class="col-xs-1 roomBox">
+                        301
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        302
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        303
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        304
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        305
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        306
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        307
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        308
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        309
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        310
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        311
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        312
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        313
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        314
+                    </div>
+
+                    <div class="col-xs-1 roomBox">
+                        315
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        316
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        317
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        318
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        319
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        320
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        321
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        322
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        323
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        324
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        325
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        326
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        327
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        328
+                    </div>
+
+                    <div class="col-xs-1 roomBox">
+                        329
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        330
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        331
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        332
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        333
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        334
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        335
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        336
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        337
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        338
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        339
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        340
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        341
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        342
+                    </div>
+
+                    <div class="col-xs-1 roomBox">
+                        343
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        344
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        345
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        346
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        347
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        348
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        349
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        350
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        351
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        352
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        353
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        354
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        355
+                    </div>
+                    <div class="col-xs-1 roomBox">
+                        356
+                    </div>
+
+
+
+
+
+
+                </div>
+                <!-- .tm_pb_brands_showcase_module__wrapper -->
+
+            </div>
+            <!-- .tm_pb_column -->
+
+        </div>
+        <!-- .tm_pb_row -->
+    </div>
+    <hr/>
+</div>
+<!--end all room number-->
+
 
 <!-- News letter -->
 <div class="tm_pb_news">
