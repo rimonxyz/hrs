@@ -192,34 +192,43 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date) {
+    public List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date, boolean isManual) {
         List<Booking> bookingList = this.findBookings(currentUser, true, null, null);
         List<Room> roomList = new ArrayList<>();
         for (Booking booking : bookingList) {
-            if (DateUtils.isSameDay(booking.getCreated(), date))
-                roomList.addAll(booking.getRoomList());
+            // filter booking by offline/online
+            if (booking.isManualBooking()==isManual) {
+                if (DateUtils.isSameDay(booking.getCreated(), date))
+                    roomList.addAll(booking.getRoomList());
+            }
         }
         return roomList;
     }
 
+
+    // returns all of the booking list (Distinct) which order is placed on provided day
     @Override
-    public List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser, Date date) {
-        return this.findFilteredRoomListByPlacementDate(currentUser, date).stream()
+    public List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser, Date date, boolean isManual) {
+        return this.findFilteredRoomListByPlacementDate(currentUser, date,isManual).stream()
                 .filter(Utils.distinctByKey(BaseEntity::getId))
                 .collect(Collectors.toList());
     }
 
+    // returns all rooms that are booked on provided day
     @Override
-    public List<Room> findFilteredRoomList(User currentUser, Date date) {
+    public List<Room> findFilteredRoomList(User currentUser, Date date, boolean isManual) {
         List<Booking> bookingList = this.findBookings(currentUser, true, null, null);
 
         List<Room> bookedRooms = new ArrayList<>();
         for (Booking booking : bookingList) {
-            List<Room> roomList = booking.getRoomList();
-            List<Date> bookingDateList = booking.getBookingDateList();
-            for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++) {
-                if (DateUtils.isSameDay(bookingDateList.get(i), date))
-                    bookedRooms.add(roomList.get(i));
+            // filter booking by offline/online
+            if (booking.isManualBooking() == isManual) {
+                List<Room> roomList = booking.getRoomList();
+                List<Date> bookingDateList = booking.getBookingDateList();
+                for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++) {
+                    if (DateUtils.isSameDay(bookingDateList.get(i), date))
+                        bookedRooms.add(roomList.get(i));
+                }
             }
         }
         return bookedRooms;

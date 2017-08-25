@@ -52,6 +52,7 @@ public class BookingController {
                               @RequestParam(value = "filterType", required = false, defaultValue = "") String filterType,
                               @RequestParam(value = "filterValue", required = false, defaultValue = "") String filterValue,
                               @RequestParam(value = "analDate", required = false, defaultValue = "") String analDate,
+                              @RequestParam(value = "analFlagManual", required = false, defaultValue = "false") boolean isManual,
                               Model model) throws ParseException {
 
         // find booking list by role
@@ -61,18 +62,19 @@ public class BookingController {
         if (analDate == null || analDate.isEmpty()) date = new Date();
         else date = DateUtils.getParsableDateFormat().parse(analDate);
 
-        List<Room> todaysBookedRoomList = this.bookingService.findFilteredRoomList(currentUser, date);
-        List<Room> todaysPlacedRoomList = this.bookingService.findFilteredRoomListByPlacementDateDistinct(currentUser, date);
+        List<Room> todaysBookedRoomList = this.bookingService.findFilteredRoomList(currentUser, date, isManual);
+        List<Room> todaysPlacedRoomList = this.bookingService.findFilteredRoomListByPlacementDateDistinct(currentUser, date, isManual);
 
         if (!filterType.isEmpty() && !filterValue.isEmpty())
             bookingList = this.bookingService.filterBookingList(bookingList, filterType, filterValue);
         // find total placement price and count
 
         model.addAttribute("bookingHelper", new BookingHelper());
-        model.addAttribute("todaysDate", DateUtils.getParsableDateFormat().format(date));
+        model.addAttribute("analDate", DateUtils.getParsableDateFormat().format(date));
+        model.addAttribute("analFlagManual", isManual);
         model.addAttribute("bookingList", bookingList);
         model.addAttribute("todaysPlacedRoomList", todaysPlacedRoomList);
-        model.addAttribute("todaysPlacedRoomListSize", this.bookingService.findFilteredRoomListByPlacementDate(currentUser, new Date()).size());
+        model.addAttribute("todaysPlacedRoomListSize", this.bookingService.findFilteredRoomListByPlacementDate(currentUser, new Date(), isManual).size());
         model.addAttribute("bookedRoomList", todaysBookedRoomList);
         model.addAttribute("hotelList", this.hotelService.findAll());
         model.addAttribute("invoiceList", this.invoiceService.findByUser(currentUser, false));

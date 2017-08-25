@@ -18,8 +18,9 @@
                     <h3 class="box-title">Bookings (Order placed by date)</h3><br/>
                     <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
                     <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormBookings" method="get">
+                        <input type="hidden" name="analFlagManual" th:value="${analFlagManual}">
                         <input class="form-control" name="analDate" type="date" id="analDateFilterBookings"
-                                th:value="${todaysDate}"></input>
+                                th:value="${analDate}"></input>
                     </form>
                     <!--<h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>-->
                 </div>
@@ -45,7 +46,7 @@
                         <td th:text="${room?.category?.name}"></td>
                         <td th:text="${room?.getBookingDatesString(true)}"></td>
                         <!--<td th:text="${todaysPlacedRoomListSize}"></td>-->
-                        <td>৳<span th:text="${room?.getDiscountedPrice(todaysDate)}"></span></td>
+                        <td>৳<span th:text="${room?.getDiscountedPrice(analDate)}"></span></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -53,7 +54,7 @@
                         <td></td>
                         <td></td>
                         <td>Total</td>
-                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,todaysDate)*todaysPlacedRoomListSize}"></span></td>
+                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate)*todaysPlacedRoomListSize}"></span></td>
                     </tr>
                 </table>
             </div>
@@ -64,10 +65,11 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Sales (Booked Rooms by date)</h3><br/>
-                    <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
+                    <h4 class="box-title">Date: <span th:text="${analDate}"></span></h4>
                     <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormSales" method="get">
+                        <input type="hidden" name="analFlagManual" th:value="${analFlagManual}">
                         <input class="form-control" name="analDate" type="date" id="analDateFilterSales"
-                               th:value="${todaysDate}"></input>
+                               th:value="${analDate}"></input>
                     </form>
                 </div>
 
@@ -89,7 +91,7 @@
                             <!--</a>-->
                         </td>
                         <td th:text="${room?.category?.name}"></td>
-                        <td>৳<span th:text="${room?.getDiscountedPrice(todaysDate)}"></span></td>
+                        <td>৳<span th:text="${room?.getDiscountedPrice(analDate)}"></span></td>
 
                     </tr>
                     <tr>
@@ -97,7 +99,7 @@
                         <td></td>
                         <td></td>
                         <td>Total</td>
-                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,todaysDate)}"></span></td>
+                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate)}"></span></td>
                     </tr>
                 </table>
             </div>
