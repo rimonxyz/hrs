@@ -18,7 +18,7 @@
                     <h3 class="box-title">Bookings (Order placed by date)</h3><br/>
                     <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
                     <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormBookings" method="get">
-                        <input type="hidden" name="analFlagManual" th:value="${analFlagManual}">
+                        <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
                         <input class="form-control" name="analDate" type="date" id="analDateFilterBookings"
                                 th:value="${analDate}"></input>
                     </form>
@@ -67,7 +67,7 @@
                     <h3 class="box-title">Sales (Booked Rooms by date)</h3><br/>
                     <h4 class="box-title">Date: <span th:text="${analDate}"></span></h4>
                     <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormSales" method="get">
-                        <input type="hidden" name="analFlagManual" th:value="${analFlagManual}">
+                        <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
                         <input class="form-control" name="analDate" type="date" id="analDateFilterSales"
                                th:value="${analDate}"></input>
                     </form>

@@ -192,12 +192,12 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date, boolean isManual) {
+    public List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date, String analFlagRole) {
         List<Booking> bookingList = this.findBookings(currentUser, true, null, null);
         List<Room> roomList = new ArrayList<>();
         for (Booking booking : bookingList) {
-            // filter booking by offline/online
-            if (booking.isManualBooking()==isManual) {
+            // filter booking by role
+            if (booking.getUser().hasAssignedRole(analFlagRole)) {
                 if (DateUtils.isSameDay(booking.getCreated(), date))
                     roomList.addAll(booking.getRoomList());
             }
@@ -208,21 +208,21 @@ public class BookingServiceImpl implements BookingService {
 
     // returns all of the booking list (Distinct) which order is placed on provided day
     @Override
-    public List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser, Date date, boolean isManual) {
-        return this.findFilteredRoomListByPlacementDate(currentUser, date,isManual).stream()
+    public List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser, Date date, String analFlagRole) {
+        return this.findFilteredRoomListByPlacementDate(currentUser, date, analFlagRole).stream()
                 .filter(Utils.distinctByKey(BaseEntity::getId))
                 .collect(Collectors.toList());
     }
 
     // returns all rooms that are booked on provided day
     @Override
-    public List<Room> findFilteredRoomList(User currentUser, Date date, boolean isManual) {
+    public List<Room> findFilteredRoomList(User currentUser, Date date, String analFlagRole) {
         List<Booking> bookingList = this.findBookings(currentUser, true, null, null);
 
         List<Room> bookedRooms = new ArrayList<>();
         for (Booking booking : bookingList) {
-            // filter booking by offline/online
-            if (booking.isManualBooking() == isManual) {
+            // filter booking by role
+            if (booking.getUser().hasAssignedRole(analFlagRole)) {
                 List<Room> roomList = booking.getRoomList();
                 List<Date> bookingDateList = booking.getBookingDateList();
                 for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++) {

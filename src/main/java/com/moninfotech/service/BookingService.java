@@ -59,13 +59,13 @@ public interface BookingService {
     List<Booking> findFiltered(User currentUser, boolean isManual);
 
     // returns all of the booking list which order is placed on provided day
-    List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date, boolean isManual);
+    List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date, String analFlagRole);
 
     // returns all of the booking list (Distinct) which order is placed on provided day
-    List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser, Date date, boolean isManual);
+    List<Room> findFilteredRoomListByPlacementDateDistinct(User currentUser, Date date, String analFlagRole);
 
     // returns all rooms that are booked on provided day
-    List<Room> findFilteredRoomList(User currentUser, Date date, boolean isManual);
+    List<Room> findFilteredRoomList(User currentUser, Date date, String analFlagRole);
 
     List<Booking> filterBookingList(List<Booking> bookingList, String filterType, String filterValue) throws ParseException;
 

@@ -89,8 +89,9 @@
                         <a th:href="@{/bookings}"><i class="fa fa-circle-o"></i>Bookings on my Hotel</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{/bookings?analFlagManual=false}"><i class="fa fa-circle-o"></i>HotelsWave Bookings</a>
-                        <a th:href="@{/bookings?analFlagManual=true}"><i class="fa fa-circle-o"></i>Offline Bookings</a>
+                        <a th:href="@{/bookings}"><i class="fa fa-circle-o"></i>HotelsWave Bookings</a>
+                        <a th:href="@{/bookings?analFlagRole=ROLE_HOTEL_ADMIN}"><i class="fa fa-circle-o"></i>Offline Bookings</a>
+                        <a th:href="@{/bookings?analFlagRole=ROLE_ADMIN}"><i class="fa fa-circle-o"></i>Admin Bookings</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_USER')">
                         <a th:href="@{/hotels}"><i class="fa fa-circle-o"></i> Book Now</a>
