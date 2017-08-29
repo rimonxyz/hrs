@@ -67,6 +67,7 @@ public class HotelAdminController {
         hotelList = this.hotelService.filterHotels(hotelList, type);
 
         model.addAttribute(hotelList);
+        model.addAttribute("hotelType", type);
         model.addAttribute("template", "fragments/hotel/admin/all");
         return "adminlte/index";
     }
