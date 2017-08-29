@@ -126,6 +126,7 @@
     <div class="row no-print">
         <div class="col-xs-12">
             <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+            <span style="color: red;"><b>This booking is invalid. Please do not pay.</b></span>
             <form class="pull-right" id="payment_gw" name="payment_gw" method="POST" action="https://sandbox.sslcommerz.com/gwprocess/v3/process.php">
                 <input type="hidden" name="total_amount" th:value="${invoice?.booking?.getTotalPayableCost()}" />
                 <input type="hidden" name="store_id" th:value="testbox" />
@@ -175,7 +176,7 @@
                 <!--<input type="hidden" name="cart[2][amount]" value="50.00" />-->
 
                 <!-- SUBMIT REQUEST  !-->
-                <button class="btn btn-danger" th:disabled="${invoice?.paid}" name="submit"><i class="fa fa-credit-card"></i>&nbsp;Pay Now</button>
+                <button class="btn btn-danger" th:disabled="${invoice?.paid or !invoice?.booking?.isValid()}" name="submit"><i class="fa fa-credit-card"></i>&nbsp;Pay Now</button>
             </form>
             <!--<button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment-->
             </button>

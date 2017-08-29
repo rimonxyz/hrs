@@ -6,6 +6,7 @@ import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.BookingService;
 import com.moninfotech.service.HotelService;
 import com.moninfotech.service.InvoiceService;
+import com.moninfotech.service.PaymentInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,11 +26,16 @@ public class InvoiceController {
 
     private final BookingService bookingService;
     private final InvoiceService invoiceService;
+    private final PaymentInfoService paymentInfoService;
 
     @Autowired
-    public InvoiceController(BookingService bookingService, InvoiceService invoiceService, HotelService hotelService) {
+    public InvoiceController(BookingService bookingService,
+                             InvoiceService invoiceService,
+                             HotelService hotelService,
+                             PaymentInfoService paymentInfoService) {
         this.bookingService = bookingService;
         this.invoiceService = invoiceService;
+        this.paymentInfoService = paymentInfoService;
     }
 
     @GetMapping("/generate/{bookingId}")
@@ -60,7 +66,7 @@ public class InvoiceController {
         Invoice invoice = this.invoiceService.findOne(invoiceId);
 
         // NEEDS PAYMENT VALIDATION
-        if (paymentInfo==null || !paymentInfo.isValid())
+        if (paymentInfo == null || !paymentInfo.isValid())
             return "redirect:/invoices/generate/" + invoice.getBooking().getId() + "?message=Payment Invalid!";
 
         if (!invoice.getBooking().getUser().getId().equals(currentUser.getId()))
@@ -68,6 +74,11 @@ public class InvoiceController {
         invoice.getBooking().getTransaction().setSuccess(true);
         invoice.setPaid(invoice.getBooking().getTransaction().isSuccess());
         invoice = this.invoiceService.save(invoice);
+
+        // save payment info
+        paymentInfo.setTransaction(invoice.getBooking().getTransaction());
+        this.paymentInfoService.save(paymentInfo);
+
         return "redirect:/invoices/generate/" + invoice.getBooking().getId() + "?messagesuccess=Payment Successful!";
     }
 

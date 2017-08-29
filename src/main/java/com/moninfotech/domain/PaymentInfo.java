@@ -3,6 +3,7 @@ package com.moninfotech.domain;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -30,6 +31,7 @@ public class PaymentInfo extends BaseEntity {
     private String value_c;
     private String value_d;
     private String varify_sign;
+    @Column(length = 500)
     private String verify_key;
     private byte risk_level;
     private String risk_title;
