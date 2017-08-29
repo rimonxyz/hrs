@@ -3709,15 +3709,42 @@ i.mail{
     -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
     box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
 }
+
+@media (min-width: 768px) {
+    .roomPanel {
+        display: block;
+        width: 616px;
+        padding-bottom: 30px;
+    }
+}
+@media (min-width: 992px) {
+    .roomPanel {
+        display: block;
+        width: 826px;
+        padding-bottom: 30px;
+    }
+}
+@media (min-width: 1200px) {
+    .roomPanel {
+        display: block;
+        width: 951px;
+        padding-bottom: 30px;
+    }
+}
+
+
 .allRoomNumber{
-    margin-top: 50px;
     width: 100%;
+    margin-top: 10px;
+    margin-bottom: 15px;
     font-family: "Segoe UI",Arial,sans-serif;
     /*border: 1px solid black;*/
     /* add box shadows */
     -moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
     -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
     box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+
+
 }
 
 .roomBox{
