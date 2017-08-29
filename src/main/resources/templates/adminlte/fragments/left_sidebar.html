@@ -37,13 +37,27 @@
             <li class="header bg-yellow">MAIN NAVIGATION</li>
             <li class="treeview">
                 <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>All Hotels &amp; Ships</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/hotels?type=Hotel}"><i class="fa fa-circle-o"></i>All Hotels</a></li>
+                    <li class="active" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/hotels?type=Ship}"><i class="fa fa-circle-o"></i>All Ships</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a th:href="@{/dashboard}"><i class="fa fa-circle-o"></i>Dashboard</a></li>
+                    <li class="active" sec:authorize="!hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}"><i class="fa fa-circle-o"></i>Dashboard</a></li>
+                    <li class="active" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard?hotelType=Hotel}"><i class="fa fa-circle-o"></i>Hotels</a></li>
+                    <li class="active" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard?hotelType=Ship}"><i class="fa fa-circle-o"></i>Ships</a></li>
                 </ul>
             </li>
             <!--<li class="treeview">-->
@@ -78,7 +92,6 @@
                     <i class="fa fa-files-o"></i>
                     <span>Bookings</span>
                     <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
             </span>
                 </a>
                 <ul class="treeview-menu">
@@ -105,7 +118,6 @@
                     <i class="fa fa-files-o"></i>
                     <span>Reviews and Ratings</span>
                     <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
             </span>
                 </a>
                 <ul class="treeview-menu">
@@ -121,9 +133,8 @@
             <li class="treeview" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="#">
                     <i class="fa fa-th"></i>
-                    <span>Categories</span>
+                    <span>Categories (Admin)</span>
                     <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
             </span>
                 </a>
                 <ul class="treeview-menu">
@@ -133,10 +144,7 @@
             <li class="treeview" sec:authorize="hasRole('ADMIN')">
                 <a href="#">
                     <i class="fa fa-th"></i>
-                    <span>Users</span>
-                    <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
+                    <span>Users (Admin)</span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a th:href="@{/admin/users}"><i class="fa fa-circle-o"></i>All Users</a></li>
@@ -145,21 +153,21 @@
             <li class="treeview" sec:authorize="hasRole('ADMIN')">
                 <a href="#">
                     <i class="fa fa-th"></i>
-                    <span>Hotels</span>
+                    <span>Hotels &amp; Ships (Admin)</span>
                     <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a th:href="@{/admin/hotels}"><i class="fa fa-circle-o"></i>Hotels</a></li>
+                    <li><a th:href="@{/admin/hotels?type=Both}"><i class="fa fa-circle-o"></i>Hotels &amp; Ships</a></li>
+                    <li><a th:href="@{/admin/hotels?type=Hotel}"><i class="fa fa-circle-o"></i>Hotels</a></li>
+                    <li><a th:href="@{/admin/hotels?type=Ship}"><i class="fa fa-circle-o"></i>Ships</a></li>
                 </ul>
             </li>
             <li class="treeview" sec:authorize="hasRole('ADMIN')">
                 <a href="#">
                     <i class="fa fa-th"></i>
-                    <span>Packages &amp Offers</span>
+                    <span>Packages &amp; Offers (Admin)</span>
                     <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
             </span>
                 </a>
                 <ul class="treeview-menu">
@@ -170,9 +178,8 @@
             <li class="treeview" sec:authorize="hasRole('ADMIN')">
                 <a href="#">
                     <i class="fa fa-th"></i>
-                    <span>User Feedbacks</span>
+                    <span>User Feedbacks (Admin)</span>
                     <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
             </span>
                 </a>
                 <ul class="treeview-menu">

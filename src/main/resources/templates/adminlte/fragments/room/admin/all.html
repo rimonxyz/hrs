@@ -10,7 +10,32 @@
     </ol>
 </section>
 <section class="content">
+    <div class="row">
+        <!--all room number-->
+        <div sec:authorize="hasRole('ROLE_HOTEL_ADMIN')" id="partners" class="tm_pb_section tm_pb_anchor tm_pb_section_9 tm_section_regular tm_section_transparent">
+            <hr/>
+            <div class="roomPanel" style="width: 100%;">
+                <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_27 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
+                    <div class="dashblue text-uppercase text-center">
+                        <h3>Rooms</h3>
+                    </div>
 
+                    <div class="container allRoomNumber">
+                        <div class="col-xs-1 roomBox" th:each="room : ${roomList}"
+                             th:classappend="${bookedIds?.contains(room?.id)} ? bg-yellow : bg-aqua-active">
+                            <span th:text="${room?.roomNumber}"></span>
+                        </div>
+                    </div>
+                    <!-- .tm_pb_brands_showcase_module__wrapper -->
+                </div>
+                <!-- .tm_pb_column -->
+
+                <!-- .tm_pb_row -->
+            </div>
+            <hr/>
+        </div><hr/>
+        <!--end all room number-->
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="panel row panel-default">

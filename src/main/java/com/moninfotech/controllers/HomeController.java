@@ -6,6 +6,7 @@ import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.BookingHelper;
 import com.moninfotech.domain.AcValidationToken;
 import com.moninfotech.domain.Booking;
+import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.*;
@@ -57,12 +58,13 @@ public class HomeController {
     }
 
     @GetMapping("/dashboard")
-    private String dashboard(@CurrentUser User currentUser, Model model) {
+    private String dashboard(@CurrentUser User currentUser,
+                             @RequestParam(value = "hotelType", required = false, defaultValue = Hotel.Type.BOTH) String hotelType, Model model) {
         model.addAttribute("bookingHelper", new BookingHelper());
 
-        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser,true, null, null));
-        model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser, true));
-        model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser, false));
+        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser, true, null, null));
+        model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser, true, hotelType));
+        model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser, false, hotelType));
         model.addAttribute("template", "fragments/dashboard/dashboard");
         return "adminlte/index";
     }
@@ -106,7 +108,7 @@ public class HomeController {
         acToken.setTokenValid(false);
         this.userService.save(user);
         this.acValidationTokenService.save(acToken);
-        return "redirect:/login?messageinfo=Account \""+user.getName()+"\" is Activated. Please logged in to continue.";
+        return "redirect:/login?messageinfo=Account \"" + user.getName() + "\" is Activated. Please logged in to continue.";
     }
 
 }

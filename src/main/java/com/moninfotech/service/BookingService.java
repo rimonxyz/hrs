@@ -56,7 +56,7 @@ public interface BookingService {
     List<Booking> findBookings(User currentUser, boolean isConfirmed, Integer page, Integer size);
 
     // returns filtered booking list by booking creation type
-    List<Booking> findFiltered(User currentUser, boolean isManual);
+    List<Booking> findFiltered(User currentUser, boolean isManual,String hotelType);
 
     // returns all of the booking list which order is placed on provided day
     List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date, String analFlagRole);

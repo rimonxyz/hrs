@@ -53,6 +53,7 @@ public class Hotel extends BaseEntity {
 
         public static final String HOTEL = "Hotel";
         public static final String SHIP = "Ship";
+        public static final String BOTH = "Both";
     }
 
     public float getAverageRating() {

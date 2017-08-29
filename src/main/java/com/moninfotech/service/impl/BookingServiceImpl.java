@@ -183,12 +183,21 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> findFiltered(User currentUser, boolean isManual) {
+    public List<Booking> findFiltered(User currentUser, boolean isManual, String hotelType) {
         List<Booking> bookingList = this.findBookings(currentUser, true, null, null);
-        return bookingList
-                .stream()
-                .filter(booking -> booking.isManualBooking() == isManual)
-                .collect(Collectors.toList());
+        // filter
+        if (hotelType == null || hotelType.equals(Hotel.Type.BOTH))
+            return bookingList
+                    .stream()
+                    .filter(booking -> booking.isManualBooking() == isManual)
+                    .collect(Collectors.toList());
+        else
+            return bookingList
+                    .stream()
+                    .filter(booking -> booking.getHotel().getType().equals(hotelType))
+                    .filter(booking -> booking.isManualBooking() == isManual)
+                    .collect(Collectors.toList());
+
     }
 
     @Override

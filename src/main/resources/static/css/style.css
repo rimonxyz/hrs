@@ -3755,3 +3755,7 @@ i.mail{
     margin-bottom: 5px;
     text-align: center;
 }
+
+.navbar-nav > li > .dropdown-menu {
+    margin-right: -27px;
+}

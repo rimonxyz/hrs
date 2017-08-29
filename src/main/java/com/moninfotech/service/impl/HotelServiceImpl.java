@@ -135,6 +135,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<Hotel> filterHotels(List<Hotel> hotelList, String type) {
+        if (type.equals(Hotel.Type.BOTH)) return hotelList;
         return hotelList.stream()
                 .filter(hotel -> hotel.getType().equals(type))
                 .collect(Collectors.toList());

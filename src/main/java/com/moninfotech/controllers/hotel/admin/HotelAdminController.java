@@ -53,6 +53,7 @@ public class HotelAdminController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String all(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                        @RequestParam(value = "sortBy", required = false, defaultValue = SortAttributes.FIELD_ID) String soryBy,
+                       @RequestParam(value = "type", required = false, defaultValue = Hotel.Type.BOTH) String type,
                        @RequestParam(value = "desc", required = false, defaultValue = "true") boolean isDesc,
                        @RequestParam(value = "filterType", required = false) String filterType,
                        @RequestParam(value = "filterValue", required = false) String filterValue,
@@ -61,6 +62,10 @@ public class HotelAdminController {
         List<Hotel> hotelList = hotelService.findAll(page, SortAttributes.Page.SIZE, soryBy, isDesc);
         if (filterType != null && !filterType.isEmpty() && filterValue != null && !filterValue.isEmpty())
             hotelList = this.hotelService.filterHotels(hotelList, filterType, filterValue);
+
+        // Filter by type
+        hotelList = this.hotelService.filterHotels(hotelList, type);
+
         model.addAttribute(hotelList);
         model.addAttribute("template", "fragments/hotel/admin/all");
         return "adminlte/index";

@@ -41,13 +41,13 @@ public class HotelController {
     // Get All Hotels paginated
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String all(@RequestParam(value = "query", required = false) String query,
-                       @RequestParam(value = "type",required = false, defaultValue = Hotel.Type.HOTEL) String type,
-                       @RequestParam(value = "page", required = false) Integer page,
-                       @RequestParam(value = "sortBy", required = false) String sortBy,
-                       @RequestParam(value = "isDesc", required = false) boolean isDesc,
-                       @RequestParam(value = "filterType", required = false) String filterType,
-                       @RequestParam(value = "filterValue", required = false) String filterValue,
-                       Model model) {
+                      @RequestParam(value = "type", required = false, defaultValue = Hotel.Type.BOTH) String type,
+                      @RequestParam(value = "page", required = false) Integer page,
+                      @RequestParam(value = "sortBy", required = false) String sortBy,
+                      @RequestParam(value = "isDesc", required = false) boolean isDesc,
+                      @RequestParam(value = "filterType", required = false) String filterType,
+                      @RequestParam(value = "filterValue", required = false) String filterValue,
+                      Model model) {
         if (page == null || page < 0) page = 0;
         List<Hotel> hotelList;
         if (query != null && !query.isEmpty()) {
@@ -65,7 +65,7 @@ public class HotelController {
             hotelList = this.hotelService.filterHotels(hotelList, filterType, filterValue);
 
         // filter by type
-            hotelList = this.hotelService.filterHotels(hotelList,type);
+        hotelList = this.hotelService.filterHotels(hotelList, type);
 
         model.addAttribute("isDesc", !isDesc);
         if (filterValue != null)
@@ -102,7 +102,7 @@ public class HotelController {
         model.addAttribute("filterType", filterType);
         model.addAttribute("filterValue", value);
 
-        model.addAttribute("sidebarCollapse",true);
+        model.addAttribute("sidebarCollapse", true);
         model.addAttribute("template", "fragments/hotel/details");
         return "adminlte/index";
     }
