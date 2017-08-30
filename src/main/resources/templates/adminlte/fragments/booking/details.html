@@ -167,8 +167,9 @@
                 </table>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-                <a class="btn btn-block btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
+            <div class="box-footer clearfix col-sm-12">
+                <a class="btn btn-info col-sm-5" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
+                <a class="btn btn-info col-sm-5 col-sm-offset-2" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a Review</a>
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by sayemkcn on 4/21/17.
@@ -18,6 +19,11 @@ import java.util.List;
 public class DateUtils {
 
     public static final String PARSABLE_DATE_FORMAT = "yyyy-MM-dd";
+
+    public static long getDateDiff(Date before, Date after, TimeUnit timeUnit) {
+        long diffInMillies = after.getTime() - before.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
+    }
 
     public static boolean isSameDay(Date date1, Date date2) {
         Calendar cal1 = Calendar.getInstance();

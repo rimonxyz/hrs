@@ -56,7 +56,7 @@ public class BookingController {
                               Model model) throws ParseException {
 
         // find booking list by role
-        List<Booking> bookingList = this.bookingService.findBookings(currentUser, true, page, size);
+        List<Booking> bookingList = this.bookingService.findBookings(currentUser, false, true, page, size);
 
         Date date = null;
         if (analDate == null || analDate.isEmpty()) date = new Date();
@@ -81,6 +81,18 @@ public class BookingController {
         model.addAttribute("filterValue", filterValue);
 
         model.addAttribute("template", "fragments/booking/all");
+        return "adminlte/index";
+    }
+
+    @GetMapping("/canceled")
+    private String canceledBookings(@CurrentUser User currentUser,
+                                    @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                    @RequestParam(value = "size", required = false, defaultValue = "10") Integer size,
+                                    Model model) {
+        // find booking list by role
+        List<Booking> canceledBookingList = this.bookingService.findBookings(currentUser, true, true, page, size);
+        model.addAttribute("bookingList",canceledBookingList);
+        model.addAttribute("template", "fragments/booking/allCanceled");
         return "adminlte/index";
     }
 
@@ -292,6 +304,20 @@ public class BookingController {
         if (booking != null && booking.isValid())
             booking = this.bookingService.save(booking);
         return "redirect:/bookings";
+    }
+
+    // Cancel Booking
+    @PostMapping("/cancel/{id}")
+    private String cancelBooking(@PathVariable("id") Long id,
+                                 @CurrentUser User user) {
+        Booking booking = this.bookingService.findOne(id);
+        if (booking == null || !booking.belongsTo(user))
+            return "redirect:/bookings?message=You are unauthorized to cancel this booking!";
+        if (!booking.isCancelable())
+            return "redirect:/bookings?message=You can\'t cancel booking after 24 hours!";
+        booking.setCancelled(true);
+        booking = this.bookingService.save(booking);
+        return "redirect:/bookings?messageinfo=Booking Canceled!";
     }
 
 }

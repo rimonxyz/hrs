@@ -8,6 +8,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -164,20 +165,20 @@ public class Booking extends BaseEntity {
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
-
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "transaction=" + transaction +
-                ", roomList=" + roomList +
-                ", manualBooking=" + manualBooking +
-                ", bookingDateList=" + bookingDateList +
-                ", user=" + user +
-                ", hotel=" + hotel +
-                ", invoice=" + invoice +
-                ", cancelled=" + cancelled +
-                "} " + super.toString();
-    }
+//
+//    @Override
+//    public String toString() {
+//        return "Booking{" +
+//                "transaction=" + transaction +
+//                ", roomList=" + roomList +
+//                ", manualBooking=" + manualBooking +
+//                ", bookingDateList=" + bookingDateList +
+//                ", user=" + user +
+//                ", hotel=" + hotel +
+//                ", invoice=" + invoice +
+//                ", cancelled=" + cancelled +
+//                "} " + super.toString();
+//    }
 
     public boolean isConfirmed() {
         return confirmed;
@@ -185,5 +186,18 @@ public class Booking extends BaseEntity {
 
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
+    }
+
+    public boolean isCancelable() {
+        long dateDiff = DateUtils.getDateDiff(this.getLastUpdated(), new Date(), TimeUnit.HOURS);
+        return dateDiff >= 0 && dateDiff <= 24 && !this.cancelled;
+    }
+
+    public boolean belongsTo(User user) {
+        return this.user.getId().equals(user.getId());
+    }
+
+    public boolean belongsToHotel(Hotel hotel) {
+        return this.hotel.getId().equals(hotel.getId());
     }
 }

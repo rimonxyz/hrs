@@ -16,15 +16,15 @@ import java.util.List;
  */
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    List<Booking> findByCancelledFalseAndConfirmed(boolean isConfirmed);
+    List<Booking> findByCancelledAndConfirmed(boolean calceled,boolean isConfirmed);
 
-    List<Booking> findByUserAndCancelledFalseAndConfirmed(User user, boolean isConfirmed);
+    List<Booking> findByUserAndCancelledAndConfirmed(User user,boolean calceled, boolean isConfirmed);
 
-    List<Booking> findByHotelAndCancelledFalseAndConfirmed(Hotel hotel, boolean isConfirmed);
+    List<Booking> findByHotelAndCancelledAndConfirmed(Hotel hotel,boolean calceled, boolean isConfirmed);
 
-    Page<Booking> findByUserAndCancelledFalseAndConfirmed(User user, boolean isConfirmed, Pageable pageable);
+    Page<Booking> findByUserAndCancelledAndConfirmed(User user,boolean calceled, boolean isConfirmed, Pageable pageable);
 
-    Page<Booking> findByHotelAndCancelledFalseAndConfirmed(Hotel hotel, boolean isConfirmed, Pageable pageable);
+    Page<Booking> findByHotelAndCancelledAndConfirmed(Hotel hotel,boolean calceled, boolean isConfirmed, Pageable pageable);
 
-    Page<Booking> findByCancelledFalseAndConfirmed(boolean isConfirmed, Pageable pageable);
+    Page<Booking> findByCancelledAndConfirmed(boolean isConfirmed,boolean calceled, Pageable pageable);
 }

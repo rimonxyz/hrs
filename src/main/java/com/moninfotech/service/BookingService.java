@@ -17,13 +17,13 @@ import java.util.Map;
  */
 public interface BookingService {
 
-    List<Booking> findByUser(User user, boolean isConfirmed, Integer page, Integer size);
+    List<Booking> findByUser(User user,boolean isCanceled, boolean isConfirmed, Integer page, Integer size);
 
-    List<Booking> findByHotel(Hotel hotel, boolean isConfirmed, Integer page, Integer size);
+    List<Booking> findByHotel(Hotel hotel,boolean isCanceled, boolean isConfirmed, Integer page, Integer size);
 
     Booking findOne(Long id);
 
-    List<Booking> findAll(boolean isConfirmed, Integer page, Integer size);
+    List<Booking> findAll(boolean isCanceled,boolean isConfirmed, Integer page, Integer size);
 
     boolean belongsTo(Booking booking, User user);
 
@@ -53,10 +53,10 @@ public interface BookingService {
      * @param size
      * @return List<Booking>
      */
-    List<Booking> findBookings(User currentUser, boolean isConfirmed, Integer page, Integer size);
+    List<Booking> findBookings(User currentUser,boolean isCanceled, boolean isConfirmed, Integer page, Integer size);
 
     // returns filtered booking list by booking creation type
-    List<Booking> findFiltered(User currentUser, boolean isManual,String hotelType);
+    List<Booking> findFiltered(User currentUser, boolean isManual, String hotelType);
 
     // returns all of the booking list which order is placed on provided day
     List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date, String analFlagRole);

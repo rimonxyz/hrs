@@ -1,4 +1,3 @@
-
 <section class="content-header">
     <h1>
         Bookings
@@ -20,7 +19,7 @@
                     <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormBookings" method="get">
                         <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
                         <input class="form-control" name="analDate" type="date" id="analDateFilterBookings"
-                                th:value="${analDate}"></input>
+                               th:value="${analDate}"></input>
                     </form>
                     <!--<h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>-->
                 </div>
@@ -54,7 +53,9 @@
                         <td></td>
                         <td></td>
                         <td>Total</td>
-                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate)*todaysPlacedRoomListSize}"></span></td>
+                        <td>৳<span
+                                th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate)*todaysPlacedRoomListSize}"></span>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -99,7 +100,8 @@
                         <td></td>
                         <td></td>
                         <td>Total</td>
-                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate)}"></span></td>
+                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate)}"></span>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -121,13 +123,20 @@
                         <h3 class="box-title" sec:authorize="hasRole('ROLE_ADMIN')">
                             <a th:href="@{/bookings}">All Bookings</a>
                         </h3>
+                        |
+                        <h3 class="box-title">
+                            <a th:href="@{/bookings/canceled}">Canceled Bookings</a>
+                        </h3>
                     </div>
                     <div class="col-sm-8">
-                        <form sec:authorize="hasRole('ROLE_ADMIN')" class="form col-sm-4" th:action="@{/bookings}" id="typeFilterForm" method="get">
+                        <form sec:authorize="hasRole('ROLE_ADMIN')" class="form col-sm-4" th:action="@{/bookings}"
+                              id="typeFilterForm" method="get">
                             <input name="filterType" type="hidden" value="hotelType"></input>
                             <select class="form-control" name="filterValue" id="typeFilter">
-                                <option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel</option>
-                                <option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship</option>
+                                <option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel
+                                </option>
+                                <option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship
+                                </option>
                             </select>
                         </form>
                         <form class="form col-sm-4" th:action="@{/bookings}" id="dateFilterForm" method="get">
@@ -137,10 +146,12 @@
                         <form class="form col-sm-4" th:action="@{/bookings}" method="get">
                             <input type="hidden" name="filterType" value="hotelName">
                             <datalist id="hotels" th:if="${hotelList!=null}">
-                                <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}" th:text="${hotel?.name}"></option>
+                                <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}"
+                                        th:text="${hotel?.name}"></option>
                                 <!--<option th:value="chaal">Saint Martins</option>-->
                             </datalist>
-                            <input class="form-control" type="text" name="filterValue" placeholder="Hotel Name" list="hotels">
+                            <input class="form-control" type="text" name="filterValue" placeholder="Hotel Name"
+                                   list="hotels">
                         </form>
                     </div>
                 </div>
@@ -162,7 +173,7 @@
                         <td th:text="${booking?.id}"></td>
                         <td sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
                             <a th:href="@{/bookings/}+${booking?.id}">
-                            <h5 th:text="${booking?.hotel?.name}"></h5>
+                                <h5 th:text="${booking?.hotel?.name}"></h5>
                             </a>
                         </td>
                         <td sec:authorize="!hasRole('ROLE_USER')">
@@ -171,13 +182,20 @@
                         </td>
                         <td th:text="${booking?.getRoomNumbersString()}"></td>
                         <td>৳<span th:text="${booking?.getTotalPayableCost()}"></span></td>
-                        <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green" th:text="${booking?.getTotalDiscountPercentage()}">90%</span></td>
+                        <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green"
+                                                                       th:text="${booking?.getTotalDiscountPercentage()}">90%</span>
+                        </td>
                         <!--<td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>-->
                         <td>
                             <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
-                            <a sec:authorize="!hasAnyRole('ROLE_ADMIN','ROLE_HOTEL_ADMIN')" class="btn btn-success" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
+                            <a sec:authorize="!hasAnyRole('ROLE_ADMIN','ROLE_HOTEL_ADMIN')" class="btn btn-success"
+                               th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
                                 review</a>
                             <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
+                            <form class="form pull-right" th:action="@{/bookings/cancel/}+${booking?.id}" method="post">
+                                <button class="btn btn-warning" onsubmit="return confirm('Do you really want to cancel this booking?');"
+                                   th:disabled="${!booking?.isCancelable()}">Cancel</button>
+                            </form>
                         </td>
 
                     </tr>
