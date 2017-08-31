@@ -231,7 +231,9 @@
                                 </form>
                             </div>
                             <div class="panel-heading col-sm-6">
-                                <form class="form" th:action="@{/hotels/}+${hotel?.id}+@{/search}" method="get">
+                                <form class="form" th:action="@{/hotels/}+${hotel?.id}" method="get">
+                                    <input name="filterType" type="hidden" th:value="date"></input>
+                                    <input name="value" type="hidden" th:value="${filterValue}"></input>
                                     <input class="form-control" name="q" type="text" placeholder="Search"></input>
                                 </form>
                             </div>
