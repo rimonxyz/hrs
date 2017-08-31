@@ -46,8 +46,8 @@ public class RoomController {
         model.addAttribute("filterValue",dateStr);
         model.addAttribute("categoryList",this.categoryService.findAll());
 
-        model.addAttribute("template", "fragments/room/details");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/room/details");
+        return "adminlte/fragments/room/details";
     }
 
 

@@ -75,8 +75,8 @@ public class HotelController {
         model.addAttribute(hotelList);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
 
-        model.addAttribute("template", "fragments/hotel/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/hotel/all");
+        return "adminlte/fragments/hotel/all";
     }
 
     // get all room
@@ -103,8 +103,8 @@ public class HotelController {
         model.addAttribute("filterValue", value);
 
         model.addAttribute("sidebarCollapse", true);
-        model.addAttribute("template", "fragments/hotel/details");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/hotel/details");
+        return "adminlte/fragments/hotel/details";
     }
 
     // search

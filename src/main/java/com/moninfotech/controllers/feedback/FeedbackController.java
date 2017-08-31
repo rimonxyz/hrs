@@ -31,8 +31,8 @@ public class FeedbackController {
 
     @GetMapping("")
     private String feedbackPage(Model model) {
-        model.addAttribute("template", "fragments/feedback/create");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/feedback/create");
+        return "adminlte/fragments/feedback/create";
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -43,8 +43,8 @@ public class FeedbackController {
         feedback = this.feedbackService.save(feedback);
         if (feedback != null)
             return "redirect:/?message=" + this.feedbackReceivedMessage;
-        model.addAttribute("template", "fragments/dashboard/dashboard");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/dashboard/dashboard");
+        return "adminlte/fragments/dashboard/dashboard";
     }
 
 }

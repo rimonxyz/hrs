@@ -28,8 +28,8 @@ public class OfferController {
         model.addAttribute("offer",this.offerService.findOne(id));
         model.addAttribute("offerList",this.offerService.findAll(null,null));
 
-        model.addAttribute("template", "fragments/offer/details");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/offer/details");
+        return "adminlte/fragments/offer/details";
     }
 
     // get Image by id

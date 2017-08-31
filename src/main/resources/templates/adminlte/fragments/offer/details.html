@@ -1,47 +1,57 @@
-<section class="content-header">
-    <h1>
-        <span>Offers</span>
-        <small>Control panel</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a th:href="@{/offers/}+${offer?.id}">Offer</a></li>
-    </ol>
-</section>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="adminlte/index">
 
-<section class="content">
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="box">
-                <div class="box-header">
-                    <h2 th:text="${offer?.title}" class="title"></h2>
-                    <h4>
-                        <span>Tag: </span>
-                        <span th:text="${offer?.shortTag}"></span>
-                    </h4>
-                </div>
-                <div class="box-body">
-                    <img th:src="@{/offers/image/}+${offer?.id}" th:alt="${offer?.title}" class="img-responsive"
-                         style="height: 300px; margin-right: 20px;margin-bottom: 20px;">
-                    <p th:text="${offer?.description}"></p>
+<div layout:fragment="main_content">
+
+
+    <section class="content-header">
+        <h1>
+            <span>Offers</span>
+            <small>Control panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a th:href="@{/offers/}+${offer?.id}">Offer</a></li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="box">
+                    <div class="box-header">
+                        <h2 th:text="${offer?.title}" class="title"></h2>
+                        <h4>
+                            <span>Tag: </span>
+                            <span th:text="${offer?.shortTag}"></span>
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <img th:src="@{/offers/image/}+${offer?.id}" th:alt="${offer?.title}" class="img-responsive"
+                             style="height: 300px; margin-right: 20px;margin-bottom: 20px;">
+                        <p th:text="${offer?.description}"></p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-sm-4">
-            <div class="box box-widget widget-user" th:each="ofr: ${offerList}">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-black"  th:style="'background:url(' + @{/offers/image/}+${ofr?.id} + ') center center;'">
-                    <h3 class="widget-user-username" th:text="${ofr?.title}" style="color: #000; font-family: 'Arial Rounded MT Bold'"></h3>
-                    <h5 class="widget-user-desc" th:text="${ofr?.shortTag}" style="color: #000;"></h5>
+            <div class="col-sm-4">
+                <div class="box box-widget widget-user" th:each="ofr: ${offerList}">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header bg-black"  th:style="'background:url(' + @{/offers/image/}+${ofr?.id} + ') center center;'">
+                        <h3 class="widget-user-username" th:text="${ofr?.title}" style="color: #000; font-family: 'Arial Rounded MT Bold'"></h3>
+                        <h5 class="widget-user-desc" th:text="${ofr?.shortTag}" style="color: #000;"></h5>
 
-                    <div class="col-sm-12">
-                        <a class="btn btn-primary pull-right" th:href="@{/offers/}+${ofr?.id}">Details</a>
+                        <div class="col-sm-12">
+                            <a class="btn btn-primary pull-right" th:href="@{/offers/}+${ofr?.id}">Details</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</section>
+    </section>
 
+</div>

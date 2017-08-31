@@ -64,8 +64,8 @@ public class RoomAdminController {
         model.addAttribute("filterType", filterType);
         model.addAttribute("filterValue", value);
 
-        model.addAttribute("template", "fragments/room/admin/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/room/admin/all");
+        return "adminlte/fragments/room/admin/all";
     }
 
     // search
@@ -88,8 +88,8 @@ public class RoomAdminController {
 
         model.addAttribute("filterType", FilterType.DATE);
 
-        model.addAttribute("template", "fragments/room/admin/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/room/admin/all");
+        return "adminlte/fragments/room/admin/all";
     }
 
     // create
@@ -202,8 +202,8 @@ public class RoomAdminController {
             return "/hotel/rooms?message=You\'re not authorized to do this action!";
 
         model.addAttribute("room", room);
-        model.addAttribute("template", "fragments/room/admin/discounts");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/room/admin/discounts");
+        return "adminlte/fragments/room/admin/discounts";
     }
 
     @PostMapping("/{roomId}/discounts/add")

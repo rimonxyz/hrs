@@ -35,8 +35,8 @@ public class PackageAdminController {
                             @RequestParam(value = "size", required = false) Integer size, Model model) {
         List<Package> packageList = this.packageService.findAll(page, size);
         model.addAttribute(packageList);
-        model.addAttribute("template", "fragments/package/admin/packages");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/package/admin/packages");
+        return "adminlte/fragments/package/admin/packages";
     }
 
     @PostMapping("/create")
@@ -56,8 +56,8 @@ public class PackageAdminController {
         if (pckg == null) return "redirect:/admin/packages?message=Package not found!";
         model.addAttribute("package", pckg);
         model.addAttribute("packageList", this.packageService.findAll(null, null));
-        model.addAttribute("template", "fragments/package/admin/packages");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/package/admin/packages");
+        return "adminlte/fragments/package/admin/packages";
     }
 
     @PostMapping("/edit/{id}")

@@ -26,16 +26,16 @@ public class UserController {
     private String allUsers(@RequestParam(value = "page", required = false) Integer page, Model model) {
         if (page == null || page < 0) page = 0;
         model.addAttribute("userList", this.userService.findAll(page, 10));
-        model.addAttribute("template", "fragments/user/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/user/all");
+        return "adminlte/fragments/user/all";
     }
 
     // Edit
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     private String editPage(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", this.userService.findOne(id));
-        model.addAttribute("template", "fragments/user/profile");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/user/profile");
+        return "adminlte/fragments/user/profile";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)

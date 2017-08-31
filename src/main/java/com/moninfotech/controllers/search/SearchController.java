@@ -51,8 +51,8 @@ public class SearchController {
         model.addAttribute("isDesc", !isDesc);
         model.addAttribute("query", query);
 
-        model.addAttribute("template","fragments/hotel/all");
-        return "adminlte/index";
+//        model.addAttribute("template","fragments/hotel/all");
+        return "adminlte/fragments/hotel/all";
     }
 
 }

@@ -1,216 +1,224 @@
-<section class="content-header">
-    <h1>
-        Bookings
-        <small>Control panel</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Booking</li>
-    </ol>
-</section>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="adminlte/index">
 
-<section class="content">
-    <div class="row" sec:authorize="!hasRole('ROLE_USER')">
-        <div class="col-sm-6">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Bookings (Order placed by date)</h3><br/>
-                    <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
-                    <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormBookings" method="get">
-                        <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
-                        <input class="form-control" name="analDate" type="date" id="analDateFilterBookings"
-                               th:value="${analDate}"></input>
-                    </form>
-                    <!--<h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>-->
-                </div>
+<div layout:fragment="main_content">
+    <section class="content-header">
+        <h1>
+            Bookings
+            <small>Control panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Booking</li>
+        </ol>
+    </section>
 
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Sl</th>
-                        <th sec:authorize="hasRole('ROLE_ADMIN')">Hotel Name</th>
-                        <th>Room No</th>
-                        <th>Category</th>
-                        <th>Booking Dates</th>
-                        <!--<th>Total Order</th>-->
-                        <th>Room Rent</th>
-                    </tr>
-                    <tr th:if="${todaysPlacedRoomList != null}" th:each="room,iter : ${todaysPlacedRoomList}">
-                        <td th:text="${iter.index+1}"></td>
-                        <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${room?.hotel?.name}"></td>
-                        <td>
-                            <!--<a th:href="@{/rooms/}+${room?.id}">-->
-                            <h5 th:text="${room?.roomNumber}"></h5>
-                            <!--</a>-->
-                        </td>
-                        <td th:text="${room?.category?.name}"></td>
-                        <td th:text="${room?.getBookingDatesString(true)}"></td>
-                        <!--<td th:text="${todaysPlacedRoomListSize}"></td>-->
-                        <td>৳<span th:text="${room?.getDiscountedPrice(analDate)}"></span></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Total</td>
-                        <td>৳<span
-                                th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate)*todaysPlacedRoomListSize}"></span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <!-- /.box-body -->
-        </div>
-
-        <div class="col-sm-6">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Sales (Booked Rooms by date)</h3><br/>
-                    <h4 class="box-title">Date: <span th:text="${analDate}"></span></h4>
-                    <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormSales" method="get">
-                        <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
-                        <input class="form-control" name="analDate" type="date" id="analDateFilterSales"
-                               th:value="${analDate}"></input>
-                    </form>
-                </div>
-
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Sl</th>
-                        <th sec:authorize="hasRole('ROLE_ADMIN')">Hotel Name</th>
-                        <th>Room No</th>
-                        <th>Category</th>
-                        <th>Room Rent</th>
-
-                    </tr>
-                    <tr th:if="${bookedRoomList != null}" th:each="room,iter : ${bookedRoomList}">
-                        <td th:text="${iter.index+1}"></td>
-                        <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${room?.hotel?.name}"></td>
-                        <td>
-                            <!--<a th:href="@{/rooms/}+${room?.id}">-->
-                            <h5 th:text="${room?.roomNumber}"></h5>
-                            <!--</a>-->
-                        </td>
-                        <td th:text="${room?.category?.name}"></td>
-                        <td>৳<span th:text="${room?.getDiscountedPrice(analDate)}"></span></td>
-
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Total</td>
-                        <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate)}"></span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <!-- /.box-body -->
-
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <div class="col-sm-4">
-                        <h3 class="box-title" sec:authorize="hasRole('ROLE_USER')">
-                            <a th:href="@{/bookings}">My Bookings</a>
-                        </h3>
-                        <h3 class="box-title" sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a th:href="@{/bookings}">All Bookings</a>
-                        </h3>
-                        |
-                        <h3 class="box-title">
-                            <a th:href="@{/bookings/canceled}">Canceled Bookings</a>
-                        </h3>
+    <section class="content">
+        <div class="row" sec:authorize="!hasRole('ROLE_USER')">
+            <div class="col-sm-6">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Bookings (Order placed by date)</h3><br/>
+                        <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
+                        <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormBookings" method="get">
+                            <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
+                            <input class="form-control" name="analDate" type="date" id="analDateFilterBookings"
+                                   th:value="${analDate}"></input>
+                        </form>
+                        <!--<h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>-->
                     </div>
-                    <div class="col-sm-8">
-                        <form sec:authorize="hasRole('ROLE_ADMIN')" class="form col-sm-4" th:action="@{/bookings}"
-                              id="typeFilterForm" method="get">
-                            <input name="filterType" type="hidden" value="hotelType"></input>
-                            <select class="form-control" name="filterValue" id="typeFilter">
-                                <option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel
-                                </option>
-                                <option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship
-                                </option>
-                            </select>
-                        </form>
-                        <form class="form col-sm-4" th:action="@{/bookings}" id="dateFilterForm" method="get">
-                            <input name="filterType" type="hidden" value="date"></input>
-                            <input class="form-control" name="filterValue" type="date" id="dateFilter"/>
-                        </form>
-                        <form class="form col-sm-4" th:action="@{/bookings}" method="get">
-                            <input type="hidden" name="filterType" value="hotelName">
-                            <datalist id="hotels" th:if="${hotelList!=null}">
-                                <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}"
-                                        th:text="${hotel?.name}"></option>
-                                <!--<option th:value="chaal">Saint Martins</option>-->
-                            </datalist>
-                            <input class="form-control" type="text" name="filterValue" placeholder="Hotel Name"
-                                   list="hotels">
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Sl</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Hotel Name</th>
+                            <th>Room No</th>
+                            <th>Category</th>
+                            <th>Booking Dates</th>
+                            <!--<th>Total Order</th>-->
+                            <th>Room Rent</th>
+                        </tr>
+                        <tr th:if="${todaysPlacedRoomList != null}" th:each="room,iter : ${todaysPlacedRoomList}">
+                            <td th:text="${iter.index+1}"></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${room?.hotel?.name}"></td>
+                            <td>
+                                <!--<a th:href="@{/rooms/}+${room?.id}">-->
+                                <h5 th:text="${room?.roomNumber}"></h5>
+                                <!--</a>-->
+                            </td>
+                            <td th:text="${room?.category?.name}"></td>
+                            <td th:text="${room?.getBookingDatesString(true)}"></td>
+                            <!--<td th:text="${todaysPlacedRoomListSize}"></td>-->
+                            <td>৳<span th:text="${room?.getDiscountedPrice(analDate)}"></span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td>৳<span
+                                    th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate)*todaysPlacedRoomListSize}"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <div class="col-sm-6">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Sales (Booked Rooms by date)</h3><br/>
+                        <h4 class="box-title">Date: <span th:text="${analDate}"></span></h4>
+                        <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormSales" method="get">
+                            <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
+                            <input class="form-control" name="analDate" type="date" id="analDateFilterSales"
+                                   th:value="${analDate}"></input>
                         </form>
                     </div>
-                </div>
 
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Sl</th>
-                        <th>Booking ID</th>
-                        <th sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">Hotel Name</th>
-                        <th sec:authorize="!hasRole('ROLE_USER')">User's Name</th>
-                        <th>Rooms</th>
-                        <!--<th>Total Rooms</th>-->
-                        <th>Room Rent</th>
-                        <th sec:authorize="hasRole('ROLE_USER')">You Saved</th>
-                        <!--<th>Placed On</th>-->
-                    </tr>
-                    <tr th:if="${bookingList != null}" th:each="booking,iter : ${bookingList}">
-                        <td th:text="${iter.index+1}"></td>
-                        <td th:text="${booking?.id}"></td>
-                        <td sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
-                            <a th:href="@{/bookings/}+${booking?.id}">
-                                <h5 th:text="${booking?.hotel?.name}"></h5>
-                            </a>
-                        </td>
-                        <td sec:authorize="!hasRole('ROLE_USER')">
-                            <span th:if="${!booking?.manualBooking}" th:text="${booking?.user?.name}"></span>
-                            <span th:if="${booking?.manualBooking}" th:text="${booking?.hotel?.name}"></span>
-                        </td>
-                        <td th:text="${booking?.getRoomNumbersString()}"></td>
-                        <td>৳<span th:text="${booking?.getTotalPayableCost()}"></span></td>
-                        <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green"
-                                                                       th:text="${booking?.getTotalDiscountPercentage()}">90%</span>
-                        </td>
-                        <!--<td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>-->
-                        <td>
-                            <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
-                            <a sec:authorize="!hasAnyRole('ROLE_ADMIN','ROLE_HOTEL_ADMIN')" class="btn btn-success"
-                               th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
-                                review</a>
-                            <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
-                            <form class="form pull-right" th:action="@{/bookings/cancel/}+${booking?.id}" method="post">
-                                <button class="btn btn-warning" onsubmit="return confirm('Do you really want to cancel this booking?');"
-                                   th:disabled="${!booking?.isCancelable()}">Cancel</button>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Sl</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Hotel Name</th>
+                            <th>Room No</th>
+                            <th>Category</th>
+                            <th>Room Rent</th>
+
+                        </tr>
+                        <tr th:if="${bookedRoomList != null}" th:each="room,iter : ${bookedRoomList}">
+                            <td th:text="${iter.index+1}"></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${room?.hotel?.name}"></td>
+                            <td>
+                                <!--<a th:href="@{/rooms/}+${room?.id}">-->
+                                <h5 th:text="${room?.roomNumber}"></h5>
+                                <!--</a>-->
+                            </td>
+                            <td th:text="${room?.category?.name}"></td>
+                            <td>৳<span th:text="${room?.getDiscountedPrice(analDate)}"></span></td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate)}"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="col-sm-4">
+                            <h3 class="box-title" sec:authorize="hasRole('ROLE_USER')">
+                                <a th:href="@{/bookings}">My Bookings</a>
+                            </h3>
+                            <h3 class="box-title" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{/bookings}">All Bookings</a>
+                            </h3>
+                            |
+                            <h3 class="box-title">
+                                <a th:href="@{/bookings/canceled}">Canceled Bookings</a>
+                            </h3>
+                        </div>
+                        <div class="col-sm-8">
+                            <form sec:authorize="hasRole('ROLE_ADMIN')" class="form col-sm-4" th:action="@{/bookings}"
+                                  id="typeFilterForm" method="get">
+                                <input name="filterType" type="hidden" value="hotelType"></input>
+                                <select class="form-control" name="filterValue" id="typeFilter">
+                                    <option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel
+                                    </option>
+                                    <option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship
+                                    </option>
+                                </select>
                             </form>
-                        </td>
+                            <form class="form col-sm-4" th:action="@{/bookings}" id="dateFilterForm" method="get">
+                                <input name="filterType" type="hidden" value="date"></input>
+                                <input class="form-control" name="filterValue" type="date" id="dateFilter"/>
+                            </form>
+                            <form class="form col-sm-4" th:action="@{/bookings}" method="get">
+                                <input type="hidden" name="filterType" value="hotelName">
+                                <datalist id="hotels" th:if="${hotelList!=null}">
+                                    <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}"
+                                            th:text="${hotel?.name}"></option>
+                                    <!--<option th:value="chaal">Saint Martins</option>-->
+                                </datalist>
+                                <input class="form-control" type="text" name="filterValue" placeholder="Hotel Name"
+                                       list="hotels">
+                            </form>
+                        </div>
+                    </div>
 
-                    </tr>
-                </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Sl</th>
+                            <th>Booking ID</th>
+                            <th sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">Hotel Name</th>
+                            <th sec:authorize="!hasRole('ROLE_USER')">User's Name</th>
+                            <th>Rooms</th>
+                            <!--<th>Total Rooms</th>-->
+                            <th>Room Rent</th>
+                            <th sec:authorize="hasRole('ROLE_USER')">You Saved</th>
+                            <!--<th>Placed On</th>-->
+                        </tr>
+                        <tr th:if="${bookingList != null}" th:each="booking,iter : ${bookingList}">
+                            <td th:text="${iter.index+1}"></td>
+                            <td th:text="${booking?.id}"></td>
+                            <td sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
+                                <a th:href="@{/bookings/}+${booking?.id}">
+                                    <h5 th:text="${booking?.hotel?.name}"></h5>
+                                </a>
+                            </td>
+                            <td sec:authorize="!hasRole('ROLE_USER')">
+                                <span th:if="${!booking?.manualBooking}" th:text="${booking?.user?.name}"></span>
+                                <span th:if="${booking?.manualBooking}" th:text="${booking?.hotel?.name}"></span>
+                            </td>
+                            <td th:text="${booking?.getRoomNumbersString()}"></td>
+                            <td>৳<span th:text="${booking?.getTotalPayableCost()}"></span></td>
+                            <td sec:authorize="hasRole('ROLE_USER')"><span class="badge bg-green"
+                                                                           th:text="${booking?.getTotalDiscountPercentage()}">90%</span>
+                            </td>
+                            <!--<td th:text="${booking?.getReadableDateTime(booking?.getTime())}"><h4></h4></td>-->
+                            <td>
+                                <a th:href="@{/bookings/}+${booking?.id}" class="btn btn-primary">Details</a>
+                                <a sec:authorize="!hasAnyRole('ROLE_ADMIN','ROLE_HOTEL_ADMIN')" class="btn btn-success"
+                                   th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
+                                    review</a>
+                                <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
+                                <form class="form pull-right" th:action="@{/bookings/cancel/}+${booking?.id}" method="post">
+                                    <button class="btn btn-warning" onsubmit="return confirm('Do you really want to cancel this booking?');"
+                                       th:disabled="${!booking?.isCancelable()}">Cancel</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li><a href="#">&laquo;</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

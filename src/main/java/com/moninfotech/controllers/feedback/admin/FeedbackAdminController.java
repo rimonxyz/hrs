@@ -29,15 +29,15 @@ public class FeedbackAdminController {
         if (page == null || page < 0) page = 0;
         model.addAttribute("feedbackList", this.feedbackService.findAll(page, 20));
         model.addAttribute("page",page);
-        model.addAttribute("template", "fragments/feedback/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/feedback/all");
+        return "adminlte/fragments/feedback/all";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     private String singleFeedback(@PathVariable("id") Long id, Model model) {
         model.addAttribute("feedback", this.feedbackService.getOne(id));
-        model.addAttribute("template", "fragments/feedback/details");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/feedback/details");
+        return "adminlte/fragments/feedback/details";
     }
 
     @RequestMapping(value = "/{id}/response", method = RequestMethod.POST)
