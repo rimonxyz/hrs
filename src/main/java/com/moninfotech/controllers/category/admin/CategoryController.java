@@ -38,8 +38,8 @@ public class CategoryController {
         if (page == null || page < 0) page = 0;
         model.addAttribute("categoryList", this.categoryService.findAll());
 
-        model.addAttribute("template", "fragments/category/admin/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/category/admin/all");
+        return "adminlte/fragments/category/admin/all";
     }
 
 

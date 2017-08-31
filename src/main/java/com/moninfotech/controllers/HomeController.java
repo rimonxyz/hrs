@@ -65,8 +65,8 @@ public class HomeController {
         model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser,false, true, null, null));
         model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser, true, hotelType));
         model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser, false, hotelType));
-        model.addAttribute("template", "fragments/dashboard/dashboard");
-        return "adminlte/index";
+
+        return "adminlte/fragments/dashboard/dashboard";
     }
 
     // Register

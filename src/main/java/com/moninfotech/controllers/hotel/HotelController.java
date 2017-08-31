@@ -75,13 +75,14 @@ public class HotelController {
         model.addAttribute(hotelList);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
 
-        model.addAttribute("template", "fragments/hotel/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/hotel/all");
+        return "adminlte/fragments/hotel/all";
     }
 
     // get all room
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     private String allRooms(@PathVariable("id") Long id,
+                            @RequestParam(value = "q", required = false) String query,
                             @RequestParam(value = "filterType", required = false) String filterType,
                             @RequestParam(value = "value", required = false) String value, Model model) {
 
@@ -91,7 +92,13 @@ public class HotelController {
         }
         Hotel hotel = this.hotelService.findOne(id);
         if (hotel == null) return "redirect:/?message=You are not authorized to perform this action!";
-        List<Room> roomList = hotel.getRoomList();
+
+        // Load rooms, all if search query is empty.
+        List<Room> roomList;
+        if (query == null)
+            roomList = hotel.getRoomList();
+        else
+            roomList = this.roomService.searchRooms(hotel, query);
         List<Long> bookedIds = this.roomService.filterRoomIds(roomList, filterType, value);
 
         model.addAttribute("hotel", hotel);
@@ -103,23 +110,8 @@ public class HotelController {
         model.addAttribute("filterValue", value);
 
         model.addAttribute("sidebarCollapse", true);
-        model.addAttribute("template", "fragments/hotel/details");
-        return "adminlte/index";
-    }
-
-    // search
-    @RequestMapping(value = "/{id}/search", method = RequestMethod.GET)
-    private String searchRoom(@PathVariable("id") Long id,
-                              @RequestParam("q") String query,
-                              Model model) {
-        Hotel hotel = this.hotelService.findOne(id);
-        List<Room> roomList = this.roomService.searchRooms(hotel, query);
-        if (roomList == null)
-            return "hotel/admin/allRooms?message=One or more rooms can not be found!";
-        model.addAttribute("hotel", hotel);
-        model.addAttribute("roomList", roomList);
-        model.addAttribute("categoryList", this.categoryService.findAll());
-        return "room/all";
+//        model.addAttribute("template", "fragments/hotel/details");
+        return "adminlte/fragments/hotel/details";
     }
 
     // returns image with that entity id

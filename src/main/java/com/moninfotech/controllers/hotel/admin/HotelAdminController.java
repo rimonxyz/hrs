@@ -68,8 +68,8 @@ public class HotelAdminController {
 
         model.addAttribute(hotelList);
         model.addAttribute("hotelType", type);
-        model.addAttribute("template", "fragments/hotel/admin/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/hotel/admin/all");
+        return "adminlte/fragments/hotel/admin/all";
     }
 
 
@@ -206,8 +206,8 @@ public class HotelAdminController {
         model.addAttribute("filterType", filterType);
         model.addAttribute("filterValue", value);
 
-        model.addAttribute("template", "fragments/room/admin/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/room/admin/all");
+        return "adminlte/fragments/room/admin/all";
     }
 
     // search

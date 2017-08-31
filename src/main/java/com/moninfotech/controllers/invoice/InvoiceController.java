@@ -53,8 +53,8 @@ public class InvoiceController {
         invoice = this.invoiceService.save(invoice);
 
         model.addAttribute("invoice", invoice);
-        model.addAttribute("template", "fragments/booking/invoice");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/booking/invoice");
+        return "adminlte/fragments/booking/invoice";
     }
 
     @PostMapping("/{invoiceId}/payment/success")

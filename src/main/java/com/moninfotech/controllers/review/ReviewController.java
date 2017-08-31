@@ -48,8 +48,8 @@ public class ReviewController {
         model.addAttribute("hotelList", this.reviewService.findReviewedHotels(currentUser));
         model.addAttribute("reviewList", myReviewList);
 
-        model.addAttribute("template", "fragments/review/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/review/all");
+        return "adminlte/fragments/review/all";
     }
 
 
@@ -66,8 +66,8 @@ public class ReviewController {
         model.addAttribute(this.bookingService.getBookingList(hotel, currentUser));
         model.addAttribute("hotel", hotel);
 
-        model.addAttribute("template", "fragments/review/create");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/review/create");
+        return "adminlte/fragments/review/create";
     }
 
     @PostMapping("/hotel/{hotelId}/create")

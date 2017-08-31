@@ -1,127 +1,134 @@
-<section class="content-header">
-    <h1>
-        <span>Offers</span>
-        <small>Control panel</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a th:href="@{/admin/offers}">Offers(Admin)</a></li>
-    </ol>
-</section>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="adminlte/index">
 
-<section class="content">
-    <div class="row">
-        <div class="col-md-6">
-            <!-- Widget: user widget style 1 -->
-            <div class="box">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="box-header bg-yellow">
-                    <!-- /.widget-user-image -->
-                    <h3 class="widget-user-username">Offers</h3>
+<div layout:fragment="main_content">
+    <section class="content-header">
+        <h1>
+            <span>Offers</span>
+            <small>Control panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a th:href="@{/admin/offers}">Offers(Admin)</a></li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Widget: user widget style 1 -->
+                <div class="box">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="box-header bg-yellow">
+                        <!-- /.widget-user-image -->
+                        <h3 class="widget-user-username">Offers</h3>
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Short Tag</th>
+                                <th>Offer Link</th>
+                                <th>Description</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            <tr th:if="${offerList != null}" th:each="offer,iter : ${offerList}">
+                                <td th:text="${iter.index+1}"></td>
+                                <td><h5 th:text="${offer?.title}"></h5></td>
+                                <td><h5 th:text="${offer?.shortTag}"></h5></td>
+                                <td>
+                                    <a th:href="${offer?.linkToOpen}">
+                                        <h5 th:text="${offer?.linkToOpen}"></h5>
+                                    </a>
+                                </td>
+                                <td>
+
+                                    <div class="panel-heading">
+                                        <h6 class="panel-title">
+                                            &nbsp;<a data-toggle="collapse" href="#collapse1" style="color: blue;">See Description</a>
+                                        </h6>
+                                    </div>
+                                    <div id="collapse1" class="panel-collapse collapse">
+                                        <span th:text="${offer?.description}"></span>
+                                    </div>
+
+                                </td>
+                                <td style="text-align: center;">
+                                    <a th:href="@{/admin/offers/edit/}+${offer?.id}">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                    </a>
+                                </td>
+                                <td style="text-align: center;">
+                                    <form onsubmit="return confirm('Are you sure?');"
+                                          th:action="@{/admin/offers/delete/}+${offer?.id}" method="post">
+                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <div class="box-body no-padding">
-                    <table class="table table-bordered table-hover">
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Short Tag</th>
-                            <th>Offer Link</th>
-                            <th>Description</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                        <tr th:if="${offerList != null}" th:each="offer,iter : ${offerList}">
-                            <td th:text="${iter.index+1}"></td>
-                            <td><h5 th:text="${offer?.title}"></h5></td>
-                            <td><h5 th:text="${offer?.shortTag}"></h5></td>
-                            <td>
-                                <a th:href="${offer?.linkToOpen}">
-                                    <h5 th:text="${offer?.linkToOpen}"></h5>
-                                </a>
-                            </td>
-                            <td>
-
-                                <div class="panel-heading">
-                                    <h6 class="panel-title">
-                                        &nbsp;<a data-toggle="collapse" href="#collapse1" style="color: blue;">See Description</a>
-                                    </h6>
-                                </div>
-                                <div id="collapse1" class="panel-collapse collapse">
-                                    <span th:text="${offer?.description}"></span>
-                                </div>
-
-                            </td>
-                            <td style="text-align: center;">
-                                <a th:href="@{/admin/offers/edit/}+${offer?.id}">
-                                    <i class="glyphicon glyphicon-edit"></i>
-                                </a>
-                            </td>
-                            <td style="text-align: center;">
-                                <form onsubmit="return confirm('Are you sure?');"
-                                      th:action="@{/admin/offers/delete/}+${offer?.id}" method="post">
-                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                            class="glyphicon glyphicon-remove"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                <!-- /.widget-user -->
             </div>
-            <!-- /.widget-user -->
-        </div>
-        <div class="col-md-6">
-            <div class="box box-warning">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Create/Edit Offer</h3>
+            <div class="col-md-6">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Create/Edit Offer</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <form role="form" th:action="@{/admin/offers/create}" method="post" enctype="multipart/form-data">
+                            <!-- text input -->
+                            <div class="form-group" hidden="hidden">
+                                <label>Offer ID</label>
+                                <input th:value="${offer?.id}" type="hidden" name="id" class="form-control" placeholder="offer ID">
+                            </div>
+                            <div class="form-group">
+                                <label>Offer Title</label>
+                                <input th:value="${offer?.title}" type="text" required="required" name="title" class="form-control" placeholder="offer Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Short Tag</label>
+                                <input th:value="${offer?.shortTag}" type="text" required="required" name="shortTag" class="form-control" placeholder="Short Tag">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="linkToOpen">Offer Link</label>
+                                <input id="linkToOpen" th:value="${offer?.linkToOpen}" required="required" type="text" name="linkToOpen" class="form-control" placeholder="Link to Open">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input id="image" class="form-control" type="file" name="image" required="required">
+                            </div>
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea th:text="${offer?.description}" name="description" class="form-control" rows="6"
+                                          placeholder="offer Description"></textarea>
+                            </div>
+
+
+                            <input class="btn btn-primary" type="submit" value="SUBMIT"></input>
+
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <form role="form" th:action="@{/admin/offers/create}" method="post" enctype="multipart/form-data">
-                        <!-- text input -->
-                        <div class="form-group" hidden="hidden">
-                            <label>Offer ID</label>
-                            <input th:value="${offer?.id}" type="hidden" name="id" class="form-control" placeholder="offer ID">
-                        </div>
-                        <div class="form-group">
-                            <label>Offer Title</label>
-                            <input th:value="${offer?.title}" type="text" required="required" name="title" class="form-control" placeholder="offer Name">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Short Tag</label>
-                            <input th:value="${offer?.shortTag}" type="text" required="required" name="shortTag" class="form-control" placeholder="Short Tag">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="linkToOpen">Offer Link</label>
-                            <input id="linkToOpen" th:value="${offer?.linkToOpen}" required="required" type="text" name="linkToOpen" class="form-control" placeholder="Link to Open">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="image">Image</label>
-                            <input id="image" class="form-control" type="file" name="image" required="required">
-                        </div>
-                        <!-- textarea -->
-                        <div class="form-group">
-                            <label>Description</label>
-                            <textarea th:text="${offer?.description}" name="description" class="form-control" rows="6"
-                                      placeholder="offer Description"></textarea>
-                        </div>
-
-
-                        <input class="btn btn-primary" type="submit" value="SUBMIT"></input>
-
-                    </form>
-                </div>
-                <!-- /.box-body -->
+                <!-- /.box -->
             </div>
-            <!-- /.box -->
+            <!-- /.col -->
+
         </div>
-        <!-- /.col -->
-
-    </div>
 
 
-</section>
-
+    </section>
+</div>
 

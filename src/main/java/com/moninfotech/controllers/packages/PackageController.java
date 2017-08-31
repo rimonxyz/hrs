@@ -27,8 +27,8 @@ public class PackageController {
         model.addAttribute("pckg",this.packageService.findOne(id));
         model.addAttribute("pckgList",this.packageService.findAll(null,null));
 
-        model.addAttribute("template", "fragments/package/details");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/package/details");
+        return "adminlte/fragments/package/details";
     }
 
     // get Image by id

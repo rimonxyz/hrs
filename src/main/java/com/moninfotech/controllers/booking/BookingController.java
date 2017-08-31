@@ -80,8 +80,8 @@ public class BookingController {
         model.addAttribute("invoiceList", this.invoiceService.findByUser(currentUser, false));
         model.addAttribute("filterValue", filterValue);
 
-        model.addAttribute("template", "fragments/booking/all");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/booking/all");
+        return "adminlte/fragments/booking/all";
     }
 
     @GetMapping("/canceled")
@@ -92,8 +92,8 @@ public class BookingController {
         // find booking list by role
         List<Booking> canceledBookingList = this.bookingService.findBookings(currentUser, true, true, page, size);
         model.addAttribute("bookingList",canceledBookingList);
-        model.addAttribute("template", "fragments/booking/allCanceled");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/booking/allCanceled");
+        return "adminlte/fragments/booking/allCanceled";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -107,8 +107,8 @@ public class BookingController {
             return "redirect:/bookings?message=You\'re not authorised to access this resource.";
 
         model.addAttribute("booking", booking);
-        model.addAttribute("template", "fragments/booking/details");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/booking/details");
+        return "adminlte/fragments/booking/details";
     }
 
     @GetMapping("/cart/add/{roomId}")
@@ -200,8 +200,8 @@ public class BookingController {
     @GetMapping("/checkout/assignUser")
     private String assignUserToBookingPage(@RequestParam(value = "searchQuery", required = false, defaultValue = "") String searchQuery, Model model) {
         model.addAttribute("userList", this.userService.findByEmailOrPhoneNumber(searchQuery, searchQuery));
-        model.addAttribute("template", "fragments/booking/assignUser");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/booking/assignUser");
+        return "adminlte/fragments/booking/assignUser";
     }
 
     @PostMapping("/checkout/assignUser")

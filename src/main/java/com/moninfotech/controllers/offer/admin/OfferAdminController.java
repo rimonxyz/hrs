@@ -36,8 +36,8 @@ public class OfferAdminController {
                             @RequestParam(value = "size", required = false) Integer size, Model model) {
         List<Offer> offerList= this.offerService.findAll(page, size);
         model.addAttribute(offerList);
-        model.addAttribute("template", "fragments/offer/admin/offers");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/offer/admin/offers");
+        return "adminlte/fragments/offer/admin/offers";
     }
 
     @PostMapping("/create")
@@ -57,8 +57,8 @@ public class OfferAdminController {
         if (offer == null) return "redirect:/admin/offers?message=Offer not found!";
         model.addAttribute(offer);
         model.addAttribute("offerList", this.offerService.findAll(null, null));
-        model.addAttribute("template", "fragments/offer/admin/offers");
-        return "adminlte/index";
+//        model.addAttribute("template", "fragments/offer/admin/offers");
+        return "adminlte/fragments/offer/admin/offers";
     }
 
     @PostMapping("/edit/{id}")

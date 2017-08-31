@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="adminlte/index">
+
+<div layout:fragment="main_content">
 <section class="content">
 
     <div class="row">
@@ -33,25 +40,25 @@
                     </td>
                     <td>
                         <span th:text="${feedback?.getEmail()}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${feedback?.getPhoneNumber()}"></span>
-                    </td>
+                        </td>
+                        <td>
+                            <span th:text="${feedback?.getPhoneNumber()}"></span>
+                        </td>
 
-                    <td>
-                        <a class="btn btn-primary" th:href="@{/admin/feedback/} + ${feedback?.getId()}">Respond</a>
-                    </td>
-                    <td>
-                        <form onsubmit="return confirm('Do you really want to delete this article?');" th:action="@{/admin/feedback/delete/}+${feedback?.getId()}" method="post">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        <td>
+                            <a class="btn btn-primary" th:href="@{/admin/feedback/} + ${feedback?.getId()}">Respond</a>
+                        </td>
+                        <td>
+                            <form onsubmit="return confirm('Do you really want to delete this article?');" th:action="@{/admin/feedback/delete/}+${feedback?.getId()}" method="post">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-</section>
+    </section>
 
-
+</div>
