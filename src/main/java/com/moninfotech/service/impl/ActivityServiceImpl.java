@@ -55,4 +55,14 @@ public class ActivityServiceImpl implements ActivityService {
         return this.activityRepo.findOne(id);
     }
 
+    @Override
+    public List<Activity> findAll() {
+        return this.activityRepo.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.activityRepo.delete(id);
+    }
+
 }
