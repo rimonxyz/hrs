@@ -1,6 +1,7 @@
 package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -41,6 +42,14 @@ public class Booking extends BaseEntity {
 
     private boolean confirmed;
     private boolean cancelled;
+
+    @PrePersist
+    @PreUpdate
+    void setDefaults(){
+        // set manual booking
+        if (this.getUser()!=null)
+                this.setManualBooking(this.getUser().hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN) || this.getUser().hasAssignedRole(Constants.Roles.ROLE_ADMIN));
+    }
 
     public boolean isValid() {
         // TODO: 6/7/17 TIME VALIDATION | MAKE SURE BOOKING TIME ISN'T PAST
@@ -141,7 +150,6 @@ public class Booking extends BaseEntity {
         this.bookingDateList = bookingDateList;
     }
 
-
     public Invoice getInvoice() {
         return invoice;
     }
@@ -165,20 +173,6 @@ public class Booking extends BaseEntity {
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
-//
-//    @Override
-//    public String toString() {
-//        return "Booking{" +
-//                "transaction=" + transaction +
-//                ", roomList=" + roomList +
-//                ", manualBooking=" + manualBooking +
-//                ", bookingDateList=" + bookingDateList +
-//                ", user=" + user +
-//                ", hotel=" + hotel +
-//                ", invoice=" + invoice +
-//                ", cancelled=" + cancelled +
-//                "} " + super.toString();
-//    }
 
     public boolean isConfirmed() {
         return confirmed;
