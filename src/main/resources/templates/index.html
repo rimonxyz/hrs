@@ -98,7 +98,7 @@
                 <!-- <li><i class="fa fa-phone" aria-hidden="true"></i> +055 3175 6666 <br/> +055 3175 6666</li> -->
             </ul>
         </div>
-        <div class="col-xs-6" style="padding-top: 30px;">
+        <div class="col-xs-5" style="padding-top: 30px;">
             <p class="moto-text_normal">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477707,</a>
@@ -115,6 +115,9 @@
             </p>
 
 
+        </div>
+        <div class="col-xs-1" th:if="${totalVisitors!=null}">
+            <span style="font-size: 10px;">Total Visitors:</span> <span th:text="${totalVisitors}" style="color: green;"></span>
         </div>
         <div class="clearfix"></div>
     </div>

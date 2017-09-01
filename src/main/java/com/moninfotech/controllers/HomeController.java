@@ -4,10 +4,7 @@ import com.moninfotech.commons.Config;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.BookingHelper;
-import com.moninfotech.domain.AcValidationToken;
-import com.moninfotech.domain.Booking;
-import com.moninfotech.domain.Hotel;
-import com.moninfotech.domain.User;
+import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,21 +36,27 @@ public class HomeController {
 
     private final AcValidationTokenService acValidationTokenService;
 
+    private final ActivityService activityService;
+
     @Autowired
-    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService, PackageService packageService, OfferService offerService, AcValidationTokenService acValidationTokenService) {
+    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService, PackageService packageService, OfferService offerService, AcValidationTokenService acValidationTokenService, ActivityService activityService) {
         this.userService = userService;
         this.hotelService = hotelService;
         this.bookingService = bookingService;
         this.packageService = packageService;
         this.offerService = offerService;
         this.acValidationTokenService = acValidationTokenService;
+        this.activityService = activityService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String home(Model model) {
+        Activity firstActivity = this.activityService.findFirst();
+
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         model.addAttribute("packageList", this.packageService.findAll(null, null));
         model.addAttribute("offerList", this.offerService.findAll(null, null));
+        model.addAttribute("totalVisitors", firstActivity != null ? firstActivity.getTotalVisitors() : 0L);
         return "index";
     }
 
@@ -62,7 +65,7 @@ public class HomeController {
                              @RequestParam(value = "hotelType", required = false, defaultValue = Hotel.Type.BOTH) String hotelType, Model model) {
         model.addAttribute("bookingHelper", new BookingHelper());
 
-        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser,false, true, null, null));
+        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser, false, true, null, null));
         model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser, true, hotelType));
         model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser, false, hotelType));
 
