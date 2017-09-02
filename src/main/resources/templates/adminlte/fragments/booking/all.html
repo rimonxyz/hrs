@@ -17,6 +17,21 @@
     </section>
 
     <section class="content">
+        <div class="row col-sm-12" style="margin-bottom: 20px;">
+            <form sec:authorize="hasRole('ROLE_ADMIN')" class="form col-sm-4 pull-right" th:action="@{/bookings}"
+                  id="typeFilterForm" method="get">
+                <input name="analFlagRole" type="hidden" th:value="${analFlagRole}"></input>
+                <input name="analDate" type="hidden" th:value="${analDate}"></input>
+                <input name="filterType" type="hidden" value="hotelType"></input>
+                <select class="form-control" name="filterValue" id="typeFilter">
+                    <option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel
+                    </option>
+                    <option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship
+                    </option>
+                </select>
+            </form>
+        </div>
+
         <div class="row" sec:authorize="!hasRole('ROLE_USER')">
             <div class="col-sm-6">
                 <div class="box">
@@ -27,6 +42,13 @@
                             <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
                             <input class="form-control" name="analDate" type="date" id="analDateFilterBookings"
                                    th:value="${analDate}"></input>
+                            <input name="filterType" type="hidden" value="hotelType"></input>
+                            <select hidden="hidden" name="filterValue" id="typeFilter">
+                                <option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel
+                                </option>
+                                <option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship
+                                </option>
+                            </select>
                         </form>
                         <!--<h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>-->
                     </div>
@@ -127,6 +149,9 @@
                             <h3 class="box-title" sec:authorize="hasRole('ROLE_USER')">
                                 <a th:href="@{/bookings}">My Bookings</a>
                             </h3>
+                            <h3 class="box-title" sec:authorize="hasRole('ROLE_HOTEL_ADMIN')">
+                                <a th:href="@{/bookings}">My Hotel Bookings</a>
+                            </h3>
                             <h3 class="box-title" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a th:href="@{/bookings}">All Bookings</a>
                             </h3>
@@ -136,21 +161,21 @@
                             </h3>
                         </div>
                         <div class="col-sm-8">
-                            <form sec:authorize="hasRole('ROLE_ADMIN')" class="form col-sm-4" th:action="@{/bookings}"
-                                  id="typeFilterForm" method="get">
-                                <input name="filterType" type="hidden" value="hotelType"></input>
-                                <select class="form-control" name="filterValue" id="typeFilter">
-                                    <option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel
-                                    </option>
-                                    <option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship
-                                    </option>
-                                </select>
-                            </form>
-                            <form class="form col-sm-4" th:action="@{/bookings}" id="dateFilterForm" method="get">
+                            <!--<form sec:authorize="hasRole('ROLE_ADMIN')" class="form col-sm-4" th:action="@{/bookings}"-->
+                                  <!--id="typeFilterForm" method="get">-->
+                                <!--<input name="filterType" type="hidden" value="hotelType"></input>-->
+                                <!--<select class="form-control" name="filterValue" id="typeFilter">-->
+                                    <!--<option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel-->
+                                    <!--</option>-->
+                                    <!--<option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship-->
+                                    <!--</option>-->
+                                <!--</select>-->
+                            <!--</form>-->
+                            <form class="form col-sm-6" th:action="@{/bookings}" id="dateFilterForm" method="get">
                                 <input name="filterType" type="hidden" value="date"></input>
                                 <input class="form-control" name="filterValue" type="date" id="dateFilter"/>
                             </form>
-                            <form class="form col-sm-4" th:action="@{/bookings}" method="get">
+                            <form class="form col-sm-6" th:action="@{/bookings}" method="get">
                                 <input type="hidden" name="filterType" value="hotelName">
                                 <datalist id="hotels" th:if="${hotelList!=null}">
                                     <option th:each="hotel : ${hotelList}" th:value="${hotel?.name}"

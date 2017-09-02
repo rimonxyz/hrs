@@ -249,19 +249,20 @@ public class BookingServiceImpl implements BookingService {
         if (bookingList == null || bookingList.isEmpty() || filterType == null || filterType.isEmpty() || filterValue == null || filterValue.isEmpty())
             return bookingList;
 
-        if (filterType.equals(FilterType.HOTEL_NAME)) {
-            return bookingList.stream()
-                    .filter(booking -> booking.getHotel().getName().toLowerCase().contains(filterValue.toLowerCase()))
-                    .collect(Collectors.toList());
-        } else if (filterType.equals(FilterType.DATE)) {
-            Date filterDate = DateUtils.getParsableDateFormat().parse(filterValue);
-            return bookingList.stream()
-                    .filter(booking -> DateUtils.isSameDay(booking.getCreated(), filterDate))
-                    .collect(Collectors.toList());
-        } else if (filterType.equals(FilterType.HOTEL_TYPE)) {
-            return bookingList.stream()
-                    .filter(booking -> booking.getHotel().getType().toLowerCase().equals(filterValue.toLowerCase()))
-                    .collect(Collectors.toList());
+        switch (filterType) {
+            case FilterType.HOTEL_NAME:
+                return bookingList.stream()
+                        .filter(booking -> booking.getHotel().getName().toLowerCase().contains(filterValue.toLowerCase()))
+                        .collect(Collectors.toList());
+            case FilterType.DATE:
+                Date filterDate = DateUtils.getParsableDateFormat().parse(filterValue);
+                return bookingList.stream()
+                        .filter(booking -> DateUtils.isSameDay(booking.getCreated(), filterDate))
+                        .collect(Collectors.toList());
+            case FilterType.HOTEL_TYPE:
+                return bookingList.stream()
+                        .filter(booking -> booking.getHotel().getType().toLowerCase().equals(filterValue.toLowerCase()))
+                        .collect(Collectors.toList());
         }
         return bookingList;
     }

@@ -112,6 +112,24 @@ public class RoomServiceImpl implements RoomService {
         return this.roomRepo.save(roomList);
     }
 
+    @Override
+    public List<Room> filterRoomList(List<Room> roomList, String filterType, String filterValue) throws ParseException {
+        if (roomList == null || roomList.isEmpty() || filterType == null || filterType.isEmpty() || filterValue == null || filterValue.isEmpty())
+            return roomList;
+
+        switch (filterType) {
+            case FilterType.HOTEL_NAME:
+                return roomList.stream()
+                        .filter(room -> room.getHotel().getName().toLowerCase().contains(filterValue.toLowerCase()))
+                        .collect(Collectors.toList());
+            case FilterType.HOTEL_TYPE:
+                return roomList.stream()
+                        .filter(room -> room.getHotel().getType().toLowerCase().equals(filterValue.toLowerCase()))
+                        .collect(Collectors.toList());
+        }
+        return roomList;
+    }
+
     private List<Long> filterRoomIdsByCategory(List<Room> roomList, String value) {
         List<Long> idsList = new ArrayList<>();
         roomList.forEach(room -> {

@@ -65,8 +65,11 @@ public class BookingController {
         List<Room> todaysBookedRoomList = this.bookingService.findFilteredRoomList(currentUser, date, analFlagRole);
         List<Room> todaysPlacedRoomList = this.bookingService.findFilteredRoomListByPlacementDateDistinct(currentUser, date, analFlagRole);
 
-        if (!filterType.isEmpty() && !filterValue.isEmpty())
+        if (!filterType.isEmpty() && !filterValue.isEmpty()) {
             bookingList = this.bookingService.filterBookingList(bookingList, filterType, filterValue);
+            todaysBookedRoomList = this.roomService.filterRoomList(todaysBookedRoomList,filterType,filterValue);
+            todaysPlacedRoomList = this.roomService.filterRoomList(todaysPlacedRoomList,filterType,filterValue);
+        }
         // find total placement price and count
 
         model.addAttribute("bookingHelper", new BookingHelper());
