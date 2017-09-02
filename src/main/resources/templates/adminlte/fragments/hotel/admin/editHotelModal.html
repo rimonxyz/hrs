@@ -24,6 +24,7 @@
                             <div class="form-group">
                                 <label for="starEdit">Star</label>
                                 <select id="starEdit" class="form-control" name="star">
+                                    <option value="not applicable">N/A</option>
                                     <option value="1 star">1 Star</option>
                                     <option value="2 star">2 Star</option>
                                     <option value="3 star standard">3 Star Standard</option>
@@ -90,10 +91,15 @@
                                 <input id="helipadEdit" name="facilities.helipad" class="checkbox" type="checkbox">Helipad</input>
                             </div>
 
+                            <div class="col-md-6 form-right">
+                                <input  class="checkbox" type="checkbox"></input>
+                            </div>
+                            <div class="col-md-6 form-right">
+                                <input id="acEdit" name="facilities.ac" class="checkbox" type="checkbox">AC</input>
+                            </div>
 
                             <hr/>
-                            <span><b><span th:text="${hotelType}">Hotel</span> Address</b></span>
-                            <hr/>
+                            <span style="color: white;"><b><span th:text="${hotelType}">Hotel</span> Address</b></span>
                             <div class="form-group" id="address">
                                 <div class="col-sm-6 form-group">
                                     <label for="addressCountryEdit">Country</label>

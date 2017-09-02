@@ -20,6 +20,7 @@
                                 <div class="form-group">
                                     <label for="star">Star</label>
                                     <select id="star" class="form-control" name="star">
+                                        <option value="not applicable">N/A</option>
                                         <option value="1 star">1 Star</option>
                                         <option value="2 star">2 Star</option>
                                         <option value="3 star standard">3 Star Standard</option>
@@ -77,7 +78,12 @@
                                 <div class="col-md-6 form-right">
                                     <input name="facilities.helipad" class="checkbox" type="checkbox">Helipad</input>
                                 </div>
-
+                                <div class="col-md-6 form-right">
+                                    <input  class="checkbox" type="checkbox"></input>
+                                </div>
+                                <div class="col-md-6 form-right">
+                                    <input name="facilities.ac" class="checkbox" type="checkbox">AC</input>
+                                </div>
 
                                 <label for="address" style="margin-top: 20px;"><span th:text="${hotelType}"></span> Address</label><hr/>
                                 <div class="form-group" id="address">

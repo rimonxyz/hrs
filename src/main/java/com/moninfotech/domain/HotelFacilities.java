@@ -14,6 +14,10 @@ public class HotelFacilities {
     private boolean spa;
     private boolean bar;
     private boolean helipad;
+    private boolean ac;
+
+    public HotelFacilities() {
+    }
 
     public boolean isRestaurant() {
         return restaurant;
@@ -95,6 +99,15 @@ public class HotelFacilities {
         this.helipad = helipad;
     }
 
+
+    public boolean isAc() {
+        return ac;
+    }
+
+    public void setAc(boolean ac) {
+        this.ac = ac;
+    }
+
     @Override
     public String toString() {
         return "HotelFacilities{" +
@@ -108,6 +121,7 @@ public class HotelFacilities {
                 ", spa=" + spa +
                 ", bar=" + bar +
                 ", helipad=" + helipad +
+                ", ac=" + ac +
                 '}';
     }
 }
