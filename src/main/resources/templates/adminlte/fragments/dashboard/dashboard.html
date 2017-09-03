@@ -5,6 +5,9 @@
       layout:decorator="adminlte/index">
 <div layout:fragment="main_content">
     <section class="content-header">
+        <h1 sec:authorize="hasRole('ROLE_HOTEL_ADMIN')">
+           <span th:if="${hotelName!=null}" th:text="${hotelName}" class="text text-success"></span>
+        </h1>
         <h1>
             Dashboard
             <small>Control panel</small>

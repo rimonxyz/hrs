@@ -77,7 +77,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" th:action="@{/admin/packages/create}" method="post" enctype="multipart/form-data">
+                        <form role="form" th:action="${package?.id==null ? '/admin/packages/create':'/admin/packages/edit/'+package?.id}" method="post" enctype="multipart/form-data">
                             <!-- text input -->
                             <div class="form-group" hidden="hidden">
                                 <label>Package ID</label>
@@ -104,7 +104,7 @@
 
                             <div class="form-group">
                                 <label for="image">Image</label>
-                                <input id="image" class="form-control" type="file" name="image" required="required">
+                                <input id="image" class="form-control" type="file" name="image" th:required="${package?.id == null}">
                             </div>
                             <!-- textarea -->
                             <div class="form-group">

@@ -65,6 +65,11 @@ public class HomeController {
                              @RequestParam(value = "hotelType", required = false, defaultValue = Hotel.Type.BOTH) String hotelType, Model model) {
         model.addAttribute("bookingHelper", new BookingHelper());
 
+        if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
+            Hotel hotel = this.hotelService.findByUser(currentUser);
+            if (hotel != null)
+                model.addAttribute("hotelName", hotel.getName());
+        }
         model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser, false, true, null, null));
         model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser, true, hotelType));
         model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser, false, hotelType));

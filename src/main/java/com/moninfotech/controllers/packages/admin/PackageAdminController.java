@@ -63,6 +63,11 @@ public class PackageAdminController {
     @PostMapping("/edit/{id}")
     private String edit(@ModelAttribute Package pckg, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
+        Package existing = this.packageService.findOne(pckg.getId());
+        if (existing!=null) {
+            pckg.setImage(existing.getImage());
+            pckg.setCreated(existing.getCreated());
+        }
         pckg = this.packageService.save(pckg);
         return "redirect:/admin/packages?messageinfo=Package Saved!";
     }

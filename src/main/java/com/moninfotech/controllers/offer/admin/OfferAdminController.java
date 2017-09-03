@@ -33,8 +33,8 @@ public class OfferAdminController {
 
     @GetMapping("")
     private String offers(@RequestParam(value = "page", required = false) Integer page,
-                            @RequestParam(value = "size", required = false) Integer size, Model model) {
-        List<Offer> offerList= this.offerService.findAll(page, size);
+                          @RequestParam(value = "size", required = false) Integer size, Model model) {
+        List<Offer> offerList = this.offerService.findAll(page, size);
         model.addAttribute(offerList);
 //        model.addAttribute("template", "fragments/offer/admin/offers");
         return "adminlte/fragments/offer/admin/offers";
@@ -53,7 +53,7 @@ public class OfferAdminController {
 
     @GetMapping("/edit/{id}")
     private String editPage(@PathVariable("id") Long id, Model model) {
-        Offer offer= this.offerService.findOne(id);
+        Offer offer = this.offerService.findOne(id);
         if (offer == null) return "redirect:/admin/offers?message=Offer not found!";
         model.addAttribute(offer);
         model.addAttribute("offerList", this.offerService.findAll(null, null));
@@ -64,6 +64,11 @@ public class OfferAdminController {
     @PostMapping("/edit/{id}")
     private String edit(@ModelAttribute Offer offer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
+        Offer existing = this.offerService.findOne(offer.getId());
+        if (existing != null) {
+            offer.setImage(existing.getImage());
+            offer.setCreated(existing.getCreated());
+        }
         offer = this.offerService.save(offer);
         return "redirect:/admin/offers?messageinfo=Offer Saved!";
     }
