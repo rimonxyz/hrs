@@ -106,18 +106,19 @@
             </p>
             <p class="moto-text_normal">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-            <!--<a target="_self" data-action="url" class="moto-link" href="callto:#">-->
+                <!--<a target="_self" data-action="url" class="moto-link" href="callto:#">-->
                 <span class="moto-link">
                 32/1, Khan Plaza ( 3rd floor),
                 Mirpur Road, Dhanmondi, Dhaka- 1205
                 </span>
-            <!--</a>-->
+                <!--</a>-->
             </p>
 
 
         </div>
         <div class="col-xs-1" th:if="${totalVisitors!=null}">
-            <span style="font-size: 10px;">Total Visitors:</span> <span th:text="${totalVisitors}" style="color: green;"></span>
+            <span style="font-size: 10px;">Total Visitors:</span> <span th:text="${totalVisitors}"
+                                                                        style="color: green;"></span>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -192,8 +193,14 @@
                         </li>
 
                         <li><a href="https://www.facebook.com/groups/intelligenttouristaid">Customer Service</a></li>
-                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Registration</a></li>
-                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                        <li class="dropdown" sec:authorize="!isAuthenticated()">
+                            <a th:href="@{/login}">Sign in &amp; Accounts</a>
+                            <ul class="dropdown-menu agile_short_dropdown">
+                                <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                                <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Registration</a></li>
+                            </ul>
+                        </li>
+
                         <!--<li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"><a th:href="@{/hotel/rooms}">My-->
                         <!--Hotel</a></li>-->
                         <!--<li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/bookings}">My Bookings</a></li>-->
@@ -257,7 +264,7 @@
                     <div class="container">
                         <div class="row searchBox">
                             <form th:action="@{/search}" method="get" class="subscribe-block__form">
-                                <input type="search" class="searchForm" id="search" placeholder="Enter your location" />
+                                <input type="search" class="searchForm" id="search" placeholder="Enter your location"/>
                                 <button type="submit" class="searchBtn">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -317,37 +324,48 @@
                             </tr>
                             <tr>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Easy payment system through Bkash, Rocket, Credit/Debit Card or Cash.</td>
+                                    Easy payment system through Bkash, Rocket, Credit/Debit Card or Cash.
+                                </td>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Exclusive discount on group booking.</td>
+                                    Exclusive discount on group booking.
+                                </td>
                             </tr>
                             <tr>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Providing instant booking confirmation copy on payment.</td>
+                                    Providing instant booking confirmation copy on payment.
+                                </td>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Decide by comparing guest reviews &amp; facilities among hundreds of hotels.</td>
+                                    Decide by comparing guest reviews &amp; facilities among hundreds of hotels.
+                                </td>
                             </tr>
                             <tr>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Pointing hotels location on Google map.</td>
+                                    Pointing hotels location on Google map.
+                                </td>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Indicating Hotel’s distance from important spots.</td>
+                                    Indicating Hotel’s distance from important spots.
+                                </td>
                             </tr>
                             <tr>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Android apps.</td>
+                                    Android apps.
+                                </td>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Applying no extra charge or hidden cost.</td>
+                                    Applying no extra charge or hidden cost.
+                                </td>
                             </tr>
                             <tr>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Availability of related tour packages.</td>
+                                    Availability of related tour packages.
+                                </td>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Ship ticketing for Saint Martin’s Island.</td>
+                                    Ship ticketing for Saint Martin’s Island.
+                                </td>
                             </tr>
                             <tr>
                                 <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Customer service.</td>
+                                    Customer service.
+                                </td>
                                 <td></td>
                             </tr>
 
