@@ -262,12 +262,20 @@
 
                     <!-- search option -->
                     <div class="container">
-                        <div class="row searchBox">
-                            <form th:action="@{/search}" method="get" class="subscribe-block__form">
-                                <input type="search" class="searchForm" id="search" placeholder="Enter your location"/>
-                                <button type="submit" class="searchBtn">
-                                    <i class="fa fa-search"></i>
-                                </button>
+                        <div class="row searchBox" >
+                            <form th:action="@{/search}" method="get" class="subscribe-block__form" style="align-content: center;">
+                                <table>
+                                    <tr>
+                                        <td><input type="search" class="searchForm" id="search" placeholder="Enter your location"/></td>
+                                        <td>
+                                            <button type="submit" class="searchBtn">
+                                                Search
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+
+
                             </form>
                         </div>
                     </div>

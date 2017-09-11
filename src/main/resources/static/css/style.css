@@ -3672,9 +3672,12 @@ i.mail{
     margin-left: 20px;
 }
 .searchBox{
-    text-align: center;
+    display: table;
+    position: relative;
+    width: 100%;
 }
 .searchBox .searchForm{
+    width: 100%;
     width: 300px;
     height: 45px;
     font-family: "Segoe UI",Arial,sans-serif;
@@ -3683,21 +3686,30 @@ i.mail{
     font-size: 10pt;
     color: #63717f;
     padding-left: 15px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 15px;
+    /*-webkit-border-radius: 10px;*/
+    /*-moz-border-radius: 10px;*/
+    /*border-radius: 15px;*/
 }
 
 
 .searchBox .searchBtn{
-    position: absolute;
+    /*position: absolute;*/
+    width: 100px;
+    height: 45px;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "Segoe UI",Arial,sans-serif;
+    border: 0;
+    color: #ffffff;
+    background-color: #007fad;
     /*top: 50%;*/
-    margin-left: -45px;
-    margin-top: 6px;
-    font-size: 30px;
-    color: #4f5b66;
-    background: transparent;
-    border: transparent;
+    /*margin-left: -45px;*/
+    /*margin-top: 6px;*/
+    /*font-size: 30px;*/
+    /*color: #4f5b66;*/
+    /*background: transparent;*/
+    /*border: transparent;*/
     z-index: 1;
 }
 .whyHotelsWeb{
