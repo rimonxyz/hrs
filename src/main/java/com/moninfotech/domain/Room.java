@@ -2,7 +2,10 @@ package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
+import com.moninfotech.config.SecurityConfig;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import java.text.ParseException;
@@ -25,6 +28,7 @@ public class Room extends BaseEntity {
     @MapKeyColumn(name = "date")
     private Map<Date, Integer> discountMap;
     private int discount;
+    private int agentDiscount = 100;
     private boolean discounted;
     private int floorNumber;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "roomList")
@@ -71,14 +75,27 @@ public class Room extends BaseEntity {
 //        return discount;
 //    }
     public int getDiscount(Date date) {
+        int discount = 0;
         if (this.discountMap != null)
             for (Map.Entry<Date, Integer> entry : discountMap.entrySet()) {
                 // todays discount from map
                 if (DateUtils.isSameDay(entry.getKey(), date))
                     // check if discount exceeds the original price
-                    if (entry.getValue() < this.price)
-                        return entry.getValue();
+                    if (entry.getValue() < this.price) {
+                        discount = entry.getValue();
+                        break;
+                    }
             }
+
+        // check if discount is still zero. assign default discount amount if true
+        if (discount <= 0) discount = this.discount;
+
+        if (!SecurityConfig.isAuthenticated()) return discount;
+
+        // for agent add their special discount with original discount;
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser != null && loggedInUser.hasAssignedRole(Constants.Roles.ROLE_AGENT))
+            discount = discount + this.agentDiscount;
         return discount;
     }
 
@@ -325,5 +342,13 @@ public class Room extends BaseEntity {
 
     public void setFacilities(Facilities facilities) {
         this.facilities = facilities;
+    }
+
+    public int getAgentDiscount() {
+        return agentDiscount;
+    }
+
+    public void setAgentDiscount(int agentDiscount) {
+        this.agentDiscount = agentDiscount;
     }
 }

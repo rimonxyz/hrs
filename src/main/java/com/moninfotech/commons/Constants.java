@@ -11,12 +11,14 @@ public class Constants {
         public static final String ROLE_ADMIN = "ROLE_ADMIN";
         public static final String ROLE_USER = "ROLE_USER";
         public static final String ROLE_HOTEL_ADMIN = "ROLE_HOTEL_ADMIN";
+        public static final String ROLE_AGENT = "ROLE_AGENT";
 
 
         // Authorities
         public static final String AUTHORITY_ADMIN = "ADMIN";
-        public static final String RAUTHORITY_USER = "USER";
+        public static final String AUTHORITY_USER = "USER";
         public static final String AUTHORITY_HOTEL_ADMIN = "HOTEL_ADMIN";
+        public static final String AUTHORITY_AGENT = "AGENT";
     }
 
 }
