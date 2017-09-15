@@ -28,7 +28,7 @@ public class Room extends BaseEntity {
     @MapKeyColumn(name = "date")
     private Map<Date, Integer> discountMap;
     private int discount;
-    private int agentDiscount = 100;
+    private int agentDiscount;
     private boolean discounted;
     private int floorNumber;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "roomList")
