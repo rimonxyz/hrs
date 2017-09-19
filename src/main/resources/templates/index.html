@@ -574,7 +574,9 @@
                                     <img th:src="@{/packages/image/}+${pckg?.id}" alt=""
                                          class="img-responsive zoom-img">
                                     <div class="b-wrapper">
-                                        <h5 th:text="${pckg?.title}">Package 1</h5>
+                                        <h5 th:text="${pckg?.title}" style="font-size: 30px;">Package 1</h5>
+                                        <h5 th:text="${pckg?.location}" style="font-size: 20px;">Package 1</h5>
+
                                     </div>
                                 </a>
                             </div>

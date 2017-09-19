@@ -9,7 +9,8 @@
 
     <section class="content-header">
         <h1>
-            Hotels
+            <span th:if="${hotelType.equals('Hotel')}">Hotels</span>
+            <span th:if="${hotelType.equals('Ship')}">Ships</span>
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
@@ -59,7 +60,7 @@
                         </div>
                         <div>
                             <!--Star Filter-->
-                            <div>
+                            <div th:if="${hotelType!=null and hotelType.equals('Hotel')}">
                                 <label for="starFilterDiv" class="label label-primary">BY STAR</label>
                                 <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">
@@ -77,6 +78,21 @@
                                             <option value="4 star" th:selected="${filterValue?.equals('4 star')}">4 Star
                                             </option>
                                             <option value="5 star" th:selected="${filterValue?.equals('5 star')}">5 Star
+                                            </option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                            <div th:if="${hotelType!=null and hotelType.equals('Ship')}">
+                                <label for="starFilterDiv" class="label label-primary">BY SHIP</label>
+                                <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
+                                    <form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">
+                                        <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
+                                        <input name="filterType" type="hidden" th:value="star"></input>
+                                        <select class="form-control" name="filterValue" id="starFilter">
+                                            <option value="ac" th:selected="${filterValue?.equals('1 star')}">AC
+                                            </option>
+                                            <option value="nonac" th:selected="${filterValue?.equals('2 star')}">NON AC
                                             </option>
                                         </select>
                                     </form>
@@ -138,7 +154,8 @@
                     <div class="box-header with-border">
                         <i class="fa fa-bar-chart-o"></i>
 
-                        <h3 class="box-title">Hotels</h3>
+                        <h3 class="box-title" th:if="${hotelType.equals('Hotel')}">Hotels</h3>
+                        <h3 class="box-title" th:if="${hotelType.equals('Ship')}">Ships</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -171,19 +188,19 @@
                             <tbody>
                             <tr th:each="hotel : ${hotelList}">
                                 <td>
-                                    <img style="margin-top: 20px;" height="100" width="100"
+                                    <img style="margin-top: 20px;" height="150" width="150"
                                          th:src="@{/hotels/images/}+${hotel?.id}"
                                          class="img-responsive zoom-img"
                                          alt=""></img>
                                 </td>
                                 <td>
-                                    <i class="phon">
-                                        <h3>
+                                    <!--<i class="phon">-->
+                                        <h3 style="margin-top: 25px;">
                                             <a th:href="@{/hotels/}+${hotel?.id}" th:text="${hotel?.name}"></a>
                                         </h3>
-                                    </i>
-                                    <h4><kbd th:text="${hotel?.type}"></kbd></h4>
-                                    <h4 th:text="${hotel?.description}">info@moninfotech.com</h4>
+                                    <!--</i>-->
+                                    <!--<h4><kbd th:text="${hotel?.type}"></kbd></h4>-->
+                                    <!--<h4 th:text="${hotel?.description}">info@moninfotech.com</h4>-->
                                 </td>
                                 <td>
                                     <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
