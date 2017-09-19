@@ -8,7 +8,8 @@
 
     <section class="content-header">
         <h1>
-            <span>All Hotels (Admin)</span>
+            <span th:if="${'Hotel'.equals(hotelType)}">All Hotels (Admin)</span>
+            <span th:if="${'Ship'.equals(hotelType)}">All Ships (Admin)</span>
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">

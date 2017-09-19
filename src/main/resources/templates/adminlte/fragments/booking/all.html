@@ -7,7 +7,9 @@
 <div layout:fragment="main_content">
     <section class="content-header">
         <h1>
-            Bookings
+            <span th:if="${!analFlagRole.equals('ROLE_ADMIN') and !analFlagRole.equals('ROLE_HOTEL_ADMIN')}">Online Bookings</span>
+            <span th:if="${analFlagRole.equals('ROLE_HOTEL_ADMIN')}">Hotel Admin Bookings</span>
+            <span th:if="${analFlagRole.equals('ROLE_ADMIN')}">Super Admin Bookings</span>
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
