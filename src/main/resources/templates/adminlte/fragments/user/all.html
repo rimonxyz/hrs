@@ -43,7 +43,9 @@
                                     <label class="label label-info" th:if="${user?.hasAssignedRole('ROLE_HOTEL')}">Hotel
                                         Admin</label>
                                     <label class="label label-primary"
-                                           th:if="${user?.hasAssignedRole('ROLE_USER')}">User</label>
+                                           th:if="${user?.hasAssignedRole('ROLE_USER') and !user?.hasAssignedRole('ROLE_AGENT')}">User</label>
+                                    <label class="label label-warning"
+                                           th:if="${user?.hasAssignedRole('ROLE_AGENT')}">Agent</label>
                                 </td>
                                 <td>
                                     <span th:if="${user?.isEnabled()}" class="label label-success">Enabled</span>

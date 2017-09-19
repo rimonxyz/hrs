@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.users;
 
+import com.moninfotech.commons.Constants;
 import com.moninfotech.domain.User;
 import com.moninfotech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sayemkcn on 4/2/17.
@@ -40,15 +44,27 @@ public class UserController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     private String edit(@ModelAttribute User user, BindingResult bindingResult,
-                        @PathVariable("id") Long id) {
+                        @PathVariable("id") Long id,
+                        @RequestParam(value = "isAgent", required = false, defaultValue = "false") Boolean isAgent) {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
 
         User existingUser = this.userService.findOne(user.getId());
-        if (existingUser==null) return "redirect:/users?message=User not found!";
+        if (existingUser == null) return "redirect:/users?message=User not found!";
         existingUser.setName(user.getName());
         existingUser.setPhoneNumber(user.getPhoneNumber());
         existingUser.setAddress(user.getAddress());
 
+        // For admin and hotel admin, role can not be changed
+        if (!existingUser.hasAssignedRole(Constants.Roles.ROLE_ADMIN) && !existingUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
+            List<String> roles = new ArrayList<>();
+            if (isAgent) {
+                roles.add(Constants.Roles.ROLE_USER);
+                roles.add(Constants.Roles.ROLE_AGENT);
+            } else {
+                roles.add(Constants.Roles.ROLE_USER);
+            }
+            existingUser.setRoles(roles);
+        }
         user = this.userService.save(existingUser);
 
         return "redirect:/admin/users?messageinfo=" + user.getName() + " is updated!";
@@ -65,10 +81,10 @@ public class UserController {
     @RequestMapping(value = "/{id}/action", method = RequestMethod.POST)
     private String disable(@PathVariable("id") Long id, @RequestParam("enabled") Boolean enabled) {
         User user = this.userService.findOne(id);
-        if (user==null) return "redirect:/admin/users?message=User can not be found!";
+        if (user == null) return "redirect:/admin/users?message=User can not be found!";
         user.setEnabled(enabled);
         user = this.userService.save(user);
-        return "redirect:/admin/users?message="+user.getName()+" updated!";
+        return "redirect:/admin/users?message=" + user.getName() + " updated!";
     }
 
 }

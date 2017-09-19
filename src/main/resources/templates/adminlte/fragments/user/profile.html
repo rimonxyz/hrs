@@ -44,6 +44,10 @@
                                                           th:text="${user?.isEnabled()? 'Yes':'No'}">842</span></a>
                             </li>
 
+                            <li th:if="${user?.hasAssignedRole('ROLE_AGENT')}"><a href="#">
+                                <h3 class="text text-danger">This user is an Agent</h3></a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -77,6 +81,11 @@
                                 <label for="phoneNumber">Phone Number</label>
                                 <input th:value="${user?.phoneNumber}" name="phoneNumber" id="phoneNumber" class="form-control" type="text"
                                        placeholder="Users Phone Number" required="required"></input>
+                            </div>
+
+                            <div th:if="${user?.hasAssignedRole('ROLE_USER')}" class="form-group has-feedback">
+                                <label style="color: darkred;">Is He/She an Agent?</label>
+                                <input name="isAgent" th:checked="${user?.hasAssignedRole('ROLE_AGENT')}" type="checkbox"></input>
                             </div>
 
                             <label for="address">Address:</label>
