@@ -258,7 +258,8 @@
                 <!--ROOM LIST-->
                 <div class="row">
                     <div class="col-md-3" th:each="room : ${roomList}"
-                         th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary">
+                         th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary"
+                         th:hidden="${'category'.equals(filterType) and !bookedIds?.contains(room?.id)}">
                         <!-- Widget: user widget style 1 -->
                         <div class="box box-widget widget-user">
                             <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -288,8 +289,9 @@
                                     <div class="col-sm-4 border-right">
                                         <div class="description-block">
                                             <span>Price</span>
-                                            <h5 class="description-header" th:text="${room?.price}">3,200</h5>
-                                            <span class="description-text">TK</span>
+                                            <h5 class="description-header">
+                                                ৳<span th:text="${room?.price}"></span>
+                                            </h5>
                                         </div>
                                         <!-- /.description-block -->
                                     </div>
@@ -306,9 +308,10 @@
                                     <!-- /.col -->
                                     <div class="col-sm-4">
                                         <div class="description-block">
-                                            <span>Price After</span>
-                                            <h5 class="description-header" th:text="${room?.getDiscountedPrice(filterValue)}">35</h5>
-                                            <span class="description-text">TK</span>
+                                            <span>After</span>
+                                            <h5 class="description-header">
+                                                ৳<span th:text="${room?.getDiscountedPrice(filterValue)}"></span>
+                                            </h5>
                                         </div>
                                         <!-- /.description-block -->
                                     </div>
