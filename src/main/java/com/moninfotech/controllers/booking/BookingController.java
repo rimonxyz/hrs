@@ -161,6 +161,13 @@ public class BookingController {
         return "redirect:/hotels/" + room.getHotel().getId();
     }
 
+    @GetMapping("/cart/clear")
+    private String clearCart(HttpSession session) {
+        // remove item from session
+        session.removeAttribute(SessionAttr.SESSION_BOOKING);
+        return "redirect:/hotels?type=Hotel&messageinfo=All items removed from cart!";
+    }
+
     @GetMapping("/checkout")
     private String checkout(@CurrentUser User currentUser, HttpSession session) {
         if (currentUser == null) return "redirect:/login?message=Please login to continue.";
