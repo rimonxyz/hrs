@@ -51,12 +51,9 @@ public class HomeController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String home(Model model) {
-        Activity firstActivity = this.activityService.findFirst();
-
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         model.addAttribute("packageList", this.packageService.findAll(null, null));
         model.addAttribute("offerList", this.offerService.findAll(null, null));
-        model.addAttribute("totalVisitors", firstActivity != null ? firstActivity.getTotalVisitors() : 0L);
         return "index";
     }
 
@@ -73,6 +70,10 @@ public class HomeController {
         model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser, false, true, null, null));
         model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser, true, hotelType));
         model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser, false, hotelType));
+
+        // Total Visitors
+        Activity firstActivity = this.activityService.findFirst();
+        model.addAttribute("totalVisitors", firstActivity != null ? firstActivity.getTotalVisitors() : 0L);
 
         return "adminlte/fragments/dashboard/dashboard";
     }

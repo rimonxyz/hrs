@@ -9,6 +9,7 @@ public class FilterType {
     public static final String STAR = "star";
     public static final String PRICE = "price";
     public static final String RATING = "rating";
+    public static final String AC = "ac";
 
     public static final String HOTEL_NAME = "hotelName";
     public static final String HOTEL_TYPE = "hotelType";

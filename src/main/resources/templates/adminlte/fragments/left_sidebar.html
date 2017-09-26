@@ -1,5 +1,17 @@
 <aside class="main-sidebar bg-black" xmlns:sec="http://www.w3.org/1999/xhtml" sec:authorize="!isAuthenticated()">
     <ul class="sidebar-menu" data-widget="tree">
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>All Hotels &amp; Ships</span>
+                <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a th:href="@{/hotels?type=Hotel}"><i class="fa fa-circle-o"></i>All Hotels</a></li>
+                <li class="active"><a th:href="@{/hotels?type=Ship}"><i class="fa fa-circle-o"></i>All Ships</a></li>
+            </ul>
+        </li>
         <li class="active treeview">
             <a href="#">
                 <i class="fa fa-th"></i>

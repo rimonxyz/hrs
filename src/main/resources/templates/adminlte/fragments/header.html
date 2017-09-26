@@ -98,6 +98,13 @@
                     <!--</ul>-->
                 <!--</li>-->
                 <!-- Notifications: style can be found in dropdown.less -->
+                <li>
+
+                    <div sec:authorize="hasRole('ROLE_ADMIN')" class="col-xs-1" th:if="${totalVisitors!=null}">
+                        <span style="font-size: 10px;">Visitors:</span><br/>
+                        <span th:text="${totalVisitors}" style="color: blue;"></span>
+                    </div>
+                </li>
                 <li class="dropdown notifications-menu" th:if="${invoiceList!=null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>

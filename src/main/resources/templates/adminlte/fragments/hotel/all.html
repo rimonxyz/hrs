@@ -65,6 +65,7 @@
                                 <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">
                                         <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
+                                        <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
                                         <input name="filterType" type="hidden" th:value="star"></input>
                                         <select class="form-control" name="filterValue" id="starFilter">
                                             <option value="1 star" th:selected="${filterValue?.equals('1 star')}">1 Star
@@ -88,11 +89,12 @@
                                 <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">
                                         <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
-                                        <input name="filterType" type="hidden" th:value="star"></input>
+                                        <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
+                                        <input name="filterType" type="hidden" value="ac"></input>
                                         <select class="form-control" name="filterValue" id="starFilter">
-                                            <option value="ac" th:selected="${filterValue?.equals('1 star')}">AC
+                                            <option value="ac" th:selected="${filterValue?.equals('ac')}">AC
                                             </option>
-                                            <option value="nonac" th:selected="${filterValue?.equals('2 star')}">NON AC
+                                            <option value="nonac" th:selected="${filterValue?.equals('nonac')}">NON AC
                                             </option>
                                         </select>
                                     </form>
@@ -104,6 +106,7 @@
                                 <div id="priceFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels/}" id="priceFilterForm" method="get">
                                         <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
+                                        <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
                                         <input name="filterType" type="hidden" th:value="price"></input>
                                         <select class="form-control" name="filterValue" id="priceFilter">
                                             <option th:value="500x1500"
@@ -132,6 +135,7 @@
                                 <div id="ratingFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels/}" id="ratingFilterForm" method="get">
                                         <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
+                                        <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
                                         <input name="filterType" type="hidden" th:value="rating"></input>
                                         <div class="row lead">
                                             <div style="margin-left: 20px;" id="stars" class="starrr"></div>
