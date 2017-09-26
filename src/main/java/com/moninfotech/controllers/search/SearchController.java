@@ -50,7 +50,7 @@ public class SearchController {
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         model.addAttribute("isDesc", !isDesc);
         model.addAttribute("query", query);
-
+        model.addAttribute("hotelType","Hotel");
 //        model.addAttribute("template","fragments/hotel/all");
         return "adminlte/fragments/hotel/all";
     }

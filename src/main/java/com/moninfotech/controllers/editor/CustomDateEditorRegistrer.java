@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.editor;
 
+import com.moninfotech.commons.CustomDateFormat;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -18,8 +19,8 @@ public class CustomDateEditorRegistrer implements PropertyEditorRegistrar {
     @InitBinder
     @Override
     public void registerCustomEditors(PropertyEditorRegistry registry) {
-        registry.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-        registry.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
+        registry.registerCustomEditor(Date.class, new CustomDateEditor(new CustomDateFormat(), true));
+//        registry.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
     }
 
 }

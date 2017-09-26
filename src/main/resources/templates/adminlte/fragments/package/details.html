@@ -24,15 +24,45 @@
                 <div class="box">
                     <div class="box-header">
                         <h2 th:text="${pckg?.title}" class="title"></h2>
-                        <h4>
-                            <span>Location: </span>
+                        <h5 style="margin-top: 10px;" class="pull-right">
+                            <strong>Date: </strong>
+                            <span th:text="${pckg?.getReadableDate(pckg?.date)}"></span>
+                        </h5>
+                        <h4 th:text="${pckg?.shortTag}" style="color: grey; margin-top: 10px;"></h4>
+                        <h5 style="margin-top: 10px;">
+                            <strong>Location: </strong>
                             <span th:text="${pckg?.location}"></span>
-                        </h4>
+                        </h5>
+                        <h5 style="margin-top: 10px;">
+                            <strong>Price: </strong>
+                            ৳<span th:text="${pckg?.price}"></span>
+                        </h5>
+                        <h5 style="margin-top: 10px;">
+                            <strong>Duration: </strong>
+                            ৳<span th:text="${pckg?.duration}"></span>
+                        </h5>
+
+
                     </div>
                     <div class="box-body">
                         <img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive"
                              style="height: 300px; margin-right: 20px;margin-bottom: 20px;">
-                        <p th:text="${pckg?.description}"></p>
+                        <h5 style="margin-top: 10px;">
+                            <strong>Time Distribution</strong><br/>
+                            <span th:text="${pckg?.timeDistribution}"></span>
+                        </h5>
+                        <h5 style="margin-top: 10px;">
+                            <strong>This Package includes</strong><br/>
+                            <span th:text="${pckg?.include}"></span>
+                        </h5>
+
+                        <h5 style="margin-top: 10px;">
+                            <strong>This Package doesn't includes</strong><br/>
+                            <span th:text="${pckg?.exclude}"></span>
+                        </h5>
+
+
+                        <p th:text="${pckg?.description}" style="margin-top: 15px;"></p>
                     </div>
                 </div>
             </div>
@@ -40,8 +70,10 @@
             <div class="col-sm-4">
                 <div class="box box-widget widget-user" th:each="p: ${pckgList}">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header bg-black"  th:style="'background:url(' + @{/offers/image/}+${p?.id} + ') center center;'">
-                        <h3 class="widget-user-username" th:text="${p?.title}" style="color: #000; font-family: 'Arial Rounded MT Bold'"></h3>
+                    <div class="widget-user-header bg-black"
+                         th:style="'background:url(' + @{/packages/image/}+${p?.id} + ') center center;'">
+                        <h3 class="widget-user-username" th:text="${p?.title}"
+                            style="color: #000; font-family: 'Arial Rounded MT Bold'"></h3>
                         <h5 class="widget-user-desc" th:text="${p?.location}" style="color: #000;"></h5>
 
                         <div class="col-sm-12">
@@ -53,21 +85,21 @@
         </div>
 
         <!--<div class="row">-->
-            <!--<div class="col-sm-8 col-sm-offset-2">-->
-                <!--<h2 th:text="${pckg?.title}" class="title"></h2>-->
-                <!--<h4>-->
-                    <!--<span>Location: </span>-->
-                    <!--<span th:text="${pckg?.location}"></span>-->
-                <!--</h4>-->
-                <!--<hr/>-->
-            <!--</div>-->
+        <!--<div class="col-sm-8 col-sm-offset-2">-->
+        <!--<h2 th:text="${pckg?.title}" class="title"></h2>-->
+        <!--<h4>-->
+        <!--<span>Location: </span>-->
+        <!--<span th:text="${pckg?.location}"></span>-->
+        <!--</h4>-->
+        <!--<hr/>-->
+        <!--</div>-->
         <!--</div>-->
         <!--<div class="row">-->
-            <!--<div class="col-sm-8 col-sm-offset-2">-->
-                <!--<img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive pull-left"-->
-                     <!--style="width: 200px; margin-right: 20px;margin-bottom: 20px;">-->
-                <!--<p th:text="${pckg?.description}"></p>-->
-            <!--</div>-->
+        <!--<div class="col-sm-8 col-sm-offset-2">-->
+        <!--<img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive pull-left"-->
+        <!--style="width: 200px; margin-right: 20px;margin-bottom: 20px;">-->
+        <!--<p th:text="${pckg?.description}"></p>-->
+        <!--</div>-->
         <!--</div>-->
 
     </section>

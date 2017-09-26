@@ -32,26 +32,19 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Location</th>
-                                <th>Description</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                             <tr th:if="${packageList != null}" th:each="pkg,iter : ${packageList}">
                                 <td th:text="${iter.index+1}"></td>
-                                <td><h5 th:text="${pkg?.title}"></h5></td>
-                                <td><h5 th:text="${pkg?.location}"></h5></td>
                                 <td>
-
-                                    <div class="panel-heading">
-                                        <h6 class="panel-title">
-                                            &nbsp;<a data-toggle="collapse" href="#collapse1" style="color: blue;">See Description</a>
-                                        </h6>
-                                    </div>
-                                    <div id="collapse1" class="panel-collapse collapse">
-                                        <span th:text="${pkg?.description}"></span>
-                                    </div>
-
+                                    <h5>
+                                        <a th:href="@{/packages/}+${pkg?.id}">
+                                            <span th:text="${pkg?.title}"></span>
+                                        </a>
+                                    </h5>
                                 </td>
+                                <td><h5 th:text="${pkg?.location}"></h5></td>
                                 <td style="text-align: center;">
                                     <a th:href="@{/admin/packages/edit/}+${pkg?.id}">
                                         <i class="glyphicon glyphicon-edit"></i>
@@ -86,6 +79,41 @@
                             <div class="form-group">
                                 <label>Package Title</label>
                                 <input th:value="${package?.title}" type="text" required="required" name="title" class="form-control" placeholder="Package Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Short Tag</label>
+                                <input th:value="${package?.shortTag}" type="text"  name="shortTag" class="form-control" placeholder="Short Tag">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input th:value="${pckgDate}" type="date" required="required" name="date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Duration</label>
+                                <input th:value="${package?.duration}" type="text" name="duration" placeholder="Package Duration" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input th:value="${package?.price}" type="number" name="price" class="form-control" placeholder="Price">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Link</label>
+                                <input th:value="${package?.link}" type="text"  name="link" class="form-control" placeholder="Package Link">
+                            </div>
+                            <div class="form-group">
+                                <label>Time Distribution</label>
+                                <textarea th:text="${package?.timeDistribution}" type="text"  name="timeDistribution" class="form-control" placeholder="Time Distribution"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Package Include</label>
+                                <input th:value="${package?.include}" type="text" name="include" class="form-control" placeholder="Package Include">
+                            </div>
+                            <div class="form-group">
+                                <label>Package Exclude</label>
+                                <input th:value="${package?.exclude}" type="text" name="exclude" class="form-control" placeholder="Package Exclude">
                             </div>
 
                             <div class="form-group">

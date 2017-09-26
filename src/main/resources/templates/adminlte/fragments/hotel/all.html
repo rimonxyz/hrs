@@ -9,8 +9,8 @@
 
     <section class="content-header">
         <h1>
-            <span th:if="${hotelType.equals('Hotel')}">Hotels</span>
-            <span th:if="${hotelType.equals('Ship')}">Ships</span>
+            <span th:if="${'Hotel'.equals(hotelType)}">Hotels</span>
+            <span th:if="${'Ship'.equals(hotelType)}">Ships</span>
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
@@ -154,8 +154,8 @@
                     <div class="box-header with-border">
                         <i class="fa fa-bar-chart-o"></i>
 
-                        <h3 class="box-title" th:if="${hotelType.equals('Hotel')}">Hotels</h3>
-                        <h3 class="box-title" th:if="${hotelType.equals('Ship')}">Ships</h3>
+                        <h3 class="box-title" th:if="${'Hotel'.equals(hotelType)}">Hotels</h3>
+                        <h3 class="box-title" th:if="${'Ship'.equals(hotelType)}">Ships</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i

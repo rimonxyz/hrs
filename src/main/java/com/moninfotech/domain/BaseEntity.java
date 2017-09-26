@@ -57,7 +57,10 @@ public abstract class BaseEntity {
             return this.lastUpdated;
         return this.created;
     }
-
+    public String getReadableDate(Date date){
+        if (date==null) return "";
+        return DateUtils.getReadableDateFormat().format(date);
+    }
     public String getReadableDateTime(Date date) {
         if (date == null) return "";
         DateFormat dateFormat = DateUtils.getReadableDateTimeFormat();

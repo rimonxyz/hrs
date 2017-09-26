@@ -89,9 +89,9 @@
                     </a>
                 </div>
                 <!--<div class="col-xs-6 companyTitle">-->
-                    <!--<li>-->
-                        <!--<a th:href="@{/}">HotelsWave</a>-->
-                    <!--</li>-->
+                <!--<li>-->
+                <!--<a th:href="@{/}">HotelsWave</a>-->
+                <!--</li>-->
                 <!--</div>-->
 
 
@@ -262,11 +262,13 @@
 
                     <!-- search option -->
                     <div class="container">
-                        <div class="row searchBox" >
-                            <form th:action="@{/search}" method="get" class="subscribe-block__form" style="align-content: center;">
+                        <div class="row searchBox">
+                            <form th:action="@{/search}" method="get" class="subscribe-block__form"
+                                  style="align-content: center;">
                                 <table>
                                     <tr>
-                                        <td><input type="search" class="searchForm" id="search" placeholder="Enter your location"/></td>
+                                        <td><input name="query" type="search" class="searchForm" id="search"
+                                                   placeholder="Enter your location"/></td>
                                         <td>
                                             <button type="submit" class="searchBtn">
                                                 Search
@@ -575,7 +577,12 @@
                                          class="img-responsive zoom-img">
                                     <div class="b-wrapper">
                                         <h5 th:text="${pckg?.title}" style="font-size: 30px;">Package 1</h5>
-                                        <h5 th:text="${pckg?.location}" style="font-size: 20px;">Package 1</h5>
+                                        <h5 th:text="${pckg?.shortTag}" style="font-size: 20px;">Package 1</h5>
+                                        <h5 th:text="${pckg?.getReadableDate(pckg?.date)}" style="font-size: 20px;">Package 1</h5>
+                                        <h5 style="font-size: 20px;">
+                                            ৳<span th:text="${pckg?.price}"></span>
+                                        </h5>
+                                        <a th:href="@{/packages/}+${pckg?.id}">See More</a>
 
                                     </div>
                                 </a>

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 public class Package extends BaseEntity {
@@ -14,6 +15,15 @@ public class Package extends BaseEntity {
     @Column(nullable = false)
     @NotNull
     private String title;
+    private String shortTag;
+
+    private Date date;
+    private String duration;
+    private int price;
+    private String link;
+    private String timeDistribution;
+    private String include;
+    private String exclude;
 
     @Column(nullable = false)
     @NotNull
@@ -53,10 +63,82 @@ public class Package extends BaseEntity {
         this.description = description;
     }
 
+    public String getShortTag() {
+        return shortTag;
+    }
+
+    public void setShortTag(String shortTag) {
+        this.shortTag = shortTag;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getTimeDistribution() {
+        return timeDistribution;
+    }
+
+    public void setTimeDistribution(String timeDistribution) {
+        this.timeDistribution = timeDistribution;
+    }
+
+    public String getInclude() {
+        return include;
+    }
+
+    public void setInclude(String include) {
+        this.include = include;
+    }
+
+    public String getExclude() {
+        return exclude;
+    }
+
+    public void setExclude(String exclude) {
+        this.exclude = exclude;
+    }
+
     @Override
     public String toString() {
         return "Package{" +
-                "title='" + title + '\'' +
+                ", title='" + title + '\'' +
+                ", shortTag='" + shortTag + '\'' +
+                ", date=" + date +
+                ", duration='" + duration + '\'' +
+                ", price=" + price +
+                ", link='" + link + '\'' +
+                ", timeDistribution='" + timeDistribution + '\'' +
+                ", include='" + include + '\'' +
+                ", exclude='" + exclude + '\'' +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 "} " + super.toString();

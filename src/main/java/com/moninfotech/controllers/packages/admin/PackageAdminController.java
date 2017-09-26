@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.packages.admin;
 
+import com.moninfotech.commons.DateUtils;
 import com.moninfotech.domain.Package;
 import com.moninfotech.service.PackageService;
 import com.moninfotech.utils.ImageValidator;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -54,7 +56,9 @@ public class PackageAdminController {
     private String editPage(@PathVariable("id") Long id, Model model) {
         Package pckg = this.packageService.findOne(id);
         if (pckg == null) return "redirect:/admin/packages?message=Package not found!";
+        if (pckg.getDate()==null) pckg.setDate(new Date());
         model.addAttribute("package", pckg);
+        model.addAttribute("pckgDate", DateUtils.getParsableDateFormat().format(pckg.getDate()));
         model.addAttribute("packageList", this.packageService.findAll(null, null));
 //        model.addAttribute("template", "fragments/package/admin/packages");
         return "adminlte/fragments/package/admin/packages";
