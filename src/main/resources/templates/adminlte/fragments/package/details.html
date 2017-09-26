@@ -24,20 +24,20 @@
                 <div class="box">
                     <div class="box-header">
                         <h2 th:text="${pckg?.title}" class="title"></h2>
-                        <h5 style="margin-top: 10px;" class="pull-right">
+                        <h5 th:if="${pckg?.date != null}" style="margin-top: 10px;" class="pull-right">
                             <strong>Date: </strong>
                             <span th:text="${pckg?.getReadableDate(pckg?.date)}"></span>
                         </h5>
                         <h4 th:text="${pckg?.shortTag}" style="color: grey; margin-top: 10px;"></h4>
-                        <h5 style="margin-top: 10px;">
+                        <h5 th:if="${pckg?.location != null}" style="margin-top: 10px;">
                             <strong>Location: </strong>
                             <span th:text="${pckg?.location}"></span>
                         </h5>
-                        <h5 style="margin-top: 10px;">
+                        <h5 th:if="${pckg?.price != null}" style="margin-top: 10px;">
                             <strong>Price: </strong>
                             ৳<span th:text="${pckg?.price}"></span>
                         </h5>
-                        <h5 style="margin-top: 10px;">
+                        <h5 th:if="${pckg?.duration != null}" style="margin-top: 10px;">
                             <strong>Duration: </strong>
                             ৳<span th:text="${pckg?.duration}"></span>
                         </h5>
@@ -47,16 +47,16 @@
                     <div class="box-body">
                         <img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive"
                              style="height: 300px; margin-right: 20px;margin-bottom: 20px;">
-                        <h5 style="margin-top: 10px;">
+                        <h5 th:if="${pckg?.timeDistribution != null}" style="margin-top: 10px;">
                             <strong>Time Distribution</strong><br/>
                             <span th:text="${pckg?.timeDistribution}"></span>
                         </h5>
-                        <h5 style="margin-top: 10px;">
+                        <h5 th:if="${pckg?.include != null}" style="margin-top: 10px;">
                             <strong>This Package includes</strong><br/>
                             <span th:text="${pckg?.include}"></span>
                         </h5>
 
-                        <h5 style="margin-top: 10px;">
+                        <h5 th:if="${pckg?.exclude != null}" style="margin-top: 10px;">
                             <strong>This Package doesn't includes</strong><br/>
                             <span th:text="${pckg?.exclude}"></span>
                         </h5>

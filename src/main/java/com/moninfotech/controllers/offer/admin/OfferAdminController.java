@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.offer.admin;
 
+import com.moninfotech.commons.DateUtils;
 import com.moninfotech.domain.Offer;
 import com.moninfotech.domain.Package;
 import com.moninfotech.service.OfferService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -55,7 +57,10 @@ public class OfferAdminController {
     private String editPage(@PathVariable("id") Long id, Model model) {
         Offer offer = this.offerService.findOne(id);
         if (offer == null) return "redirect:/admin/offers?message=Offer not found!";
-        model.addAttribute(offer);
+        if(offer.getDate()==null) offer.setDate(new Date());
+
+        model.addAttribute("offer",offer);
+        model.addAttribute("offerDate", DateUtils.getParsableDateFormat().format(offer.getDate()));
         model.addAttribute("offerList", this.offerService.findAll(null, null));
 //        model.addAttribute("template", "fragments/offer/admin/offers");
         return "adminlte/fragments/offer/admin/offers";

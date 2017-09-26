@@ -783,6 +783,15 @@
                                 <p th:text="${offer?.shortTag}" style="color: #FFFFFF;">lol</p>
                             </div>
                             <div>
+                                <p th:text="${offer?.getReadableDate(offer?.date)}" style="color: #FFFFFF;">lol</p>
+                            </div>
+                            <div>
+                                <p th:text="${offer?.duration}" style="color: #FFFFFF;">lol</p>
+                            </div>
+                            <div>
+                                <p th:text="${offer?.price}" style="color: #FFFFFF;">lol</p>
+                            </div>
+                            <div>
                                 <a th:href="@{/offers/}+${offer?.id}"><span
                                         style="color: lightblue;">See More</span></a>
                             </div>
