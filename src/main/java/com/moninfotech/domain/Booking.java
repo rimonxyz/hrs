@@ -183,8 +183,10 @@ public class Booking extends BaseEntity {
     }
 
     public boolean isCancelable() {
+        Date minDate = Collections.min(this.bookingDateList);
+        boolean before72Hours = DateUtils.getDateDiff(new Date(),minDate,TimeUnit.HOURS)>72;
         long dateDiff = DateUtils.getDateDiff(this.getLastUpdated(), new Date(), TimeUnit.HOURS);
-        return dateDiff >= 0 && dateDiff <= 24 && !this.cancelled;
+        return dateDiff >= 0 && dateDiff <= 24 && before72Hours && !this.cancelled;
     }
 
     public boolean belongsTo(User user) {
@@ -194,4 +196,5 @@ public class Booking extends BaseEntity {
     public boolean belongsToHotel(Hotel hotel) {
         return this.hotel.getId().equals(hotel.getId());
     }
+
 }
