@@ -4,8 +4,11 @@ package com.moninfotech.commons;
  * Created by sayemkcn on 4/2/17.
  */
 public class Constants {
+    private Constants(){}
 
     public static String FIELD_ID = "id";
+
+    public static int PAGE_SIZE = 10;
 
     public static final class Roles{
         public static final String ROLE_ADMIN = "ROLE_ADMIN";

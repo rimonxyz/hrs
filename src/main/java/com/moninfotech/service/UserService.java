@@ -22,4 +22,6 @@ public interface UserService {
     List<User> findByName(String name);
 
     List<User> findByEmailOrPhoneNumber(String email,String phoneNumber);
+
+    List<User> findByRole(String role,int page);
 }

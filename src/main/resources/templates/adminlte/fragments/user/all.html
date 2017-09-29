@@ -13,12 +13,12 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">User List</h3>
-                        <form class="form col-sm-3 pull-right">
-                            <select class="form-control">
-                                <option>User</option>
-                                <option>Agent</option>
-                                <option>Hotel Admin</option>
-                                <option>Admin</option>
+                        <form th:action="@{/admin/users}" id="userTypeFilterForm" class="form col-sm-3 pull-right">
+                            <select name="role" id="userTypeFilter" class="form-control">
+                                <option th:selected="${role?.equals('ROLE_USER')}" value="ROLE_USER">User</option>
+                                <option th:selected="${role?.equals('ROLE_AGENT')}" value="ROLE_AGENT">Agent</option>
+                                <option th:selected="${role?.equals('ROLE_HOTEL_ADMIN')}" value="ROLE_HOTEL_ADMIN">Hotel Admin</option>
+                                <option th:selected="${role?.equals('ROLE_ADMIN')}" value="ROLE_ADMIN">Admin</option>
                             </select>
                         </form>
                     </div>
@@ -85,11 +85,12 @@
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">&raquo;</a></li>
+                             <li class="previous"><a th:hidden="${page==0}"
+                                                        th:href="@{/admin/users(page=${page-1},role=${role})}">Previous</a>
+                                </li>
+                                <li class="next"><a th:hidden="${userList == null || userList.isEmpty()}"
+                                                    th:href="@{/admin/users(page=${page+1},role=${role})}">Next</a>
+                                </li>
                         </ul>
                     </div>
                 </div>

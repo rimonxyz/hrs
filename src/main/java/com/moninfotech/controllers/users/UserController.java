@@ -27,10 +27,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private String allUsers(@RequestParam(value = "page", required = false) Integer page, Model model) {
-        if (page == null || page < 0) page = 0;
-        model.addAttribute("userList", this.userService.findAll(page, 10));
+    private String allUsers(@RequestParam(value = "role", required = false, defaultValue = Constants.Roles.ROLE_USER) String role,
+                            @RequestParam(value = "page", required = false,defaultValue = "0") Integer page, Model model) {
+//        model.addAttribute("userList", this.userService.findAll(page, 10));
+        model.addAttribute("userList",this.userService.findByRole(role,page));
 //        model.addAttribute("template", "fragments/user/all");
+        model.addAttribute("role",role);
+        model.addAttribute("page",page);
         return "adminlte/fragments/user/all";
     }
 

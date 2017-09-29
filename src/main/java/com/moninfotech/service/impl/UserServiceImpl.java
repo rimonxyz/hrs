@@ -2,6 +2,7 @@ package com.moninfotech.service.impl;
 
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.SessionIdentifierGenerator;
+import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.domain.AcValidationToken;
 import com.moninfotech.domain.User;
 import com.moninfotech.repository.UserRepository;
@@ -92,5 +93,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findByEmailOrPhoneNumber(String email, String phoneNumber) {
         return this.userRepo.findByEmailOrPhoneNumber(email, phoneNumber);
+    }
+
+    @Override
+    public List<User> findByRole(String role, int page) {
+        return this.userRepo.findByRolesIn(role,new PageRequest(page,Constants.PAGE_SIZE, Sort.Direction.DESC, SortAttributes.FIELD_ID));
     }
 }

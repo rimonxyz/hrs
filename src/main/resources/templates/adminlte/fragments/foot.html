@@ -662,3 +662,15 @@
 
     /*]]>*/
 </script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    $(document).ready(function () {
+        $("#userTypeFilter").on("change", function (form) {
+            $("#userTypeFilterForm").submit();
+        });
+    });
+
+    /*]]>*/
+</script>
