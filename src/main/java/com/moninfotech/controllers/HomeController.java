@@ -6,6 +6,7 @@ import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.BookingHelper;
 import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
+import com.moninfotech.exceptions.NotFoundException;
 import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -118,6 +119,11 @@ public class HomeController {
         this.userService.save(user);
         this.acValidationTokenService.save(acToken);
         return "redirect:/login?messageinfo=Account \"" + user.getName() + "\" is Activated. Please logged in to continue.";
+    }
+
+    @GetMapping("/extest")
+    private String testEx() throws NotFoundException {
+        throw new NotFoundException();
     }
 
 }
