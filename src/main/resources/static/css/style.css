@@ -4224,41 +4224,9 @@ i.mail {
     width: 100%;
 }
 
-.searchBox .searchForm {
-    width: 100%;
-    width: 300px;
-    height: 45px;
-    font-family: "Segoe UI", Arial, sans-serif;
-    /*background: #2b303b;*/
-    border: none;
-    font-size: 10pt;
-    color: #63717f;
-    padding-left: 15px;
-    /*-webkit-border-radius: 10px;*/
-    /*-moz-border-radius: 10px;*/
-    /*border-radius: 15px;*/
-}
 
-.searchBox .searchBtn {
-    /*position: absolute;*/
-    width: 100px;
-    height: 45px;
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    font-family: "Segoe UI", Arial, sans-serif;
-    border: 0;
-    color: #ffffff;
-    background-color: #007fad;
-    /*top: 50%;*/
-    /*margin-left: -45px;*/
-    /*margin-top: 6px;*/
-    /*font-size: 30px;*/
-    /*color: #4f5b66;*/
-    /*background: transparent;*/
-    /*border: transparent;*/
-    z-index: 1;
-}
+
+
 
 .whyHotelsWeb {
     font-family: "Segoe UI", Arial, sans-serif;
@@ -4269,8 +4237,34 @@ i.mail {
     -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
-
+.searchBox .searchForm {
+    width: 100%;
+    height: 45px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    border: none;
+    font-size: 10pt;
+    color: #63717f;
+    padding-left: 15px;
+}
+.searchBox .searchBtn {
+    width: 100%;
+    height: 45px;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    border: 0;
+    color: #ffffff;
+    background-color: #007fad;
+    z-index: 1;
+}
 @media (min-width: 768px) {
+    .searchBox .searchForm {
+        width: 300px;
+    }
+    .searchBox .searchBtn {
+        width: 100px;
+    }
     .roomPanel {
         display: block;
         width: 616px;
