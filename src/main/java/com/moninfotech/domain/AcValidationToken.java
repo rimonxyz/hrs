@@ -7,6 +7,7 @@ import javax.persistence.OneToOne;
 public class AcValidationToken extends ValidationToken{
     @OneToOne
     private User user;
+    private String reason;
 
     public User getUser() {
         return user;
@@ -16,10 +17,19 @@ public class AcValidationToken extends ValidationToken{
         this.user = user;
     }
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
     @Override
     public String toString() {
         return "AcValidationToken{" +
                 "user=" + user +
+                ", reason='" + reason + '\'' +
                 "} " + super.toString();
     }
 }

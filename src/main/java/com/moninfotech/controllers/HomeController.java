@@ -116,6 +116,7 @@ public class HomeController {
         User user = acToken.getUser();
         user.setEnabled(enabled);
         acToken.setTokenValid(false);
+        acToken.setReason("User Registration");
         this.userService.save(user);
         this.acValidationTokenService.save(acToken);
         return "redirect:/login?messageinfo=Account \"" + user.getName() + "\" is Activated. Please logged in to continue.";
