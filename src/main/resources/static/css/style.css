@@ -145,7 +145,7 @@ a:focus, a:hover {
 .moto-text_normal, .moto-text_normal a {
     color: #6f6f6f;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
     font-family: "Segoe UI", Arial, sans-serif;
     font-style: normal;
@@ -4247,7 +4247,7 @@ i.mail {
     padding-left: 15px;
 }
 .searchBox .searchBtn {
-    width: 100%;
+    width: 40px;
     height: 45px;
     margin: 0;
     padding: 0;
@@ -4269,6 +4269,10 @@ i.mail {
         display: block;
         width: 616px;
         padding-bottom: 30px;
+    }
+    .moto-text_normal, .moto-text_normal a {
+        font-size: 16px;
+
     }
 }
 
