@@ -229,7 +229,7 @@
                 <div class="row">
                     <!--IMAGE-->
                     <div class="row col-sm-12">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 400px;">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
                                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -241,17 +241,17 @@
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <img th:src="@{/rooms/}+${room?.id}+@{/image/0}" id="dtlsImg1" alt="Los Angeles"
-                                         style="height: 400px; width: 100%;"></img>
+                                         style="height: 100%; width: 100%;"></img>
                                 </div>
 
                                 <div class="item">
                                     <img th:src="@{/rooms/}+${room?.id}+@{/image/1}" id="dtlsImg2" alt="Chicago"
-                                         style="height: 400px;width: 100%;"></img>
+                                         style="height: 100%;width: 100%;"></img>
                                 </div>
 
                                 <div class="item">
                                     <img th:src="@{/rooms/}+${room?.id}+@{/image/2}" id="dtlsImg3" alt="New York"
-                                         style="height: 400px;width: 100%;"></img>
+                                         style="height: 100%;width: 100%;"></img>
                                 </div>
                             </div>
 

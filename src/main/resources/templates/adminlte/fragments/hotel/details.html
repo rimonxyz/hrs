@@ -15,12 +15,11 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-yellow">
                         <!--<div class="widget-user-image">-->
-                        <img class="img-circle" th:src="@{/hotels/images/}+${hotel?.id}" alt="User Avatar">
+                        <!--<img class="img-circle" th:src="@{/hotels/}+${hotel?.id}+@{/image/0}" height="30" width="30" alt="User Avatar">-->
                         <!--</div>-->
                         <!-- /.widget-user-image -->
-                        <h3 class="widget-user-username" th:text="${hotel?.name}"></h3>
-                        <h5 class="widget-user-desc" th:text="${hotel?.address?.getCommaSeperatedString()}">Lead
-                            Developer</h5>
+                        <h3 th:text="${hotel?.name}"></h3>
+                        <h5 th:text="${hotel?.address?.getCommaSeperatedString()}" style="margin-top: 20px;">Lead Developer</h5>
                     </div>
                     <div class="box-footer no-padding">
                         <ul class="nav nav-stacked">
@@ -129,7 +128,7 @@
                          <!--th:src="@{/hotels/images/}+${hotel?.id}">-->
                     <!--IMAGE-->
                     <div class="row col-sm-12">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 400px;">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
                                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -141,27 +140,27 @@
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <img th:src="@{/hotels/}+${hotel?.id}+@{/image/0}" id="dtlsImg1" alt="Los Angeles"
-                                         style="height: 400px; width: 100%;"></img>
+                                         style="height: 100%; width: 100%;"></img>
                                 </div>
 
                                 <div class="item">
                                     <img th:src="@{/hotels/}+${hotel?.id}+@{/image/1}" id="dtlsImg2" alt="Chicago"
-                                         style="height: 400px;width: 100%;"></img>
+                                         style="height: 100%;width: 100%;"></img>
                                 </div>
 
                                 <div class="item">
                                     <img th:src="@{/hotels/}+${hotel?.id}+@{/image/2}" id="dtlsImg3" alt="New York"
-                                         style="height: 400px;width: 100%;"></img>
+                                         style="height: 100%;width: 100%;"></img>
                                 </div>
 
                                 <div class="item">
                                     <img th:src="@{/hotels/}+${hotel?.id}+@{/image/3}" id="dtlsImg3" alt="New York"
-                                         style="height: 400px;width: 100%;"></img>
+                                         style="height: 100%;width: 100%;"></img>
                                 </div>
 
                                 <div class="item">
                                     <img th:src="@{/hotels/}+${hotel?.id}+@{/image/4}" id="dtlsImg3" alt="New York"
-                                         style="height: 400px;width: 100%;"></img>
+                                         style="height: 100%;width: 100%;"></img>
                                 </div>
                             </div>
 
