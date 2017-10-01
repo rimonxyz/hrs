@@ -114,9 +114,24 @@ public class HotelController {
         return "adminlte/fragments/hotel/details";
     }
 
-    // returns image with that entity id
-    @RequestMapping(value = "/images/{id}", method = RequestMethod.GET)
-    private ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
-        return new ResponseEntity<byte[]>(this.hotelService.findOne(id).getImage(), HttpStatus.OK);
+//    // returns image with that entity id
+//    @RequestMapping(value = "/images/{id}", method = RequestMethod.GET)
+//    private ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
+//        return new ResponseEntity<byte[]>(this.hotelService.findOne(id).getImage(), HttpStatus.OK);
+//    }
+
+    @RequestMapping(value = "{hotelId}/image/{imageNumber}", method = RequestMethod.GET)
+    private ResponseEntity<byte[]> getImages(@PathVariable("hotelId") Long hotelId,
+                                             @PathVariable("imageNumber") Integer imageNumber) {
+        Hotel hotel = this.hotelService.findOne(hotelId);
+        List<byte[]> images = null;
+        // set images from room
+        if (hotel.getImages() != null && !hotel.getImages().isEmpty())
+            images = hotel.getImages();
+
+        if (images != null && images.size() > imageNumber) {
+            return new ResponseEntity<>(images.get(imageNumber), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -15,7 +15,7 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-yellow">
                         <!--<div class="widget-user-image">-->
-                        <!--<img class="img-circle" th:src="@{/hotels/images/}+${hotel?.id}" alt="User Avatar">-->
+                        <img class="img-circle" th:src="@{/hotels/images/}+${hotel?.id}" alt="User Avatar">
                         <!--</div>-->
                         <!-- /.widget-user-image -->
                         <h3 class="widget-user-username" th:text="${hotel?.name}"></h3>
@@ -125,8 +125,57 @@
                     </div>
                 </div>
                 <div class="row">
-                    <img class="img img-responsive" style="height: 400px;width: 100%;margin-bottom: 20px;"
-                         th:src="@{/hotels/images/}+${hotel?.id}">
+                    <!--<img class="img img-responsive" style="height: 400px;width: 100%;margin-bottom: 20px;"-->
+                         <!--th:src="@{/hotels/images/}+${hotel?.id}">-->
+                    <!--IMAGE-->
+                    <div class="row col-sm-12">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/0}" id="dtlsImg1" alt="Los Angeles"
+                                         style="height: 400px; width: 100%;"></img>
+                                </div>
+
+                                <div class="item">
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/1}" id="dtlsImg2" alt="Chicago"
+                                         style="height: 400px;width: 100%;"></img>
+                                </div>
+
+                                <div class="item">
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/2}" id="dtlsImg3" alt="New York"
+                                         style="height: 400px;width: 100%;"></img>
+                                </div>
+
+                                <div class="item">
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/3}" id="dtlsImg3" alt="New York"
+                                         style="height: 400px;width: 100%;"></img>
+                                </div>
+
+                                <div class="item">
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/4}" id="dtlsImg3" alt="New York"
+                                         style="height: 400px;width: 100%;"></img>
+                                </div>
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <!--all room number-->
@@ -281,7 +330,7 @@
                             </div>
                             <div class="widget-user-image">
                                 <!--<h1 style="color: white;" class="widget-user-username" th:text="${room?.roomNumber}">Alexander Pierce</h1>-->
-                                <img class="img-circle" th:src="@{/rooms/}+${room?.id}+@{/image/0}" alt="User Avatar">
+                                <!--<img class="img-circle" th:src="@{/rooms/}+${room?.id}+@{/image/0}" alt="User Avatar">-->
                             </div>
                             <div class="box-footer">
                                 <div class="row">

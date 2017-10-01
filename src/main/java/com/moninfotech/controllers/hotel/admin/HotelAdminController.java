@@ -18,6 +18,7 @@ import com.moninfotech.utils.ImageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/admin/hotels")
+@Secured("ROLE_ADMIN")
 public class HotelAdminController {
 
     private final HotelService hotelService;
@@ -84,18 +86,16 @@ public class HotelAdminController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     private String create(@ModelAttribute Hotel hotel, BindingResult bindingResult,
                           @RequestParam(value = "userId", required = false) Long userId,
-                          @RequestParam("image") MultipartFile multipartFile) throws IOException {
+                          @RequestParam("images") MultipartFile[] multipartFiles) throws IOException {
         if (bindingResult.hasErrors())
             System.out.print("Binding ERROR: " + bindingResult.toString());
         // set image to the hotel entity if it's valid.
-        if (ImageValidator.isImageValid(multipartFile))
-            hotel.setImage(multipartFile.getBytes());
-        else {
-            if (hotel.getId() != null) {
-                Hotel existingHotel = this.hotelService.findOne(hotel.getId());
-                if (existingHotel != null)
-                    hotel.setImage(existingHotel.getImage());
-            }
+        List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
+        // if all images aren't valid
+        if (FileIO.isNotEmpty(multipartFiles)) { // if images one or more images are choosen to be uploaded
+            if (files.size() != multipartFiles.length)
+                return "redirect:/admin/hotels?message=One or more images are invalid.";
+            hotel.setImages(files);
         }
         // first save user
         User user;
@@ -104,8 +104,11 @@ public class HotelAdminController {
             // save previous created date when updating
             if (hotel.getId() != null) {
                 Hotel existingHotel = this.hotelService.findOne(hotel.getId());
-                if (existingHotel != null)
+                if (existingHotel != null) {
                     hotel.setCreated(existingHotel.getCreated());
+                    if (hotel.getImages()==null || hotel.getImages().isEmpty())
+                        hotel.setImages(existingHotel.getImages());
+                }
             }
         } else // hotel create -new
             user = hotel.getUser();
@@ -127,38 +130,41 @@ public class HotelAdminController {
 
     // Edit hotel informations by admin
     //@GET
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    private String editPage(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("hotel", hotelService.findOne(id));
-        return "hotel/admin/edit";
-    }
-
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    private String edit(@ModelAttribute Hotel hotel, BindingResult bindingResult,
-                        @PathVariable("id") Long id,
-                        @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        if (bindingResult.hasErrors())
-            System.out.println(bindingResult.toString());
-        // set existing id to update
-        hotel.setId(id);
-
-        Hotel existingHotel = this.hotelService.findOne(id);
-        if (existingHotel != null) {
-            // set created date from previous entity
-            hotel.setCreated(existingHotel.getCreated());
-            // set previous user to hotel entity
-            hotel.setUser(existingHotel.getUser());
-            // if no image is uploaded the set previous image if available
-            if (multipartFile == null) hotel.setImage(existingHotel.getImage());
-        }
-        // check if image is valid
-        if (ImageValidator.isImageValid(multipartFile))
-            hotel.setImage(multipartFile.getBytes());
-            // else return with error message
-        else return "redirect:/admin/hotels/edit/" + id + "?message=Image is invalid!";
-        hotel = this.hotelService.save(hotel);
-        return "redirect:/admin/hotels?messageinfo=" + hotel.getName() + " informations are updated!";
-    }
+//    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+//    private String editPage(@PathVariable("id") Long id, Model model) {
+//        model.addAttribute("hotel", hotelService.findOne(id));
+//        return "hotel/admin/edit";
+//    }
+//
+//    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+//    private String edit(@ModelAttribute Hotel hotel, BindingResult bindingResult,
+//                        @PathVariable("id") Long id,
+//                        @RequestParam("images") MultipartFile[] multipartFiles) throws IOException {
+//        if (bindingResult.hasErrors())
+//            System.out.println(bindingResult.toString());
+//        // set existing id to update
+//        hotel.setId(id);
+//
+//        Hotel existingHotel = this.hotelService.findOne(id);
+//        if (existingHotel != null) {
+//            // set created date from previous entity
+//            hotel.setCreated(existingHotel.getCreated());
+//            // set previous user to hotel entity
+//            hotel.setUser(existingHotel.getUser());
+//            // if no image is uploaded the set previous image if available
+//            if (multipartFiles == null || multipartFiles.length == 0) hotel.setImages(existingHotel.getImages());
+//        }
+//
+//        List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
+//        // if all images aren't valid
+//        if (FileIO.isNotEmpty(multipartFiles)) { // if images one or more images are choosen to be uploaded
+//            if (files.size() != multipartFiles.length)
+//                return "redirect:/admin/hotels/edit/" + id + "?message=One or more images are invalid!";
+//            hotel.setImages(files);
+//        }
+//        hotel = this.hotelService.save(hotel);
+//        return "redirect:/admin/hotels?messageinfo=" + hotel.getName() + " informations are updated!";
+//    }
 
     // Delete entity
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
@@ -167,11 +173,11 @@ public class HotelAdminController {
         return "redirect:/admin/hotels?message=Successfully deleted!";
     }
 
-    // returns image with that entity id
-    @RequestMapping(value = "/images/{id}", method = RequestMethod.GET)
-    private ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
-        return new ResponseEntity<byte[]>(this.hotelService.findOne(id).getImage(), HttpStatus.OK);
-    }
+//    // returns image with that entity id
+//    @RequestMapping(value = "/images/{id}", method = RequestMethod.GET)
+//    private ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
+//        return new ResponseEntity<byte[]>(this.hotelService.findOne(id).getImage(), HttpStatus.OK);
+//    }
 
     // disable user of a hotel
     @RequestMapping(value = "/{id}/action", method = RequestMethod.POST)

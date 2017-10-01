@@ -18,9 +18,10 @@ public class Hotel extends BaseEntity {
     private String phoneNumber;
     private String type;
     private String star;
+    @ElementCollection(fetch = FetchType.LAZY)
     @Column(length = 1000000)
     @JsonIgnore
-    private byte[] image;
+    private List<byte[]> images;
     @Embedded
     private Address address;
     @Embedded
@@ -155,12 +156,12 @@ public class Hotel extends BaseEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public byte[] getImage() {
-        return image;
+    public List<byte[]> getImages() {
+        return images;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImages(List<byte[]> images) {
+        this.images = images;
     }
 
     public List<Booking> getBookingList() {
@@ -195,7 +196,6 @@ public class Hotel extends BaseEntity {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", type='" + type + '\'' +
                 ", star=" + star +
-                ", image=" + Arrays.toString(image) +
                 ", address=" + address +
                 ", roomList=" + roomList +
                 ", reviewList=" + reviewList +

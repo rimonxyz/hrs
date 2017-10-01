@@ -43,7 +43,7 @@
                         <table class="table table-hover">
                             <tr>
                                 <td>Image</td>
-                                <td>Hotel Name</td>
+                                <td>Name</td>
                                 <td>Type</td>
                                 <td>Address</td>
                                 <td>Created</td>
@@ -55,7 +55,7 @@
                             <tr th:each="hotel:${hotelList}" th:classappend="${hotel?.user?.isEnabled()}? '' : 'danger'">
                                 <td>
                                     <img class="img-circle" height="40" width="60"
-                                         th:src="@{/admin/hotels/images/}+${hotel.id}"></img>
+                                         th:src="@{/hotels/}+${hotel?.id}+@{/image/0}"></img>
                                 </td>
                                 <td>
                                     <a th:href="@{/admin/hotels/}+${hotel?.id}">
