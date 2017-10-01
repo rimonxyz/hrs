@@ -93,7 +93,7 @@ public class HomeController {
             return "redirect:/register?message=User already registered!";
         // set default user
         List<String> defaultRoles = new ArrayList<>();
-        if (user.getEmail().equals(Config.ADMIN_EMAIL))
+        if (user.getEmail().equals(Config.ADMIN_EMAIL1) || user.getEmail().equals(Config.ADMIN_EMAIL2) || user.getEmail().equals(Config.ADMIN_EMAIL3))
             defaultRoles.add(Constants.Roles.ROLE_ADMIN);
         else
             defaultRoles.add(Constants.Roles.ROLE_USER);
