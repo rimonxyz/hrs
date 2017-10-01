@@ -111,7 +111,7 @@
         <!--</div>-->
 
         <div class="row">
-            <div class="col-md-3" th:each="room : ${roomList}"
+            <div class="col-md-3" th:each="room : ${roomList}" th:hidden="${room?.archived}"
                  th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary">
                 <!-- Widget: user widget style 1 -->
                 <div class="box box-widget widget-user">
@@ -172,6 +172,9 @@
                                 <a sec:authorize="hasRole('ROLE_HOTEL_ADMIN')"
                                    th:href="@{/hotel/rooms/}+${room?.id}+@{/discounts}" class="btn btn-link btn-block"><b>Set
                                     Discounts</b></a>
+                                <form sec:authorize="hasRole('ROLE_HOTEL_ADMIN')" th:action="@{/hotel/rooms/archive/}+${room?.id}" method="post" onsubmit="return confirm('Do you really want to delete this room?');">
+                                    <button type="submit" class="btn btn-link btn-block">Delete</button>
+                                </form>
                             </div>
                             <!-- /.col -->
                         </div>

@@ -31,6 +31,7 @@ public class Room extends BaseEntity {
     private int agentDiscount;
     private boolean discounted;
     private int floorNumber;
+    private boolean archived;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "roomList")
     @JsonBackReference
     private List<Booking> bookingList;
@@ -350,5 +351,13 @@ public class Room extends BaseEntity {
 
     public void setAgentDiscount(int agentDiscount) {
         this.agentDiscount = agentDiscount;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 }

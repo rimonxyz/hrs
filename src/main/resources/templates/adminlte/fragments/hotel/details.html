@@ -306,7 +306,7 @@
                 <div class="row">
                     <div class="col-md-3" th:each="room : ${roomList}"
                          th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary"
-                         th:hidden="${'category'.equals(filterType) and !bookedIds?.contains(room?.id)}">
+                         th:hidden="${('category'.equals(filterType) and !bookedIds?.contains(room?.id)) or room?.archived}">
                         <!-- Widget: user widget style 1 -->
                         <div class="box box-widget widget-user">
                             <!-- Add the bg color to the header using any of the bg-* classes -->

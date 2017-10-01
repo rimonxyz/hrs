@@ -122,7 +122,7 @@ public class RoomAdminController {
         room.setHotel(hotel);
 
         // Room Fascilities
-        if (room.getFacilities()==null) room.setFacilities(new Facilities());
+        if (room.getFacilities() == null) room.setFacilities(new Facilities());
         // check if room category was saved previously, if not then save and set to room
 //        if (room.getCategory().getId() == null)
 //            room.setCategory(this.categoryService.save(room.getCategory()));
@@ -175,7 +175,7 @@ public class RoomAdminController {
         room.setHotel(hotel);
 
         // Room Fascilities
-        if (room.getFacilities()==null) room.setFacilities(new Facilities());
+        if (room.getFacilities() == null) room.setFacilities(new Facilities());
 
         room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
         room = this.roomService.save(room);
@@ -220,5 +220,14 @@ public class RoomAdminController {
         roomList = this.roomService.save(roomList);
 
         return "redirect:/hotel/rooms/" + room.getId() + "/discounts";
+    }
+
+    @PostMapping("/archive/{id}")
+    private String archiveRoom(@PathVariable("id") Long id) {
+        Room room = this.roomService.findOne(id);
+        if (room == null) return "redirect:/hotel/rooms?message=Room not found!";
+        room.setArchived(true);
+        this.roomService.save(room);
+        return "redirect:/hotel/rooms?message=Successfully deleted Room " + room.getRoomNumber();
     }
 }
