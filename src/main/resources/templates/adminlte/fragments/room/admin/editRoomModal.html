@@ -36,7 +36,7 @@
                                 <label for="discountEdit">Discount</label>
                                 <input name="discount" id="discountEdit" th:value="${room?.getDiscount()}"  class="form-control" type="number" placeholder="Discount"></input>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <label for="agentDiscountEdit">Extra Discount for Group Booking (Agent)</label>
                                 <input name="agentDiscount" id="agentDiscountEdit" class="form-control" type="number" placeholder="Extra Discount"></input>
                             </div>
