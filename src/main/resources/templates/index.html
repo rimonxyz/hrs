@@ -81,10 +81,10 @@
 
 <!-- TOP HEADER -->
 <div class="top" id="topMenu">
-    <div class="container" style="margin-right: 80px;">
-        <div class="col-xs-6">
+    <div class="container" style="margin-right: 0px;">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
             <ul>
-                <div class="col-xs-2">
+                <div>
                     <a th:href="@{/}">
                         <img height="100" width="200" title="" alt="" draggable="false" src="images/logo.png">
                     </a>
@@ -99,21 +99,22 @@
                 <!-- <li><i class="fa fa-phone" aria-hidden="true"></i> +055 3175 6666 <br/> +055 3175 6666</li> -->
             </ul>
         </div>
-        <div class="col-xs-5" style="padding-top: 30px;">
-            <p class="moto-text_normal">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477707,</a>
-                <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477759</a>
-            </p>
-            <p class="moto-text_normal">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <!--<a target="_self" data-action="url" class="moto-link" href="callto:#">-->
-                <span class="moto-link">
-                32/1, Khan Plaza ( 3rd floor), Science Lab,
-                Mirpur Road, Dhanmondi, Dhaka- 1205
-                </span>
-                <!--</a>-->
-            </p>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" style="padding-top: 30px;">
+
+                <p class="moto-text_normal">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477707,</a>
+                    <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477759</a>
+                </p>
+                <p class="moto-text_normal">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <!--<a target="_self" data-action="url" class="moto-link" href="callto:#">-->
+                    <span class="moto-link">
+                    32/1, Khan Plaza ( 3rd floor), Science Lab,<br/>
+                        Mirpur Road, Dhanmondi, Dhaka- 1205
+                    </span>
+                    <!--</a>-->
+                </p>
 
 
         </div>
@@ -267,9 +268,10 @@
                                         <td style="width:100%; text-align: right;padding-right: 0px"><input name="query" type="search" class="searchForm" id="search"
                                                    placeholder="Enter your location"/></td>
                                         <td style="text-align: left;padding-left: 0px">
-                                            <button type="submit" class="searchBtn">
-                                                Search
-                                            </button>
+                                            <button type="submit" class="btn btn-default searchBtn"><i class="glyphicon glyphicon-search visible-xs"></i><span class="hidden-xs">Search</span></button>
+                                            <!--<button type="submit" class="searchBtn">-->
+                                                <!--Search-->
+                                            <!--</button>-->
                                         </td>
                                     </tr>
                                 </table>
