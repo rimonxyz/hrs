@@ -4,6 +4,7 @@ import com.moninfotech.commons.Config;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.BookingHelper;
+import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.exceptions.NotFoundException;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,18 +88,19 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    public String register(@Valid @ModelAttribute User user, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
         // check if user already exists
         if (this.userService.findByEmail(user.getEmail()) != null)
             return "redirect:/register?message=User already registered!";
         // set default user
-        List<String> defaultRoles = new ArrayList<>();
-        if (user.getEmail().equals(Config.ADMIN_EMAIL1) || user.getEmail().equals(Config.ADMIN_EMAIL2) || user.getEmail().equals(Config.ADMIN_EMAIL3))
-            defaultRoles.add(Constants.Roles.ROLE_ADMIN);
+        if (user.getEmail().equals(Config.ADMIN_EMAIL1)
+                || user.getEmail().equals(Config.ADMIN_EMAIL2)
+                || user.getEmail().equals(Config.ADMIN_EMAIL3))
+            user.grantRole(Constants.Roles.ROLE_ADMIN);
         else
-            defaultRoles.add(Constants.Roles.ROLE_USER);
-        user.setRoles(defaultRoles);
+            user.grantRole(Constants.Roles.ROLE_USER);
+        user.setPassword(PasswordUtil.encryptPassword(user.getPassword(), PasswordUtil.EncType.BCRYPT_ENCODER, null));
         user = this.userService.save(user);
         return "redirect:/login?messageinfo=We have sent you an email. Please confirm your identity by clicking on the confirmation link.";
     }
@@ -117,9 +120,44 @@ public class HomeController {
         user.setEnabled(enabled);
         acToken.setTokenValid(false);
         acToken.setReason("User Registration");
-        this.userService.save(user);
-        this.acValidationTokenService.save(acToken);
+        this.userService.save(user, acToken);
         return "redirect:/login?messageinfo=Account \"" + user.getName() + "\" is Activated. Please logged in to continue.";
+    }
+
+    @GetMapping("/resetPassword")
+    private String resetPassword(@RequestParam(value = "token", required = false) String token, HttpSession session) {
+        if (token == null || token.isEmpty()) // return email page to send password reset link
+            return "adminlte/pages/resetPassword";
+        AcValidationToken acValidationToken = this.acValidationTokenService.findByToken(token);
+        if (acValidationToken == null || !acValidationToken.isTokenValid())
+            return "redirect:/login?message=Invalid request!";
+        session.setAttribute("passwordResetToken", token);
+        return "adminlte/pages/newPassword";
+    }
+
+    @PostMapping("/resetPassword")
+    private String resetPasswordConfirm(@RequestParam("password") String password, HttpSession session) throws Exception {
+        String token = (String) session.getAttribute("passwordResetToken");
+        AcValidationToken acValidationToken = this.acValidationTokenService.findByToken(token);
+        if (acValidationToken == null || !acValidationToken.isTokenValid())
+            return "redirect:/login?message=Invalid Request!";
+        if (password.length() < 6)
+            return "redirect:/resetPassword?token=" + token + "&message=Password length must be at least 6 characters!";
+        User user = acValidationToken.getUser();
+        user.setPassword(PasswordUtil.encryptPassword(password, PasswordUtil.EncType.BCRYPT_ENCODER, null));
+        acValidationToken.setTokenValid(false);
+        acValidationToken.setReason("Password Reset");
+        this.userService.save(user, acValidationToken);
+        return "redirect:/login?messagesuccess=Password reset successful!";
+    }
+
+    @PostMapping("/resetPassword/verifyEmail")
+    private String verifyEmail(@RequestParam("email") String email) {
+        User user = this.userService.findByEmail(email);
+        if (user == null)
+            return "redirect:/resetPassword?message=User is not registered with this email. Please register to continue!";
+        this.userService.requireAccountValidationByEmail(user, "/resetPassword");
+        return "redirect:/resetPassword?messageinfo=A verification link has been sent to your email. Please click that link to confirm your identification.";
     }
 
     @GetMapping("/extest")

@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -45,12 +46,11 @@ public class UserServiceImpl implements UserService {
         // for new user registration
         // send email for validation
         if (isNewUser)
-            this.requireAccountValidationByEmail(user);
+            this.requireAccountValidationByEmail(user,"/user/validation");
         return user;
     }
 
-    private void requireAccountValidationByEmail(User user) {
-
+    public void requireAccountValidationByEmail(User user,String validationUrl) {
         SessionIdentifierGenerator sessionIdentifierGenerator = new SessionIdentifierGenerator();
         AcValidationToken acValidationToken = new AcValidationToken();
         acValidationToken.setToken(sessionIdentifierGenerator.nextSessionId());
@@ -59,10 +59,16 @@ public class UserServiceImpl implements UserService {
         // save acvalidationtoken
         acValidationToken = this.acValidationTokenService.save(acValidationToken);
         // build confirmation link
-        String confirmationLink = baseUrl.trim() + "/user/validation?token=" + acValidationToken.getToken() + "&enabled=true";
+        String confirmationLink = baseUrl.trim() + validationUrl+"?token=" + acValidationToken.getToken() + "&enabled=true";
         // send link by email
         this.mailService.sendEmail(user.getEmail(), "HotelsWave Registration", "Please confirm your email by clicking this link " + confirmationLink);
+    }
 
+    @Override
+    @Transactional
+    public void save(User user, AcValidationToken acToken) {
+        this.userRepo.save(user);
+        this.acValidationTokenService.save(acToken);
     }
 
     @Override

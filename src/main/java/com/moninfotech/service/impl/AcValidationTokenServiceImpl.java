@@ -27,6 +27,7 @@ public class AcValidationTokenServiceImpl implements AcValidationTokenService {
 
     @Override
     public AcValidationToken findByToken(String token) {
+        if (token==null) return null;
         return this.tokenRepo.findByToken(token);
     }
 

@@ -1,10 +1,12 @@
 package com.moninfotech.config;
 
 import com.moninfotech.commons.Constants;
+import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -36,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/bookings/cart/**", "/hotels/**", "/ships/**", "/packages/**", "/offers/**", "/feedback/**", "/user/validation/**", "/rooms/**", "/rest/**", "/", "/search/**", "/login", "/users/exists/*", "/logout", "/register", "/fonts/**", "/js/**", "/css/**", "/images/**").permitAll()
+                .antMatchers("/bookings/cart/**", "/hotels/**", "/ships/**", "/packages/**", "/offers/**", "/feedback/**", "/user/validation/**", "/rooms/**", "/rest/**", "/", "/search/**", "/login", "/users/exists/*", "/logout", "/register","/resetPassword/**", "/fonts/**", "/js/**", "/css/**", "/images/**").permitAll()
                 .antMatchers("/admin/**").hasRole(Constants.Roles.AUTHORITY_ADMIN)
                 .antMatchers("/hotel/**").hasAnyRole(Constants.Roles.AUTHORITY_HOTEL_ADMIN, Constants.Roles.AUTHORITY_ADMIN)
                 .antMatchers("/bookings/**").hasAnyRole(Constants.Roles.AUTHORITY_USER, Constants.Roles.AUTHORITY_AGENT, Constants.Roles.AUTHORITY_HOTEL_ADMIN, Constants.Roles.AUTHORITY_ADMIN)
@@ -64,8 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
 //                .inMemoryAuthentication()
 //                .withUser("admin").password("pass").roles("USER","HOTEL","ADMIN");
-                .userDetailsService(this.userDetailsService);
-//                .passwordEncoder(new ShaPasswordEncoder(256));
+                .userDetailsService(this.userDetailsService)
+                .passwordEncoder(PasswordUtil.getBCryptPasswordEncoder());
     }
 
 

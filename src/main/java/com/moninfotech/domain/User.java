@@ -46,6 +46,12 @@ public class User extends BaseEntity implements UserDetails {
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
 
+
+    public void grantRole(String role){
+        if (this.roles==null) roles = new ArrayList<>();
+        this.roles.add(role);
+    }
+
     public String getName() {
         return name;
     }

@@ -1,7 +1,9 @@
 package com.moninfotech.service;
 
+import com.moninfotech.domain.AcValidationToken;
 import com.moninfotech.domain.User;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -24,4 +26,9 @@ public interface UserService {
     List<User> findByEmailOrPhoneNumber(String email,String phoneNumber);
 
     List<User> findByRole(String role,int page);
+
+    public void requireAccountValidationByEmail(User user,String validationUrl);
+
+    @Transactional
+    void save(User user, AcValidationToken acToken);
 }
