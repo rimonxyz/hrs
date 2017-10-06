@@ -62,19 +62,28 @@
                             <!--<div id="ratingProgressBar" class="ratingProgressBar progress-bar progress-bar-aqua" style="width: 0%"></div>-->
                             <!--</div>-->
                         </div>
-                        <div class="row">
-                            <div class="col-sm-8"></div>
-                            <div class="col-sm-4">
-                                <a class="btn btn-warning btn-block">Edit</a>
-                                <!--<form class="col-sm-6">-->
-                                    <!--<button type="button" class="btn btn-danger col-sm-12">Delete</button>-->
-                                <!--</form>-->
-                            </div>
-                        </div>
+                        <!--<div class="row">-->
+                            <!--<div class="col-sm-8"></div>-->
+                            <!--<div class="col-sm-4">-->
+                                <!--<a class="btn btn-warning btn-block">Edit</a>-->
+                                <!--&lt;!&ndash;<form class="col-sm-6">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<button type="button" class="btn btn-danger col-sm-12">Delete</button>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</form>&ndash;&gt;-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                     <!-- /.box-body -->
                 </div>
 
+                <ul class="pager pull-right" style="margin-right: 10px;">
+                    <li class="previous"><a th:hidden="${page==0}"
+                                            th:href="@{/reviews(hotelId=${hotelId},page=${page-1})}">Previous</a>
+                    </li>
+                    <li class="next"><a
+                            th:hidden="${reviewList == null || reviewList.isEmpty()}"
+                            th:href="@{/reviews(hotelId=${hotelId},page=${page+1})}">Next</a>
+                    </li>
+                </ul>
                 <!-- /.box -->
             </div>
 

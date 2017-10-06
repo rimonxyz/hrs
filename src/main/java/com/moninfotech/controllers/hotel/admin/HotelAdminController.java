@@ -70,6 +70,7 @@ public class HotelAdminController {
 
         model.addAttribute(hotelList);
         model.addAttribute("hotelType", type);
+        model.addAttribute("page",page);
 //        model.addAttribute("template", "fragments/hotel/admin/all");
         return "adminlte/fragments/hotel/admin/all";
     }

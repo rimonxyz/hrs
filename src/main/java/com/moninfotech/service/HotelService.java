@@ -24,9 +24,9 @@ public interface HotelService {
 
     Hotel findByUser(User user);
 
-    List<Hotel> findByAddressArea(String district);
+    List<Hotel> findByAddressArea(String district,int page);
 
-    List<Hotel> findByAddressUpazila(String location);
+    List<Hotel> findByAddressUpazila(String location,int page);
 
     List<Hotel> filterUnbookedHotelsByDate(List<Hotel> hotels, Date date);
 
@@ -36,6 +36,6 @@ public interface HotelService {
 
     List<Hotel> filterHotels(List<Hotel> hotelList, String type);
 
-    List<Hotel> findByNameContaining(String query);
+    List<Hotel> findByNameContaining(String query,int page);
 
 }

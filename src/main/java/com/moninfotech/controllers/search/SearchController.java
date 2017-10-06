@@ -35,10 +35,10 @@ public class SearchController {
                           Model model) {
         if (page < 0) page = 0;
 
-        List<Hotel> hotels = this.hotelService.findByAddressArea(query);
-        hotels.addAll(this.hotelService.findByAddressUpazila(query));
+        List<Hotel> hotels = this.hotelService.findByAddressArea(query,page);
+        hotels.addAll(this.hotelService.findByAddressUpazila(query,page));
         if (hotels.isEmpty())
-            hotels = this.hotelService.findByNameContaining(query);
+            hotels = this.hotelService.findByNameContaining(query,page);
         // filter
         if (filterType != null && !filterType.isEmpty() && filterValue != null && !filterValue.isEmpty())
             hotels = this.hotelService.filterHotels(hotels, filterType, filterValue);
@@ -51,6 +51,7 @@ public class SearchController {
         model.addAttribute("isDesc", !isDesc);
         model.addAttribute("query", query);
         model.addAttribute("hotelType","Hotel");
+        model.addAttribute("page",page);
 //        model.addAttribute("template","fragments/hotel/all");
         return "adminlte/fragments/hotel/all";
     }

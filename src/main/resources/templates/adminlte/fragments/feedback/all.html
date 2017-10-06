@@ -5,41 +5,41 @@
       layout:decorator="adminlte/index">
 
 <div layout:fragment="main_content">
-<section class="content">
+    <section class="content">
 
-    <div class="row">
-        <div class="col-sm-12">
-            <h3><u>ফিডব্যাকগুলো</u></h3>
-            <table class="table table-hover table-striped table-bordered">
-                <thead>
-                <tr class="info">
-                    <th>ID</th>
-                    <th>Message</th>
-                    <th>Feedback From</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Response</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${feedbackList != null}" th:each="feedback : ${feedbackList}"
-                    th:classappend="${feedback?.isResponded()} ? active : danger">
-                    <td>
-                        <span th:text="${feedback?.getId()}"></span>
-                    </td>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3><u>ফিডব্যাকগুলো</u></h3>
+                <table class="table table-hover table-striped table-bordered">
+                    <thead>
+                    <tr class="info">
+                        <th>ID</th>
+                        <th>Message</th>
+                        <th>Feedback From</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Response</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${feedbackList != null}" th:each="feedback : ${feedbackList}"
+                        th:classappend="${feedback?.isResponded()} ? active : danger">
+                        <td>
+                            <span th:text="${feedback?.getId()}"></span>
+                        </td>
 
-                    <td>
-                        <a th:href="@{/admin/feedback/} + ${feedback?.getId()}">
-                            <span th:text="${feedback?.getMessage()}"></span>
-                        </a>
-                    </td>
+                        <td>
+                            <a th:href="@{/admin/feedback/} + ${feedback?.getId()}">
+                                <span th:text="${feedback?.getMessage()}"></span>
+                            </a>
+                        </td>
 
-                    <td>
-                        <span th:text="${feedback?.getName()}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${feedback?.getEmail()}"></span>
+                        <td>
+                            <span th:text="${feedback?.getName()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${feedback?.getEmail()}"></span>
                         </td>
                         <td>
                             <span th:text="${feedback?.getPhoneNumber()}"></span>
@@ -49,13 +49,23 @@
                             <a class="btn btn-primary" th:href="@{/admin/feedback/} + ${feedback?.getId()}">Respond</a>
                         </td>
                         <td>
-                            <form onsubmit="return confirm('Do you really want to delete this article?');" th:action="@{/admin/feedback/delete/}+${feedback?.getId()}" method="post">
+                            <form onsubmit="return confirm('Do you really want to delete this article?');"
+                                  th:action="@{/admin/feedback/delete/}+${feedback?.getId()}" method="post">
                                 <button class="btn btn-danger" type="submit">Delete</button>
                             </form>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+                <ul class="pager pull-right" style="margin-right: 10px;">
+                    <li class="previous"><a th:hidden="${page==0}"
+                                            th:href="@{/admin/feedback(page=${page-1})}">Previous</a>
+                    </li>
+                    <li class="next"><a
+                            th:hidden="${hotelList == null || hotelList.isEmpty()}"
+                            th:href="@{/admin/feedback(page=${page+1})}">Next</a>
+                    </li>
+                </ul>
             </div>
         </div>
 

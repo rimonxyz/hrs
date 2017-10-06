@@ -52,10 +52,10 @@ public class HotelController {
         List<Hotel> hotelList;
         if (query != null && !query.isEmpty()) {
             // if search query not null filter hotels
-            hotelList = this.hotelService.findByAddressArea(query);
-            hotelList.addAll(this.hotelService.findByAddressUpazila(query));
+            hotelList = this.hotelService.findByAddressArea(query,page);
+            hotelList.addAll(this.hotelService.findByAddressUpazila(query,page));
             if (hotelList.isEmpty())
-                hotelList = this.hotelService.findByNameContaining(query);
+                hotelList = this.hotelService.findByNameContaining(query,page);
         } else {
             // else find all hotel
             hotelList = hotelService.findAll(page, 10, sortBy, isDesc);
@@ -75,6 +75,7 @@ public class HotelController {
         model.addAttribute(hotelList);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         model.addAttribute("hotelType",type);
+        model.addAttribute("page",page);
 //        model.addAttribute("template", "fragments/hotel/all");
         return "adminlte/fragments/hotel/all";
     }

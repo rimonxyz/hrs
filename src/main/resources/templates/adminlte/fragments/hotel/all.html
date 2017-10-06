@@ -213,6 +213,24 @@
                             </tr>
                             </tbody>
                         </table>
+                        <ul class="pager pull-right" style="margin-right: 10px;" th:if="${query==null}">
+                            <li class="previous"><a th:hidden="${page==0}"
+                                                    th:href="@{/hotels(page=${page-1},type=${hotelType})}">Previous</a>
+                            </li>
+                            <li class="next"><a
+                                    th:hidden="${hotelList == null || hotelList.isEmpty()}"
+                                    th:href="@{/hotels(page=${page+1},type=${hotelType})}">Next</a>
+                            </li>
+                        </ul>
+                        <ul class="pager pull-right" style="margin-right: 10px;" th:if="${query!=null}">
+                            <li class="previous"><a th:hidden="${page==0}"
+                                                    th:href="@{/search(page=${page-1},query=${query})}">Previous</a>
+                            </li>
+                            <li class="next"><a
+                                    th:hidden="${hotelList == null || hotelList.isEmpty()}"
+                                    th:href="@{/search(page=${page+1},query=${query})}">Next</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 

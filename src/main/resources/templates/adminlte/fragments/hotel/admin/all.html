@@ -89,12 +89,14 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">&raquo;</a></li>
+                        <ul class="pager pull-right" style="margin-right: 10px;">
+                            <li class="previous"><a th:hidden="${page==0}"
+                                                    th:href="@{/admin/hotels(page=${page-1},type=${hotelType})}">Previous</a>
+                            </li>
+                            <li class="next"><a
+                                    th:hidden="${hotelList == null || hotelList.isEmpty()}"
+                                    th:href="@{/admin/hotels(page=${page+1},type=${hotelType})}">Next</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

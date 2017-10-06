@@ -48,7 +48,8 @@ public class ReviewController {
         model.addAttribute("hotelList", this.reviewService.findReviewedHotels(currentUser));
         model.addAttribute("reviewList", myReviewList);
 
-//        model.addAttribute("template", "fragments/review/all");
+        model.addAttribute("page", page);
+        model.addAttribute("hotelId",hotelId);
         return "adminlte/fragments/review/all";
     }
 

@@ -67,13 +67,13 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<Hotel> findByAddressArea(String area) {
-        return this.hotelRepo.findByAddressAreaContainingIgnoreCase(area);
+    public List<Hotel> findByAddressArea(String area,int page) {
+        return this.hotelRepo.findByAddressAreaContainingIgnoreCase(area,new PageRequest(page,SortAttributes.Page.SIZE,Sort.Direction.ASC,SortAttributes.FIELD_ID));
     }
 
     @Override
-    public List<Hotel> findByAddressUpazila(String location) {
-        return this.hotelRepo.findByAddressUpazilaContainingIgnoreCase(location);
+    public List<Hotel> findByAddressUpazila(String location,int page) {
+        return this.hotelRepo.findByAddressUpazilaContainingIgnoreCase(location,new PageRequest(page,SortAttributes.Page.SIZE,Sort.Direction.ASC,SortAttributes.FIELD_ID));
     }
 
     @Override
@@ -147,8 +147,8 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<Hotel> findByNameContaining(String name) {
-        return this.hotelRepo.findByNameContainingIgnoreCase(name);
+    public List<Hotel> findByNameContaining(String name,int page) {
+        return this.hotelRepo.findByNameContainingIgnoreCase(name,new PageRequest(page,SortAttributes.Page.SIZE,Sort.Direction.ASC,SortAttributes.FIELD_ID));
     }
 
 }
