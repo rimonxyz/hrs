@@ -374,8 +374,14 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
     border: none;
 }
 .cherry-follow_item:first-child {
-    margin-left: 0;
+    margin-right: 25px;
+    margin-left: 25px;
 }
+/*@media screen and (max-width: 768px) {*/
+    /*.cherry-follow_item:first-child {*/
+        /*margin-left: 0px;*/
+    /*}*/
+/*}*/
 .cherry-follow_item {
     display: block;
     float: left;
@@ -387,7 +393,9 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
     color: #fff;
 }
 .social-list li+li {
-    margin-left: 57px;
+    margin-right: 25px;
+    margin-left: 25px;
+
 }
 .social-list li .cherry-follow_label {
     font: 500 30px/32px 'Roboto', sans-serif!important;
@@ -399,7 +407,13 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
     margin-top: 30px;
     padding: 0 160px;
 }
-main.css:1492
+@media screen and (max-width: 768px) {
+    .bg-5 p {
+        margin-top: 20px;
+        padding: 0 30px;
+        text-align: justify;
+    }
+}
 p {
     margin-bottom: 22px;
 } 
@@ -496,6 +510,10 @@ p {
 .partner_contents{
     margin-top: 50px;
     margin-bottom: 30px;
+    text-align: center;
+}
+.tm_pb_brands_showcase_module__brands .tm_pb_column{
+    margin-top: 20px;
 }
 
 /*News letter*/
