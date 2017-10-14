@@ -4178,14 +4178,15 @@ i.mail {
 }
 
 .footerName p {
+    font-family: Garamond;
     margin-top: 20px;
     font-size: 18px;
     text-align: center;
-    color: #ffffff;
+    color: #92F9FF;
 }
 
 .footerName p a {
-    color: #aaaaaa;
+    color: whitesmoke;
 }
 
 /*end fotter*/
