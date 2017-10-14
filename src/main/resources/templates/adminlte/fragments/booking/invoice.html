@@ -6,7 +6,7 @@
 
 <div layout:fragment="main_content">
 
-    <section class="invoice" xmlns:th="http://www.w3.org/1999/xhtml">
+    <section class="invoice" id="invoiceContent" xmlns:th="http://www.w3.org/1999/xhtml">
         <!-- title row -->
         <div class="row">
             <div class="col-xs-12">
@@ -141,7 +141,7 @@
         <!-- this row will not appear when printing -->
         <div class="row no-print">
             <div class="col-xs-12">
-                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                <a onclick="window.print();" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                 <span style="color: red;" th:if="${!invoice?.booking?.isValid() and !invoice?.paid}"><b>This booking is invalid. Please do not pay.</b></span>
                 <form class="pull-right" id="payment_gw" name="payment_gw" method="POST" action="https://sandbox.sslcommerz.com/gwprocess/v3/process.php">
                     <input type="hidden" name="total_amount" th:value="${invoice?.booking?.getTotalPayableCost()}" />
@@ -195,8 +195,7 @@
                     <button class="btn btn-danger" th:disabled="${invoice?.paid or !invoice?.booking?.isValid()}"><i class="fa fa-credit-card"></i>&nbsp;Pay Now</button>
                 </form>
                 <!--<button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment-->
-                </button>
-                <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+                <button type="button" onclick="window.print();" class="btn btn-primary pull-right" style="margin-right: 5px;">
                     <i class="fa fa-download"></i> Generate PDF
                 </button>
             </div>

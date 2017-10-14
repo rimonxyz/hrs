@@ -83,7 +83,7 @@ public class BookingController {
         model.addAttribute("invoiceList", this.invoiceService.findByUser(currentUser, false));
         model.addAttribute("filterValue", filterValue);
 
-//        model.addAttribute("template", "fragments/booking/all");
+        model.addAttribute("page",page);
         return "adminlte/fragments/booking/all";
     }
 

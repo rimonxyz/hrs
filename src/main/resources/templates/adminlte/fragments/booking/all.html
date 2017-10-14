@@ -80,12 +80,12 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"></td>
                             <td></td>
                             <td></td>
                             <td>Total</td>
-                            <td>৳<span
-                                    th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate)*todaysPlacedRoomListSize}"></span>
+                            <td>
+                                ৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate)}"></span>
                             </td>
                         </tr>
                     </table>
@@ -128,7 +128,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"></td>
                             <td></td>
                             <td>Total</td>
                             <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate)}"></span>
@@ -238,11 +238,12 @@
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
                     <ul class="pagination pagination-sm no-margin pull-right">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">&raquo;</a></li>
+                        <li class="previous"><a th:hidden="${page==0}"
+                                                th:href="@{/bookings(page=${page-1})}">Previous</a>
+                        </li>
+                        <li class="next"><a th:hidden="${bookingList == null || bookingList.isEmpty()}"
+                                            th:href="@{/bookings(page=${page+1})}">Next</a>
+                        </li>
                     </ul>
                 </div>
             </div>
