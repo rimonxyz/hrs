@@ -74,9 +74,9 @@
                                 <!--</a>-->
                             </td>
                             <td th:text="${room?.category?.name}"></td>
-                            <td th:text="${room?.getBookingDatesString(true)}"></td>
+                            <td th:text="${room?.getBookingDatesForView(analDate)?.get('dates')}"></td>
                             <!--<td th:text="${todaysPlacedRoomListSize}"></td>-->
-                            <td>৳<span th:text="${room?.getDiscountedPrice(analDate)}"></span></td>
+                            <td>৳<span th:text="${room?.getDiscountedPrice(analDate)*room?.getBookingDatesForView(analDate)?.get('size')}"></span></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -85,7 +85,7 @@
                             <td></td>
                             <td>Total</td>
                             <td>
-                                ৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate)}"></span>
+                                ৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate,true)}"></span>
                             </td>
                         </tr>
                     </table>
@@ -131,7 +131,7 @@
                             <td sec:authorize="hasRole('ROLE_ADMIN')"></td>
                             <td></td>
                             <td>Total</td>
-                            <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate)}"></span>
+                            <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate,false)}"></span>
                             </td>
                         </tr>
                     </table>

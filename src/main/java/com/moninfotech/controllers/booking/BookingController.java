@@ -3,6 +3,7 @@ package com.moninfotech.controllers.booking;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.SessionAttr;
+import com.moninfotech.commons.pojo.Analytics;
 import com.moninfotech.commons.pojo.BookingHelper;
 import com.moninfotech.commons.pojo.Roles;
 import com.moninfotech.domain.*;
@@ -67,8 +68,8 @@ public class BookingController {
 
         if (!filterType.isEmpty() && !filterValue.isEmpty()) {
             bookingList = this.bookingService.filterBookingList(bookingList, filterType, filterValue);
-            todaysBookedRoomList = this.roomService.filterRoomList(todaysBookedRoomList,filterType,filterValue);
-            todaysPlacedRoomList = this.roomService.filterRoomList(todaysPlacedRoomList,filterType,filterValue);
+            todaysBookedRoomList = this.roomService.filterRoomList(todaysBookedRoomList, filterType, filterValue);
+            todaysPlacedRoomList = this.roomService.filterRoomList(todaysPlacedRoomList, filterType, filterValue);
         }
         // find total placement price and count
 
@@ -83,7 +84,7 @@ public class BookingController {
         model.addAttribute("invoiceList", this.invoiceService.findByUser(currentUser, false));
         model.addAttribute("filterValue", filterValue);
 
-        model.addAttribute("page",page);
+        model.addAttribute("page", page);
         return "adminlte/fragments/booking/all";
     }
 
@@ -94,7 +95,7 @@ public class BookingController {
                                     Model model) {
         // find booking list by role
         List<Booking> canceledBookingList = this.bookingService.findBookings(currentUser, true, true, page, size);
-        model.addAttribute("bookingList",canceledBookingList);
+        model.addAttribute("bookingList", canceledBookingList);
 //        model.addAttribute("template", "fragments/booking/allCanceled");
         return "adminlte/fragments/booking/allCanceled";
     }

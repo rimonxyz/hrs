@@ -1,8 +1,10 @@
 package com.moninfotech.service;
 
+import com.moninfotech.commons.pojo.Analytics;
 import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
+import com.moninfotech.domain.User;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -40,4 +42,5 @@ public interface RoomService {
     List<Room> save(List<Room> roomList);
 
     List<Room> filterRoomList(List<Room> roomList, String filterType, String filterValue) throws ParseException;
+
 }

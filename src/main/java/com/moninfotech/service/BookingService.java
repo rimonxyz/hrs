@@ -1,5 +1,6 @@
 package com.moninfotech.service;
 
+import com.moninfotech.commons.pojo.Analytics;
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;

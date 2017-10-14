@@ -160,25 +160,26 @@ public class Room extends BaseEntity {
     }
 
     // returns booking dates(String) for that room placed on today
-    public String getBookingDatesString(boolean placedToday) {
-        return this.getBookingDates(placedToday).stream()
+    public Map<String, Object> getBookingDatesForView(String placementDateStr) throws ParseException {
+        Collection<Date> bookingDates = this.getBookingDates(DateUtils.getParsableDateFormat().parse(placementDateStr));
+        String bookingDatesStr = bookingDates.stream()
                 .map(date -> DateUtils.getReadableDateFormat().format(date))
                 .collect(Collectors.joining(" | "));
+        Map<String,Object> map = new HashMap<>();
+        map.put("dates",bookingDatesStr);
+        map.put("size",bookingDates.size());
+        return map;
     }
 
     // returns booking dates for that room placed on today
-    public List<Date> getBookingDates(boolean placedToday) {
-        List<Date> dateList = new ArrayList<>();
+    public Collection<Date> getBookingDates(Date placementDate) {
+        Set<Date> dateList = new HashSet<>();
         for (Booking booking : this.bookingList) {
             // check if booking is confirmed
             if (booking.isConfirmed() && !booking.isCancelled()) {
-                if (placedToday) {
-                    // filter bookings of this room by todays date
-                    if (DateUtils.isSameDay(booking.getCreated(), new Date())) {
-                        dateList.addAll(this.getBookingDates(this, booking));
-                    }
-                } else {
-                    dateList = this.getBookingDates(this, booking);
+                // filter bookings of this room by todays date
+                if (DateUtils.isSameDay(booking.getCreated(), placementDate)) {
+                    dateList.addAll(this.getBookingDates(this, booking));
                 }
             }
         }
