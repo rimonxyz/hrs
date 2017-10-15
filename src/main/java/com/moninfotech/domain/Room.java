@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
-import com.moninfotech.config.SecurityConfig;
+import com.moninfotech.config.security.SecurityConfig;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
