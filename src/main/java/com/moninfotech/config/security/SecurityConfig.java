@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/oauth/token","/api/v1/**","/bookings/cart/**", "/hotels/**", "/ships/**", "/packages/**", "/offers/**", "/feedback/**", "/user/validation/**", "/rooms/**", "/rest/**", "/", "/search/**", "/login", "/users/exists/*", "/logout", "/register","/resetPassword/**", "/fonts/**", "/js/**", "/css/**", "/images/**").permitAll()
+                .antMatchers("/oauth/token", "/api/v1/**", "/bookings/cart/**", "/hotels/**", "/ships/**", "/packages/**", "/offers/**", "/feedback/**", "/user/validation/**", "/rooms/**", "/rest/**", "/", "/search/**", "/login", "/users/exists/*", "/logout", "/register", "/resetPassword/**", "/fonts/**", "/js/**", "/css/**", "/images/**").permitAll()
                 .antMatchers("/admin/**").hasRole(Constants.Roles.AUTHORITY_ADMIN)
                 .antMatchers("/hotel/**").hasAnyRole(Constants.Roles.AUTHORITY_HOTEL_ADMIN, Constants.Roles.AUTHORITY_ADMIN)
                 .antMatchers("/bookings/**").hasAnyRole(Constants.Roles.AUTHORITY_USER, Constants.Roles.AUTHORITY_AGENT, Constants.Roles.AUTHORITY_HOTEL_ADMIN, Constants.Roles.AUTHORITY_ADMIN)
