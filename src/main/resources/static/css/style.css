@@ -4275,6 +4275,9 @@ i.mail {
         font-size: 16px;
 
     }
+    .header .container {
+        width: 850px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -4283,6 +4286,9 @@ i.mail {
         width: 826px;
         padding-bottom: 30px;
     }
+    .header .container {
+        width: 1070px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -4290,6 +4296,9 @@ i.mail {
         display: block;
         width: 951px;
         padding-bottom: 30px;
+    }
+    .header .container {
+        width: 1270px;
     }
 }
 
