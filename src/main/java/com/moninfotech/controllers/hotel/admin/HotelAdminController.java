@@ -6,6 +6,7 @@ import com.moninfotech.commons.FileIO;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.commons.pojo.Roles;
+import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
@@ -25,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -70,7 +72,7 @@ public class HotelAdminController {
 
         model.addAttribute(hotelList);
         model.addAttribute("hotelType", type);
-        model.addAttribute("page",page);
+        model.addAttribute("page", page);
 //        model.addAttribute("template", "fragments/hotel/admin/all");
         return "adminlte/fragments/hotel/admin/all";
     }
@@ -84,10 +86,11 @@ public class HotelAdminController {
     }
 
     //@POST
+    @Transactional
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    private String create(@ModelAttribute Hotel hotel, BindingResult bindingResult,
-                          @RequestParam(value = "userId", required = false) Long userId,
-                          @RequestParam("images") MultipartFile[] multipartFiles) throws IOException {
+    String create(@ModelAttribute Hotel hotel, BindingResult bindingResult,
+                  @RequestParam(value = "userId", required = false) Long userId,
+                  @RequestParam("images") MultipartFile[] multipartFiles) throws Exception {
         if (bindingResult.hasErrors())
             System.out.print("Binding ERROR: " + bindingResult.toString());
         // set image to the hotel entity if it's valid.
@@ -107,12 +110,14 @@ public class HotelAdminController {
                 Hotel existingHotel = this.hotelService.findOne(hotel.getId());
                 if (existingHotel != null) {
                     hotel.setCreated(existingHotel.getCreated());
-                    if (hotel.getImages()==null || hotel.getImages().isEmpty())
+                    if (hotel.getImages() == null || hotel.getImages().isEmpty())
                         hotel.setImages(existingHotel.getImages());
                 }
             }
-        } else // hotel create -new
+        } else {// hotel create -new
             user = hotel.getUser();
+            user.setPassword(PasswordUtil.encryptPassword(user.getPassword(), PasswordUtil.EncType.BCRYPT_ENCODER, null));
+        }
 
         if (user == null) return "redirect:/admin/hotels?message=Can\'t update hotel!";
         user = this.userService.save(user);
