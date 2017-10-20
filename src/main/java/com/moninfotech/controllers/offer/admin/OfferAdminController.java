@@ -57,9 +57,9 @@ public class OfferAdminController {
     private String editPage(@PathVariable("id") Long id, Model model) {
         Offer offer = this.offerService.findOne(id);
         if (offer == null) return "redirect:/admin/offers?message=Offer not found!";
-        if(offer.getDate()==null) offer.setDate(new Date());
+        if (offer.getDate() == null) offer.setDate(new Date());
 
-        model.addAttribute("offer",offer);
+        model.addAttribute("offer", offer);
         model.addAttribute("offerDate", DateUtils.getParsableDateFormat().format(offer.getDate()));
         model.addAttribute("offerList", this.offerService.findAll(null, null));
 //        model.addAttribute("template", "fragments/offer/admin/offers");
@@ -67,13 +67,17 @@ public class OfferAdminController {
     }
 
     @PostMapping("/edit/{id}")
-    private String edit(@ModelAttribute Offer offer, BindingResult bindingResult) {
+    private String edit(@ModelAttribute Offer offer, BindingResult bindingResult,
+                        @RequestParam("image") MultipartFile multipartFile) throws IOException {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
         Offer existing = this.offerService.findOne(offer.getId());
-        if (existing != null) {
+        if (existing == null) return "redirect:/admin/offers?message=Could not find offers!";
+        offer.setCreated(existing.getCreated());
+
+        if (ImageValidator.isImageValid(multipartFile))
+            offer.setImage(multipartFile.getBytes());
+        else
             offer.setImage(existing.getImage());
-            offer.setCreated(existing.getCreated());
-        }
         offer = this.offerService.save(offer);
         return "redirect:/admin/offers?messageinfo=Offer Saved!";
     }

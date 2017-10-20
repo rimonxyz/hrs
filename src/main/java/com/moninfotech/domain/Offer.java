@@ -21,6 +21,7 @@ public class Offer extends BaseEntity {
     private Date date;
     private String duration;
     private int price;
+    @Column(length = 1000)
     private String link;
     private String timeDistribution;
     private String include;

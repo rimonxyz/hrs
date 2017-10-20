@@ -55,8 +55,8 @@ public class HomeController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     private String home(Model model) {
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
-        model.addAttribute("packageList", this.packageService.findAll(null, null));
-        model.addAttribute("offerList", this.offerService.findAll(null, null));
+        model.addAttribute("packageList", this.packageService.findAll(0, 6));
+        model.addAttribute("offerList", this.offerService.findAll(0, 6));
         return "index";
     }
 

@@ -56,7 +56,7 @@ public class PackageAdminController {
     private String editPage(@PathVariable("id") Long id, Model model) {
         Package pckg = this.packageService.findOne(id);
         if (pckg == null) return "redirect:/admin/packages?message=Package not found!";
-        if (pckg.getDate()==null) pckg.setDate(new Date());
+        if (pckg.getDate() == null) pckg.setDate(new Date());
         model.addAttribute("package", pckg);
         model.addAttribute("pckgDate", DateUtils.getParsableDateFormat().format(pckg.getDate()));
         model.addAttribute("packageList", this.packageService.findAll(null, null));
@@ -65,13 +65,15 @@ public class PackageAdminController {
     }
 
     @PostMapping("/edit/{id}")
-    private String edit(@ModelAttribute Package pckg, BindingResult bindingResult) {
+    private String edit(@ModelAttribute Package pckg, BindingResult bindingResult,
+                        @RequestParam("image") MultipartFile multipartFile) throws IOException {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
         Package existing = this.packageService.findOne(pckg.getId());
-        if (existing!=null) {
-            pckg.setImage(existing.getImage());
-            pckg.setCreated(existing.getCreated());
-        }
+        if (existing == null) return "redirect:/admin/packages?message=Couldn't find packages.";
+        pckg.setCreated(existing.getCreated());
+        if (ImageValidator.isImageValid(multipartFile))
+            pckg.setImage(multipartFile.getBytes());
+        else pckg.setImage(existing.getImage());
         pckg = this.packageService.save(pckg);
         return "redirect:/admin/packages?messageinfo=Package Saved!";
     }

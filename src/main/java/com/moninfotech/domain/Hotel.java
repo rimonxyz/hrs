@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 public class Hotel extends BaseEntity {
     private String name;
-    @Column(length = 5000)
+    @Column(length = 10000)
     private String description;
     private String phoneNumber;
     private String type;
