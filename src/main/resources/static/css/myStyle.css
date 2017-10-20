@@ -836,6 +836,10 @@ h4, .h4-style {
 
 }
 
+.tm_pb_blurb_content h3{
+    font-size: 30px;
+}
+
  /*!*Small devices (landscape phones, 576px and up)*!*/
 /*@media (min-width: 576px) { ... }*/
 

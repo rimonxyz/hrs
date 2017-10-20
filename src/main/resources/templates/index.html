@@ -482,7 +482,7 @@
 
                 <div class="tm_pb_link_box tm_pb_link_box_2 tm_pb_module">
                     <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic008.jpg);">
+                         th:style="'background:url(' + @{/images/services/event.png} + ');'">
                         <div class="tm_pb_blurb_content">
                             <h3>Event</h3>
                             <p>Management</p>
@@ -500,7 +500,7 @@
 
                 <div class="tm_pb_link_box tm_pb_link_box_3 tm_pb_module">
                     <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic009.jpg);">
+                         th:style="'background:url(' + @{/images/services/transp.png} + ');'">
                         <div class="tm_pb_blurb_content">
                             <h3>Transport</h3>
                             <p>Reservation</p>
@@ -934,11 +934,12 @@
                 <div class="partner_contents">
 
                     <div class="row tm_pb_brands_showcase_module__brands">
+
                         <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <div class="tm_pb_brands_showcase_module__item__wrapper">
                                 <a class="tm_pb_brands_showcase_module__item">
                                     <img class="tm_pb_brands_showcase_module__item__logo"
-                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home04.png">
+                                         src="">
                                     <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
                             </div>
                         </div>
@@ -947,7 +948,7 @@
                             <div class="tm_pb_brands_showcase_module__item__wrapper">
                                 <a class="tm_pb_brands_showcase_module__item">
                                     <img class="tm_pb_brands_showcase_module__item__logo"
-                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home05.png">
+                                         th:src="@{/images/partners/1.png}">
                                     <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
                             </div>
                         </div>
@@ -956,7 +957,7 @@
                             <div class="tm_pb_brands_showcase_module__item__wrapper">
                                 <a class="tm_pb_brands_showcase_module__item">
                                     <img class="tm_pb_brands_showcase_module__item__logo"
-                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home06.png">
+                                         th:src="@{/images/partners/2.png}">
                                     <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
                             </div>
                         </div>
@@ -965,7 +966,7 @@
                             <div class="tm_pb_brands_showcase_module__item__wrapper">
                                 <a class="tm_pb_brands_showcase_module__item">
                                     <img class="tm_pb_brands_showcase_module__item__logo"
-                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home07.png">
+                                         th:src="@{/images/partners/3.png}">
                                     <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
                             </div>
                         </div>
@@ -974,10 +975,11 @@
                             <div class="tm_pb_brands_showcase_module__item__wrapper">
                                 <a class="tm_pb_brands_showcase_module__item">
                                     <img class="tm_pb_brands_showcase_module__item__logo"
-                                         src="https://ld-wp.template-help.com/wordpress_62355/wp-content/uploads/2017/02/home08.png">
+                                         th:src="@{/images/partners/4.png}">
                                     <span class="tm_pb_brands_showcase_module__item__description"></span> </a>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
