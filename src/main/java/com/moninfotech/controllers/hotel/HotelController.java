@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by sayemkcn on 4/16/17.
@@ -52,10 +53,10 @@ public class HotelController {
         List<Hotel> hotelList;
         if (query != null && !query.isEmpty()) {
             // if search query not null filter hotels
-            hotelList = this.hotelService.findByAddressArea(query,page);
-            hotelList.addAll(this.hotelService.findByAddressUpazila(query,page));
+            hotelList = this.hotelService.findByAddressArea(query, page);
+            hotelList.addAll(this.hotelService.findByAddressUpazila(query, page));
             if (hotelList.isEmpty())
-                hotelList = this.hotelService.findByNameContaining(query,page);
+                hotelList = this.hotelService.findByNameContaining(query, page);
         } else {
             // else find all hotel
             hotelList = hotelService.findAll(page, 10, sortBy, isDesc);
@@ -74,8 +75,8 @@ public class HotelController {
             model.addAttribute("query", query);
         model.addAttribute(hotelList);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
-        model.addAttribute("hotelType",type);
-        model.addAttribute("page",page);
+        model.addAttribute("hotelType", type);
+        model.addAttribute("page", page);
 //        model.addAttribute("template", "fragments/hotel/all");
         return "adminlte/fragments/hotel/all";
     }
@@ -85,7 +86,8 @@ public class HotelController {
     private String allRooms(@PathVariable("id") Long id,
                             @RequestParam(value = "q", required = false) String query,
                             @RequestParam(value = "filterType", required = false) String filterType,
-                            @RequestParam(value = "value", required = false) String value, Model model) {
+                            @RequestParam(value = "value", required = false) String value,
+                            @RequestParam(value = "categoryFilter", required = false, defaultValue = "") String categoryFilter, Model model) {
 
         if (filterType == null || filterType.isEmpty() || value == null || value.isEmpty()) {
             filterType = FilterType.DATE;
@@ -96,9 +98,11 @@ public class HotelController {
 
         // Load rooms, all if search query is empty.
         List<Room> roomList;
-        if (query == null)
+        if (query == null) {
             roomList = hotel.getRoomList();
-        else
+            if (!categoryFilter.isEmpty() && !categoryFilter.toLowerCase().equals("all"))
+                roomList = roomService.filterByCategory(roomList, categoryFilter);
+        } else
             roomList = this.roomService.searchRooms(hotel, query);
         List<Long> bookedIds = this.roomService.filterRoomIds(roomList, filterType, value);
 
@@ -109,6 +113,8 @@ public class HotelController {
 
         model.addAttribute("filterType", filterType);
         model.addAttribute("filterValue", value);
+
+        model.addAttribute("categoryFilter", categoryFilter);
 
         model.addAttribute("sidebarCollapse", true);
 //        model.addAttribute("template", "fragments/hotel/details");

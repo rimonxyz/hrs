@@ -43,4 +43,6 @@ public interface RoomService {
 
     List<Room> filterRoomList(List<Room> roomList, String filterType, String filterValue) throws ParseException;
 
+    List<Room> filterByCategory(List<Room> roomList,String categoryName);
+
 }

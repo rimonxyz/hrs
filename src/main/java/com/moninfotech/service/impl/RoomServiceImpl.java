@@ -93,7 +93,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> findByHotelAndCategory(Hotel hotel, Category category) {
-        return this.roomRepo.findByHotelAndCategory(hotel,category);
+        return this.roomRepo.findByHotelAndCategory(hotel, category);
     }
 
     @Override
@@ -128,6 +128,14 @@ public class RoomServiceImpl implements RoomService {
                         .collect(Collectors.toList());
         }
         return roomList;
+    }
+
+    @Override
+    public List<Room> filterByCategory(List<Room> roomList, String categoryName) {
+        if (roomList == null)
+            throw new IllegalArgumentException("Room List can not be null: filterByCategory(List<Room> roomList, String categoryName)");
+        return roomList.stream()
+                .filter(room -> room.getCategory().getName().equals(categoryName)).collect(Collectors.toList());
     }
 
     private List<Long> filterRoomIdsByCategory(List<Room> roomList, String value) {
