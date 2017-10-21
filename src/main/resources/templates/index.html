@@ -114,7 +114,8 @@
                         &nbsp;&nbsp; Mirpur Road, Dhanmondi, Dhaka- 1205
                     </span>
                 <!--</a>-->
-            </p>
+            </p>Khan Plaza
+            32/2 Mirpur Rd, Dhaka
 
 
         </div>
@@ -566,7 +567,8 @@
                     <li class="resp-tab-item" aria-controls="tab_item-5" role="tab"><span>Sajek</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-6" role="tab"><span>Sylhet</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>Srimangal</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>International</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>Int'l</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>Combined</span></li>
                 </ul>
                 <div class="clearfix"></div>
                 <div class="resp-tabs-container">
@@ -742,6 +744,26 @@
                         <div class="tab_img">
                             <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}"
                                  th:if="${pckg?.location?.toLowerCase().equals('international')}">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   th:href="@{/packages/}+${pckg?.id}"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt=""
+                                         class="img-responsive zoom-img">
+                                    <div class="b-wrapper">
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>Combined
+                    </h2>
+                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
+                        <div class="tab_img">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}"
+                                 th:if="${pckg?.location?.toLowerCase().equals('combined')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
                                    th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
@@ -1101,8 +1123,13 @@
 
 
     <div class="col-md-6 contact-left">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.273833243833!2d90.3817477148468!3d23.73761259518198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8c80ca23e0d%3A0x8f11a59195a58c5c!2sKhan+Plaza!5e0!3m2!1sen!2sbd!4v1502007951445"
-                width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <div>
+            <p hidden="hidden" id="mapSource">Shah Jalal International Airport</p>
+            <p hidden="hidden" id="mapDestination">32/1, Khan Plaza ( 3rd floor), Science Lab, Mirpur Road, Dhanmondi</p>
+            <iframe id="directionMap" class="col-sm-12" height="450" width="600"></iframe>
+        </div>
+        <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.273833243833!2d90.3817477148468!3d23.73761259518198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8c80ca23e0d%3A0x8f11a59195a58c5c!2sKhan+Plaza!5e0!3m2!1sen!2sbd!4v1502007951445"-->
+                <!--width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
     </div>
 </div>
 <!-- end location and map -->
