@@ -8,8 +8,11 @@ import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.exceptions.NotFoundException;
+import com.moninfotech.repository.SubscriberRepository;
 import com.moninfotech.service.*;
+import com.moninfotech.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -41,8 +44,13 @@ public class HomeController {
 
     private final ActivityService activityService;
 
+    private final Validator emailValidator;
+    private final Validator phoneValidator;
+
+    private final SubscriberRepository subscriberRepo;
+
     @Autowired
-    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService, PackageService packageService, OfferService offerService, AcValidationTokenService acValidationTokenService, ActivityService activityService) {
+    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService, PackageService packageService, OfferService offerService, AcValidationTokenService acValidationTokenService, ActivityService activityService, @Qualifier("phoneValidator") Validator phoneValidator, @Qualifier("emailValidator") Validator emailValidator, SubscriberRepository subscriberRepo) {
         this.userService = userService;
         this.hotelService = hotelService;
         this.bookingService = bookingService;
@@ -50,6 +58,9 @@ public class HomeController {
         this.offerService = offerService;
         this.acValidationTokenService = acValidationTokenService;
         this.activityService = activityService;
+        this.phoneValidator = phoneValidator;
+        this.emailValidator = emailValidator;
+        this.subscriberRepo = subscriberRepo;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -163,6 +174,25 @@ public class HomeController {
     @GetMapping("/extest")
     private String testEx() throws NotFoundException {
         throw new NotFoundException();
+    }
+
+
+    @PostMapping("/newsletter/subscribe")
+    private String subscribeNewsletter(@RequestParam("email") String emailOrPhone) {
+        if (!emailValidator.isValid(emailOrPhone) && !phoneValidator.isValid(emailOrPhone))
+            return "redirect:/?message=Invalid email or phone number!";
+
+        Subscriber subscriber = new Subscriber();
+        if (emailValidator.isValid(emailOrPhone))
+            subscriber.setEmail(emailOrPhone);
+        else if (phoneValidator.isValid(emailOrPhone))
+            subscriber.setPhone(emailOrPhone);
+
+        if (this.subscriberRepo.findByEmail(emailOrPhone) != null || this.subscriberRepo.findByPhone(emailOrPhone) != null)
+            return "redirect:/?message=You are already subscribed!";
+        this.subscriberRepo.save(subscriber);
+        return "redirect:/?message=Successfully subscribed!";
+
     }
 
 }

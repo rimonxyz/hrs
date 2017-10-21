@@ -432,7 +432,8 @@
             <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
 
                 <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
-                    <div class="tm_pb_link_box_content" style="background-image:url(images/hotel.jpg);">
+                    <div class="tm_pb_link_box_content"
+                         th:style="'background-image:url(' + @{/images/services/hotel-book.png} + ');'">
                         <div class="tm_pb_blurb_content">
                             <h3>Hotel</h3>
                             <p>Booking</p>
@@ -450,7 +451,7 @@
 
                 <div class="tm_pb_link_box tm_pb_link_box_1 tm_pb_module">
                     <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic007.jpg);">
+                         th:style="'background-image:url(' + @{/images/services/ship-ticketing.png} + ');'">
                         <div class="tm_pb_blurb_content">
                             <h3>Ship</h3>
                             <p>Ticketing</p>
@@ -466,7 +467,7 @@
             <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
                     <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic006.jpg);">
+                         th:style="'background-image:url(' + @{/images/services/holiday-packages.png} + ');'">
                         <div class="tm_pb_blurb_content">
                             <h3>Holiday</h3>
                             <p>Packages</p>
@@ -488,7 +489,7 @@
 
                 <div class="tm_pb_link_box tm_pb_link_box_2 tm_pb_module">
                     <div class="tm_pb_link_box_content"
-                         th:style="'background:url(' + @{/images/services/event.png} + ');'">
+                         th:style="'background-image:url(' + @{/images/services/event.png} + ');'">
                         <div class="tm_pb_blurb_content">
                             <h3>Event</h3>
                             <p>Management</p>
@@ -506,7 +507,7 @@
 
                 <div class="tm_pb_link_box tm_pb_link_box_3 tm_pb_module">
                     <div class="tm_pb_link_box_content"
-                         th:style="'background:url(' + @{/images/services/transp.png} + ');'">
+                         th:style="'background-image:url(' + @{/images/services/transp.png} + ');'">
                         <div class="tm_pb_blurb_content">
                             <h3>Transport</h3>
                             <p>Reservation</p>
@@ -522,7 +523,7 @@
             <div class="tm_pb_column tm_pb_column_1_2  tm_pb_column_10 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
                     <div class="tm_pb_link_box_content"
-                         style="background-image:url(https://ld-wp.template-help.com/wordpress_60054/wp-content/uploads/2016/05/pic006.jpg);">
+                         th:style="'background-image:url(' + @{/images/services/group-book.png} + ');'">
                         <div class="tm_pb_blurb_content">
                             <h3>Group</h3>
                             <p>Shipping</p>
@@ -1028,15 +1029,15 @@
                                 </div>
                             </div>
 
-                            <form method="POST" action="#" class="subscribe-block__form">
+                            <form method="post" th:action="@{/newsletter/subscribe}" class="subscribe-block__form">
                                 <input type="hidden" name="nonce" value="fbe36e053a"/>
                                 <div class="subscribe-block__input-group">
                                     <div class="subscribe-block__input-wrap">
                                         <i class="linearicon linearicon-envelope"></i>
-                                        <input class="subscribe-block__input" type="email" name="subscribe-mail"
+                                        <input required="required" class="subscribe-block__input" type="email" name="email"
                                                value="" placeholder="e-mail or phone number">
                                     </div>
-                                    <a href="#" class="subscribe-block__submit btn btn-secondary">Subscribe!</a>
+                                    <button type="submit" class="subscribe-block__submit btn btn-secondary">Subscribe!</button>
                                 </div>
                                 <div class="subscribe-block__messages">
                                     <div class="subscribe-block__success hidden">You successfully subscribed</div>
