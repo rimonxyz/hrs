@@ -36,7 +36,7 @@
 
         <div class="row" sec:authorize="!hasRole('ROLE_USER')">
             <div class="col-sm-6">
-                <div class="box">
+                <div class="box table-responsive">
                     <div class="box-header with-border">
                         <h3 class="box-title">Bookings (Order placed by date)</h3><br/>
                         <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
@@ -55,7 +55,7 @@
                         <!--<h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>-->
                     </div>
 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-responsive">
                         <tr>
                             <th>Sl</th>
                             <th sec:authorize="hasRole('ROLE_ADMIN')">Hotel Name</th>
@@ -94,7 +94,7 @@
             </div>
 
             <div class="col-sm-6">
-                <div class="box">
+                <div class="box table-responsive">
                     <div class="box-header with-border">
                         <h3 class="box-title">Sales (Booked Rooms by date)</h3><br/>
                         <h4 class="box-title">Date: <span th:text="${analDate}"></span></h4>
@@ -145,7 +145,7 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <div class="box">
+                <div class="box table-responsive">
                     <div class="box-header with-border">
                         <div class="col-sm-4">
                             <h3 class="box-title" sec:authorize="hasRole('ROLE_USER')">
