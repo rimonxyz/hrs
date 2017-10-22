@@ -568,9 +568,9 @@
                     <li class="resp-tab-item" aria-controls="tab_item-4" role="tab"><span>Rangamati</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-5" role="tab"><span>Sajek</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-6" role="tab"><span>Sylhet</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>Srimangal</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>Int'l</span></li>
+                    <!--<li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>Srimangal</span></li>-->
                     <li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>Combined</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-7" role="tab"><span>International</span></li>
                 </ul>
                 <div class="clearfix"></div>
                 <div class="resp-tabs-container">
@@ -701,51 +701,31 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
-                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>Srimangal
-                    </h2>
-                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
-                        <div class="tab_img">
-                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}"
-                                 th:if="${pckg?.location?.toLowerCase().equals('srimangal')}">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt=""
-                                         class="img-responsive zoom-img">
-                                    <div class="b-wrapper">
-                                        <h5 th:text="${pckg?.title}">Package 1</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                    <!--<h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>Srimangal-->
+                    <!--</h2>-->
+                    <!--<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">-->
+                        <!--<div class="tab_img">-->
+                            <!--<div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}"-->
+                                 <!--th:if="${pckg?.location?.toLowerCase().equals('srimangal')}">-->
+                                <!--<a class="wow zoomIn animated animated" data-lightbox="example-set"-->
+                                   <!--th:href="@{/packages/}+${pckg?.id}"-->
+                                   <!--style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">-->
+                                    <!--<img th:src="@{/packages/image/}+${pckg?.id}" alt=""-->
+                                         <!--class="img-responsive zoom-img">-->
+                                    <!--<div class="b-wrapper">-->
+                                        <!--<h5 th:text="${pckg?.title}">Package 1</h5>-->
+                                    <!--</div>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                            <!--<div class="clearfix"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>Sylhet
                     </h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
                         <div class="tab_img">
                             <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}"
                                  th:if="${pckg?.location?.toLowerCase().equals('sylhet')}">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt=""
-                                         class="img-responsive zoom-img">
-                                    <div class="b-wrapper">
-                                        <h5 th:text="${pckg?.title}">Package 1</h5>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-
-                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>International
-                    </h2>
-                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
-                        <div class="tab_img">
-                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}"
-                                 th:if="${pckg?.location?.toLowerCase().equals('international')}">
                                 <a class="wow zoomIn animated animated" data-lightbox="example-set"
                                    th:href="@{/packages/}+${pckg?.id}"
                                    style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
@@ -780,6 +760,25 @@
                         </div>
                     </div>
 
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-4"><span class="resp-arrow"></span>International
+                    </h2>
+                    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
+                        <div class="tab_img">
+                            <div class="col-md-4 portfolio-grids" th:each="pckg : ${packageList}"
+                                 th:if="${pckg?.location?.toLowerCase().equals('international')}">
+                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
+                                   th:href="@{/packages/}+${pckg?.id}"
+                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}" alt=""
+                                         class="img-responsive zoom-img">
+                                    <div class="b-wrapper">
+                                        <h5 th:text="${pckg?.title}">Package 1</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
