@@ -205,7 +205,7 @@
                     <div sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
                         <p hidden="hidden" id="mapSource" th:text="${hotel?.address?.mapDirectionFrom}">Coxs Bazar</p>
                         <p hidden="hidden" id="mapDestination" th:text="${hotel?.address?.getCommaSeperatedString()}"></p>
-                        <iframe id="directionMap" class="col-sm-12" height="300"></iframe>
+                        <iframe id="directionMap" class="col-sm-12" height="290"></iframe>
                     </div>
                 </div>
                 <!--BOOKING SESSION ITEMS-->
