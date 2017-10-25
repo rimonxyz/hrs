@@ -82,7 +82,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3>User Reviews</h3>
+                        <h3 style="margin-bottom: 20px;">User Reviews</h3>
                         <a class="btn btn-block btn-success pull-right"
                            th:href="@{/reviews/hotel/}+${room?.hotel?.id}+@{/create}"><span
                                 style="color: white;">Write a Review</span></a>
@@ -472,6 +472,40 @@
                                                 <span class="info-box-text"><i id="dtlsIsFrontFace"
                                                                                class="glyphicon glyphicon-th-list"></i></span>
                                                 <span class="info-box-number">Geyser</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="info-box">
+                                                <span class="info-box-icon"
+                                                      th:classappend="${room?.facilities?.hillView}?  bg-green : bg-red">
+                                                   <i id="dtlsIsHillView"
+                                                      th:classappend="${room?.facilities?.hillView}?  glyphicon-ok : glyphicon-remove"
+                                                      class="glyphicon"></i>
+                                                </span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text"><i id="dtlsIsFrontFace"
+                                                                               class="glyphicon glyphicon-th-list"></i></span>
+                                                <span class="info-box-number">Hill View</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="info-box">
+                                                <span class="info-box-icon"
+                                                      th:classappend="${room?.facilities?.seaView}?  bg-green : bg-red">
+                                                   <i id="dtlsIsSeaView"
+                                                      th:classappend="${room?.facilities?.seaView}?  glyphicon-ok : glyphicon-remove"
+                                                      class="glyphicon"></i>
+                                                </span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text"><i id="dtlsIsSeaView"
+                                                                               class="glyphicon glyphicon-th-list"></i></span>
+                                                <span class="info-box-number">Sea View</span>
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>

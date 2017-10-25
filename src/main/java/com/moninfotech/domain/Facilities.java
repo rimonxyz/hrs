@@ -14,6 +14,8 @@ public class Facilities {
     private boolean airConditioned;
     private boolean tv;
     private boolean geyser;
+    private boolean hillView;
+    private boolean seaView;
 
     public boolean isFrontFace() {
         return frontFace;
@@ -71,6 +73,23 @@ public class Facilities {
         this.geyser = geyser;
     }
 
+
+    public boolean isHillView() {
+        return hillView;
+    }
+
+    public void setHillView(boolean hillView) {
+        this.hillView = hillView;
+    }
+
+    public boolean isSeaView() {
+        return seaView;
+    }
+
+    public void setSeaView(boolean seaView) {
+        this.seaView = seaView;
+    }
+
     @Override
     public String toString() {
         return "Facilities{" +
@@ -81,6 +100,8 @@ public class Facilities {
                 ", airConditioned=" + airConditioned +
                 ", tv=" + tv +
                 ", geyser=" + geyser +
+                ", hillView=" + hillView +
+                ", seaView=" + seaView +
                 '}';
     }
 }
