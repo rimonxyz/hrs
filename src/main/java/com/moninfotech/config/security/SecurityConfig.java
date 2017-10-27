@@ -2,18 +2,21 @@ package com.moninfotech.config.security;
 
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.utils.PasswordUtil;
+import com.moninfotech.domain.User;
 import com.moninfotech.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -59,7 +62,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/js/**",
                         "/css/**",
                         "/images/**",
-                        "/newsletter/subscribe"
+                        "/newsletter/subscribe",
+                        "/bookings/checkout",
+                        "/bookings/tempRegister"
                 )
                 .permitAll()
                 .antMatchers("/admin/**").hasRole(Constants.Roles.AUTHORITY_ADMIN)
@@ -101,5 +106,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //when Anonymous Authentication is enabled
                 !(SecurityContextHolder.getContext().getAuthentication()
                         instanceof AnonymousAuthenticationToken);
+    }
+
+    public static void setAuthentication(User user) {
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

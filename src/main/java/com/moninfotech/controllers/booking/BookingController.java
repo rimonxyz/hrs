@@ -1,17 +1,21 @@
 package com.moninfotech.controllers.booking;
 
+import com.moninfotech.commons.Config;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.DateUtils;
 import com.moninfotech.commons.SessionAttr;
 import com.moninfotech.commons.pojo.Analytics;
 import com.moninfotech.commons.pojo.BookingHelper;
 import com.moninfotech.commons.pojo.Roles;
+import com.moninfotech.commons.utils.PasswordUtil;
+import com.moninfotech.config.security.SecurityConfig;
 import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -171,7 +175,7 @@ public class BookingController {
 
     @GetMapping("/checkout")
     private String checkout(@CurrentUser User currentUser, HttpSession session) {
-        if (currentUser == null) return "redirect:/login?message=Please login to continue.";
+        if (currentUser == null) return "redirect:/bookings/tempRegister";
         Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
         if (booking == null
                 || booking.getRoomList() == null
@@ -208,27 +212,48 @@ public class BookingController {
         return "redirect:/invoices/generate/" + booking.getId();
     }
 
-    @GetMapping("/checkout/assignUser")
-    private String assignUserToBookingPage(@RequestParam(value = "searchQuery", required = false, defaultValue = "") String searchQuery, Model model) {
-        model.addAttribute("userList", this.userService.findByEmailOrPhoneNumber(searchQuery, searchQuery));
-//        model.addAttribute("template", "fragments/booking/assignUser");
-        return "adminlte/fragments/booking/assignUser";
+    @GetMapping("/tempRegister")
+    private String tempRegisterPage() {
+        return "adminlte/pages/tempRegister";
     }
 
-    @PostMapping("/checkout/assignUser")
-    private String assignUserToBooking(@RequestParam("userId") Long userId, HttpSession session, Model model) {
-        User user = this.userService.findOne(userId);
-        if (user == null) return "redirect:/bookings/checkout/assignUser?message=User not found!";
-        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
-        if (booking == null) return "redirect:/checkout/assignUser?message=User not found!";
-        booking.setUser(user);
-        booking.setManualBooking(true);
-        // HANDLE PAYMENT PROCEEDURE
-
-        booking = this.bookingService.save(booking);
-        session.removeAttribute(SessionAttr.SESSION_BOOKING);
-        return "redirect:/invoices/generate/" + booking.getId() + "?messagesuccess=Booking Successful!";
+    @PostMapping("/tempRegister")
+    private String tempRegister(@ModelAttribute User user, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
+        // check if user already exists
+        if (this.userService.findByEmail(user.getEmail()) != null)
+            return "redirect:/tempRegister?message=User already registered!";
+        // set default user role
+        user.grantRole(Constants.Roles.ROLE_USER);
+        user.setAddress(new Address());
+        user.setPassword(PasswordUtil.encryptPassword(user.getPassword(), PasswordUtil.EncType.BCRYPT_ENCODER, null));
+        user = this.userService.save(user);
+        SecurityConfig.setAuthentication(user);
+        return "redirect:/bookings/checkout";
     }
+
+
+//    @GetMapping("/checkout/assignUser")
+//    private String assignUserToBookingPage(@RequestParam(value = "searchQuery", required = false, defaultValue = "") String searchQuery, Model model) {
+//        model.addAttribute("userList", this.userService.findByEmailOrPhoneNumber(searchQuery, searchQuery));
+////        model.addAttribute("template", "fragments/booking/assignUser");
+//        return "adminlte/fragments/booking/assignUser";
+//    }
+//
+//    @PostMapping("/checkout/assignUser")
+//    private String assignUserToBooking(@RequestParam("userId") Long userId, HttpSession session, Model model) {
+//        User user = this.userService.findOne(userId);
+//        if (user == null) return "redirect:/bookings/checkout/assignUser?message=User not found!";
+//        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+//        if (booking == null) return "redirect:/checkout/assignUser?message=User not found!";
+//        booking.setUser(user);
+//        booking.setManualBooking(true);
+//        // HANDLE PAYMENT PROCEEDURE
+//
+//        booking = this.bookingService.save(booking);
+//        session.removeAttribute(SessionAttr.SESSION_BOOKING);
+//        return "redirect:/invoices/generate/" + booking.getId() + "?messagesuccess=Booking Successful!";
+//    }
 //    @ResponseBody
 //    @CrossOrigin
 //    @RequestMapping(value = "/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -48,7 +48,7 @@ public class UserController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     private String edit(@ModelAttribute User user, BindingResult bindingResult,
                         @PathVariable("id") Long id,
-                        @RequestParam(value = "isAgent", required = false, defaultValue = "false") Boolean isAgent) {
+                        @RequestParam(value = "isAgent", required = false, defaultValue = "false") Boolean isAgent) throws Exception {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
 
         User existingUser = this.userService.findOne(user.getId());
@@ -82,7 +82,7 @@ public class UserController {
 
     // Disable user
     @RequestMapping(value = "/{id}/action", method = RequestMethod.POST)
-    private String disable(@PathVariable("id") Long id, @RequestParam("enabled") Boolean enabled) {
+    private String disable(@PathVariable("id") Long id, @RequestParam("enabled") Boolean enabled) throws Exception {
         User user = this.userService.findOne(id);
         if (user == null) return "redirect:/admin/users?message=User can not be found!";
         user.setEnabled(enabled);
