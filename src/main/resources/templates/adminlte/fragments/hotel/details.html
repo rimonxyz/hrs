@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -67,7 +67,7 @@
                         </ul>
                     </div>
                 </div>
-
+01945 838 474
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3>User Reviews</h3>
@@ -127,8 +127,8 @@
                     <!--<img class="img img-responsive" style="height: 400px;width: 100%;margin-bottom: 20px;"-->
                          <!--th:src="@{/hotels/images/}+${hotel?.id}">-->
                     <!--IMAGE-->
-                    <div class="row col-sm-12">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 400px;margin-bottom: 50px;margin-left: 15px;">
+                    <div class="col-sm-12 hotel-page-pic-panel">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
                                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -141,28 +141,23 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/0}" id="dtlsImg1" alt="Los Angeles"
-                                         style="height: 100%; width: 100%;"></img>
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/0}" id="dtlsImg1" alt="" class="img-responsive"/>
                                 </div>
 
                                 <div class="item">
-                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/1}" id="dtlsImg2" alt="Chicago"
-                                         style="height: 100%;width: 100%;"></img>
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/1}" id="dtlsImg2" alt="" class="hotel-page-pic"/>
                                 </div>
 
                                 <div class="item">
-                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/2}" id="dtlsImg3" alt="New York"
-                                         style="height: 100%;width: 100%;"></img>
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/2}" id="dtlsImg3" alt="" class="hotel-page-pic" />
                                 </div>
 
                                 <div class="item">
-                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/3}" id="dtlsImg3" alt="New York"
-                                         style="height: 100%;width: 100%;"></img>
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/3}" id="dtlsImg3" alt="" class="hotel-page-pic" />
                                 </div>
 
                                 <div class="item">
-                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/4}" id="dtlsImg3" alt="New York"
-                                         style="height: 100%;width: 100%;"></img>
+                                    <img th:src="@{/hotels/}+${hotel?.id}+@{/image/4}" id="dtlsImg3" alt="" class="hotel-page-pic" />
                                 </div>
                             </div>
 

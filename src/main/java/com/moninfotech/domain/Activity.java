@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Activity extends BaseEntity{
+public class Activity extends BaseEntity {
 
     private String userAgent;
     private String ip;
@@ -69,6 +69,8 @@ public class Activity extends BaseEntity{
     }
 
     public Long getTotalVisitors() {
+        if (totalVisitors == null)
+            totalVisitors = 0L;
         return totalVisitors;
     }
 

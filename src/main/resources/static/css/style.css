@@ -4132,7 +4132,7 @@ h2.resp-accordion {
     color: #fff;
     margin: 0 0 1em;
     font-weight: 700;
-    font-family: 'Alegreya Sans SC', sans-serif;
+    font-family: "brandon-grotesque",Arial,sans-serif;
     letter-spacing: 1px;
 }
 
@@ -4278,6 +4278,15 @@ i.mail {
     .header .container {
         width: 850px;
     }
+    .navbar-nav {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+    }
+
+    .navbar-collapse {
+        text-align: center;
+    }
 }
 
 @media (min-width: 992px) {
@@ -4326,4 +4335,37 @@ i.mail {
 
 .navbar-nav > li > .dropdown-menu {
     margin-right: -27px;
+}
+
+.hotel-page-pic-panel{
+    height: 400px;
+    margin-bottom: 50px;
+    margin-left: 15px;
+}
+
+.hotel-page-pic{
+    height: 400px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .hotel-page-pic-panel{
+        height: 200px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+    }
+    .hotel-page-pic{
+        height: 200px;
+        width: 100%;
+    }
+    .carousel{
+        height: 200px;
+    }
+    .carousel-inner{
+        display: block;
+        float: left;
+        height: 200px;
+    }
+
+
 }
