@@ -24,7 +24,8 @@
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                     class="fa fa-minus"></i>
                             </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
                             </button>
                         </div>
                     </div>
@@ -43,13 +44,13 @@
                     <div class="inner">
                         <h3 th:text="${booking?.getTotalCost()}">150</h3><h4>TK</h4>
 
-                        <p>Total Cost</p>
+                        <p>&nbsp;<br/>&nbsp;</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-shopping-cart"></i>
                     </div>
                     <a href="#" class="small-box-footer">
-                        More info <i class="fa fa-arrow-circle-right"></i>
+                        Total Cost
                     </a>
                 </div>
             </div>
@@ -60,13 +61,13 @@
                     <div class="inner">
                         <h3 th:text="${booking?.getTotalPayableCost()}">65</h3><h4>TK</h4>
 
-                        <p>You paid</p>
+                        <p>&nbsp;<br/>&nbsp;</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
                     <a href="#" class="small-box-footer">
-                        More info <i class="fa fa-arrow-circle-right"></i>
+                        You Paid
                     </a>
                 </div>
             </div>
@@ -75,15 +76,16 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3 th:text="${booking?.hotel?.address?.area}">65</h3><h4 th:text="${booking?.hotel?.address?.district}"></h4>
+                        <h3 th:text="${booking?.hotel?.address?.area}">65</h3><h4
+                            th:text="${booking?.hotel?.address?.district}"></h4>
 
-                        <p>Area</p>
+                        <p>&nbsp;<br/>&nbsp;</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
                     <a href="#" class="small-box-footer">
-                        More info <i class="fa fa-arrow-circle-right"></i>
+                        Area
                     </a>
                 </div>
             </div>
@@ -94,13 +96,13 @@
                     <div class="inner">
                         <h3 th:text="${booking?.getTotalDiscountPercentage()}">65</h3><h4>Of total amount</h4>
 
-                        <p>You saved</p>
+                        <p>&nbsp;<br/>&nbsp;</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
                     <a href="#" class="small-box-footer">
-                        More info <i class="fa fa-arrow-circle-right"></i>
+                        You Saved
                     </a>
                 </div>
             </div>
@@ -115,12 +117,12 @@
                 <div class="box box-widget widget-user-2">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-yellow">
-                        <div class="widget-user-image">
-                            <img class="img-circle" th:src="@{/hotels/images/}+${booking?.hotel?.id}" alt="User Avatar">
-                        </div>
+                        <!--<div class="widget-user-image">-->
+                        <!--<img class="img-circle" th:src="@{/hotels/images/}+${booking?.hotel?.id}" alt="User Avatar">-->
+                        <!--</div>-->
                         <!-- /.widget-user-image -->
-                        <h3 class="widget-user-username" th:text="${booking?.hotel?.name}"></h3>
-                        <h5 class="widget-user-desc" th:text="${booking?.hotel?.address?.getCommaSeperatedString()}">Lead
+                        <h3 th:text="${booking?.hotel?.name}"></h3>
+                        <h5 th:text="${booking?.hotel?.address?.getCommaSeperatedString()}">Lead
                             Developer</h5>
                     </div>
                     <div class="box-footer no-padding">
@@ -130,11 +132,21 @@
                             <li><a href="#"><span class="pull-left badge bg-aqua" id="star"
                                                   th:text="${booking?.hotel?.star}"></span><span>&nbsp; &nbsp;Star Hotel</span></a>
                             </li>
-                            <li><a href="#">Average Rating: <span class="pull-right badge bg-green" th:text="${booking?.hotel?.getAverageRating()}"></span></a></li>
-                            <li><a href="#">Total Rooms <span class="pull-right badge bg-red" th:text="${booking?.hotel?.roomList?.size()}">842</span></a></li>
-                            <li><a href="#">Number of AC Rooms <span class="pull-right badge bg-red" th:text="${booking?.hotel?.getNumberOfAcRooms()}">842</span></a></li>
-                            <li><a href="#">Number of NON AC Rooms <span class="pull-right badge bg-red" th:text="${booking?.hotel?.getNumberOfNonAcRooms()}">842</span></a></li>
-                            <li sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-block btn-success btn-lg" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}"><span style="color: white;">Write a Review</span></a></li>
+                            <li><a href="#">Average Rating: <span class="pull-right badge bg-green"
+                                                                  th:text="${booking?.hotel?.getAverageRating()}"></span></a>
+                            </li>
+                            <li><a href="#">Total Rooms <span class="pull-right badge bg-red"
+                                                              th:text="${booking?.hotel?.roomList?.size()}">842</span></a>
+                            </li>
+                            <li><a href="#">Number of AC Rooms <span class="pull-right badge bg-red"
+                                                                     th:text="${booking?.hotel?.getNumberOfAcRooms()}">842</span></a>
+                            </li>
+                            <li><a href="#">Number of NON AC Rooms <span class="pull-right badge bg-red"
+                                                                         th:text="${booking?.hotel?.getNumberOfNonAcRooms()}">842</span></a>
+                            </li>
+                            <li sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-block btn-success btn-lg"
+                                                                        th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}"><span
+                                    style="color: white;">Write a Review</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -145,7 +157,7 @@
             <div class="col-sm-8">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Booking Items</h3>
+                        <h3 class="box-title">Rooms you've booked</h3>
                     </div>
 
                     <table class="table table-bordered">
@@ -159,24 +171,30 @@
                             <th>Discount</th>
                             <th>Discounted Price</th>
                         </tr>
-                        <tr th:if="${booking != null and booking.roomList?.size()==booking.bookingDateList?.size()}" th:each="room,iter : ${booking?.roomList}">
+                        <tr th:if="${booking != null and booking.roomList?.size()==booking.bookingDateList?.size()}"
+                            th:each="room,iter : ${booking?.roomList}">
                             <td><img height="50" width="50" th:src="@{/rooms/} + ${room?.id} +@{/image/0}"></img></td>
                             <td><span th:if="${!booking?.bookingDateList?.isEmpty()}"
-                                    th:text="${room?.getReadableDayMonth(booking?.bookingDateList?.get(iter.index))}"></span>
+                                      th:text="${room?.getReadableDayMonth(booking?.bookingDateList?.get(iter.index))}"></span>
                             </td>
                             <td><span th:text="${room?.roomNumber}"></span></td>
                             <td><span th:text="${room?.category?.name}"></span></td>
                             <td><span th:text="${room?.floorNumber}"></span></td>
                             <td><span th:text="${room?.price}"></span></td>
-                            <td><span th:text="${room?.getDiscount(booking?.bookingDateList?.get(iter.index))}"></span></td>
-                            <td><span th:text="${room?.getDiscountedPrice(booking?.bookingDateList?.get(iter.index))}"></span></td>
+                            <td><span th:text="${room?.getDiscount(booking?.bookingDateList?.get(iter.index))}"></span>
+                            </td>
+                            <td><span
+                                    th:text="${room?.getDiscountedPrice(booking?.bookingDateList?.get(iter.index))}"></span>
+                            </td>
                         </tr>
                     </table>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix col-sm-12">
-                    <a class="btn btn-info col-sm-5" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
-                    <a class="btn btn-info col-sm-5 col-sm-offset-2" th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a Review</a>
+                    <a class="btn btn-info col-sm-5" th:href="@{/invoices/generate/}+${booking?.id}">Generate
+                        Invoice</a>
+                    <a class="btn btn-info col-sm-5 col-sm-offset-2"
+                       th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a Review</a>
                 </div>
             </div>
         </div>
