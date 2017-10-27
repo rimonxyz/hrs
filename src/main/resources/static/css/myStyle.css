@@ -341,8 +341,19 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
 
 .dash {
     position: relative;
+    font: 500 42px/48px Roboto, sans-serif;
+    text-align: center;
+}
+.dash.black{
+    color: black;
 }
 
+.dash.black:before {
+    background: rgba(52, 59, 170, 0.2);
+}
+.dash.black:after {
+    background: black;
+}
 .dash:before,
 .dash:after {
     content: '';

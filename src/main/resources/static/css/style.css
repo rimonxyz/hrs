@@ -371,8 +371,9 @@ a:focus, a:hover {
 }
 
 .callbacks_here a:after {
-    background: transparent;
-    background: #da4bbd;
+    /*background: transparent;*/
+    /*background: #da4bbd;*/
+    background-color: #cee7e7;
     height: 13px;
     width: 13px;
     -webkit-border-radius: 50%;
@@ -417,7 +418,9 @@ a:focus, a:hover {
 .navbar-brand {
     font-size: 35px;
     line-height: 27px;
-    color: #da4bbd;
+    /*color: #da4bbd;*/
+    color: #cee7e7;
+
     text-transform: uppercase;
 }
 
@@ -434,7 +437,8 @@ a:focus, a:hover {
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-    color: #da4bbd;
+    /*color: #da4bbd;*/
+    color: #cee7e7;
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus {
@@ -1190,7 +1194,8 @@ ul.top-links li a i.fa {
 }
 
 .count-grid span {
-    background: #da4bbd;
+    /*background: #da4bbd;*/
+    background: #cee7e7;
     display: block;
     width: 65px;
     height: 2px;
@@ -2392,7 +2397,7 @@ button::-moz-focus-inner {
 
 .pricing h3:after, .client-review-head h3:after, .contact h3:after, .features h3:after, .team h3:after, .count-agileits h3:after {
     content: '';
-    background: #da4bbd;
+    background: #cee7e7;
     width: 8%;
     height: 4px;
     position: absolute;
@@ -2452,7 +2457,7 @@ button::-moz-focus-inner {
 
 .contactform h3:after {
     content: '';
-    background: #da4bbd;
+    background: #cee7e7;
     width: 14%;
     height: 4px;
     position: absolute;
@@ -3080,7 +3085,9 @@ button::-moz-focus-inner {
     }
 
     .navbar-default .navbar-toggle {
-        border-color: #da4bbd;
+        /*border-color: #da4bbd;*/
+        background-color: #cee7e7;
+        border-color: black;
     }
 
     .navbar-default .navbar-toggle .icon-bar {
@@ -3088,7 +3095,8 @@ button::-moz-focus-inner {
     }
 
     .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-        background-color: #da4bbd;
+        /*background-color: #da4bbd;*/
+        background-color: #cee7e7;
     }
 
     .border {
@@ -4367,6 +4375,28 @@ i.mail {
         float: left;
         height: 200px;
     }
+}
 
+.package-image{
+    width: 100%;
+    height: 200px;
+}
+.package-image-text{
+    background-color: lightcyan;
+    font-size: 20px;
+    padding: 12px 10px 8px;
+    position: relative;
+    overflow: hidden;
 
+}
+.package-image-title{
+    display: block;
+    font-size: 30px;
+}
+.package-cost-text{
+    float: right;
+    display: block;
+}
+.package-content{
+    padding-bottom: 20px;
 }
