@@ -1,15 +1,18 @@
-package com.moninfotech.config;
+package com.moninfotech.config.security;
 
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -17,14 +20,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * Created by sayemkcn on 4/3/17.
  */
 @Configuration
+@EnableWebSecurity
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final CustomUserDetailsService userDetailsService;
-
-    @Autowired
-    public SecurityConfig(CustomUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -86,14 +84,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-//                .inMemoryAuthentication()
-//                .withUser("admin").password("pass").roles("USER","HOTEL","ADMIN");
-                .userDetailsService(this.userDetailsService)
-                .passwordEncoder(PasswordUtil.getBCryptPasswordEncoder());
-    }
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth
+////                .inMemoryAuthentication()
+////                .withUser("admin").password("pass").roles("USER","HOTEL","ADMIN");
+//                .userDetailsService(this.userDetailsService)
+//                .passwordEncoder(PasswordUtil.getBCryptPasswordEncoder());
+//    }
 
 
     public static boolean isAuthenticated() {
