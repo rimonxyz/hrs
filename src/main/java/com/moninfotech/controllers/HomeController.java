@@ -13,6 +13,7 @@ import com.moninfotech.service.*;
 import com.moninfotech.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -49,8 +50,15 @@ public class HomeController {
 
     private final SubscriberRepository subscriberRepo;
 
+    private final MailService mailService;
+
+    @Value("${shutdown.username}")
+    private String sdUsername;
+    @Value("${shutdown.password}")
+    private String sdPassword;
+
     @Autowired
-    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService, PackageService packageService, OfferService offerService, AcValidationTokenService acValidationTokenService, ActivityService activityService, @Qualifier("phoneValidator") Validator phoneValidator, @Qualifier("emailValidator") Validator emailValidator, SubscriberRepository subscriberRepo) {
+    public HomeController(UserService userService, HotelService hotelService, BookingService bookingService, PackageService packageService, OfferService offerService, AcValidationTokenService acValidationTokenService, ActivityService activityService, @Qualifier("phoneValidator") Validator phoneValidator, @Qualifier("emailValidator") Validator emailValidator, SubscriberRepository subscriberRepo, MailService mailService) {
         this.userService = userService;
         this.hotelService = hotelService;
         this.bookingService = bookingService;
@@ -61,6 +69,7 @@ public class HomeController {
         this.phoneValidator = phoneValidator;
         this.emailValidator = emailValidator;
         this.subscriberRepo = subscriberRepo;
+        this.mailService = mailService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -193,6 +202,24 @@ public class HomeController {
         this.subscriberRepo.save(subscriber);
         return "redirect:/?message=Successfully subscribed!";
 
+    }
+
+    @GetMapping("/shutdown")
+    private String shutDownPage() {
+        return "adminlte/pages/shutdown";
+    }
+
+    @PostMapping("/shutdown")
+    private String shutDownApp(@RequestParam("username") String username,
+                               @RequestParam("password") String password) {
+
+        if (username.equals(sdUsername) && PasswordUtil.getBCryptPasswordEncoder().matches(password, sdPassword)) {
+            this.mailService.sendEmail(username,
+                    "Hotelswave has been shut down",
+                    "Hi hotelswave.com has been shut down by the command of an administrator. Please reboot the app if needed.");
+            System.exit(0);
+        }
+        return "redirect:/shutdown?message=Username or password is wrong!";
     }
 
 }
