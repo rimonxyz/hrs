@@ -222,7 +222,7 @@ public class BookingController {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
         // check if user already exists
         if (this.userService.findByEmail(user.getEmail()) != null)
-            return "redirect:/tempRegister?message=User already registered!";
+            return "redirect:/bookings/tempRegister?message=User already registered!";
         // set default user role
         user.grantRole(Constants.Roles.ROLE_USER);
         user.setAddress(new Address());

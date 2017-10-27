@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/images/**",
                         "/newsletter/subscribe",
                         "/bookings/checkout",
-                        "/bookings/tempRegister"
+                        "/bookings/tempRegister*"
                 )
                 .permitAll()
                 .antMatchers("/admin/**").hasRole(Constants.Roles.AUTHORITY_ADMIN)

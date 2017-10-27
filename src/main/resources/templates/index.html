@@ -587,10 +587,10 @@
                                     <img th:src="@{/packages/image/}+${pckg?.id}" alt=""
                                          class="img-responsive zoom-img">
                                     <div class="b-wrapper">
-                                        <h5 th:text="${pckg?.title}" style="font-size: 30px;">Package 1</h5>
-                                        <h5 th:text="${pckg?.shortTag}" style="font-size: 20px;">Package 1</h5>
-                                        <h5 th:text="${pckg?.getReadableDate(pckg?.date)}" style="font-size: 20px;">
-                                            Package 1</h5>
+                                        <h5 th:text="${pckg?.title}" style="font-size: 20px;padding: 30px;">Package 1</h5>
+                                        <!--<h5 th:text="${pckg?.shortTag}" style="font-size: 20px;">Package 1</h5>-->
+                                        <!--<h5 th:text="${pckg?.getReadableDate(pckg?.date)}" style="font-size: 20px;">-->
+                                            <!--Package 1</h5>-->
                                         <h5 style="font-size: 20px;">
                                             ৳<span th:text="${pckg?.price}"></span>
                                         </h5>
@@ -602,9 +602,9 @@
 
                             <div class="clearfix"></div>
                         </div>
-                        <a th:if="${packageList!=null && packageList.size()>=6}"
+                        <a th:if="${packageList!=null && packageList.size()>=3}"
                            style="margin-bottom: 30px;margin-top: 30px;" class="btn btn-primary col-sm-offset-5"
-                           th:href="@{/packages/1}">See More Offers</a>
+                           th:href="@{/packages/1}">See More Packages</a>
 
                     </div>
                     <h2 class="resp-accordion" role="tab" aria-controls="tab_item-1"><span class="resp-arrow"></span>Coxs
@@ -818,13 +818,13 @@
                             <!--<p th:text="${offer?.shortTag}" style="color: #FFFFFF;">lol</p>-->
                             <!--</div>-->
                             <div>
-                                <p th:text="${offer?.getReadableDate(offer?.date)}" style="color: #FFFFFF;">lol</p>
+                                <!--<p th:text="${offer?.getReadableDate(offer?.date)}" style="color: #FFFFFF;">lol</p>-->
                             </div>
                             <div>
-                                <p th:text="${offer?.duration}" style="color: #FFFFFF;">lol</p>
+                                <!--<p th:text="${offer?.duration}" style="color: #FFFFFF;">lol</p>-->
                             </div>
                             <div>
-                                <p th:text="${offer?.price}" style="color: #FFFFFF;">lol</p>
+                                <p style="color: #FFFFFF;">৳<span th:text="${offer?.price}"></span></p>
                             </div>
 
                         </div>
@@ -837,7 +837,7 @@
                 <div class="clearfix"></div>
             </div>
             <!-- .tm_pb_menu_categories -->
-            <a th:if="${offerList!=null && offerList.size()>=6}" style="margin-bottom: 30px;margin-top: 30px;"
+            <a th:if="${offerList!=null && offerList.size()>=3}" style="margin-bottom: 30px;margin-top: 30px;"
                class="btn btn-primary col-sm-offset-5" th:href="@{/}">See More Offers</a>
             <hr class="tm_pb_module tm_pb_space tm_pb_divider_6">
 
