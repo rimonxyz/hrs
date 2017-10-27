@@ -20,7 +20,7 @@ public class Hotel extends BaseEntity {
     private String type;
     private String star;
     @ElementCollection(fetch = FetchType.LAZY)
-    @Column(length = 1000000)
+    @Column(length = 400000000)
     @JsonIgnore
     private List<byte[]> images;
     @Embedded
