@@ -18,91 +18,97 @@
         </ol>
     </section>
 
+
     <section class="content">
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="box">
-                    <div class="box-header">
-                        <h2 th:text="${pckg?.title}" class="title"></h2>
-                        <h5 th:if="${pckg?.date != null}" style="margin-top: 10px;" class="pull-right">
-                            <strong>Date: </strong>
-                            <span th:text="${pckg?.getReadableDate(pckg?.date)}"></span>
-                        </h5>
-                        <h4 th:text="${pckg?.shortTag}" style="color: grey; margin-top: 10px;"></h4>
-                        <h5 th:if="${pckg?.location != null}" style="margin-top: 10px;">
-                            <strong>Location: </strong>
-                            <span th:text="${pckg?.location}"></span>
-                            <span th:if="${pckg?.location?.toLowerCase().equals('combined')}">(See description for location)</span>
-                        </h5>
-                        <h5 th:if="${pckg?.price != null}" style="margin-top: 10px;">
-                            <strong>Price: </strong>
-                            ৳<span th:text="${pckg?.price}"></span>
-                        </h5>
-                        <h5 th:if="${pckg?.duration != null}" style="margin-top: 10px;">
-                            <strong>Duration: </strong>
-                            ৳<span th:text="${pckg?.duration}"></span>
-                        </h5>
-
-
-                    </div>
-                    <div class="box-body">
-                        <img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive"
-                             style="height: 300px; margin-right: 20px;margin-bottom: 20px;">
-                        <h5 th:if="${pckg?.timeDistribution != null}" style="margin-top: 10px;">
-                            <strong>Time Distribution</strong><br/>
-                            <span th:text="${pckg?.timeDistribution}"></span>
-                        </h5>
-                        <h5 th:if="${pckg?.include != null}" style="margin-top: 10px;">
-                            <strong>This Package includes</strong><br/>
-                            <span th:text="${pckg?.include}"></span>
-                        </h5>
-
-                        <h5 th:if="${pckg?.exclude != null}" style="margin-top: 10px;">
-                            <strong>This Package doesn't includes</strong><br/>
-                            <span th:text="${pckg?.exclude}"></span>
-                        </h5>
-
-
-                        <p th:text="${pckg?.description}" style="margin-top: 15px;"></p>
+        <div class="row package-page-row">
+            <div class="col-sm-8 package-page-components">
+                <div class="component-box">
+                    <div class="box-image">
+                        <img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="package-page-image" >
                     </div>
                 </div>
+                <div class="package-page-side-bar-title">
+                    <span class="headline" th:text="${pckg?.title}"></span>
+                    <strong>Duration: </strong>
+                    <span th:text="${pckg?.duration}"></span><br/>
+                    <strong>Price: </strong>
+                    ৳<span th:text="${pckg?.price}"></span>
+                </div>
+                <div class="component-box-body">
+                    <div class="component-box-body-title">
+                        Package Details
+                    </div>
+
+
+                    <h5 th:if="${pckg?.timeDistribution != null}" style="margin-top: 10px;">
+                        <strong>Time Distribution</strong><br/>
+                        <span th:text="${pckg?.timeDistribution}"></span>
+                    </h5>
+                    <h5 th:if="${pckg?.include != null}" style="margin-top: 10px;">
+                        <strong>This Package includes : </strong>
+                        <span th:text="${pckg?.include}"></span>
+                    </h5>
+
+                    <h5 th:if="${pckg?.exclude != null}" style="margin-top: 10px;">
+                        <strong>This Package doesn't includes : </strong>
+                        <span th:text="${pckg?.exclude}"></span>
+                    </h5>
+
+
+                    <h5 th:if="${pckg?.exclude != null}" style="margin-top: 10px;">
+                        <strong>Details : </strong>
+                        <span th:text="${pckg?.description}"></span>
+                    </h5>
+
+
+
+                </div>
+
             </div>
+            <div class="col-sm-4 ">
+                <div class="package-page-side-bar">
 
-            <div class="col-sm-4">
-                <div class="box box-widget widget-user" th:each="p: ${pckgList}">
-                    <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header bg-black"
-                         th:style="'background:url(' + @{/packages/image/}+${p?.id} + ') center center;'">
-                        <h3 class="widget-user-username" th:text="${p?.title}"
-                            style="color: #000; font-family: 'Arial Rounded MT Bold'"></h3>
-                        <h5 class="widget-user-desc" th:text="${p?.location}" style="color: #000;"></h5>
+                    <div class="package-page-side-bar-other-location">
+                        <span class="other-headline"><i class="fa fa-map-marker" aria-hidden="true"></i> You may also like</span>
+                    </div>
 
-                        <div class="col-sm-12">
-                            <a class="btn btn-primary pull-right" th:href="@{/packages/}+${p?.id}">Details</a>
-                        </div>
+                    <div class="other-package-box" th:each="p: ${pckgList}">
+                        <a th:href="@{/packages/}+${p?.id}">
+                            <div class="col-sm-4 other-package-image-container">
+                                <img th:src="@{/packages/image/}+${p?.id}" alt="" class="img-responsive " />
+                            </div>
+                            <div class="col-sm-8 other-package-text">
+                                <span class="headline" th:text="${p?.title}"></span>
+                                <span  th:text="${p?.duration}"></span>
+                            </div>
+                        </a>
                     </div>
                 </div>
+
+                <div class="clearfix"></div>
+
+                <div class="package-page-side-bar-title-gap" >  </div>
+                <div class="assistance-div">
+                    <div class="assistance-div-title">
+                        <i class="fa fa-phone-square" aria-hidden="true"></i>
+                        Need Help?
+                    </div>
+                    <div class="assistance-div-text">
+                        <a target="_self" data-action="url" class="moto-link" href="callto:#">
+                            <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; 01840477707
+                        </a> <br/>
+                        <a target="_self" data-action="url" class="moto-link" href="callto:#">
+                            <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; 01840477759
+                        </a> <br/>
+                        <a href="mailto:hotelswave@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i> hotelswave@gmail.com
+                        </a>
+                    </div>
+                </div>
+
+
             </div>
         </div>
-
-        <!--<div class="row">-->
-        <!--<div class="col-sm-8 col-sm-offset-2">-->
-        <!--<h2 th:text="${pckg?.title}" class="title"></h2>-->
-        <!--<h4>-->
-        <!--<span>Location: </span>-->
-        <!--<span th:text="${pckg?.location}"></span>-->
-        <!--</h4>-->
-        <!--<hr/>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-sm-8 col-sm-offset-2">-->
-        <!--<img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="img-responsive pull-left"-->
-        <!--style="width: 200px; margin-right: 20px;margin-bottom: 20px;">-->
-        <!--<p th:text="${pckg?.description}"></p>-->
-        <!--</div>-->
-        <!--</div>-->
-
     </section>
 
 </div>

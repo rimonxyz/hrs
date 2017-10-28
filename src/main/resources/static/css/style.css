@@ -4357,25 +4357,7 @@ i.mail {
     width: 100%;
 }
 
-@media (max-width: 768px) {
-    .hotel-page-pic-panel{
-        height: 200px;
-        margin-bottom: 20px;
-        margin-left: 0px;
-    }
-    .hotel-page-pic{
-        height: 200px;
-        width: 100%;
-    }
-    .carousel{
-        height: 200px;
-    }
-    .carousel-inner{
-        display: block;
-        float: left;
-        height: 200px;
-    }
-}
+
 
 .package-image{
     width: 100%;
@@ -4399,4 +4381,137 @@ i.mail {
 }
 .package-content{
     padding-bottom: 20px;
+}
+
+.package-page-row{
+}
+.package-page-components{
+    padding: 0px;
+    /*background;*/
+}
+.package-page-components .component-box {
+    border: 0px;
+    margin: 0;
+}
+.package-page-components .component-box .box-image{
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+
+}
+.package-page-components .package-page-image{
+    height: 300px;
+    width: 100%;
+}
+
+.package-page-components .component-box-body{
+    margin-top: 20px;
+    font-size: 16px;
+    background: white;
+}
+.package-page-components .component-box-body .component-box-body-title{
+    background: #0099cc;
+    min-height: 40px;
+    padding-left: 30px;
+    padding-top: 8px;
+    color: white;
+}
+
+.package-page-side-bar{
+    background-color: white;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 30px;
+}
+.package-page-side-bar-title{
+    font-size: 16px;
+    background-color: white;
+}
+.package-page-side-bar-title .headline{
+    display: block;
+    font-size: 30px;
+    padding-bottom: 7px;
+}
+
+.package-page-side-bar-other-location{
+
+}
+
+.package-page-side-bar-other-location .other-headline{
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.package-page-side-bar .other-package-box{
+    display: block;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #e3e3e3;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+}
+.other-package-box .other-package-image-container{
+    float: left;
+    padding: 0;
+}
+.other-package-box .other-package-text .headline{
+    display: block;
+    font-size: 20px;
+    color: black;
+}
+.other-package-box .other-package-text{
+    font-size: 16px;
+    color: red;
+}
+.package-page-side-bar-title-gap{
+    /*background-color: #ecf0f5;*/
+    /*margin-left: -15px;*/
+    /*margin-right: -15px;*/
+    min-height: 20px;
+}
+
+.assistance-div{
+    margin: 18px;
+    background-color: white;
+}
+
+.assistance-div .assistance-div-title{
+    text-align: center  ;
+    font-size: 24px;
+    font-weight: 100;
+    background-color: lightblue;
+}
+
+.assistance-div .assistance-div-text{
+    padding-left: 15px;
+    font-size: 20px;
+}
+@media (max-width: 768px) {
+    .hotel-page-pic-panel{
+        height: 200px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+    }
+    .hotel-page-pic{
+        height: 200px;
+        width: 100%;
+    }
+    .carousel{
+        height: 200px;
+    }
+    .carousel-inner{
+        display: block;
+        float: left;
+        height: 200px;
+    }
+    .package-page-components .package-page-image{
+        height: 180px;
+        width: 100%;
+    }
 }
