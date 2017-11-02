@@ -15,17 +15,6 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!--<section class="content-header">-->
-        <!--<h1>-->
-        <!--Dashboard-->
-        <!--<small>Control panel</small>-->
-        <!--</h1>-->
-        <!--<ol class="breadcrumb">-->
-        <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
-        <!--<li class="active">Dashboard</li>-->
-        <!--</ol>-->
-        <!--</section>-->
 
         <!-- Main content -->
         <section class="content">
@@ -64,14 +53,8 @@
     <div th:include="adminlte/fragments/footer"></div>
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark" th:if="${hotel != null and filterValue != null}">
-        <!-- Create the tabs -->
-        <!--<ul class="nav nav-tabs nav-justified control-sidebar-tabs">-->
-        <!--<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>-->
-        <!--<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>-->
-        <!--</ul>-->
-        <!-- Tab panes -->
-        <div class="tab-content">
 
+        <div class="tab-content">
             <div class="row" style="overflow-y: scroll; height:100vh;">
                 <div class="col-sm-12" th:each="room : ${hotel?.roomList}"
                      th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary">
@@ -129,12 +112,6 @@
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
-                                <!--<div class="col-sm-12">-->
-                                <!--<a th:onclick="'onRoomItemClick(this,\'' + ${room.id} + '\');'"-->
-                                <!--class="btn btn-link btn-block" id="openEditModalButton"-->
-                                <!--data-toggle="modal" data-target="#modal-edit-room"><b>Edit</b></a>-->
-                                <!--</div>-->
-                                <!-- /.col -->
                             </div>
                             <!-- /.row -->
                         </div>
@@ -143,13 +120,7 @@
                 </div>
             </div>
 
-            <!-- /.tab-pane -->
-            <!-- Stats tab content -->
             <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-            <!-- /.tab-pane -->
-            <!-- Settings tab content -->
-            <!--<div th:include="adminlte/fragments/settings_tab"></div>-->
-            <!-- /.tab-pane -->
         </div>
     </aside>
     <!-- /.control-sidebar -->

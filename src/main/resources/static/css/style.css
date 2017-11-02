@@ -83,7 +83,7 @@ a:focus, a:hover {
 
 .top {
 
-    border-bottom: 1px solid #bbb;
+    /*border-bottom: 1px solid #bbb;*/
     padding: 0px;
     /*padding: 25px;*/
 }
@@ -4148,12 +4148,12 @@ h2.resp-accordion {
 .footer-left li {
     display: block;
     font-size: 1em;
-    color: #92F9FF;
+    color: whitesmoke;
     line-height: 1.8em;
 }
 
 .footer li a {
-    color: #92F9FF;
+    color: whitesmoke;
     font-size: 1em;
     line-height: 1.8em;
     text-decoration: none;
@@ -4191,7 +4191,7 @@ i.mail {
     margin-top: 20px;
     font-size: 18px;
     text-align: center;
-    color: #92F9FF;
+    color: whitesmoke;
 }
 
 .footerName p a {
@@ -4357,27 +4357,55 @@ i.mail {
     width: 100%;
 }
 
-
+.cherry-box{
+    padding: 0;
+    border: 0;
+}
 
 .package-image{
     width: 100%;
-    height: 200px;
+    height: 220px;
 }
 .package-image-text{
     background-color: lightcyan;
     font-size: 20px;
-    padding: 12px 10px 8px;
+    padding: 12px 15px 8px;
     position: relative;
     overflow: hidden;
 
 }
+.package-image-text2{
+ float: right;
+    font-size: 15px;
+    color:grey;
+}
+.package-image-text-line2{
+    padding: 10px 0;
+}
 .package-image-title{
-    display: block;
-    font-size: 30px;
+    float: left;
+    /*display: block;*/
+    font-size: 16px;
+    font-weight: 800;
+    color: black;
 }
 .package-cost-text{
     float: right;
+    color: #4692e7;
     display: block;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+}
+.package-image-text-line3{
+    margin-top: -10px;
+    padding-bottom: 10px;
+}
+.package-duration-text{
+    margin-bottom: 9px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #777777;
 }
 .package-content{
     padding-bottom: 20px;
@@ -4408,12 +4436,14 @@ i.mail {
     margin-top: 20px;
     font-size: 16px;
     background: white;
+    padding-left: 15px;
 }
 .package-page-components .component-box-body .component-box-body-title{
     background: #0099cc;
     min-height: 40px;
     padding-left: 30px;
     padding-top: 8px;
+    margin-left: -15px;
     color: white;
 }
 
@@ -4423,11 +4453,12 @@ i.mail {
     margin-right: -15px;
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 30px;
+    /*margin-top: 30px;*/
 }
 .package-page-side-bar-title{
     font-size: 16px;
     background-color: white;
+    padding-left: 15px;
 }
 .package-page-side-bar-title .headline{
     display: block;
@@ -4436,6 +4467,8 @@ i.mail {
 }
 
 .package-page-side-bar-other-location{
+    padding-top: 15px;
+    padding-bottom: 20px;
 
 }
 
@@ -4449,7 +4482,7 @@ i.mail {
     float: left;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-top: 1px solid #e3e3e3;
+    /*border-top: 1px solid #e3e3e3;*/
     margin-left: -15px;
     margin-right: -15px;
     padding-left: 15px;
@@ -4467,7 +4500,7 @@ i.mail {
 }
 .other-package-box .other-package-text{
     font-size: 16px;
-    color: red;
+    color: #800909;
 }
 .package-page-side-bar-title-gap{
     /*background-color: #ecf0f5;*/
