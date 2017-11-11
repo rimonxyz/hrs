@@ -239,7 +239,7 @@
 
 
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx First pic and option  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div class="row" id = "first-pic-and-option">
+<div id = "first-pic-and-option">
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
@@ -626,7 +626,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <a th:if="${packageList!=null && packageList.size()>=3}"
-                           style="margin-bottom: 30px;margin-top: 30px;" class="btn btn-primary col-sm-offset-5"
+                           class="btn btn-primary package-button"
                            th:href="@{/packages/1}">See More Packages</a>
 
                     </div>
@@ -932,7 +932,7 @@
             </div>
             <!-- .tm_pb_menu_categories -->
             <a th:if="${offerList!=null && offerList.size()>=3}" style="margin-bottom: 30px;margin-top: 30px;"
-               class="btn btn-primary col-sm-offset-5" th:href="@{/}">See More Offers</a>
+               class="btn btn-primary package-button" th:href="@{/offers/1}">See More Offers</a>
 
 
         </div>
@@ -1063,37 +1063,37 @@
 
                     <div class="row">
 
-                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                        <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                                 <a>
                                     <img class="" src="" alt="" />
                                 </a>
                         </div>
 
-                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                        <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="//www.itaforu.com">
-                                    <img class="img-responsive" th:src="@{/images/partners/InteligentTouristAid.jpg}" style="width: 70%;float: right"/>
+                                    <img class="img-responsive intelligent-tourist-aid" th:src="@{/images/partners/InteligentTouristAid.jpg}"/>
                             </a>
                         </div>
 
-                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                        <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="#">
-                                    <img class="img-responsive" th:src="@{/images/partners/itours.jpg}" style="width=130%;padding-top: 50px;"/>
+                                    <img class="img-responsive i-tours" th:src="@{/images/partners/itours.jpg}" />
                             </a>
                         </div>
 
-                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                        <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="//www.itaforu.com">
-                                    <img class="img-responsive" th:src="@{/images/partners/seafoodbd.jpg}" style="padding-top: 0px;"/>
+                                    <img class="img-responsive sea-food-bd" th:src="@{/images/partners/seafoodbd.jpg}" />
                             </a>
                         </div>
 
-                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                        <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="//www.itaforu.com">
-                                    <img class="img-responsive" th:src="@{/images/partners/seaviewresort.jpg}" style="width: 80%;margin-top: -10px;"/>
+                                    <img class="img-responsive sea-view-resort" th:src="@{/images/partners/seaviewresort.jpg}" />
                             </a>
                         </div>
 
-                        <div class="tm_pb_column col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                        <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="">
                                     <img class="img-responsive" src="" alt=""/>
                             </a>
