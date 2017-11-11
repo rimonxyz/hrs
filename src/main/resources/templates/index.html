@@ -241,7 +241,7 @@
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx First pic and option  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "first-pic-and-option">
 
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding: 0;">
 
         <div class="tm_pb_slide tm_pb_bg_layout_light tm_pb_media_alignment_center tm_pb_slide_0 tm-pb-active-slide"
              style="background-color:#ffffff;background-image:url(./images/bed1.jpg);">
@@ -432,7 +432,7 @@
         <!--</div>-->
         <!--&lt;!&ndash; .tm_pb_row &ndash;&gt;-->
     <!--</div>-->
-    <div class="row " id="ourServices">
+    <div class="row " id="ourServices" style="margin: 0;">
         <div class="container">
             <div class="row row-edge row-style-light">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -568,9 +568,9 @@
 
 
 <!-- packages -->
-<div class="row" id="packages">
+<div id="packages">
     <div class="container" style="padding-top: 60px;padding-bottom: 50px;">
-        <div class="row " id="ourPackages">
+        <div class="row " id="ourPackages" style="margin: 0;">
             <div class="container">
                 <div class="row row-edge row-style-light">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -886,10 +886,10 @@
 
 <!-- special offers -->
 <div class="container">
-    <div class=" row" style="padding-top: 50px;padding-bottom: 50px;">
+    <div class="row" style="padding-top: 50px;padding-bottom: 50px; margin: 0;">
         <div class="col-xl-12">
 
-            <div class="row " id="specialOffers">
+            <div class="row " id="specialOffers" style="margin: 0;">
                 <div class="container">
                     <div class="row row-edge row-style-light">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -944,8 +944,8 @@
 
 
 <!-- FOLLOW US -->
-<div class="row well well__ins4 bg-5 text-center  cherry-box">
-    <div class="   box-989">
+<div class="well__ins4 bg-5 text-center  cherry-box">
+    <div class=box-989">
         <div class="inner">
             <div class="container-fluid">
                 <div class="row row-edge row-style-dark">
@@ -1123,7 +1123,7 @@
 <!-- News letter -->
 <div class="tm_pb_news">
 
-    <div class="row">
+    <div class="row" style="margin: 0;">
 
         <div class="tm_pb_column tm_pb_column_4_4  tm_pb_column_11 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
 
@@ -1185,7 +1185,7 @@
 </div>
 <!-- End News letter -->
 <!-- location and map -->
-<div class="row">
+<div class="row" style="margin:0;">
 
     <div class="col-md-6 contact-left">
         <div class="tm_pb_column tm_pb_column_4_4 tm_pb_column_inner  tm_pb_column_inner_0 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
@@ -1281,7 +1281,6 @@
             if ($(this).scrollTop() >= clientHeight) {
                 // $('nav.navbar-default').addClass('stickytop');
                 $("#first-pic-and-option").css( { marginTop : "50px" } );
-
                 $('div.header').addClass('stickytop');
             }
             else {

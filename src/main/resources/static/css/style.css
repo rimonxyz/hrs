@@ -4535,6 +4535,9 @@ i.mail {
     margin-top: -10px;
 }
 @media (max-width: 768px) {
+    body{
+        overflow-x: hidden;
+    }
     .hotel-page-pic-panel{
         height: 200px;
         margin-bottom: 20px;
@@ -4577,6 +4580,7 @@ i.mail {
         width: 100%;
         margin-top: 0;
     }
+
 }
 
 

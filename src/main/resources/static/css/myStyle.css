@@ -714,6 +714,8 @@ h1, .h1-style {
     margin: 0 -5px -5px;
     font-size: 112.5%;
     color: black;
+    float: left;
+    margin: auto;
 }
 
 .subscribe-block__input-wrap {
@@ -837,6 +839,18 @@ h4, .h4-style {
         padding-left: 15px;
     }
 
+}
+@media (max-width: 768px) {
+    .subscribe-block__submit{
+        padding: 1rem 10px 1.5rem;
+    }
+    .widget-subscribe .subscribe-block__input-wrap i + .subscribe-block__input[type="email"]{
+        padding: 0.944rem 10px 0.9167rem;
+    }
+    .subscribe-block__input-wrap{
+        margin: 5px 0 0;
+
+    }
 }
 
 /*@media screen and (max-width: 576px) {*/
