@@ -411,10 +411,10 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
     border: none;
 }
 
-.cherry-follow_item:first-child {
-    margin-right: 25px;
-    margin-left: 25px;
-}
+/*.cherry-follow_item:first-child {*/
+    /*margin-right: 25px;*/
+    /*margin-left: 25px;*/
+/*}*/
 
 /*@media screen and (max-width: 768px) {*/
 /*.cherry-follow_item:first-child {*/
@@ -422,22 +422,30 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
 /*}*/
 /*}*/
 .cherry-follow_item {
-    display: block;
+    display:inline-block;
     float: left;
-    margin: 0 0 0 5px;
-    padding: 0;
     border: none;
+    width:16.667%;
+    padding: 10px 20px;
 }
-
+@media screen and (max-width: 768px) {
+    .cherry-follow_item {
+        display:inline-block;
+        float: left;
+        border: none;
+        width:50%;
+        padding: 10px 20px;
+    }
+}
 .social-list li .cherry-follow_label {
     color: #fff;
 }
 
-.social-list li + li {
-    margin-right: 25px;
-    margin-left: 25px;
+/*.social-list li + li {*/
+    /*margin-right: 25px;*/
+    /*margin-left: 25px;*/
 
-}
+/*}*/
 
 .social-list li .cherry-follow_label {
     font: 500 30px/32px 'Roboto', sans-serif !important;
@@ -706,6 +714,8 @@ h1, .h1-style {
     margin: 0 -5px -5px;
     font-size: 112.5%;
     color: black;
+    float: left;
+    margin: auto;
 }
 
 .subscribe-block__input-wrap {
@@ -796,6 +806,19 @@ h4, .h4-style {
     border-radius: 6px;
     margin-left: 30px;
 }
+
+.package-button{
+    width: 300px;
+    margin: 10px auto;
+    display: block;
+}
+
+@media screen and (max-width: 767px){
+    .package-button{
+        width: 70%;
+    }
+}
+
 @media screen and (max-width: 445px) {
     .sloganText {
         font-size: 18px;
@@ -816,6 +839,18 @@ h4, .h4-style {
         padding-left: 15px;
     }
 
+}
+@media (max-width: 768px) {
+    .subscribe-block__submit{
+        padding: 1rem 10px 1.5rem;
+    }
+    .widget-subscribe .subscribe-block__input-wrap i + .subscribe-block__input[type="email"]{
+        padding: 0.944rem 10px 0.9167rem;
+    }
+    .subscribe-block__input-wrap{
+        margin: 5px 0 0;
+
+    }
 }
 
 /*@media screen and (max-width: 576px) {*/
