@@ -57,7 +57,7 @@ public class InvoiceController {
         return "adminlte/fragments/booking/invoice";
     }
 
-    @PostMapping("/{invoiceId}/payment/success")
+    @RequestMapping(value = "/{invoiceId}/payment/success", method = {RequestMethod.GET, RequestMethod.POST})
     private String paymentSuccess(@CurrentUser User currentUser,
                                   @PathVariable("invoiceId") Long invoiceId,
                                   @ModelAttribute PaymentInfo paymentInfo, BindingResult bindingResult) {
