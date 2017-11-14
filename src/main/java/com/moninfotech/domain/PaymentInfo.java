@@ -50,7 +50,8 @@ public class PaymentInfo extends BaseEntity {
     }
 
     public boolean isValid() {
-        if (!this.status.equals(Status.VALID))
+        System.out.println(this);
+        if (!Status.VALID.equals(this.status))
             return false;
 
         String valString = this.tran_id + "SAyEM" + this.getAmount().intValue();
