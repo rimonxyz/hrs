@@ -1,6 +1,6 @@
 package com.moninfotech.commons.utils;
 
-import com.moninfotech.exceptions.NullPasswordException;
+import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -18,7 +18,7 @@ public class PasswordUtil {
         return new BCryptPasswordEncoder();
     }
 
-    public static String encryptPassword(String password, EncType encryptType, String salt) throws Exception {
+    public static String encryptPassword(String password, EncType encryptType, String salt) throws Exception, NullPasswordException {
         if (password == null) throw new NullPasswordException("Password can not be empty!");
         if (encryptType.equals(EncType.SHA_ENCODER))
             return getShaPasswordEncoder().encodePassword(password, salt);

@@ -1,10 +1,9 @@
 package com.moninfotech.exceptions.handler;
 
 import com.moninfotech.exceptions.NotFoundException;
-import com.moninfotech.exceptions.NullPasswordException;
+import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.moninfotech.exceptions.UserAlreadyExistsException;
 import com.mysql.jdbc.PacketTooBigException;
-import org.apache.tomcat.util.http.fileupload.FileUploadBase;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MultipartException;

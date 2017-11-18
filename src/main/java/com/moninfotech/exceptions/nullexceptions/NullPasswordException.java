@@ -1,6 +1,6 @@
-package com.moninfotech.exceptions;
+package com.moninfotech.exceptions.nullexceptions;
 
-public class NullPasswordException extends Exception{
+public class NullPasswordException extends NullObjectException{
     private String message;
 
     public NullPasswordException(){}

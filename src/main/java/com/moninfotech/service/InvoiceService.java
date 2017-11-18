@@ -2,6 +2,7 @@ package com.moninfotech.service;
 
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.Invoice;
+import com.moninfotech.domain.PaymentInfo;
 import com.moninfotech.domain.User;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface InvoiceService {
 
     Invoice findByBooking(Booking booking);
 
+    Invoice setInvoicePaid(Invoice invoice, PaymentInfo paymentInfo);
 }

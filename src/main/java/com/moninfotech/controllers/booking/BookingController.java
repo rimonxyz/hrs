@@ -11,6 +11,7 @@ import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.config.security.SecurityConfig;
 import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
+import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -218,7 +219,7 @@ public class BookingController {
     }
 
     @PostMapping("/tempRegister")
-    private String tempRegister(@ModelAttribute User user, BindingResult bindingResult) throws Exception {
+    private String tempRegister(@ModelAttribute User user, BindingResult bindingResult) throws Exception, NullPasswordException {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
         // check if user already exists
         if (this.userService.findByEmail(user.getEmail()) != null)

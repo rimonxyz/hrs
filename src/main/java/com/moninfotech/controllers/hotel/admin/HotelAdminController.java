@@ -10,6 +10,7 @@ import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
+import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.moninfotech.logger.Log;
 import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.HotelService;
@@ -90,7 +91,7 @@ public class HotelAdminController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     String create(@ModelAttribute Hotel hotel, BindingResult bindingResult,
                   @RequestParam(value = "userId", required = false) Long userId,
-                  @RequestParam("images") MultipartFile[] multipartFiles) throws Exception {
+                  @RequestParam("images") MultipartFile[] multipartFiles) throws Exception, NullPasswordException {
         if (bindingResult.hasErrors())
             System.out.print("Binding ERROR: " + bindingResult.toString());
         // set image to the hotel entity if it's valid.

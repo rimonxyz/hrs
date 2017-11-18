@@ -52,9 +52,22 @@ public class InvoiceController {
         else invoice = new Invoice(nextDay(), currentUser, booking);
         invoice = this.invoiceService.save(invoice);
 
+        // set invoice already paid for super admin, hotel admin and agents
+        if (isAllowedForOfflineBooking(currentUser, invoice))
+            invoice = this.invoiceService.setInvoicePaid(invoice, null);
+
         model.addAttribute("invoice", invoice);
 //        model.addAttribute("template", "fragments/booking/invoice");
         return "adminlte/fragments/booking/invoice";
+    }
+
+    private boolean isAllowedForOfflineBooking(User currentUser, Invoice invoice) {
+        boolean isSuperAdmin = currentUser.hasAssignedRole(Constants.Roles.ROLE_ADMIN);
+        boolean isAgent = currentUser.hasAssignedRole(Constants.Roles.ROLE_AGENT);
+        boolean isHotelAdminAndSelfHotelBooking = currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)
+                && invoice.getBooking().getHotel().getUser().getId().equals(currentUser.getId());
+        return isSuperAdmin || isAgent || isHotelAdminAndSelfHotelBooking;
+
     }
 
     @RequestMapping(value = "/{invoiceId}/payment/success", method = {RequestMethod.GET, RequestMethod.POST})
@@ -71,13 +84,8 @@ public class InvoiceController {
 
         if (!invoice.getBooking().getUser().getId().equals(currentUser.getId()))
             return "redirect:/invoices/generate/" + invoice.getBooking().getId() + "?messageinfo=You can't pay for others lol!";
-        invoice.getBooking().getTransaction().setSuccess(true);
-        invoice.setPaid(invoice.getBooking().getTransaction().isSuccess());
-        invoice = this.invoiceService.save(invoice);
 
-        // save payment info
-        paymentInfo.setTransaction(invoice.getBooking().getTransaction());
-        this.paymentInfoService.save(paymentInfo);
+        invoice = this.invoiceService.setInvoicePaid(invoice, paymentInfo);
 
         return "redirect:/invoices/generate/" + invoice.getBooking().getId() + "?messagesuccess=Payment Successful!";
     }
