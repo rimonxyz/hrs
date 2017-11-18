@@ -1,6 +1,8 @@
 package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.moninfotech.commons.Constants;
+import com.moninfotech.exceptions.nullexceptions.NullObjectException;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +24,7 @@ public class User extends BaseEntity implements UserDetails {
     @NotNull
     @NotEmpty
     private String name;
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     @NotNull
     @Email
     private String email;
@@ -47,8 +49,8 @@ public class User extends BaseEntity implements UserDetails {
     private boolean credentialsNonExpired = true;
 
 
-    public void grantRole(String role){
-        if (this.roles==null) roles = new ArrayList<>();
+    public void grantRole(String role) {
+        if (this.roles == null) roles = new ArrayList<>();
         this.roles.add(role);
     }
 
@@ -165,6 +167,11 @@ public class User extends BaseEntity implements UserDetails {
                 return true;
         }
         return false;
+    }
+
+    public boolean isOnlyUser() {
+        if (this.roles == null) this.roles = new ArrayList<>();
+        return hasAssignedRole(Constants.Roles.ROLE_USER) && roles.size() == 1;
     }
 
     @Override

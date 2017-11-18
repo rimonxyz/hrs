@@ -209,6 +209,10 @@ public class BookingServiceImpl implements BookingService {
         for (Booking booking : bookingList) {
             // filter booking by role
             if (booking.getUser().hasAssignedRole(analFlagRole)) {
+                // check if only user
+                // skip for role_user if user has more than one role
+                if (analFlagRole.equals(Constants.Roles.ROLE_USER) && !booking.getUser().isOnlyUser())
+                    continue;
                 if (DateUtils.isSameDay(booking.getCreated(), date))
                     roomList.addAll(booking.getRoomList());
             }
@@ -234,6 +238,10 @@ public class BookingServiceImpl implements BookingService {
         for (Booking booking : bookingList) {
             // filter booking by role
             if (booking.getUser().hasAssignedRole(analFlagRole)) {
+                // check if only user
+                // skip for role_user if user has more than one role
+                if (analFlagRole.equals(Constants.Roles.ROLE_USER) && !booking.getUser().isOnlyUser())
+                    continue;
                 List<Room> roomList = booking.getRoomList();
                 List<Date> bookingDateList = booking.getBookingDateList();
                 for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++) {

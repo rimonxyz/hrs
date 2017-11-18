@@ -119,11 +119,13 @@
                     <li sec:authorize="hasRole('ROLE_HOTEL_ADMIN')">
                         <a th:href="@{/bookings}"><i class="fa fa-circle-o"></i>Bookings on my Hotel</a>
                         <a th:href="@{/bookings?analFlagRole=ROLE_HOTEL_ADMIN}"><i class="fa fa-circle-o"></i>Offline Bookings</a>
+                        <a th:href="@{/bookings?analFlagRole=ROLE_AGENT}"><i class="fa fa-circle-o"></i>Agent Bookings</a>
                         <a th:href="@{/bookings?analFlagRole=ROLE_ADMIN}"><i class="fa fa-circle-o"></i>Admin Bookings</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')">
                         <a th:href="@{/bookings}"><i class="fa fa-circle-o"></i>Online Bookings</a>
                         <a th:href="@{/bookings?analFlagRole=ROLE_HOTEL_ADMIN}"><i class="fa fa-circle-o"></i>Hotel Admin Bookings</a>
+                        <a th:href="@{/bookings?analFlagRole=ROLE_AGENT}"><i class="fa fa-circle-o"></i>Agent Bookings</a>
                         <a th:href="@{/bookings?analFlagRole=ROLE_ADMIN}"><i class="fa fa-circle-o"></i>Super Admin Bookings</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_USER')">
