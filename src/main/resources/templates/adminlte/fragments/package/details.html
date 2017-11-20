@@ -29,7 +29,7 @@
                 </div>
                 <div class="package-page-side-bar-title">
                     <span class="headline" th:text="${pckg?.title}"></span>
-                    <strong>Duration: </strong>
+                    <strong th:if="${pckg?.duration !=null and !pckg?.duration?.empty}">Duration: </strong>
                     <span th:text="${pckg?.duration}"></span><br/>
                     <strong>Price: </strong>
                     ৳<span th:text="${pckg?.price}"></span>
@@ -40,22 +40,22 @@
                     </div>
 
 
-                    <h5 th:if="${pckg?.timeDistribution != null}" style="margin-top: 10px;">
+                    <h5 th:if="${pckg?.timeDistribution != null and !pckg?.timeDistribution?.empty}" style="margin-top: 10px;">
                         <strong>Time Distribution</strong><br/>
                         <span th:text="${pckg?.timeDistribution}"></span>
                     </h5>
-                    <h5 th:if="${pckg?.include != null}" style="margin-top: 10px;">
+                    <h5 th:if="${pckg?.include != null and !pckg?.include?.empty}" style="margin-top: 10px;">
                         <strong>This Package includes : </strong>
                         <span th:text="${pckg?.include}"></span>
                     </h5>
 
-                    <h5 th:if="${pckg?.exclude != null}" style="margin-top: 10px;">
+                    <h5 th:if="${pckg?.exclude != null and !pckg?.exclude?.empty}" style="margin-top: 10px;">
                         <strong>This Package doesn't includes : </strong>
                         <span th:text="${pckg?.exclude}"></span>
                     </h5>
 
 
-                    <h5 th:if="${pckg?.exclude != null}" style="margin-top: 10px;">
+                    <h5 th:if="${pckg?.exclude != null and !pckg?.exclude?.empty}" style="margin-top: 10px;">
                         <strong>Details : </strong>
                         <span th:text="${pckg?.description}"></span>
                     </h5>

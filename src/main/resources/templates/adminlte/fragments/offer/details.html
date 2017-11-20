@@ -29,7 +29,7 @@
                             <span th:text="${offer?.getReadableDate(offer?.date)}"></span>
                         </h5>
                         <h4 th:text="${offer?.shortTag}" style="color: grey; margin-top: 10px;"></h4>
-                        <h5 th:if="${offer?.location != null}" style="margin-top: 10px;">
+                        <h5 th:if="${offer?.location != null and !offer?.location?.empty}" style="margin-top: 10px;">
                             <strong>Location: </strong>
                             <span th:text="${offer?.location}"></span>
                         </h5>
@@ -37,9 +37,9 @@
                             <strong>Price: </strong>
                             ৳<span th:text="${offer?.price}"></span>
                         </h5>
-                        <h5 th:if="${offer?.duration != null}" style="margin-top: 10px;">
+                        <h5 th:if="${offer?.duration != null and !offer?.duration?.empty }" style="margin-top: 10px;">
                             <strong>Duration: </strong>
-                            ৳<span th:text="${offer?.duration}"></span>
+                            <span th:text="${offer?.duration}"></span>
                         </h5>
 
 
@@ -47,16 +47,16 @@
                     <div class="box-body">
                         <img th:src="@{/offers/image/}+${offer?.id}" th:alt="${offer?.title}" class="img-responsive"
                              style="height: 300px; margin-right: 20px;margin-bottom: 20px;">
-                        <h5 th:if="${offer?.timeDistribution != null}" style="margin-top: 10px;">
+                        <h5 th:if="${offer?.timeDistribution != null and !offer?.timeDistribution?.empty}" style="margin-top: 10px;">
                             <strong>Time Distribution</strong><br/>
                             <span th:text="${offer?.timeDistribution}"></span>
                         </h5>
-                        <h5 th:if="${offer?.include != null}" style="margin-top: 10px;">
+                        <h5 th:if="${offer?.include != null and !offer?.include?.empty}" style="margin-top: 10px;">
                             <strong>This Offer includes</strong><br/>
                             <span th:text="${offer?.include}"></span>
                         </h5>
 
-                        <h5 th:if="${offer?.exclude != null}" style="margin-top: 10px;">
+                        <h5 th:if="${offer?.exclude != null and !offer?.exclude?.empty}" style="margin-top: 10px;">
                             <strong>This Offer doesn't includes</strong><br/>
                             <span th:text="${offer?.exclude}"></span>
                         </h5>
