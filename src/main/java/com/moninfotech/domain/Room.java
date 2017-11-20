@@ -311,21 +311,6 @@ public class Room extends BaseEntity {
         this.bookingList = bookingList;
     }
 
-    @Override
-    public String toString() {
-        return "Room{" +
-                "roomNumber='" + roomNumber + '\'' +
-                ", category=" + category +
-                ", price=" + price +
-                ", images=" + images +
-                ", discount=" + discount +
-                ", discounted=" + discounted +
-                ", floorNumber=" + floorNumber +
-                ", bookingList=" + bookingList +
-                ", hotel=" + hotel +
-                "} " + super.toString();
-    }
-
     public Map<Date, Integer> getDiscountMap() {
         return discountMap;
     }

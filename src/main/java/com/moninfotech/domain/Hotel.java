@@ -19,6 +19,8 @@ public class Hotel extends BaseEntity {
     private String phoneNumber;
     private String type;
     private String star;
+    private boolean enabled;
+
     @ElementCollection(fetch = FetchType.LAZY)
     @Column(length = 83886080)
     @JsonIgnore
@@ -41,12 +43,13 @@ public class Hotel extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-    public HotelFacilities getFacilities() {
-        return facilities;
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setFacilities(HotelFacilities facilities) {
-        this.facilities = facilities;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public static final class Type {
@@ -189,19 +192,12 @@ public class Hotel extends BaseEntity {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Hotel{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", type='" + type + '\'' +
-                ", star=" + star +
-                ", address=" + address +
-                ", roomList=" + roomList +
-                ", reviewList=" + reviewList +
-                ", bookingList=" + bookingList +
-                ", user=" + user +
-                '}';
+    public HotelFacilities getFacilities() {
+        return facilities;
     }
+
+    public void setFacilities(HotelFacilities facilities) {
+        this.facilities = facilities;
+    }
+
 }

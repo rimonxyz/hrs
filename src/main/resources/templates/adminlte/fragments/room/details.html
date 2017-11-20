@@ -512,8 +512,11 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <a id="addToCart" class="btn btn-lg btn-block btn-warning"
+                                    <a th:if="${room?.hotel?.isEnabled()}" id="addToCart" class="btn btn-lg btn-block btn-warning"
                                        th:href="@{/bookings/cart/add/}+${room?.id}+@{/(date=${date})}">Add to Cart!</a>
+                                    <a th:if="${!room?.hotel?.isEnabled()}" id="addToCart" class="btn btn-lg btn-block btn-warning">
+                                        Call for Booking
+                                    </a>
                                 </div>
                             </div>
                         </div>

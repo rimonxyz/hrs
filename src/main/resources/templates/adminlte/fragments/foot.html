@@ -565,6 +565,7 @@
                 $("#phoneNumberEdit").val(result.phoneNumber);
                 $("#descriptionEdit").val(result.description);
                 $("#userIdEdit").val(result.user.id);
+                $("#enableBookingEdit").prop("checked",result.enabled);
                 // facilities
                 $("#restaurantEdit").prop("checked",result.facilities.restaurant);
                 $("#liftEdit").prop("checked",result.facilities.lift);
