@@ -25,6 +25,14 @@
                         <ul class="nav nav-stacked">
                             <li><a href="#" th:text="${hotel?.description}">Projects <span
                                     class="pull-right badge bg-blue">31</span></a></li>
+                            <li>
+                                <a href="#">Hotel Status
+                                    <span class="pull-right">
+                                        <span th:if="${hotel?.enabled}"><i class="fa fa-circle text-success"></i> Online</span>
+                                        <span th:if="${!hotel?.enabled}"><i class="fa fa-circle text-danger"></i> Offline</span>
+                                    </span>
+                                </a>
+                            </li>
                             <li><a href="#"><span class="pull-left badge bg-aqua" id="star"
                                                   th:text="${hotel?.star}"></span><span>&nbsp; &nbsp;Star Hotel</span></a>
                             </li>
@@ -67,7 +75,7 @@
                         </ul>
                     </div>
                 </div>
-01945 838 474
+
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3>User Reviews</h3>
@@ -260,7 +268,13 @@
                                    class="btn btn-lg btn-block btn-danger"><i class="glyphicon glyphicon-shopping-cart"></i>CLEAR
                                     ITEMS</a>
                             </div>
-                            <div class="col-sm-4"></div>
+                            <div class="col-sm-4">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <br/>
+                                    <span th:if="${hotel?.enabled}">Hotel Status: <i class="fa fa-circle text-success"></i> Online</span>
+                                    <span th:if="${!hotel?.enabled}">Hotel Status: <i class="fa fa-circle text-danger"></i> Offline</span>
+                                </div>
+                            </div>
                             <div style="padding: 10px;" class="col-sm-4">
                                 <!--<div th:include="fragments/booking-modal"></div>-->
                                 <a id="checkoutButton" hidden="hidden" th:href="@{/bookings/checkout}"
@@ -276,6 +290,7 @@
                                            th:value="${filterValue}"></input>
                                     <input type="hidden" name="categoryFilter" th:value="${categoryFilter}">
                                 </form>
+                                <span style="color: darkgreen;padding-left: 10px;">Find rooms by date</span>
                             </div>
                             <div class="panel-heading col-sm-6">
                                 <form class="form" th:action="@{/hotels/}+${hotel?.id}" method="get">
@@ -283,6 +298,7 @@
                                     <input name="value" type="hidden" th:value="${filterValue}"></input>
                                     <input class="form-control" name="q" type="text" placeholder="Search by room number"></input>
                                 </form>
+                                <span class="col-sm-2 col-sm-offset-5">...</span>
                             </div>
                             <div class="panel-heading col-sm-3">
                                 <form class="form" th:action="@{/hotels/}+${hotel?.id}" id="catFilterForm" method="get">
@@ -293,6 +309,7 @@
                                         <option th:each="category: ${categoryList}" th:text="${category?.name}"
                                                 th:selected="${categoryFilter?.equals(category?.name)}"></option>
                                     </select>
+                                    <span style="color: darkgreen;padding-left: 10px;">Find rooms by category</span>
                                 </form>
                             </div>
                         </div>
@@ -304,6 +321,11 @@
 
                 <!--ROOM LIST-->
                 <div class="row">
+                    <div th:if="${!hotel?.enabled}" class="col-sm-8 col-sm-offset-2">
+                        <span style="color: red;font-size: 20px;">You can't book rooms in this hotel online. Please call for booking!</span>
+                        <br/><br/>
+                    </div>
+
                     <div class="col-md-3" th:each="room : ${roomList}"
                          th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary"
                          th:hidden="${('category'.equals(filterType) and !bookedIds?.contains(room?.id)) or room?.archived}">
