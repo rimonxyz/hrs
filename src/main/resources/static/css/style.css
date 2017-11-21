@@ -4230,7 +4230,19 @@ i.mail {
 
 
 
-
+#whyUs{
+    padding-top: 40px;
+}
+.our-partners{
+    padding-top: 40px;
+    height: 350px;
+}
+@media (max-width: 768px) {
+    .our-partners{
+        padding-top: 10px;
+        height: auto;
+    }
+}
 
 .whyHotelsWeb {
     font-family: "Segoe UI", Arial, sans-serif;
@@ -4341,9 +4353,9 @@ i.mail {
 }
 
 .hotel-page-pic-panel{
-    height: 400px;
+    height: 440px;
     margin-bottom: 50px;
-    margin-left: 15px;
+    /*margin-left: 15px;*/
 }
 
 .hotel-page-pic{
@@ -4534,6 +4546,10 @@ i.mail {
     width: 80%;
     margin-top: -10px;
 }
+.hotel-detail-carousel{
+    height: 440px!important;
+    width: 100%;
+}
 @media (max-width: 768px) {
     body{
         overflow-x: hidden;
@@ -4580,7 +4596,13 @@ i.mail {
         width: 100%;
         margin-top: 0;
     }
-
+    .hotel-detail-carousel{
+        height: 20  0px;
+        width: 100%;
+    }
+    .resp-tabs-list{
+        display: none;
+    }
 }
 
 

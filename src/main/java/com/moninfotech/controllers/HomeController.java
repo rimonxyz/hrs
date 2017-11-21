@@ -80,6 +80,13 @@ public class HomeController {
         model.addAttribute("offerList", this.offerService.findAll(0, 3));
         return "index";
     }
+    @GetMapping("/test")
+    private String testPage(Model model){
+        model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
+        model.addAttribute("packageList", this.packageService.findAll(0, 3));
+        model.addAttribute("offerList", this.offerService.findAll(0, 3));
+        return "test";
+    }
 
     @GetMapping("/dashboard")
     private String dashboard(@CurrentUser User currentUser,
