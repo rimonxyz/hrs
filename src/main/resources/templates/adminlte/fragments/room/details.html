@@ -207,6 +207,7 @@
                             <input name="filterType" type="hidden" th:value="date"></input>
                             <input class="form-control" name="value" type="date" id="dateFilter"
                                    th:value="${date}"></input>
+                            <span style="color: darkgreen;padding-left: 10px;">Search by date</span>
                         </form>
                     </div>
                     <!--<div class="panel-heading col-sm-6">-->
@@ -216,11 +217,14 @@
                     <!--</div>-->
                     <div class="panel-heading col-sm-3 pull-right">
                         <form class="form" th:action="@{/hotels/}+${room?.hotel?.id}" id="catFilterForm" method="get">
-                            <input name="filterType" type="hidden" th:value="category"></input>
-                            <select class="form-control" name="value" id="categoryFilter">
+                            <input name="filterType" type="hidden" th:value="date"></input>
+                            <input name="value" type="hidden" th:value="${filterValue}"></input>
+                            <select class="form-control" name="categoryFilter" id="categoryFilter">
+                                <option>All</option>
                                 <option th:each="category: ${categoryList}" th:text="${category?.name}"
-                                        th:selected="${room?.category?.name?.equals(category?.name)}"></option>
+                                        th:selected="${categoryFilter?.equals(category?.name)}"></option>
                             </select>
+                            <span style="color: darkgreen;padding-left: 10px;">Filter by category</span>
                         </form>
                     </div>
                 </div>
