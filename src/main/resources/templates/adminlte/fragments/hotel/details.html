@@ -207,10 +207,14 @@
                     </div>
                     <!--end all room number-->
 
-                    <div sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
-                        <p hidden="hidden" id="mapSource" th:text="${hotel?.address?.mapDirectionFrom}">Coxs Bazar</p>
-                        <p hidden="hidden" id="mapDestination" th:text="${hotel?.address?.getCommaSeperatedString()}"></p>
-                        <iframe id="directionMap" class="col-sm-12" height="290"></iframe>
+                    <div sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')" class="row col-sm-12" style="margin-left: 5px;">
+                        <div class="box box-primary">
+                            <div class="box-body">
+                                <p hidden="hidden" id="mapSource" th:text="${hotel?.address?.mapDirectionFrom}">Coxs Bazar</p>
+                                <p hidden="hidden" id="mapDestination" th:text="${hotel?.address?.getCommaSeperatedString()}"></p>
+                                <iframe id="directionMap" class="col-sm-12" height="290"></iframe>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--BOOKING SESSION ITEMS-->
