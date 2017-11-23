@@ -1,6 +1,6 @@
 package com.moninfotech.commons.pojo;
 
-import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.Room;
 

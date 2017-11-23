@@ -1,12 +1,9 @@
 package com.moninfotech.controllers.booking;
 
-import com.moninfotech.commons.Config;
 import com.moninfotech.commons.Constants;
-import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.SessionAttr;
-import com.moninfotech.commons.pojo.Analytics;
 import com.moninfotech.commons.pojo.BookingHelper;
-import com.moninfotech.commons.pojo.Roles;
 import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.config.security.SecurityConfig;
 import com.moninfotech.domain.*;

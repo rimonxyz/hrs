@@ -2,7 +2,6 @@ package com.moninfotech.controllers;
 
 import com.moninfotech.commons.Config;
 import com.moninfotech.commons.Constants;
-import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.BookingHelper;
 import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.domain.*;
@@ -11,20 +10,17 @@ import com.moninfotech.exceptions.NotFoundException;
 import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.moninfotech.repository.SubscriberRepository;
 import com.moninfotech.service.*;
-import com.moninfotech.utils.Validator;
+import com.moninfotech.commons.validators.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by sayemkcn on 3/26/17.

@@ -82,6 +82,13 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <!--GRAPHICS-->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>[0.4, 0.5)</version>
+        </dependency>
+
         <!--TEST-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

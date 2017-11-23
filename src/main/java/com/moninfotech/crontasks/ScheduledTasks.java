@@ -1,6 +1,6 @@
 package com.moninfotech.crontasks;
 
-import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.domain.Activity;
 import com.moninfotech.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;

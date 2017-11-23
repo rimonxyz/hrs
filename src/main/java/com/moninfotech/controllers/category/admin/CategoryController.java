@@ -1,8 +1,7 @@
 package com.moninfotech.controllers.category.admin;
 
-import com.moninfotech.commons.FileIO;
+import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.domain.Category;
-import com.moninfotech.domain.Facilities;
 import com.moninfotech.domain.Room;
 import com.moninfotech.logger.Log;
 import com.moninfotech.service.CategoryService;

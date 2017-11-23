@@ -7,7 +7,6 @@ import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.repository.HotelRepository;
 import com.moninfotech.service.HotelService;
-import com.moninfotech.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

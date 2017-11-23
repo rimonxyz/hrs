@@ -1,4 +1,4 @@
-package com.moninfotech.utils;
+package com.moninfotech.commons.validators;
 
 import org.springframework.stereotype.Component;
 

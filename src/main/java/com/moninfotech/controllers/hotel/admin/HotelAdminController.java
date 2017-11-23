@@ -1,11 +1,10 @@
 package com.moninfotech.controllers.hotel.admin;
 
 import com.moninfotech.commons.Constants;
-import com.moninfotech.commons.DateUtils;
-import com.moninfotech.commons.FileIO;
+import com.moninfotech.commons.utils.DateUtils;
+import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.FilterType;
-import com.moninfotech.commons.pojo.Roles;
 import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
@@ -16,10 +15,7 @@ import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.HotelService;
 import com.moninfotech.service.RoomService;
 import com.moninfotech.service.UserService;
-import com.moninfotech.utils.ImageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

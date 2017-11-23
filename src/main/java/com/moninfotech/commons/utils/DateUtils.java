@@ -1,4 +1,4 @@
-package com.moninfotech.commons;
+package com.moninfotech.commons.utils;
 
 import org.springframework.stereotype.Component;
 

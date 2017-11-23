@@ -2,7 +2,7 @@ package com.moninfotech.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.moninfotech.commons.Constants;
-import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.utils.DateUtils;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 

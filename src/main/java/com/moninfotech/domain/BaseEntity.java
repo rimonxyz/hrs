@@ -1,6 +1,6 @@
 package com.moninfotech.domain;
 
-import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.utils.DateUtils;
 
 import javax.persistence.*;
 import java.text.DateFormat;

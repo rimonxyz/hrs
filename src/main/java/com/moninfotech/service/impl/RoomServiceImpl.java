@@ -1,7 +1,7 @@
 package com.moninfotech.service.impl;
 
 import com.moninfotech.commons.Constants;
-import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;

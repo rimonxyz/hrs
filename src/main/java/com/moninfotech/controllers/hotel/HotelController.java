@@ -1,7 +1,8 @@
 package com.moninfotech.controllers.hotel;
 
-import com.moninfotech.commons.DateUtils;
+import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.service.CategoryService;
@@ -17,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by sayemkcn on 4/16/17.
@@ -129,7 +130,7 @@ public class HotelController {
 
     @RequestMapping(value = "{hotelId}/image/{imageNumber}", method = RequestMethod.GET)
     private ResponseEntity<byte[]> getImages(@PathVariable("hotelId") Long hotelId,
-                                             @PathVariable("imageNumber") Integer imageNumber) {
+                                             @PathVariable("imageNumber") Integer imageNumber) throws IOException {
         Hotel hotel = this.hotelService.findOne(hotelId);
         List<byte[]> images = null;
         // set images from room
