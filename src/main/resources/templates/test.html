@@ -1,0 +1,179 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hotelswave.com</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" th:href="@{/fonts/font-awesome.min.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/newStyle.css}" rel="stylesheet" type="text/css" media="all"/>
+
+    <script th:src="@{/js/jquery-2.1.4.min.js}" src="assets/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.js}" src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="row top-row no-print" id="top-row">
+    <div class="container">
+        <div class="col-lg-6 col-md-6">
+            <a th:href="@{/}">
+                <img height="80" width="200" title="" alt="" draggable="false" src="images/logo.png">
+            </a>
+        </div>
+        <div class="col-lg-6 col-md-6 ">
+            <p class="company-phone">
+                Book online or call <br/>
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477707,</a>
+                <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477759</a>
+            </p>
+        </div>
+        </div>
+</div>
+
+<div class="my-nav-bar" data-spy="affix" id="my-nav-bar">
+    <nav class="navbar" >
+        <div class="navbar-header navbar-left">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-fixed-nav-bar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- <h1><a class="navbar-brand" href="index.html">Hotel</a></h1> -->
+        </div>
+        <!--<div >-->
+
+            <nav class="collapse navbar-collapse" id="top-fixed-nav-bar">
+                <ul class="nav nav-center">
+                    <li class="active"><a data-toggle="collapse" data-target=".navbar-collapse" href="#whyUs">Why us</a></li>
+
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Accounting <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation"><a href="#">Invoice </a></li>
+                            <li role="presentation"><a th:href="@{/admin/cashBook/cash}" href="#">Cash Book</a></li>
+                            <li role="presentation"><a th:href="@{/admin/cashBook/addIncome}" href="#">Add Income</a></li>
+                            <li role="presentation"><a th:href="@{/admin/cashBook/addExpense}" href="#">Add Expenses</a></li>
+                            <li role="presentation"><a href="#">Pay Salary</a></li>
+                            <li role="presentation"><a th:href="@{/admin/cashBook/collectSessionFee}" href="#">Collect Session Fee</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a th:href="@{/hotels}" class="dropdown-toggle" data-toggle="dropdown">Hotels<b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu agile_short_dropdown">
+                            <li><a th:href="@{/hotels?type=Hotel}">All Hotels</a></li>
+                            <li><a th:href="@{/hotels?query=Cox}">Cox’s Bazar</a></li>
+                            <li><a th:href="@{/hotels?query=Martins}">Saint Martin</a></li>
+                            <li><a th:href="@{/hotels?query=Bandarban}">Bandarban</a></li>
+                            <li><a th:href="@{/hotels?query=Rangamati}">Rangamati</a></li>
+                            <li><a th:href="@{/hotels?query=Khagra}">Khagrachari</a></li>
+                            <li><a th:href="@{/hotels?query=Sylhet}">Sylhet</a></li>
+                            <li><a th:href="@{/hotels?query=Srimangal}">Srimangal</a></li>
+                            <li><a th:href="@{/hotels?query=Khulna}">Khulna</a></li>
+                        </ul>
+                    </li>
+                    <!--<li class="active"><a th:href="@{/hotels}">Hotels</a></li>-->
+                    <li class="dropdown">
+                        <a th:href="@{/ships}" class="dropdown-toggle" data-toggle="dropdown">Ships<b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu agile_short_dropdown">
+                            <li><a th:href="@{/ships?type=Ship}">All Ships</a></li>
+                            <li><a th:href="@{/ships?query=Keari Sindbad}">Keari Sindbad</a></li>
+                            <li><a th:href="@{/ships?query=Keari Cruise}">Keari Cruise &amp; Dine</a></li>
+                            <li><a th:href="@{/ships?query=Kutubdia}">L.C.T. Kutubdia</a></li>
+                            <li><a th:href="@{/ships?query=Bangali}">M.V. Bangali</a></li>
+                            <li><a th:href="@{/ships?query=Bay Cruiser}">M.V. Bay Cruiser-1</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a data-toggle="collapse" data-target=".navbar-collapse" href="#packages">Holidays</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Services<b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu agile_short_dropdown">
+                            <li><a href="https://www.facebook.com/groups/intelligenttouristaid">Conference
+                                & Events</a></li>
+                            <li><a href="https://www.facebook.com/groups/intelligenttouristaid">Car &
+                                Bus</a></li>
+                            <li><a href="https://www.facebook.com/groups/intelligenttouristaid">Group Booking</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a data-toggle="collapse" data-target=".navbar-collapse" th:href="@{/feedback}">Customer Service</a></li>
+                    <li class="dropdown" sec:authorize="!isAuthenticated()">
+                        <a th:href="@{/login}">Sign in &amp; Accounts</a>
+                        <ul class="dropdown-menu agile_short_dropdown">
+                            <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                            <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Registration</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li sec:authorize="isAuthenticated()" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                           sec:authentication="principal.name"><b class="caret"></b></a>
+                        <ul class="dropdown-menu agile_short_dropdown">
+                            <li><a th:href="@{/dashboard}">Dashboard</a></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        <!--</div>-->
+        <!--<ul class="nav navbar-nav navbar-collapse" aria-expanded="false" id="top-fixed-nav-bar">-->
+            <!--<li><a href="#">Basic Topnav</a></li>-->
+            <!--<li><a href="#">Page 1</a></li>-->
+            <!--<li><a href="#">Page 2</a></li>-->
+            <!--<li><a href="#">Page 3</a></li>-->
+        <!--</ul>-->
+    </nav>
+</div>
+
+<div class="container-fluid">
+    <h1>1Some text to enable scrolling</h1>
+    <h1>2Some text to enable scrolling</h1>
+    <h1>3Some text to enable scrolling</h1>
+    <h1>4Some text to enable scrolling</h1>
+    <h1>5Some text to enable scrolling</h1>
+    <h1>6Some text to enable scrolling</h1>
+    <h1>7Some text to enable scrolling</h1>
+    <h1>8Some text to enable scrolling</h1>
+    <h1>9Some text to enable scrolling</h1>
+    <h1>10Some text to enable scrolling</h1>
+    <h1>11Some text to enable scrolling</h1>
+    <h1>12Some text to enable scrolling</h1>
+    <h1>13Some text to enable scrolling</h1>
+    <h1>14Some text to enable scrolling</h1>
+    <h1>15Some text to enable scrolling</h1>
+</div>
+
+
+<script>
+    console.log($('#top-row').height());
+
+    $('#my-nav-bar').affix({
+        offset: {
+            top: $('#top-row').height()
+        }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+        $(".dropdown").hover(
+            function () {
+                $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                $(this).toggleClass('open');
+            },
+            function () {
+                $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                $(this).toggleClass('open');
+            }
+        );
+    });
+</script>
+</body>
+</html>

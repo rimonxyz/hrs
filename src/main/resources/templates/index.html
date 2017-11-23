@@ -271,13 +271,13 @@
                                   style="align-content: center;">
                                 <table class="table">
                                     <tr>
-                                        <td style="width:100%; text-align: right;padding-right: 0px"><input name="query"
+                                        <td style="width:100%; text-align: right;padding-right: 0px; border:none;"><input name="query"
                                                                                                             type="search"
                                                                                                             class="searchForm"
                                                                                                             id="search"
                                                                                                             placeholder="Enter your location"/>
                                         </td>
-                                        <td style="text-align: left;padding-left: 0px">
+                                        <td style="text-align: left;padding-left: 0px; border: none;">
                                             <button type="submit" class="btn btn-default searchBtn"><i
                                                     class="glyphicon glyphicon-search visible-xs"></i><span
                                                     class="hidden-xs">Search</span></button>
@@ -582,7 +582,7 @@
 
         <div class="sap_tabs">
             <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
-                <ul class="resp-tabs-list wow fadeInUp animated animated" data-wow-delay=".7s"
+                <ul class="resp-tabs-list wow fadeInUp animated" data-wow-delay=".7s"
                     style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
                     <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab"><span>All</span>
                     </li>
@@ -886,10 +886,10 @@
 
 <!-- special offers -->
 <div class="container">
-    <div class="row" style="padding-top: 50px;padding-bottom: 50px; margin: 0;">
+    <div class="row" style="margin: 0;">
         <div class="col-xl-12">
 
-            <div class="row " id="specialOffers" style="margin: 0;">
+            <div class="row " id="specialOffers" style="margin: 40px 0;">
                 <div class="container">
                     <div class="row row-edge row-style-light">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -903,28 +903,26 @@
 
                 <div class="col-xl-4 team-grids" th:each="offer: ${offerList}">
                     <div class="thumbnail team-w3agile">
-                        <img th:src="@{/offers/image/}+${offer?.id}" class="img-responsive" alt="">
+                        <img th:src="@{/offers/image/}+${offer?.id}" alt="">
                         <div class="social-icons team-icons right-w3l fotw33">
                             <div class="caption">
                                 <p th:text="${offer?.title}">Mains</p>
                             </div>
-                            <!--<div>-->
-                            <!--<p th:text="${offer?.shortTag}" style="color: #FFFFFF;">lol</p>-->
-                            <!--</div>-->
                             <div>
-                                <!--<p th:text="${offer?.getReadableDate(offer?.date)}" style="color: #FFFFFF;">lol</p>-->
-                            </div>
-                            <div>
-                                <!--<p th:text="${offer?.duration}" style="color: #FFFFFF;">lol</p>-->
-                            </div>
-                            <div>
-                                <p style="color: #FFFFFF;">৳<span th:text="${offer?.price}"></span></p>
+                             <p th:text="${offer?.shortTag}">lol</p>
                             </div>
 
+                            <div>
+                                <p th:text="${offer?.duration}">lol</p>
+                            </div>
+                            <div>
+                                <p>৳<span th:text="${offer?.price}"></span></p>
+                            </div>
+                            <a th:href="@{/offers/}+${offer?.id}" style="font-size: 14px;padding-top: 5px;"><span>See More</span></a>
                         </div>
 
                     </div>
-                    <a th:href="@{/offers/}+${offer?.id}"><span>See More</span></a>
+
 
                 </div>
 
@@ -944,7 +942,7 @@
 
 
 <!-- FOLLOW US -->
-<div class="well__ins4 bg-5 text-center  cherry-box">
+<div class="well__ins4 bg-5 text-center cherry-box follow-us-section">
     <div class=box-989">
         <div class="inner">
             <div class="container-fluid">
@@ -1041,7 +1039,7 @@
 <!--End of FOLLOW US -->
 
 <!-- our partners -->
-<div id="partners" class="tm_pb_section tm_pb_anchor tm_pb_section_9 tm_section_regular tm_section_transparent">
+<div id="partners" class="tm_pb_section tm_pb_anchor tm_pb_section_9 tm_section_regular our-partners">
     <!--<hr/>-->
     <div class="container">
         <div class=" row tm_pb_row tm_pb_row_14">
@@ -1070,25 +1068,25 @@
                         </div>
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                            <a href="//www.itaforu.com">
+                            <a href="//www.itaforu.com" target="_blank">
                                     <img class="img-responsive intelligent-tourist-aid" th:src="@{/images/partners/InteligentTouristAid.jpg}"/>
                             </a>
                         </div>
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                            <a href="#">
+                            <a href="//www.itoursltd.com/" target="_blank">
                                     <img class="img-responsive i-tours" th:src="@{/images/partners/itours.jpg}" />
                             </a>
                         </div>
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                            <a href="//www.itaforu.com">
+                            <a href="//www.itaforu.com" target="_blank">
                                     <img class="img-responsive sea-food-bd" th:src="@{/images/partners/seafoodbd.jpg}" />
                             </a>
                         </div>
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                            <a href="//www.itaforu.com">
+                            <a href="//www.itaforu.com" target="_blank">
                                     <img class="img-responsive sea-view-resort" th:src="@{/images/partners/seaviewresort.jpg}" />
                             </a>
                         </div>
@@ -1143,7 +1141,7 @@
             <!--</div>-->
             <!-- .tm_pb_title -->
             <!-- <hr class="tm_pb_module tm_pb_space tm_pb_divider_14"> -->
-            <div class="tm_pb_widget_area cherry-sidebars-2 tm_pb_widget_area_left clearfix tm_pb_module tm_pb_bg_layout_light  tm_pb_sidebar_2">
+            <div class="news-letter-contnet">
                 <aside id="hotelbliss_widget_subscribe_follow-2" class="widget widget-subscribe">
                     <div class="subscribe-follow__wrap">
                         <div class="subscribe-block">
@@ -1300,16 +1298,16 @@
             fit: true   // 100% fit in a container
         });
 
-        $(".dropdown").hover(
-            function () {
-                $('.dropdown-menu', this).stop(true, true).slideDown("fast");
-                $(this).toggleClass('open');
-            },
-            function () {
-                $('.dropdown-menu', this).stop(true, true).slideUp("fast");
-                $(this).toggleClass('open');
-            }
-        );
+//        $(".dropdown").hover(
+//            function () {
+//                $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+//                $(this).toggleClass('open');
+//            },
+//            function () {
+//                $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+//                $(this).toggleClass('open');
+//            }
+//        );
     });
 </script>
 

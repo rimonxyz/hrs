@@ -129,14 +129,15 @@
 /*-- Team --*/
 .team-grids {
     width: 33%;
+    height: 280px;
     float: left;
     padding: 10px;
 }
 
 .thumbnail.team-w3agile img {
     margin: 0 auto;
-    width: inherit;
     width: 100%;
+    height: 100%;
 }
 
 .thumbnail.team-w3agile {
@@ -161,12 +162,12 @@
 }
 
 .thumbnail .caption {
-    color: #fff !important;
+    color: #000 !important;
 }
 
 .caption {
-    font-family: 'Great Vibes', handwriting;
-    font-size: 50px;
+    /*font-family: 'Great Vibes', handwriting;*/
+    font-size: 35px;
     color: #111 !important;
     line-height: 30px;
     letter-spacing: 5px;
@@ -178,20 +179,21 @@
 
 .social-icons.team-icons {
     position: absolute;
-    bottom: -227px;
+    bottom: -100%;
     margin: 0;
     left: 0;
-    background: rgba(10, 10, 10, 0.5);
+    background: rgba(255,255,255, 0.8);
     /*background: rgba(35, 214, 178, 0.72);*/
-    padding: 1em;
+    /*padding: 1em;*/
     -webkit-transition: .5s all;
     transition: .5s all;
     -moz-transition: .5s all;
     width: 100%;
+    height: 100%;
     text-align: center;
-    font-family: 'Great Vibes', handwriting;
+    /*font-family: 'Great Vibes', handwriting;*/
     font-size: 30px;
-
+    /*color: black;*/
 }
 
 .thumbnail.team-w3agile:hover div.social-icons.team-icons {
@@ -295,6 +297,14 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
 }
 
 /*for follow us*/
+.follow-us-section{
+    height: 350px;
+}
+@media (max-width: 768px) {
+    .follow-us-section{
+        height: auto;
+    }
+}
 .row-style-dark h1, .row-style-dark h2, .row-style-dark h3, .row-style-dark h4, .row-style-dark h5, .row-style-dark h6, .row-style-dark p {
     color: #fff;
 }
@@ -306,17 +316,18 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
     background-attachment: scroll;
     background-size: cover;
     background-color: #ffffff;
-
+    height: 100%
+;
 }
 
 .cherry-box .inner {
     padding: 15px;
-    padding-top: 50px;
+    padding-top: 40px;
     padding-bottom: 20px;
 }
 
 .well__ins4 .container-fluid {
-    padding-bottom: 120px;
+    /*padding-bottom: 120px;*/
 }
 
 .well .container-fluid {
@@ -571,11 +582,15 @@ p {
 }
 
 .partner_contents {
-    margin-top: 50px;
+    margin-top: 100px;
     margin-bottom: 30px;
     text-align: center;
 }
-
+@media (max-width: 768px) {
+    .partner_contents {
+        margin-top: 10px;
+    }
+}
 .tm_pb_brands_showcase_module__brands .tm_pb_column {
     margin-top: 20px;
 }
@@ -585,6 +600,7 @@ p {
     background-image: url(./background/newsletter.jpg);
     padding-top: 40px;
     padding-bottom: 40px;
+    height: 350px;
     /*background-image: url(./background/followus.jpg);*/
     /* background-repeat: no-repeat;
      background-position: center;
@@ -592,7 +608,9 @@ p {
      background-size: cover;
      background-color: #ffffff;*/
 }
-
+.news-letter-contnet{
+    padding-top: 70px;
+}
 .tm_pb_title {
     margin-left: auto;
     margin-right: auto;
@@ -816,7 +834,7 @@ h4, .h4-style {
 @media screen and (max-width: 767px){
     .package-button{
         width: 70%;
-    }
+    }f
 }
 
 @media screen and (max-width: 445px) {
@@ -850,6 +868,9 @@ h4, .h4-style {
     .subscribe-block__input-wrap{
         margin: 5px 0 0;
 
+    }
+    .team-grids{
+        width: 100%;
     }
 }
 
