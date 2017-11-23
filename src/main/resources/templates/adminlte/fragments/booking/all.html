@@ -10,7 +10,7 @@
             <span th:if="${!analFlagRole.equals('ROLE_ADMIN') and !analFlagRole.equals('ROLE_HOTEL_ADMIN')}">Online Bookings</span>
             <span th:if="${analFlagRole.equals('ROLE_HOTEL_ADMIN')}">Hotel Admin Bookings</span>
             <span th:if="${analFlagRole.equals('ROLE_ADMIN')}">Super Admin Bookings</span>
-            <small>Control panel</small>
+            <small></small>
         </h1>
         <ol class="breadcrumb">
             <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> Home</a></li>
