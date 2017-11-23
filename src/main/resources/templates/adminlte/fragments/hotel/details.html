@@ -117,20 +117,20 @@
             </div>
 
             <div class="col-sm-9">
-                <div class="row" th:if="${param.messageinfo}">
-                    <div class="alert alert-info alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-ban"></i> Info!</h4>
-                        <span th:if="${param.messageinfo!=null}" th:text="${param.messageinfo[0]}">Danger alert preview.</span>
-                    </div>
-                </div>
-                <div class="row" th:if="${param.message}">
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                        <p th:if="${param.message!=null}" th:text="${param.message[0]}">Danger alert preview.</p>
-                    </div>
-                </div>
+                <!--<div class="row" th:if="${param.messageinfo}">-->
+                    <!--<div class="alert alert-info alert-dismissible">-->
+                        <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
+                        <!--<h4><i class="icon fa fa-ban"></i> Info!</h4>-->
+                        <!--<span th:if="${param.messageinfo!=null}" th:text="${param.messageinfo[0]}">Danger alert preview.</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row" th:if="${param.message}">-->
+                    <!--<div class="alert alert-danger alert-dismissible">-->
+                        <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
+                        <!--<h4><i class="icon fa fa-ban"></i> Alert!</h4>-->
+                        <!--<p th:if="${param.message!=null}" th:text="${param.message[0]}">Danger alert preview.</p>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="row">
                     <!--<img class="img img-responsive" style="height: 400px;width: 100%;margin-bottom: 20px;"-->
                          <!--th:src="@{/hotels/images/}+${hotel?.id}">-->
@@ -290,7 +290,7 @@
                                            th:value="${filterValue}"></input>
                                     <input type="hidden" name="categoryFilter" th:value="${categoryFilter}">
                                 </form>
-                                <span style="color: darkgreen;padding-left: 10px;">Find rooms by date</span>
+                                <span style="color: darkgreen;padding-left: 10px;margin-top: 10px;">Search by date</span>
                             </div>
                             <div class="panel-heading col-sm-6">
                                 <form class="form" th:action="@{/hotels/}+${hotel?.id}" method="get">
@@ -309,7 +309,7 @@
                                         <option th:each="category: ${categoryList}" th:text="${category?.name}"
                                                 th:selected="${categoryFilter?.equals(category?.name)}"></option>
                                     </select>
-                                    <span style="color: darkgreen;padding-left: 10px;">Find rooms by category</span>
+                                    <span style="color: darkgreen;padding-left: 10px;">Filter by category</span>
                                 </form>
                             </div>
                         </div>
