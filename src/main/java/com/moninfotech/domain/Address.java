@@ -1,6 +1,8 @@
 package com.moninfotech.domain;
 
 import javax.persistence.Embeddable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sayemkcn on 3/21/17.
@@ -47,7 +49,18 @@ public class Address {
     }
 
     public String getCommaSeperatedString() {
-        return String.join(", ", new String[]{this.area, this.upazila, this.district, this.city, this.country});
+        List<String> addr = new ArrayList<>();
+        if (this.area != null && !this.area.isEmpty())
+            addr.add(this.area);
+        if (this.upazila != null && !this.upazila.isEmpty())
+            addr.add(this.upazila);
+        if (this.district != null && !this.district.isEmpty())
+            addr.add(this.district);
+        if (this.city != null && !this.city.isEmpty())
+            addr.add(this.city);
+        if (this.country != null && !this.country.isEmpty())
+            addr.add(this.country);
+        return String.join(", ", addr);
     }
 
     public String getUpazila() {

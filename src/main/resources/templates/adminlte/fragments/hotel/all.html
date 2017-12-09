@@ -195,24 +195,24 @@
                             </thead>
                             <tbody>
                             <tr th:each="hotel : ${hotelList}">
-                                <td>
+                                <td style="vertical-align: middle;">
                                     <img style="margin-top: 20px;" height="100" width="100"
                                          th:src="@{/hotels/}+${hotel?.id}+@{/image/0}"
                                          class="img-responsive zoom-img"
                                          alt=""></img>
                                 </td>
-                                <td>
+                                <td style="vertical-align: middle;" class="col-md-6">
                                     <!--<i class="phon">-->
-                                        <h3 style="margin-top: 30px;">
-                                            <a th:href="@{/hotels/}+${hotel?.id}" th:text="${hotel?.name}"></a>
+                                        <h3>
+                                            <a th:href="@{/hotels/}+${hotel?.id}" th:text="${hotel?.name?.trim()}"></a>
                                         </h3>
                                     <!--</i>-->
                                     <!--<h4><kbd th:text="${hotel?.type}"></kbd></h4>-->
                                     <!--<h4 th:text="${hotel?.description}">info@moninfotech.com</h4>-->
                                 </td>
-                                <td>
-                                    <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
-                                    <h5 style="margin-top: 30px;" th:text="${hotel?.address?.getCommaSeperatedString()}"></h5>
+                                <td style="vertical-align: middle;" class="col-md-4">
+                                    <!--<i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>-->
+                                    <h5 th:text="${hotel?.address?.getCommaSeperatedString()}"></h5>
                                 </td>
                             </tr>
                             </tbody>

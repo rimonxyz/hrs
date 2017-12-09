@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sayemkcn on 4/21/17.
@@ -44,7 +46,12 @@ public class SearchController {
             hotels = this.hotelService.filterHotels(hotels, filterType, filterValue);
 //        // filter hotels out that are already booked
 //        hotels = this.hotelService.filterUnbookedHotelsByDate(hotels, startDate, endDate);
-        model.addAttribute("hotelList", hotels);
+
+        // remove duplicate
+        Set<Hotel> hotelSet = new HashSet<>();
+        hotelSet.addAll(hotels);
+        hotels.clear();
+        model.addAttribute("hotelList", hotelSet);
         if (filterValue != null)
             model.addAttribute("filterValue", filterValue);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
