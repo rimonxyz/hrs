@@ -143,7 +143,7 @@
             <div class="col-xs-12">
                 <a onclick="window.print();" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                 <span style="color: red;" th:if="${!invoice?.booking?.isValid() and !invoice?.paid}"><b>This booking is invalid. Please do not pay.</b></span>
-                <form class="pull-right" id="payment_gw" name="payment_gw" method="POST" action="https://sandbox.sslcommerz.com/gwprocess/v3/process.php">
+                <form class="pull-right" id="payment_gw" name="payment_gw" method="POST" action="https://securepay.sslcommerz.com/gwprocess/v3/process.php">
                     <input type="hidden" name="total_amount" th:value="${invoice?.booking?.getTotalPayableCost()}" />
                     <input type="hidden" name="store_id" th:value="testbox" />
                     <input type="hidden" name="tran_id" th:value="${invoice?.booking?.transaction?.id}" />

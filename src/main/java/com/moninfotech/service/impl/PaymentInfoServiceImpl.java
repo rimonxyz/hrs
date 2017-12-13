@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -22,7 +23,11 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
     }
 
     @Override
+    @Transactional
     public PaymentInfo save(PaymentInfo paymentInfo) {
+        PaymentInfo ex = this.paymentInfoRepo.findByTransaction(paymentInfo.getTransaction());
+        if (ex != null)
+            return ex;
         return this.paymentInfoRepo.save(paymentInfo);
     }
 

@@ -10,6 +10,7 @@ import com.moninfotech.service.PaymentInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -47,6 +48,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    @Transactional
     public Invoice setInvoicePaid(Invoice invoice, PaymentInfo paymentInfo) {
         if (invoice == null) throw new IllegalArgumentException("invoice can not be null");
         if (paymentInfo == null) paymentInfo = new PaymentInfo();
