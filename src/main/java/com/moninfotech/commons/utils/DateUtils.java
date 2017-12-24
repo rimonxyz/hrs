@@ -83,6 +83,10 @@ public class DateUtils {
     }
 
     public static boolean isOnPast(Date bookingDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(bookingDate);
+        cal.set(Calendar.HOUR,23);
+        bookingDate = cal.getTime();
         return bookingDate.before(new Date());
     }
 }
