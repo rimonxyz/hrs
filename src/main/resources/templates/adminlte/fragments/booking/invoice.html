@@ -24,22 +24,22 @@
         <div class="row invoice-info">
             <div class="col-sm-4 invoice-col">
                 From
-                <address th:if="${invoice?.booking?.manualBooking}">
-                    <strong th:text="${invoice?.booking?.hotel?.name}">John Doe</strong><br>
-                    <span th:text="${invoice?.booking?.hotel?.address?.getCommaSeperatedString()}">795 Folsom Ave, Suite 600</span><br/>
-                    <!--<span th:text="${invoice?.user?.address?.upazila}">San Francisco, CA 94107</span><br/>-->
-                    <!--Phone: <span th:text="${invoice?.booking?.hotel?.phoneNumber}"></span><br>-->
-                    Email: <span th:text="${invoice?.user?.email}">john.doe@example.com</span>
-                </address>
-                <address th:if="${!invoice?.booking?.manualBooking}">
+                <!--<address th:if="${invoice?.booking?.manualBooking}">-->
+                    <!--<strong th:text="${invoice?.booking?.hotel?.name}">John Doe</strong><br>-->
+                    <!--<span th:text="${invoice?.booking?.hotel?.address?.getCommaSeperatedString()}">795 Folsom Ave, Suite 600</span><br/>-->
+                    <!--&lt;!&ndash;<span th:text="${invoice?.user?.address?.upazila}">San Francisco, CA 94107</span><br/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;Phone: <span th:text="${invoice?.booking?.hotel?.phoneNumber}"></span><br>&ndash;&gt;-->
+                    <!--Email: <span th:text="${invoice?.user?.email}">john.doe@example.com</span>-->
+                <!--</address>-->
+                <address>
                     <strong>HotelsWave</strong><br>
                     <span>32/1, Khan Plaza ( 3rd floor), Sciece Lab, Mirpur Road, Dhanmondi, Dhaka- 1205</span><br/>
                     <!--<span th:text="${invoice?.user?.address?.upazila}">San Francisco, CA 94107</span><br/>-->
                     Phone: <span>01840477707</span><br>
                     Email: <span>hotelswave.info@gmail.com</span><br/>
                 </address>
-                <b style="font-size: 15px; margin-top: 5px;margin-bottom: 10px;">Hotel Name: <span th:text="${invoice?.booking?.hotel?.name}"></span></b>
             </div>
+
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
                 To
@@ -67,6 +67,7 @@
             </div>
             <!-- /.col -->
         </div>
+        <b style="font-size: 15px; margin-top: 5px;margin-bottom: 15px;">Hotel Name: <span class="text text-primary" th:text="${invoice?.booking?.hotel?.name}"></span></b>
         <!-- /.row -->
 
         <!-- Table row -->
