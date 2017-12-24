@@ -15,4 +15,5 @@ import java.util.List;
 public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findByHotelAndRoomNumberContainingIgnoreCase(Hotel hotel, String query);
     List<Room> findByHotelAndCategory(Hotel hotel, Category category);
+    List<Room> findByHotelIdOrderByRoomNumberAsc(Long hotelId);
 }

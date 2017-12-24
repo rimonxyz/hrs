@@ -100,7 +100,7 @@ public class HotelController {
         // Load rooms, all if search query is empty.
         List<Room> roomList;
         if (query == null) {
-            roomList = hotel.getRoomList();
+            roomList = this.roomService.findByHotel(hotel.getId());
             if (!categoryFilter.isEmpty() && !categoryFilter.toLowerCase().equals("all"))
                 roomList = roomService.filterByCategory(roomList, categoryFilter);
         } else

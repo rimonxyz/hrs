@@ -21,6 +21,8 @@ public interface RoomService {
 
     List<Room> findAll(int page, int size);
 
+    List<Room> findByHotel(Long hotelId);
+
     void delete(Long id);
 
     List<Room> findAll(Long[] ids);
