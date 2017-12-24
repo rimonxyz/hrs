@@ -173,9 +173,9 @@
                                     <!--</option>-->
                                 <!--</select>-->
                             <!--</form>-->
-                            <form class="form col-sm-6" th:action="@{/bookings}" id="dateFilterForm" method="get">
+                            <form class="form col-sm-6" th:action="@{/bookings}" id="bookingsDateFilterForm" method="get">
                                 <input name="filterType" type="hidden" value="date"></input>
-                                <input class="form-control" th:value="${filterValue}" name="filterValue" type="date" id="dateFilter"/>
+                                <input class="form-control" th:value="${filterValue}" name="filterValue" type="date" id="bookingsDateFilter"/>
                             </form>
                             <form class="form col-sm-6" th:action="@{/bookings}" method="get">
                                 <input type="hidden" name="filterType" value="hotelName">
