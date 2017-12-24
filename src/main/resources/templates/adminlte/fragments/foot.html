@@ -48,6 +48,7 @@
 <script th:src="@{/adminlte/plugins/flot/jquery.flot.pie.min.js}"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script th:src="@{/adminlte/plugins/flot/jquery.flot.categories.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- Page script -->
 <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
 
@@ -507,7 +508,14 @@
         $("#typeFilterForm").submit();
     });
     $("#dateFilter").on("change", function (form) {
-        $("#dateFilterForm").submit();
+        var dateInput = $("#dateFilter");
+        var sDate = new Date(dateInput.val());
+        var now = new Date();
+        if (now > sDate) {
+            toastr.error('You can not book on past date!\nPlease Select a future date.')
+        } else {
+            $("#dateFilterForm").submit();
+        }
     });
     $("#categoryFilter").on("change", function (form) {
         $("#catFilterForm").submit();
@@ -692,3 +700,4 @@
         WinPrint.close();
     }
 </script>
+

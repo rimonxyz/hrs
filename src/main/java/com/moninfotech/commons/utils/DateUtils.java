@@ -82,4 +82,7 @@ public class DateUtils {
         return true;
     }
 
+    public static boolean isOnPast(Date bookingDate) {
+        return bookingDate.before(new Date());
+    }
 }

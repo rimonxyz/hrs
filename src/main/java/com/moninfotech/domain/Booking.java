@@ -52,12 +52,11 @@ public class Booking extends BaseEntity {
     }
 
     public boolean isValid() {
-        // TODO: 6/7/17 TIME VALIDATION | MAKE SURE BOOKING TIME ISN'T PAST
         if (roomList == null || bookingDateList == null || roomList.size() != bookingDateList.size()) return false;
         for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++) {
             Room room = roomList.get(i);
             Date bookingDate = bookingDateList.get(i);
-            if (room.isBooked(bookingDate)) return false;
+            if (DateUtils.isOnPast(bookingDate) || room.isBooked(bookingDate)) return false;
         }
         return true;
     }
