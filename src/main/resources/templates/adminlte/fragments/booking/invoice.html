@@ -145,7 +145,7 @@
                 <span style="color: red;" th:if="${!invoice?.booking?.isValid() and !invoice?.paid}"><b>This booking is invalid. Please do not pay.</b></span>
                 <form class="pull-right" id="payment_gw" name="payment_gw" method="POST" action="https://securepay.sslcommerz.com/gwprocess/v3/process.php">
                     <input type="hidden" name="total_amount" th:value="${invoice?.booking?.getTotalPayableCost()}" />
-                    <input type="hidden" name="store_id" th:value="testbox" />
+                    <input type="hidden" name="store_id" th:value="test_hotelswave" />
                     <input type="hidden" name="tran_id" th:value="${invoice?.booking?.transaction?.id}" />
                     <input type="hidden" name="success_url" th:value="${@environment.getProperty('baseUrl')}+@{/invoices/}+${invoice?.id}+@{/payment/success}" />
                     <input type="hidden" name="fail_url" th:value="${@environment.getProperty('baseUrl')}+@{/invoices/}+${invoice?.id}+@{/payment/failed}" />
