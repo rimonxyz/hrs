@@ -179,9 +179,9 @@
                             <!--<li><i class="phon">Hotel Id</i><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><span th:text="${hotel?.id}"></span></li>-->
                             <thead>
                             <tr>
-                                <th><h3>Image</h3></th>
+                                <th><h4>Image</h4></th>
                                 <th>
-                                    <h3>Name</h3>
+                                    <h4>Name</h4>
                                     <!--<i>-->
                                     <!--<i th:if="${isDesc}" class="glyphicon glyphicon-chevron-down"></i>-->
                                     <!--<i th:if="${!isDesc}" class="glyphicon glyphicon-chevron-up"></i>-->
@@ -189,7 +189,7 @@
                                     <!--</i>-->
                                 </th>
                                 <th>
-                                    <h3>Address</h3>
+                                    <h4>Address</h4>
                                 </th>
                             </tr>
                             </thead>
@@ -199,13 +199,14 @@
                                     <img style="margin-top: 20px;" height="100" width="100"
                                          th:src="@{/hotels/}+${hotel?.id}+@{/image/0}"
                                          class="img-responsive zoom-img"
-                                         alt=""></img>
+                                         alt="">
+                                    </img>
                                 </td>
-                                <td style="vertical-align: middle;" class="col-md-6">
+                                <td style="vertical-align: middle;">
                                     <!--<i class="phon">-->
-                                        <h3>
+                                        <h4>
                                             <a th:href="@{/hotels/}+${hotel?.id}" th:text="${hotel?.name?.trim()}"></a>
-                                        </h3>
+                                        </h4>
                                     <!--</i>-->
                                     <!--<h4><kbd th:text="${hotel?.type}"></kbd></h4>-->
                                     <!--<h4 th:text="${hotel?.description}">info@moninfotech.com</h4>-->

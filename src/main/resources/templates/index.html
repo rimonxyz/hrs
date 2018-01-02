@@ -154,7 +154,7 @@
 
                 <nav class="cl-effect-13" id="cl-effect-13">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a data-toggle="collapse" data-target=".navbar-collapse" href="#whyUs">Why us</a></li>
+                        <li class="active"><a data-toggle="collapse" data-target=".navbar-collapse" th:href="@{/whyUs}" href="#whyUs">Why us</a></li>
                         <li class="dropdown">
                             <a th:href="@{/hotels}" class="dropdown-toggle" data-toggle="dropdown">Hotels<b
                                     class="caret"></b></a>
@@ -239,9 +239,7 @@
 
 
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx First pic and option  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id = "first-pic-and-option">
-
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding: 0;">
+    <div class="row" style="padding: 0;" id = "first-pic-and-option">
 
         <div class="tm_pb_slide tm_pb_bg_layout_light tm_pb_media_alignment_center tm_pb_slide_0 tm-pb-active-slide"
              style="background-color:#ffffff;background-image:url(./images/bed1.jpg);">
@@ -272,10 +270,10 @@
                                 <table class="table">
                                     <tr>
                                         <td style="width:100%; text-align: right;padding-right: 0px; border:none;"><input name="query"
-                                                                                                            type="search"
-                                                                                                            class="searchForm"
-                                                                                                            id="search"
-                                                                                                            placeholder="Enter your location"/>
+                                                            type="search"
+                                                            class="searchForm"
+                                                            id="search"
+                                                            placeholder="Enter your location"/>
                                         </td>
                                         <td style="text-align: left;padding-left: 0px; border: none;">
                                             <button type="submit" class="btn btn-default searchBtn"><i
@@ -296,142 +294,19 @@
             </div>
         </div>
     </div>
-</div>
+
 
 <!-- end First pic and option -->
 
 
 <!-- Welcome page -->
-<div class="tm_pb_section  tm_pb_section_2 tm_pb_with_background tm_section_regular tm_pb_section_sticky">
 
-    <div class="container">
-        <div class="row welcomeRow">
-
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
-                <div class="row " id="whyUs">
-                    <div class="container">
-                        <div class="row row-edge row-style-light">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <h2 class="dash black text-uppercase">Why Us</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="welcomeText" style="padding-top: 50px;">
-
-                    <p>
-                        Hotelswave.com is the largest and easiest complete online hotel booking
-                        website. It runs with the slogan of &quot;Easy Booking&quot;. You can book your desired
-                        rooms yourself by analyzing price &amp; facilities with available date from various
-                        hotels of an area.<br/>
-
-                    </p>
-                    <div class="panel-heading">
-                        <div class="h1-style tm_pb_title__title" style="font-size: 30px; text-align: center">
-                            Why <a href="www.hotelswave.com"><b> hotelswave.com </b></a>is different
-                        </div>
-                    </div>
-                    <div>
-                        <table class="table whyHotelsWeb">
-                            <tr>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Showing desired rooms’ availability on any particular date.
-                                </td>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Price updates of different rooms on different dates.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Easy payment system through Bkash, Rocket, Credit/Debit Card or Cash.
-                                </td>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Exclusive discount on group booking.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Providing instant booking confirmation copy on payment.
-                                </td>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Decide by comparing guest reviews &amp; facilities among hundreds of hotels.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Pointing hotels location on Google map.
-                                </td>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Indicating Hotel’s distance from important spots.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Android apps.
-                                </td>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Applying no extra charge or hidden cost.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Availability of related tour packages.
-                                </td>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Ship ticketing for Saint Martin’s Island.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Customer service.
-                                </td>
-                                <td></td>
-                            </tr>
-
-                        </table>
-
-                    </div>
-                    <p>
-                        For standard quality service in case of hotel booking, you can always choose
-                        Hotelswave.com.
-                        Please go through our website and <a href="https://www.facebook.com/hotelswave">facebook
-                        page</a> for details
-                    </p>
-                </div>
-                <!-- .tm_pb_text -->
-            </div>
-            <!-- .tm_pb_column -->
-
-        </div>
-        <!-- .tm_pb_row -->
-    </div>
-
-</div>
 <!-- end Welcome page -->
 
 
 <!-- Our services -->
 <div class="serviceRow" id="our-services">
 
-    <!--<div class="container">-->
-        <!--<div class="row">-->
-
-            <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">-->
-
-                <!--&lt;!&ndash;<div class="tm_pb_text_4">&ndash;&gt;-->
-
-                    <!--&lt;!&ndash;<h2 style="color:#000;padding-bottom: 50px;" id="services">Services</h2>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash; .tm_pb_text &ndash;&gt;-->
-            <!--</div>-->
-            <!--&lt;!&ndash; .tm_pb_column &ndash;&gt;-->
-
-        <!--</div>-->
-        <!--&lt;!&ndash; .tm_pb_row &ndash;&gt;-->
-    <!--</div>-->
     <div class="row " id="ourServices" style="margin: 0;">
         <div class="container">
             <div class="row row-edge row-style-light">
@@ -455,9 +330,7 @@
                             <h3>Hotel</h3>
                             <p>Booking</p>
                         </div>
-                        <!--<div class="tm_pb_link_box_button_holder"><a class="tm_pb_button"-->
-                        <!--href="https://ld-wp.template-help.com/wordpress_60054/ocean-shipping">MORE-->
-                        <!--INFO</a></div>-->
+
                     </div>
                     </a>
                     <!-- .tm_pb_blurb_content -->
@@ -1202,7 +1075,7 @@
         <div class="row tm_pb_row_inner tm_pb_row_inner_1">
             <div class="aligncenter tm_pb_column tm_pb_column_1_2 tm_pb_column_inner  tm_pb_column_inner_1 col-xs-12 col-sm-12 col-md-6 col-lg-12 col-xl-12 tm_pb_vertical_alligment_start">
                 <div class="tm_pb_text_5 ">
-                    <p><strong><span style="color: #51cba3;">15 km</span></strong></p>
+                    <p><strong><span style="color: #51cba3;">15.9 km</span></strong></p>
                 </div>
                 <div class="tm_pb_text tm_pb_module tm_pb_bg_layout_light tm_pb_text_align_center  tm_pb_text_6">
                     <h4>Away from the<br>
@@ -1217,12 +1090,9 @@
 
 
     <div class="col-md-6 contact-left">
-        <!--<div>-->
-        <!--<iframe src="https://www.google.com/maps/embed/v1/directions?origin=Hazrat%20Shah%20Jalal%20Airport&destination=32/1,%20Khan%20Plaza%20(%203rd%20floor),%20Science%20Lab,%20Mirpur%20Road,%20Dhanmondi&key=AIzaSyCOCtIc_RrQDlw-zPZm3jaSQ0kWF7oTSic"-->
-        <!--id="directionMap" class="col-sm-12" height="450" width="600"></iframe>-->
-        <!--</div>-->
-        <iframe src="https://www.google.com/maps/embed/v1/directions?origin=Hazrat%20Shahjalal%20International%20Airport&destination=32/1,%20Khan%20Plaza%20,%20Science%20Lab,%20Mirpur%20Road,%20Dhanmondi&key=AIzaSyCOCtIc_RrQDlw-zPZm3jaSQ0kWF7oTSic"
-                width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d69464.35791711224!2d90.36156018422729!3d23.791181985504355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x3755c691ba478fbd%3A0xd1b3f71371eb15ec!2sHazrat+Shahjalal+International+Airport!3m2!1d23.846615!2d90.4026234!4m5!1s0x3755b8c80b65b101%3A0xe7889593d425a22c!2s32%2F2+Mirpur+Rd%2C+Dhaka!3m2!1d23.737644799999998!2d90.38398769999999!5e0!3m2!1sen!2sbd!4v1514902512399" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <!--<iframe src="https://www.google.com/maps/embed/v1/directions?origin=Hazrat%20Shahjalal%20International%20Airport&destination=32/1,%20Khan%20Plaza%20,%20Science%20Lab,%20Mirpur%20Road,%20Dhanmondi&key=AIzaSyCOCtIc_RrQDlw-zPZm3jaSQ0kWF7oTSic"-->
+                <!--width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
     </div>
 </div>
 <!-- end location and map -->

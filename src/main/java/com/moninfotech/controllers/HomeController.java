@@ -83,6 +83,11 @@ public class HomeController {
         model.addAttribute("offerList", this.offerService.findAll(0, 3));
         return "test";
     }
+    @GetMapping("/whyUs")
+    private String whyUs(Model model) {
+        return "whyUs";
+    }
+
 
     @GetMapping("/dashboard")
     private String dashboard(@CurrentUser User currentUser,
