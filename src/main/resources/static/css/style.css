@@ -4233,6 +4233,30 @@ i.mail {
 #whyUs{
     padding-top: 40px;
 }
+.welcomeText{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.72;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #333;
+    margin-left: 20px;
+}
+.welcomeText ul{
+    margin-left: 50px;
+}
+.welcomeText ul li{
+    padding-bottom: 10px;
+}
+.welcomeText ul li:before{
+    content: "\f05a";
+    font-family: FontAwesome;
+    font-size: 20px;
+    float: left;
+    margin-left: -22px;
+    color: black;
+    margin-right: 2px;
+}
 .our-partners{
     padding-top: 40px;
     height: 350px;
@@ -4550,6 +4574,16 @@ i.mail {
     height: 440px!important;
     width: 100%;
 }
+.rooms-pic{
+    height: 400px;
+}
+.room-pic-carousel-inner{
+    height: 400px;
+}
+.room-pic-item{
+    height: 400px;
+}
+
 @media (max-width: 768px) {
     body{
         overflow-x: hidden;
@@ -4597,9 +4631,23 @@ i.mail {
         margin-top: 0;
     }
     .hotel-detail-carousel{
-        height: 20  0px;
+        height: 200px !important;
         width: 100%;
     }
+    .rooms-pic{
+        height: 200px;
+    }
+    .room-pic-carousel-inner{
+        height: 200px;
+    }
+    .room-pic-item{
+        height: 200px;
+    }
+
+
+    /*.box-body{*/
+        /*padding: 0px;*/
+    /*}*/
     .resp-tabs-list{
         display: none;
     }

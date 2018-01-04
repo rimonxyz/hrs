@@ -141,7 +141,7 @@
                     <!--</div>-->
                 <!--</div>-->
                 <!--BOOKING SESSION ITEMS-->
-                <div class="row panel panel-primary"
+                <div class="row panel panel-primary table-responsive"
                      th:if="${session.booking?.roomList!=null and !session.booking?.roomList.isEmpty()}">
                     <table class="table">
                         <thead class="panel-heading">
@@ -233,7 +233,7 @@
                 <div class="row">
                     <!--IMAGE-->
                     <div class="row col-sm-12">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 400px;">
+                        <div id="myCarousel" class="carousel slide rooms-pic" data-ride="carousel">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
                                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -242,18 +242,18 @@
                             </ol>
 
                             <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
+                            <div class="carousel-inner room-pic-carousel-inner">
+                                <div class="item active room-pic-item">
                                     <img th:src="@{/rooms/}+${room?.id}+@{/image/0}" id="dtlsImg1" alt="Los Angeles"
                                          style="height: 100%; width: 100%;"></img>
                                 </div>
 
-                                <div class="item">
+                                <div class="item room-pic-item">
                                     <img th:src="@{/rooms/}+${room?.id}+@{/image/1}" id="dtlsImg2" alt="Chicago"
                                          style="height: 100%;width: 100%;"></img>
                                 </div>
 
-                                <div class="item">
+                                <div class="item room-pic-item">
                                     <img th:src="@{/rooms/}+${room?.id}+@{/image/2}" id="dtlsImg3" alt="New York"
                                          style="height: 100%;width: 100%;"></img>
                                 </div>

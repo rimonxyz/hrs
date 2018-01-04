@@ -65,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/newsletter/subscribe",
                         "/bookings/checkout",
                         "/bookings/tempRegister*",
+                        "/whyUs",
                         "/test"
                 )
                 .permitAll()
