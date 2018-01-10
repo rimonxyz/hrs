@@ -56,7 +56,7 @@ public class Booking extends BaseEntity {
         for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++) {
             Room room = roomList.get(i);
             Date bookingDate = bookingDateList.get(i);
-            if (DateUtils.isOnPast(bookingDate) || room.isBooked(bookingDate)) return false;
+            if (DateUtils.isOnPast(bookingDate) || DateUtils.isOnFarFuture(bookingDate) || room.isBooked(bookingDate)) return false;
         }
         return true;
     }

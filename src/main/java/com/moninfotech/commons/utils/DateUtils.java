@@ -89,4 +89,15 @@ public class DateUtils {
         bookingDate = cal.getTime();
         return bookingDate.before(new Date());
     }
+
+    public static boolean isOnFarFuture(Date bookingDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(bookingDate);
+        cal.set(Calendar.HOUR,23);
+        bookingDate = cal.getTime();
+
+        cal.setTime(new Date());
+        cal.add(Calendar.MONTH,1);
+        return bookingDate.after(cal.getTime());
+    }
 }
