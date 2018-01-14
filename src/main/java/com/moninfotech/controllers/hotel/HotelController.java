@@ -1,7 +1,7 @@
 package com.moninfotech.controllers.hotel;
 
-import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
@@ -130,15 +130,18 @@ public class HotelController {
 
     @RequestMapping(value = "{hotelId}/image/{imageNumber}", method = RequestMethod.GET)
     private ResponseEntity<byte[]> getImages(@PathVariable("hotelId") Long hotelId,
-                                             @PathVariable("imageNumber") Integer imageNumber) throws IOException {
+                                             @PathVariable("imageNumber") Integer imageNumber,
+                                             @RequestParam(value = "height", required = false) Integer height,
+                                             @RequestParam(value = "width", required = false) Integer width) throws IOException {
         Hotel hotel = this.hotelService.findOne(hotelId);
-        List<byte[]> images = null;
-        // set images from room
-        if (hotel.getImages() != null && !hotel.getImages().isEmpty())
-            images = hotel.getImages();
+        if (hotel == null) return ResponseEntity.noContent().build();
+        List<byte[]> images = hotel.getImages();
 
         if (images != null && images.size() > imageNumber) {
-            return new ResponseEntity<>(images.get(imageNumber), HttpStatus.OK);
+            byte[] imageBytes = images.get(imageNumber);
+            if (height != null && width != null)
+                imageBytes = FileIO.getScaledImage(imageBytes, width, height);
+            return new ResponseEntity<>(imageBytes, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
