@@ -1,9 +1,9 @@
 package com.moninfotech.controllers.booking;
 
 import com.moninfotech.commons.Constants;
-import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.SessionAttr;
 import com.moninfotech.commons.pojo.BookingHelper;
+import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.config.security.SecurityConfig;
 import com.moninfotech.domain.*;
@@ -211,12 +211,15 @@ public class BookingController {
     }
 
     @GetMapping("/tempRegister")
-    private String tempRegisterPage() {
+    private String tempRegisterPage(HttpSession session) {
+        session.setAttribute(SessionAttr.SESSION_BOOKING_PROCESSING, true);
         return "adminlte/pages/tempRegister";
     }
 
     @PostMapping("/tempRegister")
-    private String tempRegister(@ModelAttribute User user, BindingResult bindingResult) throws Exception, NullPasswordException {
+    private String tempRegister(@ModelAttribute User user, BindingResult bindingResult,HttpSession session) throws Exception, NullPasswordException {
+        session.removeAttribute(SessionAttr.SESSION_BOOKING_PROCESSING); // remove booking processing
+
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
         // check if user already exists
         if (this.userService.findByEmail(user.getEmail()) != null)

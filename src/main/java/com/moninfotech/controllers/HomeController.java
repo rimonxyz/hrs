@@ -2,15 +2,16 @@ package com.moninfotech.controllers;
 
 import com.moninfotech.commons.Config;
 import com.moninfotech.commons.Constants;
+import com.moninfotech.commons.SessionAttr;
 import com.moninfotech.commons.pojo.BookingHelper;
 import com.moninfotech.commons.utils.PasswordUtil;
+import com.moninfotech.commons.validators.Validator;
 import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.exceptions.NotFoundException;
 import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.moninfotech.repository.SubscriberRepository;
 import com.moninfotech.service.*;
-import com.moninfotech.commons.validators.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -91,7 +92,15 @@ public class HomeController {
 
     @GetMapping("/dashboard")
     private String dashboard(@CurrentUser User currentUser,
-                             @RequestParam(value = "hotelType", required = false, defaultValue = Hotel.Type.BOTH) String hotelType, Model model) {
+                             @RequestParam(value = "hotelType", required = false, defaultValue = Hotel.Type.BOTH) String hotelType,
+                             HttpSession session, Model model) {
+        // redirect to checkout page if booking is on processing
+        Boolean isBookingProcessing = (Boolean) session.getAttribute(SessionAttr.SESSION_BOOKING_PROCESSING);
+        if (isBookingProcessing != null && isBookingProcessing) {
+            session.removeAttribute(SessionAttr.SESSION_BOOKING_PROCESSING);
+            return "redirect:/bookings/checkout";
+        }
+
         model.addAttribute("bookingHelper", new BookingHelper());
 
         if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {

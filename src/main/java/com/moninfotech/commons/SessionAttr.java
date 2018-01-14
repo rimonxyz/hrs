@@ -9,4 +9,5 @@ public class SessionAttr {
     public static final String SESSION_BOOKING_DATE_LIST = "bookingDateList";
 
 
+    public static final String SESSION_BOOKING_PROCESSING = "bookingProcessing";
 }
