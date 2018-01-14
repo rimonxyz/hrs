@@ -22,7 +22,7 @@
                 <!-- Widget: user widget style 1 -->
                 <div class="box">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="box-header bg-yellow">
+                    <div class="box-header bg-light-green">
                         <!-- /.widget-user-image -->
                         <h3 class="widget-user-username">Offers</h3>
                     </div>
@@ -32,7 +32,7 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Short Tag</th>
-                                <th>Offer Link</th>
+                                <!--<th>Offer Link</th>-->
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -44,11 +44,11 @@
                                     </h5>
                                 </td>
                                 <td><h5 th:text="${offer?.shortTag}"></h5></td>
-                                <td>
-                                    <a th:href="${offer?.link}">
-                                        <h5 th:text="${offer?.link}"></h5>
-                                    </a>
-                                </td>
+                                <!--<td>-->
+                                    <!--<a th:href="${offer?.link}">-->
+                                        <!--<h5 th:text="${offer?.link}"></h5>-->
+                                    <!--</a>-->
+                                <!--</td>-->
 
                                 <td style="text-align: center;">
                                     <a th:href="@{/admin/offers/edit/}+${offer?.id}">
