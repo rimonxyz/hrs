@@ -24,6 +24,8 @@ public interface HotelService {
 
     Hotel findByUser(User user);
 
+    List<Hotel> searchHotel(String query,int page);
+
     List<Hotel> findByAddressArea(String district,int page);
 
     List<Hotel> findByAddressUpazila(String location,int page);

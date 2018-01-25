@@ -54,10 +54,7 @@ public class HotelController {
         List<Hotel> hotelList;
         if (query != null && !query.isEmpty()) {
             // if search query not null filter hotels
-            hotelList = this.hotelService.findByAddressArea(query, page);
-            hotelList.addAll(this.hotelService.findByAddressUpazila(query, page));
-            if (hotelList.isEmpty())
-                hotelList = this.hotelService.findByNameContaining(query, page);
+            hotelList = this.hotelService.searchHotel(query, page);
         } else {
             // else find all hotel
             hotelList = hotelService.findAll(page, 10, sortBy, isDesc);

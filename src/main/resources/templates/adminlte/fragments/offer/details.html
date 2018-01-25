@@ -25,7 +25,7 @@
                     <div class="box-header">
                         <h2 th:text="${offer?.title}" class="title"></h2>
                         <h5 th:if="${offer?.date != null}" style="margin-top: 10px;" class="pull-right">
-                            <strong>Date: </strong>
+                            <strong>Last Date of Booking: </strong><br/>
                             <span th:text="${offer?.getReadableDate(offer?.date)}"></span>
                         </h5>
                         <h4 th:text="${offer?.shortTag}" style="color: grey; margin-top: 10px;"></h4>
@@ -38,7 +38,7 @@
                             ৳<span th:text="${offer?.price}"></span>
                         </h5>
                         <h5 th:if="${offer?.duration != null and !offer?.duration?.empty }" style="margin-top: 10px;">
-                            <strong>Duration: </strong>
+                            <strong>Duration/Validity: </strong>
                             <span th:text="${offer?.duration}"></span>
                         </h5>
 

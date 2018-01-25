@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by sayemkcn on 4/21/17.
@@ -37,21 +35,12 @@ public class SearchController {
                           Model model) {
         if (page < 0) page = 0;
 
-        List<Hotel> hotels = this.hotelService.findByAddressArea(query,page);
-        hotels.addAll(this.hotelService.findByAddressUpazila(query,page));
-        if (hotels.isEmpty())
-            hotels = this.hotelService.findByNameContaining(query,page);
+        List<Hotel> hotels = this.hotelService.searchHotel(query,page);
         // filter
         if (filterType != null && !filterType.isEmpty() && filterValue != null && !filterValue.isEmpty())
             hotels = this.hotelService.filterHotels(hotels, filterType, filterValue);
-//        // filter hotels out that are already booked
-//        hotels = this.hotelService.filterUnbookedHotelsByDate(hotels, startDate, endDate);
 
-        // remove duplicate
-        Set<Hotel> hotelSet = new HashSet<>();
-        hotelSet.addAll(hotels);
-        hotels.clear();
-        model.addAttribute("hotelList", hotelSet);
+        model.addAttribute("hotelList", hotels);
         if (filterValue != null)
             model.addAttribute("filterValue", filterValue);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());

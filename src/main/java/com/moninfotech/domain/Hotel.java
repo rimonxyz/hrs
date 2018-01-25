@@ -44,6 +44,7 @@ public class Hotel extends BaseEntity {
     private User user;
 
 
+    
     public boolean isEnabled() {
         return enabled;
     }
