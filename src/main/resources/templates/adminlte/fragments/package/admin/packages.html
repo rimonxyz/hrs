@@ -87,9 +87,24 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Date</label>
+                                <label>Spots</label>
+                                <input th:value="${package?.spots}" type="text"  name="spots" class="form-control" placeholder="Spots">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <input th:value="${package?.category}" type="text"  name="category" class="form-control" placeholder="Spots">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tour Date</label>
                                 <input th:value="${pckgDate}" type="date" required="required" name="date" class="form-control">
                             </div>
+
+                            <div class="form-group">
+                                <label>Last Booking Date</label>
+                                <input th:value="${lastBookingDate}" type="date" required="required" name="lastBookingDate" class="form-control">
+                            </div>
+
                             <div class="form-group">
                                 <label>Duration</label>
                                 <input th:value="${package?.duration}" type="text" name="duration" placeholder="Package Duration" class="form-control">

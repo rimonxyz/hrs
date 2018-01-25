@@ -1,9 +1,9 @@
 package com.moninfotech.controllers.packages.admin;
 
 import com.moninfotech.commons.utils.DateUtils;
+import com.moninfotech.commons.validators.ImageValidator;
 import com.moninfotech.domain.Package;
 import com.moninfotech.service.PackageService;
-import com.moninfotech.commons.validators.ImageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +58,8 @@ public class PackageAdminController {
         if (pckg.getDate() == null) pckg.setDate(new Date());
         model.addAttribute("package", pckg);
         model.addAttribute("pckgDate", DateUtils.getParsableDateFormat().format(pckg.getDate()));
+        if (pckg.getLastBookingDate() != null)
+            model.addAttribute("lastBookingDate", DateUtils.getParsableDateFormat().format(pckg.getLastBookingDate()));
         model.addAttribute("packageList", this.packageService.findAll(null, null));
 //        model.addAttribute("template", "fragments/package/admin/packages");
         return "adminlte/fragments/package/admin/packages";
@@ -73,7 +75,7 @@ public class PackageAdminController {
         if (ImageValidator.isImageValid(multipartFile))
             pckg.setImage(multipartFile.getBytes());
         else pckg.setImage(existing.getImage());
-        pckg = this.packageService.save(pckg);
+        this.packageService.save(pckg);
         return "redirect:/admin/packages?messageinfo=Package Saved!";
     }
 

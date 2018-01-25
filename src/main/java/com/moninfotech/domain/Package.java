@@ -32,6 +32,10 @@ public class Package extends BaseEntity {
     @Column(length = 10000)
     private String description;
 
+    private String spots;
+    private String category;
+    private Date lastBookingDate;
+
     public byte[] getImage() {
         return image;
     }
@@ -143,5 +147,29 @@ public class Package extends BaseEntity {
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 "} " + super.toString();
+    }
+
+    public String getSpots() {
+        return spots;
+    }
+
+    public void setSpots(String spots) {
+        this.spots = spots;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Date getLastBookingDate() {
+        return lastBookingDate;
+    }
+
+    public void setLastBookingDate(Date lastBookingDate) {
+        this.lastBookingDate = lastBookingDate;
     }
 }

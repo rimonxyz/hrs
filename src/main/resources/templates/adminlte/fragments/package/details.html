@@ -37,6 +37,9 @@
                 <div class="component-box-body">
                     <div class="component-box-body-title">
                         Package Details
+                        <div th:if="${pckg?.location != null and !pckg?.location?.empty}" class="pull-right" style="margin-right: 20px;">
+                            Location: <span th:text="${pckg?.location}"></span>
+                        </div>
                     </div>
 
 
@@ -44,14 +47,35 @@
                         <strong>Time Distribution</strong><br/>
                         <span th:text="${pckg?.timeDistribution}"></span>
                     </h5>
+
+                    <h5 th:if="${pckg?.spots != null and !pckg?.spots?.empty}" style="margin-top: 10px;">
+                        <strong>Spots : </strong>
+                        <span th:text="${pckg?.spots}"></span>
+                    </h5>
+
+                    <h5 th:if="${pckg?.category != null and !pckg?.category?.empty}" style="margin-top: 10px;">
+                        <strong>Category : </strong>
+                        <span th:text="${pckg?.category}"></span>
+                    </h5>
+
+                    <h5 th:if="${pckg?.lastBookingDate != null}" style="margin-top: 10px;">
+                        <strong>Tour Date : </strong>
+                        <span th:text="${pckg?.getReadableDate(pckg?.date)}"></span>
+                    </h5>
+
+                    <h5 th:if="${pckg?.lastBookingDate != null}" style="margin-top: 10px;">
+                        <strong>Last Booking Date : </strong>
+                        <span th:text="${pckg?.getReadableDate(pckg?.lastBookingDate)}"></span>
+                    </h5>
+
                     <h5 th:if="${pckg?.include != null and !pckg?.include?.empty}" style="margin-top: 10px;">
                         <strong>This Package includes : </strong>
-                        <span th:text="${pckg?.include}"></span>
+                        <br/><span th:text="${pckg?.include}"></span>
                     </h5>
 
                     <h5 th:if="${pckg?.exclude != null and !pckg?.exclude?.empty}" style="margin-top: 10px;">
                         <strong>This Package doesn't includes : </strong>
-                        <span th:text="${pckg?.exclude}"></span>
+                        <br/><span th:text="${pckg?.exclude}"></span>
                     </h5>
 
 
