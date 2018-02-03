@@ -16,6 +16,23 @@ public class HotelFacilities {
     private boolean helipad;
     private boolean ac;
 
+    private boolean frontDesk;
+    private boolean roomService;
+    private boolean electricity;
+    private boolean security;
+    private boolean complementaryBreakfast;
+    private boolean coffeeShop;
+    private boolean freeParking;
+    private boolean airportTransportation;
+    private boolean businessCenter;
+    private boolean meetingRoom;
+    private boolean doctorOnCall;
+    private boolean wakeupService;
+    private boolean wheelChairAccessible;
+    private boolean safeDepositBox;
+    private boolean nonSmokingRoom;
+    private boolean vipFloor;
+
     public HotelFacilities() {
     }
 
@@ -106,6 +123,134 @@ public class HotelFacilities {
 
     public void setAc(boolean ac) {
         this.ac = ac;
+    }
+
+    public boolean isFrontDesk() {
+        return frontDesk;
+    }
+
+    public void setFrontDesk(boolean frontDesk) {
+        this.frontDesk = frontDesk;
+    }
+
+    public boolean isRoomService() {
+        return roomService;
+    }
+
+    public void setRoomService(boolean roomService) {
+        this.roomService = roomService;
+    }
+
+    public boolean isElectricity() {
+        return electricity;
+    }
+
+    public void setElectricity(boolean electricity) {
+        this.electricity = electricity;
+    }
+
+    public boolean isSecurity() {
+        return security;
+    }
+
+    public void setSecurity(boolean security) {
+        this.security = security;
+    }
+
+    public boolean isComplementaryBreakfast() {
+        return complementaryBreakfast;
+    }
+
+    public void setComplementaryBreakfast(boolean complementaryBreakfast) {
+        this.complementaryBreakfast = complementaryBreakfast;
+    }
+
+    public boolean isCoffeeShop() {
+        return coffeeShop;
+    }
+
+    public void setCoffeeShop(boolean coffeeShop) {
+        this.coffeeShop = coffeeShop;
+    }
+
+    public boolean isFreeParking() {
+        return freeParking;
+    }
+
+    public void setFreeParking(boolean freeParking) {
+        this.freeParking = freeParking;
+    }
+
+    public boolean isAirportTransportation() {
+        return airportTransportation;
+    }
+
+    public void setAirportTransportation(boolean airportTransportation) {
+        this.airportTransportation = airportTransportation;
+    }
+
+    public boolean isBusinessCenter() {
+        return businessCenter;
+    }
+
+    public void setBusinessCenter(boolean businessCenter) {
+        this.businessCenter = businessCenter;
+    }
+
+    public boolean isMeetingRoom() {
+        return meetingRoom;
+    }
+
+    public void setMeetingRoom(boolean meetingRoom) {
+        this.meetingRoom = meetingRoom;
+    }
+
+    public boolean isDoctorOnCall() {
+        return doctorOnCall;
+    }
+
+    public void setDoctorOnCall(boolean doctorOnCall) {
+        this.doctorOnCall = doctorOnCall;
+    }
+
+    public boolean isWakeupService() {
+        return wakeupService;
+    }
+
+    public void setWakeupService(boolean wakeupService) {
+        this.wakeupService = wakeupService;
+    }
+
+    public boolean isWheelChairAccessible() {
+        return wheelChairAccessible;
+    }
+
+    public void setWheelChairAccessible(boolean wheelChairAccessible) {
+        this.wheelChairAccessible = wheelChairAccessible;
+    }
+
+    public boolean isSafeDepositBox() {
+        return safeDepositBox;
+    }
+
+    public void setSafeDepositBox(boolean safeDepositBox) {
+        this.safeDepositBox = safeDepositBox;
+    }
+
+    public boolean isNonSmokingRoom() {
+        return nonSmokingRoom;
+    }
+
+    public void setNonSmokingRoom(boolean nonSmokingRoom) {
+        this.nonSmokingRoom = nonSmokingRoom;
+    }
+
+    public boolean isVipFloor() {
+        return vipFloor;
+    }
+
+    public void setVipFloor(boolean vipFloor) {
+        this.vipFloor = vipFloor;
     }
 
     @Override
