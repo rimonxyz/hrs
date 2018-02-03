@@ -26,7 +26,7 @@
                             <li><a href="#" th:text="${hotel?.description}">Projects <span
                                     class="pull-right badge bg-blue">31</span></a></li>
                             <li>
-                                <a href="#">Hotel Status
+                                <a href="#"><span th:text="${hotel?.type}"></span> Status
                                     <span class="pull-right">
                                         <span th:if="${hotel?.enabled}"><i class="fa fa-circle text-success"></i> Online</span>
                                         <span th:if="${!hotel?.enabled}"><i class="fa fa-circle text-danger"></i> Offline</span>
@@ -47,7 +47,7 @@
                                                                          th:text="${hotel?.getNumberOfNonAcRooms()}">842</span></a>
                             </li>
 
-                            <li><a href="#"><h3>Hotel Facilities </h3><span class="pull-right badge bg-red"></span></a></li>
+                            <li><a href="#"><h3><span th:text="${hotel?.type}"></span> Facilities </h3><span class="pull-right badge bg-red"></span></a></li>
                             <li th:if="${hotel?.facilities?.restaurant}"><a href="#">Restaurant<i class="glyphicon glyphicon-ok pull-right"></i></a>
                             </li>
                             <li th:if="${hotel?.facilities?.lift}"><a href="#">Lift<i class="glyphicon glyphicon-ok pull-right"></i></a>
@@ -69,6 +69,38 @@
                             <li th:if="${hotel?.facilities?.helipad}"><a href="#">Helipad<i class="glyphicon glyphicon-ok pull-right"></i></a>
                             </li>
                             <li th:if="${hotel?.facilities?.ac}"><a href="#">AC<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.frontDesk}"><a href="#">24 Hours Front Desk<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.roomService}"><a href="#">24 Hours Room Service<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.electricity}"><a href="#">24 Hours Electricity<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.security}"><a href="#">24 Hours Security<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.complementaryBreakfast}"><a href="#">Complementary Breakfast<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.coffeeShop}"><a href="#">Coffee Shop<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.freeParking}"><a href="#">Free Parking<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.airportTransportation}"><a href="#">Airport Transportation<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.businessCenter}"><a href="#">Business Center<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.meetingRoom}"><a href="#">Meeting Room<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.doctorOnCall}"><a href="#">Doctor On Call<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.wakeupService}"><a href="#">Wakeup Service<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.wheelChairAccessible}"><a href="#">Wheel Chair Accessible<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.safeDepositBox}"><a href="#">Safe Deposit Box<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.nonSmokingRoom}"><a href="#">Non Smoking Room<i class="glyphicon glyphicon-ok pull-right"></i></a>
+                            </li>
+                            <li th:if="${hotel?.facilities?.vipFloor}"><a href="#">VIP Floor<i class="glyphicon glyphicon-ok pull-right"></i></a>
                             </li>
 
                         </ul>
