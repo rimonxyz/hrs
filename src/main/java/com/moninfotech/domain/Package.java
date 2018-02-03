@@ -22,6 +22,7 @@ public class Package extends BaseEntity {
     private int price;
     @Column(length = 1000)
     private String link;
+    @Column(length = 5000)
     private String timeDistribution;
     private String include;
     private String exclude;
