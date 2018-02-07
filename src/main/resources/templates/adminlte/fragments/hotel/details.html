@@ -46,6 +46,9 @@
                             <li><a href="#">Number of NON AC Rooms <span class="pull-right badge bg-red"
                                                                          th:text="${hotel?.getNumberOfNonAcRooms()}">842</span></a>
                             </li>
+                            <li th:if="${hotel?.discount>0}"><a href="#"><span class="pull-left badge bg-green" style="width: 100%;padding: 5px;"
+                                                  th:text="${hotel?.discount+'% Discount'}"></span></a><hr/>
+                            </li>
 
                             <li><a href="#"><h3><span th:text="${hotel?.type}"></span> Facilities </h3><span class="pull-right badge bg-red"></span></a></li>
                             <li th:if="${hotel?.facilities?.frontDesk}"><a href="#">24 Hours Front Desk<i class="glyphicon glyphicon-ok pull-right"></i></a>

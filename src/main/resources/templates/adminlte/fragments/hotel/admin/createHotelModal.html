@@ -15,7 +15,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="name"><span th:text="${hotelType}"></span> Name</label>
-                                    <input class="form-control" name="name" id="name" type="text" placeholder="Hotel/Ship Name" required="required"></input>
+                                    <input class="form-control" name="name" id="name" type="text" placeholder="Hotel/Ship Name" required="required"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="star">Star</label>
@@ -37,6 +37,11 @@
                                         <option th:selected="${'Hotel'.equals(hotelType)}" value="Hotel">Hotel</option>
                                         <option th:selected="${'Ship'.equals(hotelType)}" value="Ship">Ship</option>
                                     </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="discount">Discount</label>
+                                    <input class="form-control" name="discount" id="discount" type="number" min="0" max="100" step="1" placeholder="Discount" required="required"/>
                                 </div>
 
                                 <!--Facilities-->

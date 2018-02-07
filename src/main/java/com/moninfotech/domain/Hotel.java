@@ -21,6 +21,8 @@ public class Hotel extends BaseEntity {
     private String star;
     private boolean enabled;
 
+    private Integer discount;
+
     @ElementCollection(fetch = FetchType.LAZY)
     @Column(length = 83886080)
     @JsonIgnore
@@ -51,6 +53,14 @@ public class Hotel extends BaseEntity {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
     public static final class Type {
