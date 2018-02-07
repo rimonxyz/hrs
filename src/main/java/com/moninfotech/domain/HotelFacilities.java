@@ -33,7 +33,71 @@ public class HotelFacilities {
     private boolean nonSmokingRoom;
     private boolean vipFloor;
 
+    private boolean acceptCreditCard;
+    private boolean newspaper;
+    private boolean laundry;
+    private boolean lobby;
+    private boolean foreignExchange;
+    private boolean executiveLaunge;
+    private boolean babySitting;
+
     public HotelFacilities() {
+    }
+
+    public boolean isAcceptCreditCard() {
+        return acceptCreditCard;
+    }
+
+    public void setAcceptCreditCard(boolean acceptCreditCard) {
+        this.acceptCreditCard = acceptCreditCard;
+    }
+
+    public boolean isNewspaper() {
+        return newspaper;
+    }
+
+    public void setNewspaper(boolean newspaper) {
+        this.newspaper = newspaper;
+    }
+
+    public boolean isLaundry() {
+        return laundry;
+    }
+
+    public void setLaundry(boolean laundry) {
+        this.laundry = laundry;
+    }
+
+    public boolean isLobby() {
+        return lobby;
+    }
+
+    public void setLobby(boolean lobby) {
+        this.lobby = lobby;
+    }
+
+    public boolean isForeignExchange() {
+        return foreignExchange;
+    }
+
+    public void setForeignExchange(boolean foreignExchange) {
+        this.foreignExchange = foreignExchange;
+    }
+
+    public boolean isExecutiveLaunge() {
+        return executiveLaunge;
+    }
+
+    public void setExecutiveLaunge(boolean executiveLaunge) {
+        this.executiveLaunge = executiveLaunge;
+    }
+
+    public boolean isBabySitting() {
+        return babySitting;
+    }
+
+    public void setBabySitting(boolean babySitting) {
+        this.babySitting = babySitting;
     }
 
     public boolean isRestaurant() {
