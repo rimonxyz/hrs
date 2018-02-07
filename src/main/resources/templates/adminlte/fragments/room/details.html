@@ -38,10 +38,11 @@
                         <ul class="nav nav-stacked">
                             <li><a href="#" th:text="${room?.hotel?.description}">Projects <span
                                     class="pull-right badge bg-blue">31</span></a></li>
-                            <li><a href="#"><span class="pull-left badge bg-aqua" id="star"
-                                                  th:text="${room?.hotel?.star}"></span><span>&nbsp; &nbsp;Star Hotel</span></a>
+                            <li><a href="#">
+                                <span class="pull-right badge bg-aqua" id="star"
+                                                  th:text="${room?.capitalizeFirstLetter(room?.hotel?.star)}"></span><span>&nbsp; &nbsp;Star Hotel</span></a>
                             </li>
-                            <li><a href="#">Average Rating: <span class="pull-right badge bg-green"
+                            <li><a href="#">Guest Rating: <span class="pull-right badge bg-green"
                                                                   th:text="${room?.hotel?.getAverageRating()}"></span></a>
                             </li>
                             <li><a href="#">Total Rooms <span class="pull-right badge bg-red"

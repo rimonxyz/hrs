@@ -68,6 +68,8 @@
                                         <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
                                         <input name="filterType" type="hidden" th:value="star"></input>
                                         <select class="form-control" name="filterValue" id="starFilter">
+                                            <option value="">All
+                                            </option>
                                             <option value="1 star" th:selected="${filterValue?.equals('1 star')}">1 Star
                                             </option>
                                             <option value="2 star" th:selected="${filterValue?.equals('2 star')}">2 Star
@@ -113,21 +115,20 @@
                                         <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
                                         <input name="filterType" type="hidden" th:value="price"></input>
                                         <select class="form-control" name="filterValue" id="priceFilter">
-                                            <option th:value="500x1500"
-                                                    th:selected="${filterValue?.equals('500x1500')}">
-                                                500-1500
+                                            <option th:value="1x1000000">
+                                                All
                                             </option>
-                                            <option th:value="1501x2500"
-                                                    th:selected="${filterValue?.equals('1501x2500')}">
-                                                1501-2500
+                                            <option th:value="500x800"
+                                                    th:selected="${filterValue?.equals('500x800')}">
+                                                500-800
                                             </option>
-                                            <option th:value="2501x4000"
-                                                    th:selected="${filterValue?.equals('2501x4000')}">
-                                                2501-4000
+                                            <option th:value="900x1500"
+                                                    th:selected="${filterValue?.equals('900x1500')}">
+                                                900-1500
                                             </option>
-                                            <option th:value="4001x500000"
-                                                    th:selected="${filterValue?.equals('4001x500000')}">
-                                                4001- Above
+                                            <option th:value="1600x1000000"
+                                                    th:selected="${filterValue?.equals('1600x1000000')}">
+                                                1600-Above
                                             </option>
                                         </select>
                                     </form>
@@ -135,7 +136,7 @@
                             </div>
                             <!--Rating Filter-->
                             <div style="margin-top: 10px;margin-bottom: 10px;">
-                                <label for="priceFilterDiv" class="label label-primary">BY RATING</label>
+                                <label for="priceFilterDiv" class="label label-primary">GUEST RATING</label>
                                 <div id="ratingFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels/}" id="ratingFilterForm" method="get">
                                         <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>

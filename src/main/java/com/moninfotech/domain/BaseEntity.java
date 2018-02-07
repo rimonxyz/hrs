@@ -1,5 +1,6 @@
 package com.moninfotech.domain;
 
+import com.moninfotech.commons.Utils;
 import com.moninfotech.commons.utils.DateUtils;
 
 import javax.persistence.*;
@@ -78,6 +79,9 @@ public abstract class BaseEntity {
         return sdf.format(date);
     }
 
+    public String capitalizeFirstLetter(String original) {
+        return Utils.capitalizeFirstLetter(original);
+    }
     @Override
     public String toString() {
         return "BaseEntity{" +
