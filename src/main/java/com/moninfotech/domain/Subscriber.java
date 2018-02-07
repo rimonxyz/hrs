@@ -7,6 +7,14 @@ public class Subscriber extends BaseEntity{
     private String email;
     private String phone;
 
+    public boolean isEmail() {
+        return email != null;
+    }
+
+    public boolean isPhone() {
+        return phone != null;
+    }
+
     public String getEmail() {
         return email;
     }
