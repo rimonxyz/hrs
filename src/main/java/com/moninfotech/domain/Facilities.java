@@ -17,6 +17,70 @@ public class Facilities {
     private boolean hillView;
     private boolean seaView;
 
+    private boolean telephone;
+    private boolean bathTowel;
+    private boolean tableAndChair;
+    private boolean inMiddle;
+    private boolean backFace;
+    private boolean kitchen;
+    private boolean bathTub;
+
+    public boolean isTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(boolean telephone) {
+        this.telephone = telephone;
+    }
+
+    public boolean isBathTowel() {
+        return bathTowel;
+    }
+
+    public void setBathTowel(boolean bathTowel) {
+        this.bathTowel = bathTowel;
+    }
+
+    public boolean isTableAndChair() {
+        return tableAndChair;
+    }
+
+    public void setTableAndChair(boolean tableAndChair) {
+        this.tableAndChair = tableAndChair;
+    }
+
+    public boolean isInMiddle() {
+        return inMiddle;
+    }
+
+    public void setInMiddle(boolean inMiddle) {
+        this.inMiddle = inMiddle;
+    }
+
+    public boolean isBackFace() {
+        return backFace;
+    }
+
+    public void setBackFace(boolean backFace) {
+        this.backFace = backFace;
+    }
+
+    public boolean isKitchen() {
+        return kitchen;
+    }
+
+    public void setKitchen(boolean kitchen) {
+        this.kitchen = kitchen;
+    }
+
+    public boolean isBathTub() {
+        return bathTub;
+    }
+
+    public void setBathTub(boolean bathTub) {
+        this.bathTub = bathTub;
+    }
+
     public boolean isFrontFace() {
         return frontFace;
     }
