@@ -24,43 +24,39 @@
                 <div class="box">
                     <div class="box-header">
                         <h2 th:text="${offer?.title}" class="title"></h2>
-                        <h5 th:if="${offer?.date != null}" style="margin-top: 10px;" class="pull-right">
-                            <strong>Last Date of Booking: </strong><br/>
-                            <span th:text="${offer?.getReadableDate(offer?.date)}"></span>
-                        </h5>
                         <h4 th:text="${offer?.shortTag}" style="color: grey; margin-top: 10px;"></h4>
-                        <h5 th:if="${offer?.location != null and !offer?.location?.empty}" style="margin-top: 10px;">
-                            <strong>Location: </strong>
-                            <span th:text="${offer?.location}"></span>
-                        </h5>
+
                         <h5 th:if="${offer?.price != null}" style="margin-top: 10px;">
                             <strong>Price: </strong>
                             ৳<span th:text="${offer?.price}"></span>
                         </h5>
-                        <h5 th:if="${offer?.duration != null and !offer?.duration?.empty }" style="margin-top: 10px;">
+                        <div th:if="${offer?.duration != null and !offer?.duration?.empty }" style="margin-top: 10px;">
                             <strong>Duration/Validity: </strong>
                             <span th:text="${offer?.duration}"></span>
-                        </h5>
+                        </div>
 
 
                     </div>
                     <div class="box-body">
                         <img th:src="@{/offers/image/}+${offer?.id}" th:alt="${offer?.title}" class="img-responsive"
                              style="height: 300px; margin-right: 20px;margin-bottom: 20px;">
-                        <h5 th:if="${offer?.timeDistribution != null and !offer?.timeDistribution?.empty}" style="margin-top: 10px;">
+                        <div th:if="${offer?.timeDistribution != null and !offer?.timeDistribution?.empty}" style="margin-top: 10px;">
                             <strong>Time Distribution</strong><br/>
-                            <span th:text="${offer?.timeDistribution}"></span>
-                        </h5>
-                        <h5 th:if="${offer?.include != null and !offer?.include?.empty}" style="margin-top: 10px;">
-                            <strong>This Offer includes</strong><br/>
-                            <span th:text="${offer?.include}"></span>
-                        </h5>
+                            <p th:text="${offer?.timeDistribution}"></p>
+                        </div>
+                        <!--<h5 th:if="${offer?.include != null and !offer?.include?.empty}" style="margin-top: 10px;">-->
+                            <!--<strong>This Offer includes</strong><br/>-->
+                            <!--<span th:text="${offer?.include}"></span>-->
+                        <!--</h5>-->
 
-                        <h5 th:if="${offer?.exclude != null and !offer?.exclude?.empty}" style="margin-top: 10px;">
-                            <strong>This Offer doesn't includes</strong><br/>
-                            <span th:text="${offer?.exclude}"></span>
-                        </h5>
-
+                        <!--<h5 th:if="${offer?.exclude != null and !offer?.exclude?.empty}" style="margin-top: 10px;">-->
+                            <!--<strong>This Offer doesn't includes</strong><br/>-->
+                            <!--<span th:text="${offer?.exclude}"></span>-->
+                        <!--</h5>-->
+                        <div th:if="${offer?.date != null}" style="margin-top: 10px;" >
+                            <strong>Last Date of Booking: </strong>
+                            <span th:text="${offer?.getReadableDate(offer?.date)}"></span>
+                        </div>
 
                         <p th:text="${offer?.description}" style="margin-top: 15px;"></p>
                     </div>

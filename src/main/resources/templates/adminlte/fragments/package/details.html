@@ -29,10 +29,18 @@
                 </div>
                 <div class="package-page-side-bar-title">
                     <span class="headline" th:text="${pckg?.title}"></span>
-                    <strong th:if="${pckg?.duration !=null and !pckg?.duration?.empty}">Duration: </strong>
-                    <span th:text="${pckg?.duration}"></span><br/>
-                    <strong>Price: </strong>
-                    ৳<span th:text="${pckg?.price}"></span>
+                    <div th:if="${pckg?.spots !=null and !pckg?.spots.empty}">
+                        <strong>Spots: </strong><span th:text="${pckg?.spots}"></span>
+                    </div>
+                    <div th:if="${pckg?.category !=null and !pckg?.category?.empty}">
+                        <strong>Category: </strong>
+                        <span th:text="${pckg?.category}"></span><br/>
+                    </div>
+                    <div th:if="${pckg?.duration !=null and !pckg?.duration?.empty}">
+                        <strong>Duration: </strong>
+                        <span th:text="${pckg?.duration}"></span><br/>
+                    </div>
+                    <hr/>
                 </div>
                 <div class="component-box-body">
                     <div class="component-box-body-title">
@@ -42,23 +50,7 @@
                         </div>
                     </div>
 
-
-                    <h5 th:if="${pckg?.timeDistribution != null and !pckg?.timeDistribution?.empty}" style="margin-top: 10px;">
-                        <strong>Time Distribution</strong><br/>
-                        <span th:text="${pckg?.timeDistribution}"></span>
-                    </h5>
-
-                    <h5 th:if="${pckg?.spots != null and !pckg?.spots?.empty}" style="margin-top: 10px;">
-                        <strong>Spots : </strong>
-                        <span th:text="${pckg?.spots}"></span>
-                    </h5>
-
-                    <h5 th:if="${pckg?.category != null and !pckg?.category?.empty}" style="margin-top: 10px;">
-                        <strong>Category : </strong>
-                        <span th:text="${pckg?.category}"></span>
-                    </h5>
-
-                    <h5 th:if="${pckg?.lastBookingDate != null}" style="margin-top: 10px;">
+                    <h5 th:if="${pckg?.date != null}" style="margin-top: 10px;">
                         <strong>Tour Date : </strong>
                         <span th:text="${pckg?.getReadableDate(pckg?.date)}"></span>
                     </h5>
@@ -66,6 +58,23 @@
                     <h5 th:if="${pckg?.lastBookingDate != null}" style="margin-top: 10px;">
                         <strong>Last Booking Date : </strong>
                         <span th:text="${pckg?.getReadableDate(pckg?.lastBookingDate)}"></span>
+                    </h5>
+                    <div th:if="${pckg?.price != null}">
+                        <strong>Price: </strong>
+                        ৳<span th:text="${pckg?.price}"></span>
+                    </div>
+                    <div th:if="${pckg?.link != null}">
+                        <strong>Link: </strong>
+                        <span th:text="${pckg?.link}"></span>
+                    </div>
+                    <h5 th:if="${pckg?.timeDistribution != null and !pckg?.timeDistribution?.empty}" style="margin-top: 10px;">
+                        <strong>Time Distribution</strong><br/>
+                        <span th:text="${pckg?.timeDistribution}"></span>
+                    </h5>
+
+                    <h5 th:if="${pckg?.exclude != null and !pckg?.exclude?.empty}" style="margin-top: 10px;">
+                        <strong>Details : </strong>
+                        <span th:text="${pckg?.description}"></span>
                     </h5>
 
                     <h5 th:if="${pckg?.include != null and !pckg?.include?.empty}" style="margin-top: 10px;">
@@ -76,15 +85,7 @@
                     <h5 th:if="${pckg?.exclude != null and !pckg?.exclude?.empty}" style="margin-top: 10px;">
                         <strong>This Package doesn't includes : </strong>
                         <br/><span th:text="${pckg?.exclude}"></span>
-                    </h5>
-
-
-                    <h5 th:if="${pckg?.exclude != null and !pckg?.exclude?.empty}" style="margin-top: 10px;">
-                        <strong>Details : </strong>
-                        <span th:text="${pckg?.description}"></span>
-                    </h5>
-
-
+                    </h5><hr/>
 
                 </div>
 
