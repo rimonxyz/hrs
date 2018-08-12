@@ -55,106 +55,6 @@
                             </li>
                         </ul>
 
-                        <ul class="nav nav-stacked">
-                            <li><a href="#" th:text="${hotel?.description}">Projects <span
-                                    class="pull-right badge bg-blue">31</span></a></li>
-                            <li>
-                                <a href="#"><span th:text="${hotel?.type}"></span> Status
-                                    <span class="pull-right">
-                                        <span th:if="${hotel?.enabled}"><i class="fa fa-circle text-success"></i> Online</span>
-                                        <span th:if="${!hotel?.enabled}"><i class="fa fa-circle text-danger"></i> Offline</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li><a href="#"><span class="pull-right badge bg-aqua" id="star"
-                                                  th:text="${hotel?.capitalizeFirstLetter(hotel?.star)}"></span><span>Star Rating</span></a>
-                            </li>
-                            <li><a href="#">Guest Rating: <span class="pull-right badge bg-green"
-                                                                  th:text="${hotel?.getAverageRating()}"></span></a></li>
-                            <li><a href="#">Total Rooms <span class="pull-right badge bg-red"
-                                                              th:text="${hotel?.roomList?.size()}">842</span></a></li>
-                            <li><a href="#">Number of AC Rooms <span class="pull-right badge bg-red"
-                                                                     th:text="${hotel?.getNumberOfAcRooms()}">842</span></a>
-                            </li>
-                            <li><a href="#">Number of NON AC Rooms <span class="pull-right badge bg-red"
-                                                                         th:text="${hotel?.getNumberOfNonAcRooms()}">842</span></a>
-                            </li>
-                            <li th:if="${hotel?.discount>0}"><a href="#"><span class="pull-left badge bg-green" style="width: 100%;padding: 5px;"
-                                                  th:text="${hotel?.discount+'% Discount'}"></span></a><hr/>
-                            </li>
-
-                            <li><a href="#"><h3><span th:text="${hotel?.type}"></span> Facilities </h3><span class="pull-right badge bg-red"></span></a></li>
-                            <li th:if="${hotel?.facilities?.frontDesk}"><a href="#">24 Hours Front Desk<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.roomService}"><a href="#">24 Hours Room Service<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.electricity}"><a href="#">24 Hours Electricity<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.security}"><a href="#">24 Hours Security<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.acceptCreditCard}"><a href="#">Accept Credit Card<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.complementaryBreakfast}"><a href="#">Complementary Breakfast<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.restaurant}"><a href="#">Restaurant<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.coffeeShop}"><a href="#">Coffee Shop<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.ac}"><a href="#">AC<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.lift}"><a href="#">Lift<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.wifi}"><a href="#">Free Wifi<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.freeParking}"><a href="#">Free Parking<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.newspaper}"><a href="#">Newspaper<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.swimingPool}"><a href="#">Swiming Pool<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.laundry}"><a href="#">Laundry<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.lobby}"><a href="#">Lobby<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.sportsZone}"><a href="#">Sports Zone<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.gym}"><a href="#">Gymnesiam<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.spa}"><a href="#">SPA<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.bar}"><a href="#">Bar<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.helipad}"><a href="#">Helipad<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.vipFloor}"><a href="#">VIP Floor<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.foreignExchange}"><a href="#">Foreign Exchange<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.airportTransportation}"><a href="#">Airport Transportation<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.conferenceRoom}"><a href="#">Conference Room<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.businessCenter}"><a href="#">Business Center<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.meetingRoom}"><a href="#">Meeting Room<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.executiveLaunge}"><a href="#">Executive Launge<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.babySitting}"><a href="#">Baby Sitting<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.doctorOnCall}"><a href="#">Doctor On Call<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.wakeupService}"><a href="#">Wakeup Service<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.wheelChairAccessible}"><a href="#">Wheel Chair Accessible<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.safeDepositBox}"><a href="#">Safe Deposit Box<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-                            <li th:if="${hotel?.facilities?.nonSmokingRoom}"><a href="#">Non Smoking Room<i class="glyphicon glyphicon-ok pull-right"></i></a>
-                            </li>
-
-
-                        </ul>
                     </div>
                 </div>
 
@@ -479,7 +379,11 @@
                                     <!--</div>-->
                                     <!-- /.col -->
                                 </div>
-                                <!-- /.row -->
+                                <div class="row" style="padding:0 15px;">
+                                    <a class="btn btn-warning pull-right" th:if="${room?.hotel?.isEnabled()}" id="addToCart"
+                                       th:href="@{/bookings/cart/add/}+${room?.id}+@{/(date=${date})}">Book it!</a>
+                                    <a class="btn btn-success" th:href="@{/rooms/}+${room?.id}+@{/}+${filterValue}">Details</a>
+                                </div>
                             </div>
                         </div>
                         <!-- /.widget-user -->
