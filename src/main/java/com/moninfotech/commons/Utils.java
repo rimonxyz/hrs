@@ -17,4 +17,14 @@ public class Utils {
         }
         return original.substring(0, 1).toUpperCase() + original.substring(1);
     }
+
+    public static boolean NULL_OR_EMPTY(String str) {
+        return str == null || str.isEmpty();
+    }
+
+    public static boolean NOT_NULL_NOT_EMPTY(String str) {
+        return !Utils.NULL_OR_EMPTY(str);
+    }
+
+
 }

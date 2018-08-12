@@ -1,17 +1,22 @@
 package com.moninfotech.service.impl;
 
 import com.moninfotech.commons.Constants;
-import com.moninfotech.commons.utils.DateUtils;
+import com.moninfotech.commons.Utils;
 import com.moninfotech.commons.pojo.FilterType;
-import com.moninfotech.domain.Category;
-import com.moninfotech.domain.Hotel;
-import com.moninfotech.domain.Room;
+import com.moninfotech.commons.utils.DateUtils;
+import com.moninfotech.commons.utils.FileIO;
+import com.moninfotech.domain.*;
+import com.moninfotech.exceptions.forbidden.ForbiddenException;
+import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.repository.RoomRepository;
+import com.moninfotech.service.CategoryService;
+import com.moninfotech.service.HotelService;
 import com.moninfotech.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,8 +29,16 @@ import java.util.stream.Collectors;
 @Service
 public class RoomServiceImpl implements RoomService {
 
+    private final HotelService hotelService;
+    private final RoomRepository roomRepo;
+    private final CategoryService categoryService;
+
     @Autowired
-    private RoomRepository roomRepo;
+    public RoomServiceImpl(HotelService hotelService, RoomRepository roomRepo, CategoryService categoryService) {
+        this.hotelService = hotelService;
+        this.roomRepo = roomRepo;
+        this.categoryService = categoryService;
+    }
 
     @Override
     public Room save(Room room) {
@@ -141,6 +154,34 @@ public class RoomServiceImpl implements RoomService {
             throw new IllegalArgumentException("Room List can not be null: filterByCategory(List<Room> roomList, String categoryName)");
         return roomList.stream()
                 .filter(room -> room.getCategory().getName().equals(categoryName)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Room create(Room room, Long hotelId, MultipartFile[] multipartFiles, User user) throws InvalidException, ForbiddenException {
+        List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
+        // if all images aren't valid
+        if (FileIO.isNotEmpty(multipartFiles)) { // if images one or more images are choosen to be uploaded
+            if (files.size() != multipartFiles.length)
+                throw new InvalidException("/hotel/rooms/create", "One or more images are invalid.");
+            room.setImages(files);
+        }
+        Hotel hotel = null;
+        if (hotelId == null)
+            hotel = this.hotelService.findByUser(user);
+        else
+            hotel = this.hotelService.findOne(hotelId);
+
+        if (hotel == null) throw new ForbiddenException("/", "You are not authorized to do this action.");
+        room.setHotel(hotel);
+        if (Utils.NULL_OR_EMPTY(room.getRoomNumber())) room.setRoomNumber(".");
+        // Room Fascilities
+        if (room.getFacilities() == null) room.setFacilities(new Facilities());
+        // check if room category was saved previously, if not then save and set to room
+//        if (room.getCategory().getId() == null)
+//            room.setCategory(this.categoryService.save(room.getCategory()));
+//        else // else find category and set to room
+        room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
+        return this.roomRepo.save(room);
     }
 
     private List<Long> filterRoomIdsByCategory(List<Room> roomList, String value) {

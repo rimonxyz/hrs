@@ -1,10 +1,12 @@
 package com.moninfotech.service;
 
-import com.moninfotech.commons.pojo.Analytics;
 import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
+import com.moninfotech.exceptions.forbidden.ForbiddenException;
+import com.moninfotech.exceptions.invalid.InvalidException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -46,5 +48,7 @@ public interface RoomService {
     List<Room> filterRoomList(List<Room> roomList, String filterType, String filterValue) throws ParseException;
 
     List<Room> filterByCategory(List<Room> roomList,String categoryName);
+
+    Room create(Room room, Long hotelId, MultipartFile[] multipartFiles, User user) throws InvalidException, ForbiddenException;
 
 }

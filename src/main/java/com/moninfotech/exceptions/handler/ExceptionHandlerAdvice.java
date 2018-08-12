@@ -1,8 +1,10 @@
 package com.moninfotech.exceptions.handler;
 
 import com.moninfotech.exceptions.NotFoundException;
-import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.moninfotech.exceptions.UserAlreadyExistsException;
+import com.moninfotech.exceptions.forbidden.ForbiddenException;
+import com.moninfotech.exceptions.invalid.InvalidException;
+import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.mysql.jdbc.PacketTooBigException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,7 +43,25 @@ public class ExceptionHandlerAdvice {
         return modelAndView;
     }
 
+    // INVALID
 
+    @ExceptionHandler(InvalidException.class)
+    private ModelAndView handleInvalidException(InvalidException ex) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (ex.getRedirectTo() != null)
+            modelAndView.setViewName("redirect:" + ex.getRedirectTo() + "?message=" + ex.getMessage());
+        return modelAndView;
+    }
+
+    // FORBIDDEN
+
+    @ExceptionHandler(ForbiddenException.class)
+    private ModelAndView handleForbiddenException(ForbiddenException ex) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (ex.getRedirectTo() != null)
+            modelAndView.setViewName("redirect:" + ex.getRedirectTo() + "?message=" + ex.getMessage());
+        return modelAndView;
+    }
 
 
     private ModelAndView getErrorView(Throwable throwable) {

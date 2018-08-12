@@ -1,13 +1,15 @@
 package com.moninfotech.controllers.room.admin;
 
+import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.utils.FileIO;
-import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Facilities;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
+import com.moninfotech.exceptions.forbidden.ForbiddenException;
+import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.logger.Log;
 import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.HotelService;
@@ -103,33 +105,9 @@ public class RoomAdminController {
     private String create(@ModelAttribute Room room, BindingResult bindingResult,
                           @RequestParam(value = "hotelId", required = false) Long hotelId,
                           @RequestParam("images") MultipartFile[] multipartFiles,
-                          @CurrentUser User user) {
+                          @CurrentUser User user) throws ForbiddenException, InvalidException {
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
-        List<byte[]> files = FileIO.convertMultipartFiles(multipartFiles);
-        // if all images aren't valid
-        if (FileIO.isNotEmpty(multipartFiles)) { // if images one or more images are choosen to be uploaded
-            if (files.size() != multipartFiles.length)
-                return "redirect:/hotel/rooms/create?message=One or more images are invalid.";
-            room.setImages(files);
-        }
-        Hotel hotel = null;
-        if (hotelId == null)
-            hotel = this.hotelService.findByUser(user);
-        else
-            hotel = this.hotelService.findOne(hotelId);
-
-        if (hotel == null) return "redirect:/?message=You are not authorized to do this action.";
-        room.setHotel(hotel);
-
-        // Room Fascilities
-        if (room.getFacilities() == null) room.setFacilities(new Facilities());
-        // check if room category was saved previously, if not then save and set to room
-//        if (room.getCategory().getId() == null)
-//            room.setCategory(this.categoryService.save(room.getCategory()));
-//        else // else find category and set to room
-        room.setCategory(this.categoryService.findOne(room.getCategory().getId()));
-        room = this.roomService.save(room);
-//        System.out.println(room);
+        this.roomService.create(room, hotelId, multipartFiles, user);
         if (hotelId != null) return "redirect:/admin/hotels/" + hotelId + "?messageinfo=Successfully added room.";
         return "redirect:/hotel/rooms?messageinfo=Successfully added room.";
     }
