@@ -3951,7 +3951,6 @@ button::-moz-focus-inner {
     margin-right: 0;
 }
 
-
 #tm_builder_outer_content .tm_pb_link_box {
     box-shadow: 0 0 20px #dbdbdb;
 }
@@ -4087,6 +4086,7 @@ h2.resp-accordion {
 }
 
 .tab_img {
+    width: 100%;
     padding: 2em 0 0;
     display: inline-block;
 }
@@ -4135,7 +4135,7 @@ h2.resp-accordion {
     color: #fff;
     margin: 0 0 1em;
     font-weight: 700;
-    font-family: "brandon-grotesque",Arial,sans-serif;
+    font-family: "brandon-grotesque", Arial, sans-serif;
     letter-spacing: 1px;
 }
 
@@ -4228,12 +4228,11 @@ i.mail {
     width: 100%;
 }
 
-
-
-#whyUs{
+#whyUs {
     padding-top: 40px;
 }
-.welcomeText{
+
+.welcomeText {
     font-weight: 400;
     font-size: 18px;
     line-height: 1.72;
@@ -4242,13 +4241,16 @@ i.mail {
     color: #333;
     margin-left: 20px;
 }
-.welcomeText ul{
+
+.welcomeText ul {
     margin-left: 50px;
 }
-.welcomeText ul li{
+
+.welcomeText ul li {
     padding-bottom: 10px;
 }
-.welcomeText ul li:before{
+
+.welcomeText ul li:before {
     content: "\f05a";
     font-family: FontAwesome;
     font-size: 20px;
@@ -4257,12 +4259,14 @@ i.mail {
     color: black;
     margin-right: 2px;
 }
-.our-partners{
+
+.our-partners {
     padding-top: 40px;
     height: 350px;
 }
+
 @media (max-width: 768px) {
-    .our-partners{
+    .our-partners {
         padding-top: 10px;
         height: auto;
     }
@@ -4277,15 +4281,17 @@ i.mail {
     -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
+
 .searchBox .searchForm {
     width: 100%;
     height: 45px;
     font-family: "Segoe UI", Arial, sans-serif;
     border: none;
-    font-size: 10pt;
+    font-size: 13pt;
     color: #63717f;
     padding-left: 15px;
 }
+
 .searchBox .searchBtn {
     width: 40px;
     height: 45px;
@@ -4297,26 +4303,33 @@ i.mail {
     color: #ffffff;
     background-color: #007fad;
     z-index: 1;
+    border-radius: 0;
 }
+
 @media (min-width: 768px) {
     .searchBox .searchForm {
-        width: 300px;
+        width: 450px;
     }
+
     .searchBox .searchBtn {
         width: 100px;
     }
+
     .roomPanel {
         display: block;
         width: 616px;
         padding-bottom: 30px;
     }
+
     .moto-text_normal, .moto-text_normal a {
         font-size: 14px;
 
     }
+
     .header .container {
         width: 850px;
     }
+
     .navbar-nav {
         display: inline-block;
         float: none;
@@ -4334,6 +4347,7 @@ i.mail {
         width: 826px;
         padding-bottom: 30px;
     }
+
     .header .container {
         width: 1070px;
     }
@@ -4345,6 +4359,7 @@ i.mail {
         width: 951px;
         padding-bottom: 30px;
     }
+
     .header .container {
         width: 1270px;
     }
@@ -4376,99 +4391,123 @@ i.mail {
     margin-right: -27px;
 }
 
-.hotel-page-pic-panel{
+.hotel-page-pic-panel {
     height: 400px;
     margin-bottom: 50px;
     /*margin-left: 15px;*/
 }
 
-.hotel-page-pic{
+.hotel-page-pic {
     height: 400px;
     width: 100%;
 }
 
-.cherry-box{
+.cherry-box {
     padding: 0;
     border: 0;
 }
 
-.package-image{
+.package-image {
     width: 100%;
     height: 220px;
 }
-.package-image-text{
-    background-color: lightcyan;
+
+.package-image-text {
+    /*background-color: lightcyan;*/
     font-size: 20px;
     padding: 12px 15px 8px;
     position: relative;
     overflow: hidden;
+    border: 1px solid lightgrey;
+}
 
-}
-.package-image-text2{
- float: right;
+.package-image-text2 {
+    float: right;
     font-size: 15px;
-    color:grey;
+    color: grey;
 }
-.package-image-text-line2{
-    padding: 10px 0;
+
+.package-image-text-line2 {
+    padding: 5px 0;
 }
-.package-image-title{
+
+.package-image-title {
     float: left;
     /*display: block;*/
     font-size: 16px;
     font-weight: 800;
     color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
 }
-.package-cost-text{
+
+.package-cost-text {
     float: right;
     color: #4692e7;
     display: block;
-    font-size: 22px;
+    font-size: 15px;
     font-weight: 800;
     line-height: 1;
 }
-.package-image-text-line3{
+
+.package-image-text-line3 {
     margin-top: -10px;
     padding-bottom: 10px;
 }
-.package-duration-text{
+
+.package-image-text-line4 {
+    margin-top: -10px;
+    padding-bottom: 10px;
+}
+.package-image-text-line4 .btn{
+    padding: 6px 12px;
+}
+.package-duration-text {
     margin-bottom: 9px;
     font-weight: 500;
     font-size: 14px;
     color: #777777;
 }
-.package-content{
+
+.package-content {
     padding-bottom: 20px;
 }
 
-.package-page-row{
+.package-page-row {
 }
-.package-page-components{
+
+.package-page-components {
     padding: 0px;
     /*background;*/
 }
+
 .package-page-components .component-box {
     border: 0px;
     margin: 0;
 }
-.package-page-components .component-box .box-image{
+
+.package-page-components .component-box .box-image {
     margin: 0px;
     border: 0px;
     padding: 0px;
 
 }
-.package-page-components .package-page-image{
-    height: 300px;
+
+.package-page-components .package-page-image {
+    height: 400px;
     width: 100%;
 }
 
-.package-page-components .component-box-body{
+.package-page-components .component-box-body {
     margin-top: 20px;
     font-size: 16px;
     background: white;
     padding-left: 15px;
 }
-.package-page-components .component-box-body .component-box-body-title{
+
+.package-page-components .component-box-body .component-box-body-title {
     background: #0099cc;
     min-height: 40px;
     padding-left: 30px;
@@ -4477,37 +4516,39 @@ i.mail {
     color: white;
 }
 
-.package-page-side-bar{
+.package-page-side-bar {
     background-color: white;
-    margin-left: -15px;
+    /*margin-left: -15px;*/
     margin-right: -15px;
     padding-left: 15px;
     padding-right: 15px;
     /*margin-top: 30px;*/
 }
-.package-page-side-bar-title{
+
+.package-page-side-bar-title {
     font-size: 16px;
     background-color: white;
     padding-left: 15px;
 }
-.package-page-side-bar-title .headline{
+
+.package-page-side-bar-title .headline {
     display: block;
     font-size: 30px;
     padding-bottom: 7px;
 }
 
-.package-page-side-bar-other-location{
+.package-page-side-bar-other-location {
     padding-top: 15px;
     padding-bottom: 20px;
 
 }
 
-.package-page-side-bar-other-location .other-headline{
+.package-page-side-bar-other-location .other-headline {
     font-size: 20px;
     font-weight: 100;
 }
 
-.package-page-side-bar .other-package-box{
+.package-page-side-bar .other-package-box {
     display: block;
     float: left;
     padding-top: 10px;
@@ -4519,136 +4560,174 @@ i.mail {
     padding-right: 15px;
     background-color: white;
 }
-.other-package-box .other-package-image-container{
+
+.other-package-box .other-package-image-container {
     float: left;
     padding: 0;
 }
-.other-package-box .other-package-text .headline{
+
+.other-package-box .other-package-text .headline {
     display: block;
     font-size: 20px;
     color: black;
 }
-.other-package-box .other-package-text{
+
+.other-package-box .other-package-text {
     font-size: 16px;
     color: #800909;
 }
-.package-page-side-bar-title-gap{
+
+.package-page-side-bar-title-gap {
     /*background-color: #ecf0f5;*/
     /*margin-left: -15px;*/
     /*margin-right: -15px;*/
     min-height: 20px;
 }
+.offer-title{
+    background: #0099cc;
+    margin: 10px -10px 0 -10px;
+    color: white;
+    padding: 5px 10px;
+}
+.offer-box{
+    background: white;
+    margin: 0 -10px;
+    padding: 10px;
+}
 
-.assistance-div{
-    margin: 18px;
+.assistance-div {
+    margin: 15px;
+    margin-right: 0;
     background-color: white;
 }
 
-.assistance-div .assistance-div-title{
-    text-align: center  ;
-    font-size: 24px;
+.assistance-div .assistance-div-title {
+    text-align: center;
+    font-size: 20px;
+    padding: 15px 0;
     font-weight: 100;
     background-color: lightblue;
 }
 
-.assistance-div .assistance-div-text{
-    padding-left: 15px;
+.assistance-div .assistance-div-text {
+    padding: 15px;
     font-size: 20px;
 }
-.intelligent-tourist-aid{
+
+.intelligent-tourist-aid {
     width: 70%;
     float: right;
 }
-.i-tours{
-    width:130%;
+
+.i-tours {
+    width: 130%;
     padding-top: 50px;
 }
-.sea-food-bd{
+
+.sea-food-bd {
     padding-top: 0;
 }
-.sea-view-resort{
+
+.sea-view-resort {
     width: 80%;
     margin-top: -10px;
 }
-.hotel-detail-carousel{
-    height: 440px!important;
+
+.hotel-detail-carousel {
+    height: 440px !important;
     width: 100%;
 }
-.rooms-pic{
+
+.rooms-pic {
     height: 400px;
 }
-.room-pic-carousel-inner{
+
+.room-pic-carousel-inner {
     height: 400px;
 }
-.room-pic-item{
+
+.room-pic-item {
     height: 400px;
 }
 
 @media (max-width: 768px) {
-    body{
+    body {
         overflow-x: hidden;
     }
-    .hotel-page-pic-panel{
+
+    .hotel-page-pic-panel {
         height: 200px;
         margin-bottom: 20px;
-        margin-left : 0;
+        margin-left: 0;
     }
-    .hotel-page-pic{
+
+    .hotel-page-pic {
         height: 200px;
         width: 100%;
     }
-    .carousel{
+
+    .carousel {
         height: 200px;
     }
-    .carousel-inner{
+
+    .carousel-inner {
         display: block;
         float: left;
         height: 200px;
     }
-    .package-page-components .package-page-image{
+
+    .package-page-components .package-page-image {
         height: 180px;
         width: 100%;
     }
-    .our-partners-column{
+
+    .our-partners-column {
         display: block;
         width: 60%;
         padding: 10px;
         margin: auto;
     }
-    .intelligent-tourist-aid{
+
+    .intelligent-tourist-aid {
         width: 100%;
         float: none;
     }
-    .i-tours{
-        width:100%;
+
+    .i-tours {
+        width: 100%;
         padding-top: 0;
     }
-    .sea-food-bd{
+
+    .sea-food-bd {
         padding-top: 0;
     }
-    .sea-view-resort{
+
+    .sea-view-resort {
         width: 100%;
         margin-top: 0;
     }
-    .hotel-detail-carousel{
+
+    .hotel-detail-carousel {
         height: 200px !important;
         width: 100%;
     }
-    .rooms-pic{
-        height: 200px;
-    }
-    .room-pic-carousel-inner{
-        height: 200px;
-    }
-    .room-pic-item{
+
+    .rooms-pic {
         height: 200px;
     }
 
+    .room-pic-carousel-inner {
+        height: 200px;
+    }
+
+    .room-pic-item {
+        height: 200px;
+    }
 
     /*.box-body{*/
-        /*padding: 0px;*/
+    /*padding: 0px;*/
     /*}*/
-    .resp-tabs-list{
+    .resp-tabs-list {
         display: none;
     }
 }

@@ -23,38 +23,6 @@
                     </div>
                     <div class="box-footer no-padding">
 
-                        <ul class="nav">
-                            <li><a style="color: #000;" th:text="${hotel?.description}">Projects <span
-                                    class="pull-right badge bg-blue">31</span></a></li>
-                            <li>
-                                <a style="color: #000;"><span th:text="${hotel?.type}"></span> Status
-                                    <span class="pull-right">
-                                        <span th:if="${hotel?.enabled}"><i class="fa fa-circle text-success"></i> Online</span>
-                                        <span th:if="${!hotel?.enabled}"><i class="fa fa-circle text-danger"></i> Offline</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li><a style="color: #000;"><span class="pull-right badge bg-aqua" id="star"
-                                                  th:text="${hotel?.capitalizeFirstLetter(hotel?.star)}"></span><span>Star Rating</span></a>
-                            </li>
-                            <li><a style="color: #000;">Guest Rating: <span class="pull-right badge bg-green"
-                                                                th:text="${hotel?.getAverageRating()}"></span></a></li>
-                            <li><a style="color: #000;">Total <span th:text="${hotel?.type?.toLowerCase().equals('hotel')?'Rooms':'Seat'}"></span>
-                                <span class="pull-right badge bg-red"
-                                                              th:text="${hotel?.roomList?.size()}">842</span></a></li>
-                            <li><a style="color: #000;">Number of AC <span th:text="${hotel?.type?.toLowerCase().equals('hotel')?'Rooms':'Seat'}"></span>
-                                <span class="pull-right badge bg-red"
-                                                                     th:text="${hotel?.getNumberOfAcRooms()}">842</span></a>
-                            </li>
-                            <li><a style="color: #000;">Number of NON AC <span th:text="${hotel?.type?.toLowerCase().equals('hotel')?'Rooms':'Seat'}"></span>
-                                <span class="pull-right badge bg-red"
-                                                                         th:text="${hotel?.getNumberOfNonAcRooms()}">842</span></a>
-                            </li>
-                            <li th:if="${hotel?.discount>0}"><a style="color: #000;"><span class="pull-left badge bg-green" style="width: 100%;padding: 5px;"
-                                                                               th:text="${hotel?.discount+'% Discount'}"></span></a><hr/>
-                            </li>
-                        </ul>
-
                         <ul class="nav nav-stacked">
                             <li><a href="#" th:text="${hotel?.description}">Projects <span
                                     class="pull-right badge bg-blue">31</span></a></li>

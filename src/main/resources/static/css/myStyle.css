@@ -167,10 +167,11 @@
 
 .caption {
     /*font-family: 'Great Vibes', handwriting;*/
-    font-size: 35px;
+    font-size: 20px;
     color: #111 !important;
     line-height: 30px;
-    letter-spacing: 5px;
+    text-transform: uppercase;
+    /*letter-spacing: 5px;*/
 }
 
 .social-icons.team-icons ul {
@@ -192,7 +193,9 @@
     height: 100%;
     text-align: center;
     /*font-family: 'Great Vibes', handwriting;*/
-    font-size: 30px;
+    font-family: Montserrat, sans-serif;
+
+    font-size: 16px;
     /*color: black;*/
 }
 
@@ -357,6 +360,10 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
 }
 .dash.black{
     color: black;
+}
+
+.dash.dark{
+    color: #2a2a34;
 }
 
 .dash.black:before {
@@ -703,7 +710,7 @@ h1, .h1-style {
     font-weight: 400;
     font-size: 24px;
     line-height: 1.42;
-    font-family: 'Alegreya Sans SC', sans-serif;
+    font-family:Copperplate, 'Copperplate Gothic Light', 'Alegreya Sans SC', sans-serif;
     letter-spacing: 0em;
 }
 
@@ -713,7 +720,7 @@ h1, .h1-style {
 }
 
 .subscribe-block__form {
-    max-width: 350px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 19px;
@@ -818,7 +825,9 @@ h4, .h4-style {
 
 .sloganText {
     font-size: 28px;
-    color: #7d1f10;
+    font-weight: 600;
+    color: #2a2a34;
+    letter-spacing: 3px;
     padding: 5px;
     -moz-border-radius: 6px;
     border-radius: 6px;
@@ -830,7 +839,6 @@ h4, .h4-style {
     margin: 10px auto;
     display: block;
 }
-
 @media screen and (max-width: 767px){
     .package-button{
         width: 70%;
@@ -894,8 +902,10 @@ h4, .h4-style {
 @media screen and (min-width: 1200px) {
     .sloganText {
         font-size: 28px;
-        color: #7d1f10;
+        font-weight: 600;
+        color: #2a2a34;
         padding: 5px;
+        letter-spacing: 3px;
         -moz-border-radius: 6px;
         border-radius: 6px;
         margin-left: 35px;
