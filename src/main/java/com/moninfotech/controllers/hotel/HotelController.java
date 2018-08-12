@@ -10,6 +10,7 @@ import com.moninfotech.service.HotelService;
 import com.moninfotech.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -138,7 +139,8 @@ public class HotelController {
             byte[] imageBytes = images.get(imageNumber);
             if (height != null && width != null)
                 imageBytes = FileIO.getScaledImage(imageBytes, width, height);
-            return new ResponseEntity<>(imageBytes, HttpStatus.OK);
+
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

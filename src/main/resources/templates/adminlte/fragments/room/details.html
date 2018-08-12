@@ -423,7 +423,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" th:if="${room?.facilities?.breakfast}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.breakfast}?  bg-green : bg-red">
@@ -438,6 +438,8 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6" th:if="${room?.facilities?.tv}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.tv}?  bg-green : bg-red">
@@ -454,7 +456,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" th:if="${room?.facilities?.airConditioned}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.airConditioned}?  bg-green : bg-red">
@@ -470,6 +472,8 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6" th:if="${room?.facilities?.geyser}">
                                         <div class="info-box">
                                                 <span class="info-box-icon"
                                                       th:classappend="${room?.facilities?.geyser}?  bg-green : bg-red">
@@ -486,7 +490,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" th:if="${room?.facilities?.internet}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.internet}?  bg-green : bg-red">
@@ -502,6 +506,8 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6" th:if="${room?.facilities?.telephone}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.telephone}?  bg-green : bg-red">
@@ -518,7 +524,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" th:if="${room?.facilities?.bathTowel}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.bathTowel}?  bg-green : bg-red">
@@ -534,6 +540,8 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6" th:if="${room?.facilities?.tableAndChair}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.tableAndChair}?  bg-green : bg-red">
@@ -550,7 +558,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" th:if="${room?.facilities?.seaView}">
                                         <div class="info-box">
                                                 <span class="info-box-icon"
                                                       th:classappend="${room?.facilities?.seaView}?  bg-green : bg-red">
@@ -566,6 +574,8 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6" th:if="${room?.facilities?.hillView}">
                                         <div class="info-box">
                                                 <span class="info-box-icon"
                                                       th:classappend="${room?.facilities?.hillView}?  bg-green : bg-red">
@@ -582,7 +592,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" th:if="${room?.facilities?.frontFace}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.frontFace}?  bg-green : bg-red">
@@ -597,6 +607,8 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6" th:if="${room?.facilities?.inMiddle}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.inMiddle}?  bg-green : bg-red">
@@ -612,7 +624,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" th:if="${room?.facilities?.backFace}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.backFace}?  bg-green : bg-red">
@@ -627,6 +639,8 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6" th:if="${room?.facilities?.withCorridor}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.withCorridor}?  bg-green : bg-red">
@@ -642,7 +656,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" th:if="${room?.facilities?.kitchen}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.kitchen}?  bg-green : bg-red">
@@ -657,6 +671,8 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6" th:if="${room?.facilities?.bathTub}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.bathTub}?  bg-green : bg-red">
@@ -674,8 +690,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <a th:if="${room?.hotel?.isEnabled()}" id="addToCart" class="btn btn-lg btn-block btn-warning"
-                                       th:href="@{/bookings/cart/add/}+${room?.id}+@{/(date=${date})}">Add to Cart!</a>
+                                    <a th:if="${room?.hotel?.isEnabled()}" id="addToCart" class="btn btn-lg btn-block btn-success"
+                                       th:href="@{/bookings/cart/add/}+${room?.id}+@{/(date=${date})}">Book This Room!</a>
                                     <a th:if="${!room?.hotel?.isEnabled()}" id="addToCart" class="btn btn-lg btn-block btn-warning">
                                         Call for Booking
                                     </a>

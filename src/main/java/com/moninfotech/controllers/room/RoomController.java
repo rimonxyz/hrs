@@ -1,16 +1,20 @@
 package com.moninfotech.controllers.room;
 
-import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.domain.Room;
 import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Date;
 import java.util.List;
@@ -60,9 +64,8 @@ public class RoomController {
         if (room.getImages() != null && !room.getImages().isEmpty())
             images = room.getImages();
         else images = room.getCategory().getImages(); // set category images if room has no image
-        if (images != null && images.size() > imageNumber) {
-            return new ResponseEntity<>(images.get(imageNumber), HttpStatus.OK);
-        }
+        if (images != null && images.size() > imageNumber)
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(images.get(imageNumber));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
