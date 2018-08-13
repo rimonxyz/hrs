@@ -26,7 +26,7 @@
                 <!-- Donut chart -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <i class="fa fa-bar-chart-o"></i>
+                        <i class="fa fa-search"></i>
 
                         <h3 class="box-title">Search</h3>
 
@@ -34,7 +34,8 @@
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                     class="fa fa-minus"></i>
                             </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
                             </button>
                         </div>
                     </div>
@@ -47,7 +48,8 @@
                                 </datalist>
                                 <div class="from-group">
                                     <label for="place" class="label label-primary">SEARCH</label>
-                                    <input style="height: 50px;" id="place" name="query" list="places" class="form-control"
+                                    <input style="height: 50px;" id="place" name="query" list="places"
+                                           class="form-control"
                                            required="required" th:value="${query}"></input>
                                 </div>
                                 <button style="margin-top: 20px;" class="form-control btn btn-default" type="submit"><i
@@ -55,9 +57,27 @@
                                 </button>
                             </form>
                         </div>
-                        <div>
-                            <h2>Filter</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <i class="fa fa-filter"></i>
+
+                        <h3 class="box-title">Filter</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
+                            </button>
                         </div>
+                    </div>
+                    <div class="box-body">
                         <div>
                             <!--Star Filter-->
                             <div th:if="${hotelType!=null and hotelType.equals('Hotel')}">
@@ -65,7 +85,8 @@
                                 <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">
                                         <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
-                                        <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
+                                        <input th:if="${hotelType}" name="type" type="hidden"
+                                               th:value="${hotelType}"></input>
                                         <input name="filterType" type="hidden" th:value="star"></input>
                                         <select class="form-control" name="filterValue" id="starFilter">
                                             <option value="">All
@@ -74,7 +95,9 @@
                                             </option>
                                             <option value="2 star" th:selected="${filterValue?.equals('2 star')}">2 Star
                                             </option>
-                                            <option value="3 star standard" th:selected="${filterValue?.equals('3 star standard')}">3 Star Standard
+                                            <option value="3 star standard"
+                                                    th:selected="${filterValue?.equals('3 star standard')}">3 Star
+                                                Standard
                                             </option>
                                             <option value="3 star" th:selected="${filterValue?.equals('3 star')}">3 Star
                                             </option>
@@ -84,7 +107,8 @@
                                             </option>
                                             <option value="resort" th:selected="${filterValue?.equals('resort')}">Resort
                                             </option>
-                                            <option value="beach resort" th:selected="${filterValue?.equals('beach resort')}">Beach Resort
+                                            <option value="beach resort"
+                                                    th:selected="${filterValue?.equals('beach resort')}">Beach Resort
                                             </option>
                                         </select>
                                     </form>
@@ -95,7 +119,8 @@
                                 <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">
                                         <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
-                                        <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
+                                        <input th:if="${hotelType}" name="type" type="hidden"
+                                               th:value="${hotelType}"></input>
                                         <input name="filterType" type="hidden" value="ac"></input>
                                         <select class="form-control" name="filterValue" id="starFilter">
                                             <option value="ac" th:selected="${filterValue?.equals('ac')}">AC
@@ -112,7 +137,8 @@
                                 <div id="priceFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels/}" id="priceFilterForm" method="get">
                                         <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
-                                        <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
+                                        <input th:if="${hotelType}" name="type" type="hidden"
+                                               th:value="${hotelType}"></input>
                                         <input name="filterType" type="hidden" th:value="price"></input>
                                         <select class="form-control" name="filterValue" id="priceFilter">
                                             <option th:value="1x1000000">
@@ -140,7 +166,8 @@
                                 <div id="ratingFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
                                     <form class="form" th:action="@{/hotels/}" id="ratingFilterForm" method="get">
                                         <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
-                                        <input th:if="${hotelType}" name="type" type="hidden" th:value="${hotelType}"></input>
+                                        <input th:if="${hotelType}" name="type" type="hidden"
+                                               th:value="${hotelType}"></input>
                                         <input name="filterType" type="hidden" th:value="rating"></input>
                                         <div class="row lead">
                                             <div style="margin-left: 20px;" id="stars" class="starrr"></div>
@@ -170,7 +197,8 @@
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                     class="fa fa-minus"></i>
                             </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
                             </button>
                         </div>
                     </div>
@@ -205,9 +233,9 @@
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <!--<i class="phon">-->
-                                        <h4>
-                                            <a th:href="@{/hotels/}+${hotel?.id}" th:text="${hotel?.name?.trim()}"></a>
-                                        </h4>
+                                    <h4>
+                                        <a th:href="@{/hotels/}+${hotel?.id}" th:text="${hotel?.name?.trim()}"></a>
+                                    </h4>
                                     <!--</i>-->
                                     <!--<h4><kbd th:text="${hotel?.type}"></kbd></h4>-->
                                     <!--<h4 th:text="${hotel?.description}">info@moninfotech.com</h4>-->
