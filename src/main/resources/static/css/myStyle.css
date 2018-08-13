@@ -839,6 +839,7 @@ h4, .h4-style {
     margin: 10px auto;
     display: block;
 }
+
 @media screen and (max-width: 767px){
     .package-button{
         width: 70%;

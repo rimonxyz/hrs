@@ -4639,9 +4639,23 @@ i.mail {
 }
 
 .rooms-pic {
-    height: 400px;
+    height: 70vh;
 }
-
+.hotel-facilities-icons{
+    height: 40px;
+    width: 40px;
+    border:1px solid black;
+    margin-bottom: 5px;
+}
+.hotel-compare-image{
+    height: 40px;
+    width: auto;
+    max-width: 100%;
+    margin: 5px;
+}
+.checked {
+    color: orange;
+}
 .room-pic-carousel-inner {
     height: 400px;
 }
