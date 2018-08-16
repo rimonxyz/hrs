@@ -114,13 +114,13 @@
                     <a target="_self" data-action="url" class="moto-link" href="callto:#">01840477759</a>
                 </p>
                 <!--<p class="moto-text_normal">-->
-                    <!--<i class="fa fa-map-marker" aria-hidden="true"></i>-->
-                    <!--&lt;!&ndash;<a target="_self" data-action="url" class="moto-link" href="callto:#">&ndash;&gt;-->
-                    <!--<span class="moto-link">-->
-                        <!--32/1, Khan Plaza ( 3rd floor), Science Lab,<br/>-->
-                        <!--&nbsp;&nbsp; Mirpur Road, Dhanmondi, Dhaka- 1205-->
-                    <!--</span>-->
-                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                <!--<i class="fa fa-map-marker" aria-hidden="true"></i>-->
+                <!--&lt;!&ndash;<a target="_self" data-action="url" class="moto-link" href="callto:#">&ndash;&gt;-->
+                <!--<span class="moto-link">-->
+                <!--32/1, Khan Plaza ( 3rd floor), Science Lab,<br/>-->
+                <!--&nbsp;&nbsp; Mirpur Road, Dhanmondi, Dhaka- 1205-->
+                <!--</span>-->
+                <!--&lt;!&ndash;</a>&ndash;&gt;-->
                 <!--</p>-->
             </div>
 
@@ -154,7 +154,8 @@
 
                 <nav class="cl-effect-13" id="cl-effect-13">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a data-toggle="collapse" data-target=".navbar-collapse" th:href="@{/whyUs}" href="#whyUs">Why us</a></li>
+                        <li class="active"><a data-toggle="collapse" data-target=".navbar-collapse" th:href="@{/whyUs}"
+                                              href="#whyUs">Why us</a></li>
                         <li class="dropdown">
                             <a th:href="@{/hotels}" class="dropdown-toggle" data-toggle="dropdown">Hotels<b
                                     class="caret"></b></a>
@@ -183,7 +184,8 @@
                                 <li><a th:href="@{/ships?query=Bay Cruiser&type=Ship}">M.V. Bay Cruiser-1</a></li>
                             </ul>
                         </li>
-                        <li class="active"><a data-toggle="collapse" data-target=".navbar-collapse" href="#packages">Holidays</a></li>
+                        <li class="active"><a data-toggle="collapse" data-target=".navbar-collapse"
+                                              th:href="@{/packages/1}">Holidays</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Services<b
                                     class="caret"></b></a>
@@ -197,7 +199,8 @@
                             </ul>
                         </li>
 
-                        <li><a data-toggle="collapse" data-target=".navbar-collapse"     th:href="@{/feedback}">Customer Service</a></li>
+                        <li><a data-toggle="collapse" data-target=".navbar-collapse" th:href="@{/feedback}">Customer
+                            Service</a></li>
                         <li class="dropdown" sec:authorize="!isAuthenticated()">
                             <a th:href="@{/login}">Sign in &amp; Accounts</a>
                             <ul class="dropdown-menu agile_short_dropdown">
@@ -239,61 +242,62 @@
 
 
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx First pic and option  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-    <div class="row" style="padding: 0;" id = "first-pic-and-option">
+<div class="row" style="padding: 0;" id="first-pic-and-option">
 
-        <div class="tm_pb_slide tm_pb_bg_layout_light tm_pb_media_alignment_center tm_pb_slide_0 tm-pb-active-slide"
-             style="background-color:#ffffff;background-image:url(./images/bed1.jpg);">
+    <div class="tm_pb_slide tm_pb_bg_layout_light tm_pb_media_alignment_center tm_pb_slide_0 tm-pb-active-slide"
+         style="background-color:#ffffff;background-image:url(./images/bed1.jpg);">
 
-            <div class="clearfix" style="min-height: 540px;">
-                <div class="tm_pb_slide_content" style="margin-top:35px;">
-                    <p style="text-align: center;">
-                        <!--<img class="aligncenter size-full wp-image-854"-->
-                        <!--th:src="@{/images/hotelswavelogo.png}"-->
-                        <!--alt="" width="430" height="150"/>-->
+        <div class="clearfix" style="min-height: 540px;">
+            <div class="tm_pb_slide_content" style="margin-top:35px;">
+                <p style="text-align: center;">
+                    <!--<img class="aligncenter size-full wp-image-854"-->
+                    <!--th:src="@{/images/hotelswavelogo.png}"-->
+                    <!--alt="" width="430" height="150"/>-->
 
-                    </p>
+                </p>
 
-                    <div class="tm_pb_text_4" style="margin-top:100px; color:white;">
-                        <div class="subscribe-block__message">
+                <div class="tm_pb_text_4" style="margin-top:100px; color:white;">
+                    <div class="subscribe-block__message">
                             <span class="sloganText">
                                 Find your hotel for the best price
                             </span>
-                        </div>
                     </div>
+                </div>
 
 
-                    <!-- search option -->
-                    <div class="container">
-                        <div class="row searchBox">
-                            <form th:action="@{/search}" method="get" class="subscribe-block__form"
-                                  style="align-content: center;">
-                                <table class="table">
-                                    <tr>
-                                        <td style="width:100%; text-align: right;padding-right: 0px; border:none;"><input name="query"
-                                                            type="search"
-                                                            class="searchForm"
-                                                            id="search"
-                                                            placeholder="Enter your location"/>
-                                        </td>
-                                        <td style="text-align: left;padding-left: 0px; border: none;">
-                                            <button type="submit" class="btn btn-default searchBtn"><i
-                                                    class="glyphicon glyphicon-search visible-xs"></i><span
-                                                    class="hidden-xs">Search</span></button>
-                                            <!--<button type="submit" class="searchBtn">-->
-                                            <!--Search-->
-                                            <!--</button>-->
-                                        </td>
-                                    </tr>
-                                </table>
+                <!-- search option -->
+                <div class="container">
+                    <div class="row searchBox">
+                        <form th:action="@{/search}" method="get" class="subscribe-block__form"
+                              style="align-content: center;">
+                            <table class="table">
+                                <tr>
+                                    <td style="width:100%; text-align: right;padding-right: 0px; border:none;"><input
+                                            name="query"
+                                            type="search"
+                                            class="searchForm"
+                                            id="search"
+                                            placeholder="Hotel Name or Destination"/>
+                                    </td>
+                                    <td style="text-align: left;padding-left: 0px; border: none;">
+                                        <button type="submit" class="btn btn-default searchBtn"><i
+                                                class="glyphicon glyphicon-search visible-xs"></i><span
+                                                class="hidden-xs">Search</span></button>
+                                        <!--<button type="submit" class="searchBtn">-->
+                                        <!--Search-->
+                                        <!--</button>-->
+                                    </td>
+                                </tr>
+                            </table>
 
 
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 <!-- end First pic and option -->
@@ -311,7 +315,7 @@
         <div class="container">
             <div class="row row-edge row-style-light">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h2 class="dash black text-uppercase">Our Services</h2>
+                    <h2 class="dash dark text-uppercase">Our Services</h2>
                 </div>
             </div>
         </div>
@@ -324,14 +328,14 @@
 
                 <div class="tm_pb_link_box tm_pb_link_box_0 tm_pb_module">
                     <a th:href="@{/hotels?type=Hotel}">
-                    <div class="tm_pb_link_box_content"
-                         th:style="'background-image:url(' + @{/images/services/hotel-book.jpg} + ');'">
-                        <div class="tm_pb_blurb_content">
-                            <h3>Hotel</h3>
-                            <p>Booking</p>
-                        </div>
+                        <div class="tm_pb_link_box_content"
+                             th:style="'background-image:url(' + @{/images/services/hotel-book.jpg} + ');'">
+                            <div class="tm_pb_blurb_content">
+                                <h3>Hotel</h3>
+                                <p>Booking</p>
+                            </div>
 
-                    </div>
+                        </div>
                     </a>
                     <!-- .tm_pb_blurb_content -->
                 </div>
@@ -447,7 +451,7 @@
             <div class="container">
                 <div class="row row-edge row-style-light">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h2 class="dash black text-uppercase">Packages</h2>
+                        <h2 class="dash dark text-uppercase">Packages</h2>
                     </div>
                 </div>
             </div>
@@ -476,25 +480,30 @@
                          aria-labelledby="tab_item-0">
                         <div class="tab_img">
                             <div class="col-md-4 package-content" th:each="pckg : ${packageList}">
-                                <a class="" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}" alt="" class="img-responsive package-image">
+                                <span class="" data-lightbox="example-set" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}" alt=""
+                                         class="img-responsive package-image">
                                     <div class="package-image-text">
-                                        <div class="package-image-text-line1 clearfix" >
+                                        <div class="package-image-text-line1 clearfix">
                                             <span class="package-image-title" th:text="${pckg?.title}">Package 1</span>
                                             <span class="package-image-text2" th:text="From"></span>
                                         </div>
-                                        <div class="package-image-text-line2 clearfix" >
+                                        <div class="package-image-text-line2 clearfix">
                                             <span class="package-cost-text" th:text="${pckg?.price}+' '+@{Taka}"></span>
                                         </div>
-                                        <div class="package-image-text-line3 clearfix" >
-                                            <span class="package-duration-text" th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        <div class="package-image-text-line3">
+                                            <span class="package-duration-text">
+                                                <i class="fa fa-clock-o"></i> <span th:text="${pckg?.duration}"></span>
+                                            </span>
+                                        </div>
+                                        <div class="package-image-text-line4">
+                                            <a class="btn btn-primary btn-md pull-right"
+                                               th:href="@{/packages/}+${pckg?.id}">See details</a>
                                         </div>
                                         <!--<a th:href="@{/packages/}+${pckg?.id}">See More</a>-->
                                     </div>
 
-                                </a>
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -507,26 +516,31 @@
                         Bazar</h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
                         <div class="tab_img">
-                            <div class="col-md-4" th:each="pckg : ${packageList}" th:if="${pckg?.location} == 'Coxs Bazar'">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt="" class="img-responsive package-image">
+                            <div class="col-md-4" th:each="pckg : ${packageList}"
+                                 th:if="${pckg?.location} == 'Coxs Bazar'">
+                                <span class="" data-lightbox="example-set" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt=""
+                                    class="img-responsive package-image">
                                     <div class="package-image-text">
-                                        <div class="package-image-text-line1 clearfix" >
+                                        <div class="package-image-text-line1 clearfix">
                                             <span class="package-image-title" th:text="${pckg?.title}">Package 1</span>
                                             <span class="package-image-text2" th:text="From"></span>
                                         </div>
-                                        <div class="package-image-text-line2 clearfix" >
+                                        <div class="package-image-text-line2 clearfix">
                                             <span class="package-cost-text" th:text="${pckg?.price}+' '+@{Taka}"></span>
                                         </div>
-                                        <div class="package-image-text-line3 clearfix" >
-                                            <span class="package-duration-text" th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        <div class="package-image-text-line3 ">
+                                            <span class="package-duration-text"
+                                                  th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        </div>
+                                        <div class="package-image-text-line4">
+                                            <a class="btn btn-primary btn-md pull-right"
+                                               th:href="@{/packages/}+${pckg?.id}">See details</a>
                                         </div>
                                         <!--<a th:href="@{/packages/}+${pckg?.id}">See More</a>-->
                                     </div>
 
-                                </a>
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -535,26 +549,31 @@
                         Martins</h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
                         <div class="tab_img">
-                            <div class="col-md-4" th:each="pckg : ${packageList}" th:if="${pckg?.location} == 'Saint Martins'">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt="" class="img-responsive package-image">
+                            <div class="col-md-4" th:each="pckg : ${packageList}"
+                                 th:if="${pckg?.location} == 'Saint Martins'">
+                                <span class="" data-lightbox="example-set" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt=""
+                                    class="img-responsive package-image">
                                     <div class="package-image-text">
-                                        <div class="package-image-text-line1 clearfix" >
+                                        <div class="package-image-text-line1 clearfix">
                                             <span class="package-image-title" th:text="${pckg?.title}">Package 1</span>
                                             <span class="package-image-text2" th:text="From"></span>
                                         </div>
-                                        <div class="package-image-text-line2 clearfix" >
+                                        <div class="package-image-text-line2 clearfix">
                                             <span class="package-cost-text" th:text="${pckg?.price}+' '+@{Taka}"></span>
                                         </div>
-                                        <div class="package-image-text-line3 clearfix" >
-                                            <span class="package-duration-text" th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        <div class="package-image-text-line3 ">
+                                            <span class="package-duration-text"
+                                                  th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        </div>
+                                        <div class="package-image-text-line4">
+                                            <a class="btn btn-primary btn-md pull-right"
+                                               th:href="@{/packages/}+${pckg?.id}">See details</a>
                                         </div>
                                         <!--<a th:href="@{/packages/}+${pckg?.id}">See More</a>-->
                                     </div>
 
-                                </a>
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -563,26 +582,31 @@
                     </h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
                         <div class="tab_img">
-                            <div class="col-md-4" th:each="pckg : ${packageList}" th:if="${pckg?.location} == 'Bandarbans'">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt="" class="img-responsive package-image">
+                            <div class="col-md-4" th:each="pckg : ${packageList}"
+                                 th:if="${pckg?.location} == 'Bandarbans'">
+                                <span class="" data-lightbox="example-set" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt=""
+                                    class="img-responsive package-image">
                                     <div class="package-image-text">
-                                        <div class="package-image-text-line1 clearfix" >
+                                        <div class="package-image-text-line1 clearfix">
                                             <span class="package-image-title" th:text="${pckg?.title}">Package 1</span>
                                             <span class="package-image-text2" th:text="From"></span>
                                         </div>
-                                        <div class="package-image-text-line2 clearfix" >
+                                        <div class="package-image-text-line2 clearfix">
                                             <span class="package-cost-text" th:text="${pckg?.price}+' '+@{Taka}"></span>
                                         </div>
-                                        <div class="package-image-text-line3 clearfix" >
-                                            <span class="package-duration-text" th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        <div class="package-image-text-line3 ">
+                                            <span class="package-duration-text"
+                                                  th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        </div>
+                                        <div class="package-image-text-line4">
+                                            <a class="btn btn-primary btn-md pull-right"
+                                               th:href="@{/packages/}+${pckg?.id}">See details</a>
                                         </div>
                                         <!--<a th:href="@{/packages/}+${pckg?.id}">See More</a>-->
                                     </div>
 
-                                </a>
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -592,26 +616,31 @@
                     </h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
                         <div class="tab_img">
-                            <div class="col-md-4" th:each="pckg : ${packageList}" th:if="${pckg?.location} == 'Rangamati'">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt="" class="img-responsive package-image">
+                            <div class="col-md-4" th:each="pckg : ${packageList}"
+                                 th:if="${pckg?.location} == 'Rangamati'">
+                                <span class="" data-lightbox="example-set" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt=""
+                                    class="img-responsive package-image">
                                     <div class="package-image-text">
-                                        <div class="package-image-text-line1 clearfix" >
+                                        <div class="package-image-text-line1 clearfix">
                                             <span class="package-image-title" th:text="${pckg?.title}">Package 1</span>
                                             <span class="package-image-text2" th:text="From"></span>
                                         </div>
-                                        <div class="package-image-text-line2 clearfix" >
+                                        <div class="package-image-text-line2 clearfix">
                                             <span class="package-cost-text" th:text="${pckg?.price}+' '+@{Taka}"></span>
                                         </div>
-                                        <div class="package-image-text-line3 clearfix" >
-                                            <span class="package-duration-text" th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        <div class="package-image-text-line3">
+                                            <span class="package-duration-text"
+                                                  th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        </div>
+                                        <div class="package-image-text-line4">
+                                            <a class="btn btn-primary btn-md pull-right"
+                                               th:href="@{/packages/}+${pckg?.id}">See details</a>
                                         </div>
                                         <!--<a th:href="@{/packages/}+${pckg?.id}">See More</a>-->
                                     </div>
 
-                                </a>
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -621,25 +650,29 @@
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
                         <div class="tab_img">
                             <div class="col-md-4" th:each="pckg : ${packageList}" th:if="${pckg?.location} == 'Sajek'">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt="" class="img-responsive package-image">
+                                <span class="" data-lightbox="example-set" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt=""
+                                    class="img-responsive package-image">
                                     <div class="package-image-text">
-                                        <div class="package-image-text-line1 clearfix" >
+                                        <div class="package-image-text-line1 clearfix">
                                             <span class="package-image-title" th:text="${pckg?.title}">Package 1</span>
                                             <span class="package-image-text2" th:text="From"></span>
                                         </div>
-                                        <div class="package-image-text-line2 clearfix" >
+                                        <div class="package-image-text-line2 clearfix">
                                             <span class="package-cost-text" th:text="${pckg?.price}+' '+@{Taka}"></span>
                                         </div>
-                                        <div class="package-image-text-line3 clearfix" >
-                                            <span class="package-duration-text" th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        <div class="package-image-text-line3 ">
+                                            <span class="package-duration-text"
+                                                  th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        </div>
+                                        <div class="package-image-text-line4">
+                                            <a class="btn btn-primary btn-md pull-right"
+                                               th:href="@{/packages/}+${pckg?.id}">See details</a>
                                         </div>
                                         <!--<a th:href="@{/packages/}+${pckg?.id}">See More</a>-->
                                     </div>
 
-                                </a>
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -668,25 +701,29 @@
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
                         <div class="tab_img">
                             <div class="col-md-4" th:each="pckg : ${packageList}" th:if="${pckg?.location} == 'Sylhet'">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt="" class="img-responsive package-image">
+                                <span class="" data-lightbox="example-set" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt=""
+                                    class="img-responsive package-image">
                                     <div class="package-image-text">
-                                        <div class="package-image-text-line1 clearfix" >
+                                        <div class="package-image-text-line1 clearfix">
                                             <span class="package-image-title" th:text="${pckg?.title}">Package 1</span>
                                             <span class="package-image-text2" th:text="From"></span>
                                         </div>
-                                        <div class="package-image-text-line2 clearfix" >
+                                        <div class="package-image-text-line2 clearfix">
                                             <span class="package-cost-text" th:text="${pckg?.price}+' '+@{Taka}"></span>
                                         </div>
-                                        <div class="package-image-text-line3 clearfix" >
-                                            <span class="package-duration-text" th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        <div class="package-image-text-line3">
+                                            <span class="package-duration-text"
+                                                  th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        </div>
+                                        <div class="package-image-text-line4">
+                                            <a class="btn btn-primary btn-md pull-right"
+                                               th:href="@{/packages/}+${pckg?.id}">See details</a>
                                         </div>
                                         <!--<a th:href="@{/packages/}+${pckg?.id}">See More</a>-->
                                     </div>
 
-                                </a>
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -696,26 +733,31 @@
                     </h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
                         <div class="tab_img">
-                            <div class="col-md-4" th:each="pckg : ${packageList}" th:if="${pckg?.location} == 'Combined'">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt="" class="img-responsive package-image">
+                            <div class="col-md-4" th:each="pckg : ${packageList}"
+                                 th:if="${pckg?.location} == 'Combined'">
+                                <span class="" data-lightbox="example-set" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt=""
+                                    class="img-responsive package-image">
                                     <div class="package-image-text">
-                                        <div class="package-image-text-line1 clearfix" >
+                                        <div class="package-image-text-line1 clearfix">
                                             <span class="package-image-title" th:text="${pckg?.title}">Package 1</span>
                                             <span class="package-image-text2" th:text="From"></span>
                                         </div>
-                                        <div class="package-image-text-line2 clearfix" >
+                                        <div class="package-image-text-line2 clearfix">
                                             <span class="package-cost-text" th:text="${pckg?.price}+' '+@{Taka}"></span>
                                         </div>
-                                        <div class="package-image-text-line3 clearfix" >
-                                            <span class="package-duration-text" th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        <div class="package-image-text-line3">
+                                            <span class="package-duration-text"
+                                                  th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        </div>
+                                        <div class="package-image-text-line4">
+                                            <a class="btn btn-primary btn-md pull-right"
+                                               th:href="@{/packages/}+${pckg?.id}">See details</a>
                                         </div>
                                         <!--<a th:href="@{/packages/}+${pckg?.id}">See More</a>-->
                                     </div>
 
-                                </a>
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -725,26 +767,31 @@
                     </h2>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
                         <div class="tab_img">
-                            <div class="col-md-4" th:each="pckg : ${packageList}" th:if="${pckg?.location} == 'International'">
-                                <a class="wow zoomIn animated animated" data-lightbox="example-set"
-                                   th:href="@{/packages/}+${pckg?.id}"
-                                   style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
-                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt="" class="img-responsive package-image">
+                            <div class="col-md-4" th:each="pckg : ${packageList}"
+                                 th:if="${pckg?.location} == 'International'">
+                                <span class="" data-lightbox="example-set" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+                                    <img th:src="@{/packages/image/}+${pckg?.id}+@{/?height=300&width=400}"" alt=""
+                                    class="img-responsive package-image">
                                     <div class="package-image-text">
-                                        <div class="package-image-text-line1 clearfix" >
+                                        <div class="package-image-text-line1 clearfix">
                                             <span class="package-image-title" th:text="${pckg?.title}">Package 1</span>
                                             <span class="package-image-text2" th:text="From"></span>
                                         </div>
-                                        <div class="package-image-text-line2 clearfix" >
+                                        <div class="package-image-text-line2 clearfix">
                                             <span class="package-cost-text" th:text="${pckg?.price}+' '+@{Taka}"></span>
                                         </div>
-                                        <div class="package-image-text-line3 clearfix" >
-                                            <span class="package-duration-text" th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        <div class="package-image-text-line3">
+                                            <span class="package-duration-text"
+                                                  th:text="${pckg?.duration}+' '+@{Taka}"></span>
+                                        </div>
+                                        <div class="package-image-text-line4">
+                                            <a class="btn btn-primary btn-md pull-right"
+                                               th:href="@{/packages/}+${pckg?.id}">See details</a>
                                         </div>
                                         <!--<a th:href="@{/packages/}+${pckg?.id}">See More</a>-->
                                     </div>
 
-                                </a>
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -766,7 +813,7 @@
                 <div class="container">
                     <div class="row row-edge row-style-light">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2 class="dash black text-uppercase">Special offers</h2>
+                            <h2 class="dash dark text-uppercase">Special offers</h2>
                         </div>
                     </div>
                 </div>
@@ -778,11 +825,11 @@
                     <div class="thumbnail team-w3agile">
                         <img th:src="@{/offers/image/}+${offer?.id}+@{/?height=300&width=400}" alt="">
                         <div class="social-icons team-icons right-w3l fotw33">
-                            <div class="caption">
+                            <div class="caption" style="padding-top: 10px;">
                                 <p th:text="${offer?.title}">Mains</p>
                             </div>
                             <div>
-                             <p th:text="${offer?.shortTag}">lol</p>
+                                <p th:text="${offer?.shortTag}">lol</p>
                             </div>
 
                             <div>
@@ -791,7 +838,9 @@
                             <div>
                                 <p>৳<span th:text="${offer?.price}"></span></p>
                             </div>
-                            <a th:href="@{/offers/}+${offer?.id}" style="font-size: 14px;padding-top: 5px;"><span>See More</span></a>
+                            <a class="btn btn-primary btn-md"
+                               th:href="@{/offers/}+${offer?.id}">See more</a>
+                            <!--<a th:href="@{/offers/}+${offer?.id}" style="font-size: 18px;padding-top: 5px;"><span>See More</span></a>-->
                         </div>
 
                     </div>
@@ -922,55 +971,55 @@
                     <div class="container">
                         <div class="row row-edge row-style-light">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <h2 class="dash black text-uppercase">Our Partners</h2>
+                                <h2 class="dash dark text-uppercase">Our Partners</h2>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--<div class="dashblue text-uppercase text-center">-->
-                    <!--<h3>Our Partners</h3>-->
+                <!--<h3>Our Partners</h3>-->
                 <!--</div>-->
                 <div class="partner_contents">
 
                     <div class="row">
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                                <a>
-                                    <img class="" src="" alt="" />
-                                </a>
+                            <a>
+                                <img class="" src="" alt=""/>
+                            </a>
                         </div>
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="//www.itaforu.com" target="_blank">
-                                    <img class="img-responsive intelligent-tourist-aid" th:src="@{/images/partners/InteligentTouristAid.jpg}"/>
+                                <img class="img-responsive intelligent-tourist-aid"
+                                     th:src="@{/images/partners/InteligentTouristAid.jpg}"/>
                             </a>
                         </div>
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="//www.itoursltd.com/" target="_blank">
-                                    <img class="img-responsive i-tours" th:src="@{/images/partners/itours.jpg}" />
+                                <img class="img-responsive i-tours" th:src="@{/images/partners/itours.jpg}"/>
                             </a>
                         </div>
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="//www.itaforu.com" target="_blank">
-                                    <img class="img-responsive sea-food-bd" th:src="@{/images/partners/seafoodbd.jpg}" />
+                                <img class="img-responsive sea-food-bd" th:src="@{/images/partners/seafoodbd.jpg}"/>
                             </a>
                         </div>
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="//www.itaforu.com" target="_blank">
-                                    <img class="img-responsive sea-view-resort" th:src="@{/images/partners/seaviewresort.jpg}" />
+                                <img class="img-responsive sea-view-resort"
+                                     th:src="@{/images/partners/seaviewresort.jpg}"/>
                             </a>
                         </div>
 
                         <div class="our-partners-column col-xl-2 col-lg-2 col-md-2 col-sm-2">
                             <a href="">
-                                    <img class="img-responsive" src="" alt=""/>
+                                <img class="img-responsive" src="" alt=""/>
                             </a>
                         </div>
-
-
 
 
                     </div>
@@ -1009,8 +1058,8 @@
             </div>
 
             <!--<div class="tm_pb_title tm_pb_title_6 invert tm_pb_module dashgreen">-->
-                <!--<div class="h2-style tm_pb_title__super-title">Sign up for</div>-->
-                <!--<div class="h1-style tm_pb_title__title">Newsletter</div>-->
+            <!--<div class="h2-style tm_pb_title__super-title">Sign up for</div>-->
+            <!--<div class="h1-style tm_pb_title__title">Newsletter</div>-->
             <!--</div>-->
             <!-- .tm_pb_title -->
             <!-- <hr class="tm_pb_module tm_pb_space tm_pb_divider_14"> -->
@@ -1020,7 +1069,8 @@
                         <div class="subscribe-block">
 
                             <div class="subscribe-block__content">
-                                <div class="subscribe-block__message">Subscribe AND NEVER MISS THE HOTEL'S SPECIAL OFFERS AND
+                                <div class="subscribe-block__message">Subscribe AND NEVER MISS THE HOTEL'S SPECIAL
+                                    OFFERS AND
                                     NEWS!
                                 </div>
                             </div>
@@ -1063,11 +1113,12 @@
             <!--<hr class="tm_pb_module tm_pb_space tm_pb_divider_9">-->
             <div class="dashblue tm_pb_title tm_pb_title_5 tm_pb_module text-center">
                 <!--<div class="h2-style tm_pb_title__super-title">Location and map</div>-->
-                <br/><br/><div class="h1-style tm_pb_title__title">Address</div>
+                <br/><br/>
+                <div class="h1-style tm_pb_title__title">Address</div>
             </div>
             <!--<hr class="tm_pb_module tm_pb_space tm_pb_divider_10">-->
             <div class="tm_pb_text_4" style="margin-top: 50px;">
-                <p style="font-size: 15px;">Khan Plaza ( 3rd floor), 32/2,  Science Lab, Mirpur Road, Dhanmondi, Dhaka-
+                <p style="font-size: 15px;">Khan Plaza ( 3rd floor), 32/2, Science Lab, Mirpur Road, Dhanmondi, Dhaka-
                     1205</p>
             </div>
             <!--<hr class="tm_pb_module tm_pb_space tm_pb_divider_11">-->
@@ -1090,9 +1141,10 @@
 
 
     <div class="col-md-6 contact-left">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d69464.35791711224!2d90.36156018422729!3d23.791181985504355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x3755c691ba478fbd%3A0xd1b3f71371eb15ec!2sHazrat+Shahjalal+International+Airport!3m2!1d23.846615!2d90.4026234!4m5!1s0x3755b8c80b65b101%3A0xe7889593d425a22c!2s32%2F2+Mirpur+Rd%2C+Dhaka!3m2!1d23.737644799999998!2d90.38398769999999!5e0!3m2!1sen!2sbd!4v1514902512399" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d69464.35791711224!2d90.36156018422729!3d23.791181985504355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x3755c691ba478fbd%3A0xd1b3f71371eb15ec!2sHazrat+Shahjalal+International+Airport!3m2!1d23.846615!2d90.4026234!4m5!1s0x3755b8c80b65b101%3A0xe7889593d425a22c!2s32%2F2+Mirpur+Rd%2C+Dhaka!3m2!1d23.737644799999998!2d90.38398769999999!5e0!3m2!1sen!2sbd!4v1514902512399"
+                width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         <!--<iframe src="https://www.google.com/maps/embed/v1/directions?origin=Hazrat%20Shahjalal%20International%20Airport&destination=32/1,%20Khan%20Plaza%20,%20Science%20Lab,%20Mirpur%20Road,%20Dhanmondi&key=AIzaSyCOCtIc_RrQDlw-zPZm3jaSQ0kWF7oTSic"-->
-                <!--width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+        <!--width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
     </div>
 </div>
 <!-- end location and map -->
@@ -1102,10 +1154,10 @@
     <div class="container">
         <div class="col-md-4 footer-left">
             <h3>EXPLORE</h3>
-            <li><a href="#whyUs">Why us</a></li>
+            <li><a th:href="@{/whyUs}">Why us</a></li>
             <li><a th:href="@{/hotels?type=Hotel}">Hotels</a></li>
             <li><a th:href="@{/hotels?type=Ship}">Ships</a></li>
-            <li><a href="#packages">Packages</a></li>
+            <li><a th:href="@{/packages/1}">Packages</a></li>
 
         </div>
         <div class="col-md-4 footer-left">
@@ -1119,11 +1171,13 @@
 
         <div class="col-md-4 footer-left">
             <h3>OUR LOCATION</h3>
-            <li><i class="fa fa-map-marker fa-lg"></i></i> &nbsp; &nbsp; 32/1, Khan Plaza ( 3rd floor), Science Lab,<br/>
+            <li><i class="fa fa-map-marker fa-lg"></i></i> &nbsp; &nbsp; 32/1, Khan Plaza ( 3rd floor), Science
+                Lab,<br/>
                 &nbsp; &nbsp; &nbsp; &nbsp;Mirpur Road, Dhanmondi, Dhaka- 1205
             </li>
             <li><i class="fa fa-phone fa-lg"></i> &nbsp; &nbsp;01840477707, 01840477759</li>
-            <li><i class="fa fa-envelope fa-lg"></i><a href="mailto:hotelswave@gmail.com">&nbsp;&nbsp; hotelswave@gmail.com</a></li>
+            <li><i class="fa fa-envelope fa-lg"></i><a href="mailto:hotelswave@gmail.com">&nbsp;&nbsp;
+                hotelswave@gmail.com</a></li>
         </div>
         <div class="col-md-12 footerName">
             <h5>
@@ -1148,12 +1202,12 @@
         $(window).scroll(function () {
             if ($(this).scrollTop() >= clientHeight) {
                 // $('nav.navbar-default').addClass('stickytop');
-                $("#first-pic-and-option").css( { marginTop : "50px" } );
+                $("#first-pic-and-option").css({marginTop: "50px"});
                 $('div.header').addClass('stickytop');
             }
             else {
                 // $('nav.navbar-default').removeClass('stickytop');
-                $("#first-pic-and-option").css( { marginTop : "0" } );
+                $("#first-pic-and-option").css({marginTop: "0"});
                 $('div.header').removeClass('stickytop');
             }
         });

@@ -27,26 +27,26 @@
                         <img th:src="@{/packages/image/}+${pckg?.id}" th:alt="${pckg?.title}" class="package-page-image" >
                     </div>
                 </div>
-                <div class="package-page-side-bar-title">
-                    <span class="headline" th:text="${pckg?.title}"></span>
-                    <div th:if="${pckg?.spots !=null and !pckg?.spots.empty}">
-                        <strong>Spots: </strong><span th:text="${pckg?.spots}"></span>
-                    </div>
-                    <div th:if="${pckg?.category !=null and !pckg?.category?.empty}">
-                        <strong>Category: </strong>
-                        <span th:text="${pckg?.category}"></span><br/>
-                    </div>
-                    <div th:if="${pckg?.duration !=null and !pckg?.duration?.empty}">
-                        <strong>Duration: </strong>
-                        <span th:text="${pckg?.duration}"></span><br/>
-                    </div>
-                    <hr/>
-                </div>
+                <!--<div class="package-page-side-bar-title">-->
+                    <!--<span class="headline" th:text="${pckg?.title}"></span>-->
+                    <!--<div th:if="${pckg?.spots !=null and !pckg?.spots.empty}">-->
+                        <!--<strong>Spots: </strong><span th:text="${pckg?.spots}"></span>-->
+                    <!--</div>-->
+                    <!--<div th:if="${pckg?.category !=null and !pckg?.category?.empty}">-->
+                        <!--<strong>Category: </strong>-->
+                        <!--<span th:text="${pckg?.category}"></span><br/>-->
+                    <!--</div>-->
+                    <!--<div th:if="${pckg?.duration !=null and !pckg?.duration?.empty}">-->
+                        <!--<strong>Duration: </strong>-->
+                        <!--<span th:text="${pckg?.duration}"></span><br/>-->
+                    <!--</div>-->
+                    <!--<hr/>-->
+                <!--</div>-->
                 <div class="component-box-body">
                     <div class="component-box-body-title">
-                        Package Details
-                        <div th:if="${pckg?.location != null and !pckg?.location?.empty}" class="pull-right" style="margin-right: 20px;">
-                            Location: <span th:text="${pckg?.location}"></span>
+                        <span th:text="${pckg?.title}"></span>
+                        <div th:if="${pckg?.category != null and !pckg?.category?.empty}" class="pull-right" style="margin-right: 20px;">
+                            Category : <span th:text="${pckg?.category}"></span>
                         </div>
                     </div>
 
@@ -91,6 +91,7 @@
 
             </div>
             <div class="col-sm-4 ">
+
                 <div class="package-page-side-bar">
 
                     <div class="package-page-side-bar-other-location">
@@ -120,13 +121,13 @@
                     </div>
                     <div class="assistance-div-text">
                         <a target="_self" data-action="url" class="moto-link" href="callto:#">
-                            <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; 01840477707
+                            &nbsp;<i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;&nbsp; 01840477707
                         </a> <br/>
                         <a target="_self" data-action="url" class="moto-link" href="callto:#">
-                            <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; 01840477759
+                            &nbsp;<i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;&nbsp; 01840477759
                         </a> <br/>
                         <a href="mailto:hotelswave@gmail.com">
-                            <i class="fa fa-envelope fa-lg"></i> hotelswave@gmail.com
+                            <i class="fa fa-envelope"></i> &nbsp;hotelswave@gmail.com
                         </a>
                     </div>
                 </div>
