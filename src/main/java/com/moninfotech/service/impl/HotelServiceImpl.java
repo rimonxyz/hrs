@@ -3,6 +3,7 @@ package com.moninfotech.service.impl;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.HotelFacilities;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.repository.HotelRepository;
@@ -154,6 +155,12 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public List<Hotel> findByNameContaining(String name,int page) {
         return this.hotelRepo.findByNameContainingIgnoreCase(name,new PageRequest(page,SortAttributes.Page.SIZE,Sort.Direction.ASC,SortAttributes.FIELD_ID));
+    }
+
+    @Override
+    public List<Hotel> filter(String query, String star, String price, int rating, HotelFacilities facilities) {
+        String[] prices = price.split("x");
+        return this.hotelRepo.filterHotels(query, star, Integer.parseInt(prices[0]), Integer.parseInt(prices[1]), rating, facilities.isRestaurant());
     }
 
 

@@ -4,6 +4,7 @@ import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.HotelFacilities;
 import com.moninfotech.domain.Room;
 import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.HotelService;
@@ -14,10 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Date;
@@ -39,6 +37,28 @@ public class HotelController {
         this.hotelService = hotelService;
         this.roomService = roomService;
         this.categoryService = categoryService;
+    }
+
+    @GetMapping("/filter")
+    private String filterHotels(@RequestParam("query") String query,
+                                @RequestParam("star") String star,
+                                @RequestParam("price") String price,
+                                @RequestParam("rating") int rating,
+                                @ModelAttribute HotelFacilities facilities,
+                                @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                @RequestParam(value = "sortBy", required = false) String sortBy,
+                                @RequestParam(value = "isDesc", required = false) boolean isDesc,
+                                Model model) {
+        List<Hotel> hotels = this.hotelService.filter(query, star, price, rating, facilities);
+
+        model.addAttribute("isDesc", !isDesc);
+        if (query != null)
+            model.addAttribute("query", query);
+        model.addAttribute("hotelList", hotels);
+        model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
+        model.addAttribute("page", page);
+//        model.addAttribute("template", "fragments/hotel/all");
+        return "adminlte/fragments/hotel/all";
     }
 
     // Get All Hotels paginated

@@ -21,6 +21,11 @@ public class Hotel extends BaseEntity {
     private String star;
     private boolean enabled;
 
+    // TODO add
+    private float rating;
+    private String acomodationType;
+    // END TODO
+
     private Integer discount;
 
     @ElementCollection(fetch = FetchType.LAZY)
@@ -61,6 +66,22 @@ public class Hotel extends BaseEntity {
 
     public void setDiscount(Integer discount) {
         this.discount = discount;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public String getAcomodationType() {
+        return acomodationType;
+    }
+
+    public void setAcomodationType(String acomodationType) {
+        this.acomodationType = acomodationType;
     }
 
     public static final class Type {
