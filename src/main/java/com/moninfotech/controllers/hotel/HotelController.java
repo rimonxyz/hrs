@@ -5,7 +5,6 @@ import com.moninfotech.commons.pojo.ParamFacilities;
 import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.domain.Hotel;
-import com.moninfotech.domain.HotelFacilities;
 import com.moninfotech.domain.Room;
 import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.HotelService;
@@ -42,7 +41,7 @@ public class HotelController {
     }
 
     @GetMapping("/filter")
-    private String filterHotels(@RequestParam("query") String query,
+    private String filterHotels(@RequestParam(value = "query", defaultValue = "") String query,
                                 @RequestParam("star") String star,
                                 @RequestParam("price") String price,
                                 @RequestParam("rating") Integer rating,
@@ -55,10 +54,13 @@ public class HotelController {
                                 Model model) {
         List<Hotel> hotels = this.hotelService.filter(query, star, price, rating == null ? 0 : rating, facilities);
 
-        model.addAttribute("isDesc", !isDesc);
-        if (query != null)
-            model.addAttribute("query", query);
         model.addAttribute("hotelList", hotels);
+        model.addAttribute("isDesc", !isDesc);
+
+        model.addAttribute("query", query);
+        model.addAttribute("price", price);
+        model.addAttribute("star", star);
+        model.addAttribute("rating", rating);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         model.addAttribute("hotelType", hotelType);
         model.addAttribute("f",facilities);
@@ -96,12 +98,13 @@ public class HotelController {
         model.addAttribute("isDesc", !isDesc);
         if (filterValue != null)
             model.addAttribute("filterValue", filterValue);
-        if (query != null)
-            model.addAttribute("query", query);
+        if (query == null) query = "";
+        model.addAttribute("query", query);
         model.addAttribute(hotelList);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         model.addAttribute("hotelType", type);
         model.addAttribute("page", page);
+        model.addAttribute("f", new ParamFacilities());
 //        model.addAttribute("template", "fragments/hotel/all");
         return "adminlte/fragments/hotel/all";
     }

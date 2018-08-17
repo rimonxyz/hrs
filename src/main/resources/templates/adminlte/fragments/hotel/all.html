@@ -92,24 +92,24 @@
                                     <select class="form-control" name="star">
                                         <option value="">All
                                         </option>
-                                        <option value="1 star" th:selected="${filterValue?.equals('1 star')}">1 Star
+                                        <option value="1 star" th:selected="${star?.equals('1 star')}">1 Star
                                         </option>
-                                        <option value="2 star" th:selected="${filterValue?.equals('2 star')}">2 Star
+                                        <option value="2 star" th:selected="${star?.equals('2 star')}">2 Star
                                         </option>
                                         <option value="3 star standard"
-                                                th:selected="${filterValue?.equals('3 star standard')}">3 Star
+                                                th:selected="${star?.equals('3 star standard')}">3 Star
                                             Standard
                                         </option>
-                                        <option value="3 star" th:selected="${filterValue?.equals('3 star')}">3 Star
+                                        <option value="3 star" th:selected="${star?.equals('3 star')}">3 Star
                                         </option>
-                                        <option value="4 star" th:selected="${filterValue?.equals('4 star')}">4 Star
+                                        <option value="4 star" th:selected="${star?.equals('4 star')}">4 Star
                                         </option>
-                                        <option value="5 star" th:selected="${filterValue?.equals('5 star')}">5 Star
+                                        <option value="5 star" th:selected="${star?.equals('5 star')}">5 Star
                                         </option>
-                                        <option value="resort" th:selected="${filterValue?.equals('resort')}">Resort
+                                        <option value="resort" th:selected="${star?.equals('resort')}">Resort
                                         </option>
                                         <option value="beach resort"
-                                                th:selected="${filterValue?.equals('beach resort')}">Beach Resort
+                                                th:selected="${star?.equals('beach resort')}">Beach Resort
                                         </option>
                                     </select>
                                 </div>
@@ -126,19 +126,16 @@
                                 <div class="form-group">
                                     <label class="label label-primary">Price Filter</label>
                                     <select class="form-control" name="price" >
-                                        <option th:value="1x1000000">
+                                        <option th:selected="${ price?.equals('1x1000000') }" th:value="1x1000000">
                                             All
                                         </option>
-                                        <option th:value="500x800"
-                                                th:selected="${filterValue?.equals('500x800')}">
+                                        <option th:selected="${ price?.equals('500x800') }" th:value="500x800">
                                             500-800
                                         </option>
-                                        <option th:value="900x1500"
-                                                th:selected="${filterValue?.equals('900x1500')}">
+                                        <option th:selected="${ price?.equals('900x1500') }" th:value="900x1500">
                                             900-1500
                                         </option>
-                                        <option th:value="1600x1000000"
-                                                th:selected="${filterValue?.equals('1600x1000000')}">
+                                        <option th:selected="${ price?.equals('1600x1000000') }" th:value="1600x1000000">
                                             1600-Above
                                         </option>
                                     </select>
@@ -148,9 +145,9 @@
                                     <label class="label label-primary">Rating Filter</label>
                                     <div class="row lead">
                                         <div style="margin-left: 20px;" id="stars" class="starrr"></div>
-                                        <span hidden="hidden"><span id="count">0</span></span>
+                                        <span hidden="hidden"><span id="count">5</span></span>
                                     </div>
-                                    <input type="hidden" id="ratingCount" name="rating"></input>
+                                    <input type="hidden" id="ratingCount" name="rating" th:value="${rating}"></input>
                                 </div>
 
                                 <div class="form-group">
@@ -679,6 +676,7 @@
                     <!-- /.box -->
                 </div>
             </div>
-
+        </div>
     </section>
 
+</div>
