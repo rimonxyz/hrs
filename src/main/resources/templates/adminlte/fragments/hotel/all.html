@@ -41,7 +41,7 @@
                     </div>
                     <div class="box-body">
                         <div>
-                            <form class="form" th:action="@{/search}" method="get">
+                            <form class="form" th:action="@{/hotels/filter}" method="get">
                                 <datalist id="places">
                                     <option th:each="area : ${areaList}" th:value="${area}" th:text="${area}">Coxs Bazar
                                     </option>
@@ -52,6 +52,9 @@
                                            class="form-control"
                                            required="required" th:value="${query}"></input>
                                 </div>
+                                <input type="hidden" name="star"></input>
+                                <input type="hidden" name="price" value="1x1000000"></input>
+                                <input type="hidden" name="rating"></input>
                                 <button style="margin-top: 20px;" class="form-control btn btn-default" type="submit"><i
                                         style="margin-right: 10px;" class="glyphicon glyphicon-search"></i>Search
                                 </button>
@@ -79,109 +82,336 @@
                     </div>
                     <div class="box-body">
                         <div>
-                            <!--Star Filter-->
-                            <div th:if="${hotelType!=null and hotelType.equals('Hotel')}">
-                                <label for="starFilterDiv" class="label label-primary">BY STAR</label>
-                                <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
-                                    <form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">
-                                        <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
-                                        <input th:if="${hotelType}" name="type" type="hidden"
-                                               th:value="${hotelType}"></input>
-                                        <input name="filterType" type="hidden" th:value="star"></input>
-                                        <select class="form-control" name="filterValue" id="starFilter">
-                                            <option value="">All
-                                            </option>
-                                            <option value="1 star" th:selected="${filterValue?.equals('1 star')}">1 Star
-                                            </option>
-                                            <option value="2 star" th:selected="${filterValue?.equals('2 star')}">2 Star
-                                            </option>
-                                            <option value="3 star standard"
-                                                    th:selected="${filterValue?.equals('3 star standard')}">3 Star
-                                                Standard
-                                            </option>
-                                            <option value="3 star" th:selected="${filterValue?.equals('3 star')}">3 Star
-                                            </option>
-                                            <option value="4 star" th:selected="${filterValue?.equals('4 star')}">4 Star
-                                            </option>
-                                            <option value="5 star" th:selected="${filterValue?.equals('5 star')}">5 Star
-                                            </option>
-                                            <option value="resort" th:selected="${filterValue?.equals('resort')}">Resort
-                                            </option>
-                                            <option value="beach resort"
-                                                    th:selected="${filterValue?.equals('beach resort')}">Beach Resort
-                                            </option>
-                                        </select>
-                                    </form>
+                            <form th:action="@{/hotels/filter}">
+                                <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
+                                <input th:if="${hotelType}" name="type" type="hidden"
+                                       th:value="${hotelType}"></input>
+
+                                <div class="form-group" th:if="${hotelType!=null and hotelType.equals('Hotel')}">
+                                    <label class="label label-primary">Star Filter</label>
+                                    <select class="form-control" name="star">
+                                        <option value="">All
+                                        </option>
+                                        <option value="1 star" th:selected="${filterValue?.equals('1 star')}">1 Star
+                                        </option>
+                                        <option value="2 star" th:selected="${filterValue?.equals('2 star')}">2 Star
+                                        </option>
+                                        <option value="3 star standard"
+                                                th:selected="${filterValue?.equals('3 star standard')}">3 Star
+                                            Standard
+                                        </option>
+                                        <option value="3 star" th:selected="${filterValue?.equals('3 star')}">3 Star
+                                        </option>
+                                        <option value="4 star" th:selected="${filterValue?.equals('4 star')}">4 Star
+                                        </option>
+                                        <option value="5 star" th:selected="${filterValue?.equals('5 star')}">5 Star
+                                        </option>
+                                        <option value="resort" th:selected="${filterValue?.equals('resort')}">Resort
+                                        </option>
+                                        <option value="beach resort"
+                                                th:selected="${filterValue?.equals('beach resort')}">Beach Resort
+                                        </option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div th:if="${hotelType!=null and hotelType.equals('Ship')}">
-                                <label for="starFilterDiv" class="label label-primary">BY SHIP</label>
-                                <div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
-                                    <form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">
-                                        <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
-                                        <input th:if="${hotelType}" name="type" type="hidden"
-                                               th:value="${hotelType}"></input>
-                                        <input name="filterType" type="hidden" value="ac"></input>
-                                        <select class="form-control" name="filterValue" id="starFilter">
-                                            <option value="ac" th:selected="${filterValue?.equals('ac')}">AC
-                                            </option>
-                                            <option value="nonac" th:selected="${filterValue?.equals('nonac')}">NON AC
-                                            </option>
-                                        </select>
-                                    </form>
+                                <div class="form-group" th:if="${hotelType!=null and hotelType.equals('Ship')}">
+                                    <label class="label label-primary">AC/Non AC</label>
+                                    <select class="form-control" name="ac" >
+                                        <option value="ac" th:selected="${filterValue?.equals('ac')}">AC
+                                        </option>
+                                        <option value="nonac" th:selected="${filterValue?.equals('nonac')}">NON AC
+                                        </option>
+                                    </select>
                                 </div>
-                            </div>
-                            <!--Price Filter-->
-                            <div style="margin-top: 10px;margin-bottom: 10px;">
-                                <label for="priceFilterDiv" class="label label-primary">BY PRICE</label>
-                                <div id="priceFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
-                                    <form class="form" th:action="@{/hotels/}" id="priceFilterForm" method="get">
-                                        <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
-                                        <input th:if="${hotelType}" name="type" type="hidden"
-                                               th:value="${hotelType}"></input>
-                                        <input name="filterType" type="hidden" th:value="price"></input>
-                                        <select class="form-control" name="filterValue" id="priceFilter">
-                                            <option th:value="1x1000000">
-                                                All
-                                            </option>
-                                            <option th:value="500x800"
-                                                    th:selected="${filterValue?.equals('500x800')}">
-                                                500-800
-                                            </option>
-                                            <option th:value="900x1500"
-                                                    th:selected="${filterValue?.equals('900x1500')}">
-                                                900-1500
-                                            </option>
-                                            <option th:value="1600x1000000"
-                                                    th:selected="${filterValue?.equals('1600x1000000')}">
-                                                1600-Above
-                                            </option>
-                                        </select>
-                                    </form>
+
+                                <div class="form-group">
+                                    <label class="label label-primary">Price Filter</label>
+                                    <select class="form-control" name="price" >
+                                        <option th:value="1x1000000">
+                                            All
+                                        </option>
+                                        <option th:value="500x800"
+                                                th:selected="${filterValue?.equals('500x800')}">
+                                            500-800
+                                        </option>
+                                        <option th:value="900x1500"
+                                                th:selected="${filterValue?.equals('900x1500')}">
+                                            900-1500
+                                        </option>
+                                        <option th:value="1600x1000000"
+                                                th:selected="${filterValue?.equals('1600x1000000')}">
+                                            1600-Above
+                                        </option>
+                                    </select>
                                 </div>
-                            </div>
-                            <!--Rating Filter-->
-                            <div style="margin-top: 10px;margin-bottom: 10px;">
-                                <label for="priceFilterDiv" class="label label-primary">GUEST RATING</label>
-                                <div id="ratingFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">
-                                    <form class="form" th:action="@{/hotels/}" id="ratingFilterForm" method="get">
-                                        <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
-                                        <input th:if="${hotelType}" name="type" type="hidden"
-                                               th:value="${hotelType}"></input>
-                                        <input name="filterType" type="hidden" th:value="rating"></input>
-                                        <div class="row lead">
-                                            <div style="margin-left: 20px;" id="stars" class="starrr"></div>
-                                            <span hidden="hidden"><span id="count">0</span></span>
-                                        </div>
-                                        <input type="hidden" id="ratingCount" name="filterValue"></input>
-                                    </form>
+
+                                <div class="form-group">
+                                    <label class="label label-primary">Rating Filter</label>
+                                    <div class="row lead">
+                                        <div style="margin-left: 20px;" id="stars" class="starrr"></div>
+                                        <span hidden="hidden"><span id="count">0</span></span>
+                                    </div>
+                                    <input type="hidden" id="ratingCount" name="rating"></input>
                                 </div>
-                            </div>
+
+                                <div class="form-group">
+                                    <input name="restaurant" th:checked="${f.restaurant}"  type="checkbox" value="true">&nbsp;&nbsp;Restaurant</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="lift" th:checked="${f.lift}" type="checkbox" value="true">&nbsp;&nbsp;Lift</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="wifi" th:checked="${f.wifi}" type="checkbox" value="true">&nbsp;&nbsp;Wifi</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="conferenceRoom" th:checked="${f.conferenceRoom}" type="checkbox" value="true">&nbsp;&nbsp;Conference Room</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="swimingPool" th:checked="${f.swimingPool}" type="checkbox" value="true">&nbsp;&nbsp;Swiming Pool</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="sportsZone" th:checked="${f.sportsZone}" type="checkbox" value="true">&nbsp;&nbsp;Sports Zone</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="gym" th:checked="${f.gym}" type="checkbox" value="true">&nbsp;&nbsp;Gymnesium</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="spa" th:checked="${f.spa}" type="checkbox" value="true">&nbsp;&nbsp;Spa</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="bar" th:checked="${f.bar}" type="checkbox" value="true">&nbsp;&nbsp;Bar</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="helipad" th:checked="${f.helipad}" type="checkbox" value="true">&nbsp;&nbsp;Helipad</input>
+                                </div>
+                                <div class="form-group">
+                                    <input name="ac" th:checked="${f.ac}" type="checkbox" value="true">&nbsp;&nbsp;AC</input>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input name="frontDesk" th:checked="${f.frontDesk}" type="checkbox" value="true">&nbsp;&nbsp;Front Desk</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="roomService" th:checked="${f.roomService}" type="checkbox" value="true">&nbsp;&nbsp;Room Service</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="electricity" th:checked="${f.electricity}" type="checkbox" value="true">&nbsp;&nbsp;Electricity</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="security" th:checked="${f.security}" type="checkbox" value="true">&nbsp;&nbsp;Security</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="complementaryBreakfast" th:checked="${f.complementaryBreakfast}" type="checkbox" value="true">&nbsp;&nbsp;Complementary Breakfast</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="coffeeShop" th:checked="${f.coffeeShop}" type="checkbox" value="true">&nbsp;&nbsp;Coffee Shop</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="freeParking" th:checked="${f.freeParking}" type="checkbox" value="true">&nbsp;&nbsp;Free Parking</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="airportTransportation" th:checked="${f.airportTransportation}" type="checkbox" value="true">&nbsp;&nbsp;Airport Transportation</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="businessCenter" th:checked="${f.businessCenter}" type="checkbox" value="true">&nbsp;&nbsp;Business Center</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="meetingRoom" th:checked="${f.meetingRoom}" type="checkbox" value="true">&nbsp;&nbsp;Meeting Room</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="doctorOnCall" th:checked="${f.doctorOnCall}" type="checkbox" value="true">&nbsp;&nbsp;Doctors on Call</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="wakeupService" th:checked="${f.wakeupService}" type="checkbox" value="true">&nbsp;&nbsp;Wakeup Service</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="wheelChairAccessible" th:checked="${f.wheelChairAccessible}" type="checkbox" value="true">&nbsp;&nbsp;Wheelchair Accessible</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="safeDepositBox" th:checked="${f.safeDepositBox}" type="checkbox" value="true">&nbsp;&nbsp;Safe Deposit Box</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="nonSmokingRoom" th:checked="${f.nonSmokingRoom}" type="checkbox" value="true">&nbsp;&nbsp;No Smoking Room</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="vipFloor" th:checked="${f.vipFloor}" type="checkbox" value="true">&nbsp;&nbsp;VIP Floor</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="acceptCreditCard" th:checked="${f.acceptCreditCard}" type="checkbox" value="true">&nbsp;&nbsp;Accept Credit Card</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="newspaper" th:checked="${f.newspaper}" type="checkbox" value="true">&nbsp;&nbsp;Newspaper</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="laundry" th:checked="${f.laundry}" type="checkbox" value="true">&nbsp;&nbsp;Laundry</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="lobby" th:checked="${f.lobby}" type="checkbox" value="true">&nbsp;&nbsp;Lobby</input>
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="foreignExchange" th:checked="${f.foreignExchange}" type="checkbox" value="true">&nbsp;&nbsp;Foreign Exchange</input>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input name="executiveLaunge" th:checked="${f.executiveLaunge}" type="checkbox" value="true">&nbsp;&nbsp;Executive Launge</input>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input name="babySitting" th:checked="${f.babySitting}" type="checkbox" value="true">&nbsp;&nbsp;Baby Sitting</input>
+                                </div>
+
+                                <button class="btn btn-primary btn-block" type="submit">Filter</button>
+                            </form>
+
 
                         </div>
                     </div>
                     <!-- /.box-body-->
                 </div>
+
+
+                <!--<div class="box box-primary">-->
+                    <!--<div class="box-header with-border">-->
+                        <!--<i class="fa fa-filter"></i>-->
+
+                        <!--<h3 class="box-title">Filter</h3>-->
+
+                        <!--<div class="box-tools pull-right">-->
+                            <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i-->
+                                    <!--class="fa fa-minus"></i>-->
+                            <!--</button>-->
+                            <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i-->
+                                    <!--class="fa fa-times"></i>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="box-body">-->
+                        <!--<div>-->
+                            <!--&lt;!&ndash;Star Filter&ndash;&gt;-->
+                            <!--<div th:if="${hotelType!=null and hotelType.equals('Hotel')}">-->
+                                <!--<label for="starFilterDiv" class="label label-primary">BY STAR</label>-->
+                                <!--<div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
+                                    <!--<form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">-->
+                                        <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
+                                        <!--<input th:if="${hotelType}" name="type" type="hidden"-->
+                                               <!--th:value="${hotelType}"></input>-->
+                                        <!--<input name="filterType" type="hidden" th:value="star"></input>-->
+                                        <!--<select class="form-control" name="filterValue" id="starFilter">-->
+                                            <!--<option value="">All-->
+                                            <!--</option>-->
+                                            <!--<option value="1 star" th:selected="${filterValue?.equals('1 star')}">1 Star-->
+                                            <!--</option>-->
+                                            <!--<option value="2 star" th:selected="${filterValue?.equals('2 star')}">2 Star-->
+                                            <!--</option>-->
+                                            <!--<option value="3 star standard"-->
+                                                    <!--th:selected="${filterValue?.equals('3 star standard')}">3 Star-->
+                                                <!--Standard-->
+                                            <!--</option>-->
+                                            <!--<option value="3 star" th:selected="${filterValue?.equals('3 star')}">3 Star-->
+                                            <!--</option>-->
+                                            <!--<option value="4 star" th:selected="${filterValue?.equals('4 star')}">4 Star-->
+                                            <!--</option>-->
+                                            <!--<option value="5 star" th:selected="${filterValue?.equals('5 star')}">5 Star-->
+                                            <!--</option>-->
+                                            <!--<option value="resort" th:selected="${filterValue?.equals('resort')}">Resort-->
+                                            <!--</option>-->
+                                            <!--<option value="beach resort"-->
+                                                    <!--th:selected="${filterValue?.equals('beach resort')}">Beach Resort-->
+                                            <!--</option>-->
+                                        <!--</select>-->
+                                    <!--</form>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div th:if="${hotelType!=null and hotelType.equals('Ship')}">-->
+                                <!--<label for="starFilterDiv" class="label label-primary">BY SHIP</label>-->
+                                <!--<div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
+                                    <!--<form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">-->
+                                        <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
+                                        <!--<input th:if="${hotelType}" name="type" type="hidden"-->
+                                               <!--th:value="${hotelType}"></input>-->
+                                        <!--<input name="filterType" type="hidden" value="ac"></input>-->
+                                        <!--<select class="form-control" name="filterValue" id="starFilter">-->
+                                            <!--<option value="ac" th:selected="${filterValue?.equals('ac')}">AC-->
+                                            <!--</option>-->
+                                            <!--<option value="nonac" th:selected="${filterValue?.equals('nonac')}">NON AC-->
+                                            <!--</option>-->
+                                        <!--</select>-->
+                                    <!--</form>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;Price Filter&ndash;&gt;-->
+                            <!--<div style="margin-top: 10px;margin-bottom: 10px;">-->
+                                <!--<label for="priceFilterDiv" class="label label-primary">BY PRICE</label>-->
+                                <!--<div id="priceFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
+                                    <!--<form class="form" th:action="@{/hotels/}" id="priceFilterForm" method="get">-->
+                                        <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
+                                        <!--<input th:if="${hotelType}" name="type" type="hidden"-->
+                                               <!--th:value="${hotelType}"></input>-->
+                                        <!--<input name="filterType" type="hidden" th:value="price"></input>-->
+                                        <!--<select class="form-control" name="filterValue" id="priceFilter">-->
+                                            <!--<option th:value="1x1000000">-->
+                                                <!--All-->
+                                            <!--</option>-->
+                                            <!--<option th:value="500x800"-->
+                                                    <!--th:selected="${filterValue?.equals('500x800')}">-->
+                                                <!--500-800-->
+                                            <!--</option>-->
+                                            <!--<option th:value="900x1500"-->
+                                                    <!--th:selected="${filterValue?.equals('900x1500')}">-->
+                                                <!--900-1500-->
+                                            <!--</option>-->
+                                            <!--<option th:value="1600x1000000"-->
+                                                    <!--th:selected="${filterValue?.equals('1600x1000000')}">-->
+                                                <!--1600-Above-->
+                                            <!--</option>-->
+                                        <!--</select>-->
+                                    <!--</form>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;Rating Filter&ndash;&gt;-->
+                            <!--<div style="margin-top: 10px;margin-bottom: 10px;">-->
+                                <!--<label for="priceFilterDiv" class="label label-primary">GUEST RATING</label>-->
+                                <!--<div id="ratingFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
+                                    <!--<form class="form" th:action="@{/hotels/}" id="ratingFilterForm" method="get">-->
+                                        <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
+                                        <!--<input th:if="${hotelType}" name="type" type="hidden"-->
+                                               <!--th:value="${hotelType}"></input>-->
+                                        <!--<input name="filterType" type="hidden" th:value="rating"></input>-->
+                                        <!--<div class="row lead">-->
+                                            <!--<div style="margin-left: 20px;" id="stars" class="starrr"></div>-->
+                                            <!--<span hidden="hidden"><span id="count">0</span></span>-->
+                                        <!--</div>-->
+                                        <!--<input type="hidden" id="ratingCount" name="filterValue"></input>-->
+                                    <!--</form>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; /.box-body&ndash;&gt;-->
+                <!--</div>-->
                 <!-- /.box -->
             </div>
 

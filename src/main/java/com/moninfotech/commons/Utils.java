@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
     public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
@@ -26,5 +28,14 @@ public class Utils {
         return !Utils.NULL_OR_EMPTY(str);
     }
 
+    public static String toSnakeCase(String camelCaseString) {
+        Matcher m = Pattern.compile("(?<=[a-z])[A-Z]").matcher(camelCaseString);
 
+        StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            m.appendReplacement(sb, "_" + m.group().toLowerCase());
+        }
+        m.appendTail(sb);
+        return sb.toString();
+    }
 }

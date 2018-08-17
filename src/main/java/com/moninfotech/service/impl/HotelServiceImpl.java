@@ -2,8 +2,8 @@ package com.moninfotech.service.impl;
 
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.commons.pojo.ParamFacilities;
 import com.moninfotech.domain.Hotel;
-import com.moninfotech.domain.HotelFacilities;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.repository.HotelRepository;
@@ -13,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class HotelServiceImpl implements HotelService {
+    @PersistenceContext
+    private EntityManager em;
+
     private final HotelRepository hotelRepo;
 
     @Autowired
@@ -158,10 +163,65 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<Hotel> filter(String query, String star, String price, int rating, HotelFacilities facilities) {
+    public List<Hotel> filter(String query, String star, String price, int rating, ParamFacilities facilities) {
         String[] prices = price.split("x");
-        return this.hotelRepo.filterHotels(query, star, Integer.parseInt(prices[0]), Integer.parseInt(prices[1]), rating, facilities.isRestaurant());
+        return this.hotelRepo.filterHotels(
+                query,
+                star,
+                Integer.parseInt(prices[0]),
+                Integer.parseInt(prices[1]), rating,
+                facilities.getRestaurant(),
+                facilities.getLift(),
+                facilities.getWifi(),
+                facilities.getConferenceRoom(),
+                facilities.getSwimingPool(),
+                facilities.getSportsZone(),
+                facilities.getGym(),
+                facilities.getSpa(),
+                facilities.getBar(),
+                facilities.getHelipad(),
+                facilities.getAc(),
+                facilities.getFrontDesk(),
+                facilities.getRoomService(),
+                facilities.getElectricity(),
+                facilities.getSecurity(),
+                facilities.getComplementaryBreakfast(),
+                facilities.getCoffeeShop(),
+                facilities.getFreeParking(),
+                facilities.getAirportTransportation(),
+                facilities.getBusinessCenter(),
+                facilities.getMeetingRoom(),
+                facilities.getDoctorOnCall(),
+                facilities.getWakeupService(),
+                facilities.getWheelChairAccessible(),
+                facilities.getSafeDepositBox(),
+                facilities.getNonSmokingRoom(),
+                facilities.getVipFloor(),
+                facilities.getAcceptCreditCard(),
+                facilities.getNewspaper(),
+                facilities.getLaundry(),
+                facilities.getLobby(),
+                facilities.getForeignExchange(),
+                facilities.getExecutiveLaunge(),
+                facilities.getBabySitting()
+        );
     }
 
 
+//    public String buildFilterQuery(String query, String star, int rating, Map<String, String> fMap) {
+//        StringBuilder builder = new StringBuilder();
+//        builder.append("SELECT hotel.id as id, room.id as room_id," +
+//                " hotel.name" +
+//                " FROM hotel LEFT JOIN room ON hotel.id=room.hotel_id WHERE hotel.area LIKE '%").append(query).append("%' AND hotel.star LIKE '%").append(star).append("%'  AND ROUND(hotel.rating)=").append(rating);
+//        for (Map.Entry<String, String> entry : fMap.entrySet()) {
+//            String key = entry.getKey();
+//            key = Utils.toSnakeCase(key);
+//            boolean value = Boolean.parseBoolean(entry.getValue());
+//            if (value)
+//                builder.append(" AND hotel.").append(key).append("=").append(true);
+//        }
+//        builder.append(" GROUP BY id");
+//        return builder.toString();
+////        "AND restaurant=:restaurant AND room.price BETWEEN :priceFrom AND :priceTo GROUP BY hotel.id
+//    }
 }

@@ -1,6 +1,7 @@
 package com.moninfotech.controllers.hotel;
 
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.commons.pojo.ParamFacilities;
 import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.domain.Hotel;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sayemkcn on 4/16/17.
@@ -43,19 +45,23 @@ public class HotelController {
     private String filterHotels(@RequestParam("query") String query,
                                 @RequestParam("star") String star,
                                 @RequestParam("price") String price,
-                                @RequestParam("rating") int rating,
-                                @ModelAttribute HotelFacilities facilities,
+                                @RequestParam("rating") Integer rating,
+                                @ModelAttribute ParamFacilities facilities,
+                                @RequestParam Map<String,String> fMap,
+                                @RequestParam(value = "type", defaultValue = "Hotel") String hotelType,
                                 @RequestParam(value = "page", defaultValue = "0") Integer page,
                                 @RequestParam(value = "sortBy", required = false) String sortBy,
                                 @RequestParam(value = "isDesc", required = false) boolean isDesc,
                                 Model model) {
-        List<Hotel> hotels = this.hotelService.filter(query, star, price, rating, facilities);
+        List<Hotel> hotels = this.hotelService.filter(query, star, price, rating == null ? 0 : rating, facilities);
 
         model.addAttribute("isDesc", !isDesc);
         if (query != null)
             model.addAttribute("query", query);
         model.addAttribute("hotelList", hotels);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
+        model.addAttribute("hotelType", hotelType);
+        model.addAttribute("f",facilities);
         model.addAttribute("page", page);
 //        model.addAttribute("template", "fragments/hotel/all");
         return "adminlte/fragments/hotel/all";

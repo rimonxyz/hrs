@@ -1,7 +1,7 @@
 package com.moninfotech.service;
 
+import com.moninfotech.commons.pojo.ParamFacilities;
 import com.moninfotech.domain.Hotel;
-import com.moninfotech.domain.HotelFacilities;
 import com.moninfotech.domain.User;
 
 import java.util.Date;
@@ -41,6 +41,6 @@ public interface HotelService {
 
     List<Hotel> findByNameContaining(String query,int page);
 
-    List<Hotel> filter(String query, String star, String price, int rating, HotelFacilities facilities);
+    List<Hotel> filter(String query, String star, String price, int rating, ParamFacilities facilities);
 
 }

@@ -6,6 +6,8 @@ package com.moninfotech.commons;
 public class Constants {
     private Constants(){}
 
+    public static String FILTER_QUERY = "";
+
     public static String FIELD_ID = "id";
 
     public static int PAGE_SIZE = 10;
