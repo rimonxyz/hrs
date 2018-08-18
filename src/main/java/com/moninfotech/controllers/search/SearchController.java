@@ -1,5 +1,6 @@
 package com.moninfotech.controllers.search;
 
+import com.moninfotech.commons.pojo.ParamFacilities;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class SearchController {
         model.addAttribute("query", query);
         model.addAttribute("hotelType","Hotel");
         model.addAttribute("page",page);
+        model.addAttribute("f", new ParamFacilities());
 //        model.addAttribute("template","fragments/hotel/all");
         return "adminlte/fragments/hotel/all";
     }
