@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +49,31 @@ public class Hotel extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
+    public String getRatingDesc() {
+        if (this.rating >= 7)
+            return "Excellent";
+        else if (this.rating > 5 && this.rating < 7)
+            return "Great";
+        else if (this.rating > 3 && this.rating <= 5)
+            return "Good";
+        else if (this.rating > 0)
+            return "Low";
+        else if (this.reviewList.size() == 0)
+            return "Unrated";
+        return "Very Low";
+    }
 
+    public int getMinimumPrice() {
+        if (this.roomList.size() == 0) return 0;
+
+        int price = Integer.MAX_VALUE;
+        for (Room room : roomList) {
+            if (room.getPrice() < price)
+                price = room.getPrice();
+        }
+        return price;
+
+    }
     
     public boolean isEnabled() {
         return enabled;

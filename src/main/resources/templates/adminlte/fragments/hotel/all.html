@@ -420,14 +420,6 @@
                         <h3 class="box-title" th:if="${'Hotel'.equals(hotelType)}">Hotels</h3>
                         <h3 class="box-title" th:if="${'Ship'.equals(hotelType)}">Ships</h3>
 
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                    class="fa fa-times"></i>
-                            </button>
-                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -445,152 +437,154 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div>
-                                            <span th:text="${hotel?.name?.trim()}"
-                                                  style="font-size: 25px; font-weight: 600; color: #0f74a8;"></span>
+                                            <a th:href="@{/hotels/}+${hotel?.id}">
+                                                <span th:text="${hotel?.name?.trim()}"
+                                                      style="font-size: 25px; font-weight: 600; color: #0f74a8;"></span>
+                                            </a>
                                             <br>
                                             <span th:text="${hotel?.capitalizeFirstLetter(hotel?.star)}"
                                                   style="font-size: 20px;"></span> <br>
                                             <span th:text="${hotel?.description}"
                                                   style="font-size: 16px; font-weight: 200;"></span>
                                         </div>
-                                        <div style="margin: 10px 0;">
-                                            <span th:if="${hotel?.facilities?.frontDesk}">
-                                                <img th:src="@{/images/svgs/frontDesk.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.roomService}">
-                                                <img th:src="@{/images/svgs/roomService.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.electricity}">
-                                                <img th:src="@{/images/svgs/electricity.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.security}">
-                                                <img th:src="@{/images/svgs/security.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.acceptCreditCard}">
-                                                <img th:src="@{/images/svgs/acceptCreditCard.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.complementaryBreakfast}">
-                                                <img th:src="@{/images/svgs/complementaryBreakfast.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.restaurant}">
-                                                <img th:src="@{/images/svgs/restaurant.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.coffeeShop}">
-                                                <img th:src="@{/images/svgs/coffeeShop.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.ac}">
-                                                <img th:src="@{/images/svgs/ac.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.lift}">
-                                                <img th:src="@{/images/svgs/elevator.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.wifi}">
-                                                <img th:src="@{/images/svgs/wifi.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.freeParking}">
-                                                <img th:src="@{/images/svgs/freeParking.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.newspaper}">
-                                                <img th:src="@{/images/svgs/newspaper.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.swimingPool}">
-                                                <img th:src="@{/images/svgs/swimingPool.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.laundry}">
-                                                <img th:src="@{/images/svgs/laundry.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.lobby}">
-                                                <img th:src="@{/images/svgs/lobby.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.sportsZone}">
-                                                <img th:src="@{/images/svgs/sportsZone.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.gym}">
-                                                <img th:src="@{/images/svgs/gym.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.spa}">
-                                                <img th:src="@{/images/svgs/spa.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.bar}">
-                                                <img th:src="@{/images/svgs/bar.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.helipad}">
-                                                <img th:src="@{/images/svgs/helipad.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.vipFloor}">
-                                                <img th:src="@{/images/svgs/vipFloor.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.foreignExchange}">
-                                                <img th:src="@{/images/svgs/foreignExchange.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.airportTransportation}">
-                                                <img th:src="@{/images/svgs/airportTransportation.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.conferenceRoom}">
-                                                <img th:src="@{/images/svgs/conferenceRoom.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.businessCenter}">
-                                                <img th:src="@{/images/svgs/businessCenter.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.meetingRoom}">
-                                                <img th:src="@{/images/svgs/meetingRoom.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.executiveLaunge}">
-                                                <img th:src="@{/images/svgs/executiveLaunge.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.babySitting}">
-                                                <img th:src="@{/images/svgs/babySitting.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.doctorOnCall}">
-                                                <img th:src="@{/images/svgs/doctorOnCall.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.wakeupService}">
-                                                <img th:src="@{/images/svgs/wakeupService.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.wheelChairAccessible}">
-                                                <img th:src="@{/images/svgs/wheelChairAccessible.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.safeDepositBox}">
-                                                <img th:src="@{/images/svgs/safeDepositBox.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                            <span th:if="${hotel?.facilities?.nonSmokingRoom}">
-                                                <img th:src="@{/images/svgs/nonSmokingRoom.svg}" alt=""
-                                                     class="hotel-facilities-icons"/>
-                                            </span>
-                                        </div>
+                                        <!--<div style="margin: 10px 0;">-->
+                                        <!--<span th:if="${hotel?.facilities?.frontDesk}">-->
+                                        <!--<img th:src="@{/images/svgs/frontDesk.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.roomService}">-->
+                                        <!--<img th:src="@{/images/svgs/roomService.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.electricity}">-->
+                                        <!--<img th:src="@{/images/svgs/electricity.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.security}">-->
+                                        <!--<img th:src="@{/images/svgs/security.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.acceptCreditCard}">-->
+                                        <!--<img th:src="@{/images/svgs/acceptCreditCard.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.complementaryBreakfast}">-->
+                                        <!--<img th:src="@{/images/svgs/complementaryBreakfast.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.restaurant}">-->
+                                        <!--<img th:src="@{/images/svgs/restaurant.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.coffeeShop}">-->
+                                        <!--<img th:src="@{/images/svgs/coffeeShop.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.ac}">-->
+                                        <!--<img th:src="@{/images/svgs/ac.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.lift}">-->
+                                        <!--<img th:src="@{/images/svgs/elevator.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.wifi}">-->
+                                        <!--<img th:src="@{/images/svgs/wifi.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.freeParking}">-->
+                                        <!--<img th:src="@{/images/svgs/freeParking.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.newspaper}">-->
+                                        <!--<img th:src="@{/images/svgs/newspaper.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.swimingPool}">-->
+                                        <!--<img th:src="@{/images/svgs/swimingPool.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.laundry}">-->
+                                        <!--<img th:src="@{/images/svgs/laundry.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.lobby}">-->
+                                        <!--<img th:src="@{/images/svgs/lobby.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.sportsZone}">-->
+                                        <!--<img th:src="@{/images/svgs/sportsZone.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.gym}">-->
+                                        <!--<img th:src="@{/images/svgs/gym.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.spa}">-->
+                                        <!--<img th:src="@{/images/svgs/spa.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.bar}">-->
+                                        <!--<img th:src="@{/images/svgs/bar.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.helipad}">-->
+                                        <!--<img th:src="@{/images/svgs/helipad.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.vipFloor}">-->
+                                        <!--<img th:src="@{/images/svgs/vipFloor.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.foreignExchange}">-->
+                                        <!--<img th:src="@{/images/svgs/foreignExchange.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.airportTransportation}">-->
+                                        <!--<img th:src="@{/images/svgs/airportTransportation.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.conferenceRoom}">-->
+                                        <!--<img th:src="@{/images/svgs/conferenceRoom.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.businessCenter}">-->
+                                        <!--<img th:src="@{/images/svgs/businessCenter.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.meetingRoom}">-->
+                                        <!--<img th:src="@{/images/svgs/meetingRoom.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.executiveLaunge}">-->
+                                        <!--<img th:src="@{/images/svgs/executiveLaunge.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.babySitting}">-->
+                                        <!--<img th:src="@{/images/svgs/babySitting.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.doctorOnCall}">-->
+                                        <!--<img th:src="@{/images/svgs/doctorOnCall.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.wakeupService}">-->
+                                        <!--<img th:src="@{/images/svgs/wakeupService.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.wheelChairAccessible}">-->
+                                        <!--<img th:src="@{/images/svgs/wheelChairAccessible.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.safeDepositBox}">-->
+                                        <!--<img th:src="@{/images/svgs/safeDepositBox.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--<span th:if="${hotel?.facilities?.nonSmokingRoom}">-->
+                                        <!--<img th:src="@{/images/svgs/nonSmokingRoom.svg}" alt=""-->
+                                        <!--class="hotel-facilities-icons"/>-->
+                                        <!--</span>-->
+                                        <!--</div>-->
                                         <div style="margin: 10px 0;">
                                             <span style="font-weight: 600; font-size: 20px;">Address </span> <br>
                                             <span th:text="${hotel?.address?.getCommaSeperatedString()}"
@@ -601,11 +595,14 @@
                                     <div class="col-md-4">
                                         <div class="row">
                                             <div class="col-xs-7">
-                                                <span style="font-size: 30px; font-weight: 500;">Excelent</span><br>
-                                                <span style="font-size: 20px; font-weight: 200; text-align: center;">15 review</span>
+                                                <span style="font-size: 25px; font-weight: 500;"
+                                                      th:text="${ hotel?.ratingDesc}">Excelent</span><br>
+                                                <span style="font-size: 20px; font-weight: 200; text-align: center;"><span
+                                                        th:text="${hotel?.reviewList?.size()}"></span> Reviews</span>
                                             </div>
                                             <div class="col-xs-5">
-                                                <span style="font-size: 50px; font-weight: 600; background: darkolivegreen; color: white; padding: 5px 10px;">7.9</span>
+                                                <span style="font-size: 50px; font-weight: 600; background: darkolivegreen; color: white; padding: 5px 10px;"
+                                                      th:text="${hotel?.rating}">7.9</span>
                                             </div>
                                         </div>
                                         <div class="row" style="text-align: right;">
@@ -619,7 +616,8 @@
                                         </div>
                                         <div style="text-align: right;">
                                             <span style="font-size: 20px;">Starts from</span><br>
-                                            <span style="font-size: 30px;">BDT1200</span>
+                                            <span style="font-size: 30px;">BDT<span
+                                                    th:text="${hotel?.minimumPrice}"></span></span>
                                         </div>
                                     </div>
                                     <div class="row">

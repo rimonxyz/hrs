@@ -65,6 +65,7 @@ public class HotelController {
         model.addAttribute("hotelType", hotelType);
         model.addAttribute("f",facilities);
         model.addAttribute("page", page);
+        model.addAttribute("sidebarCollapse", true);
 //        model.addAttribute("template", "fragments/hotel/all");
         return "adminlte/fragments/hotel/all";
     }
@@ -105,6 +106,7 @@ public class HotelController {
         model.addAttribute("hotelType", type);
         model.addAttribute("page", page);
         model.addAttribute("f", new ParamFacilities());
+        model.addAttribute("sidebarCollapse", true);
 //        model.addAttribute("template", "fragments/hotel/all");
         return "adminlte/fragments/hotel/all";
     }
