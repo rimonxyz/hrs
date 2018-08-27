@@ -1,14 +1,16 @@
 package com.moninfotech.controllers.hotel.admin;
 
 import com.moninfotech.commons.Constants;
-import com.moninfotech.commons.utils.DateUtils;
-import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.commons.utils.DateUtils;
+import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
+import com.moninfotech.exceptions.NotFoundException;
+import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.moninfotech.logger.Log;
 import com.moninfotech.service.CategoryService;
@@ -16,6 +18,7 @@ import com.moninfotech.service.HotelService;
 import com.moninfotech.service.RoomService;
 import com.moninfotech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,7 +89,7 @@ public class HotelAdminController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     String create(@ModelAttribute Hotel hotel, BindingResult bindingResult,
                   @RequestParam(value = "userId", required = false) Long userId,
-                  @RequestParam("images") MultipartFile[] multipartFiles) throws Exception, NullPasswordException {
+                  @RequestParam("images") MultipartFile[] multipartFiles) throws Exception, NullPasswordException, InvalidException {
         if (bindingResult.hasErrors())
             System.out.print("Binding ERROR: " + bindingResult.toString());
         // set image to the hotel entity if it's valid.
@@ -175,6 +178,11 @@ public class HotelAdminController {
         return "redirect:/admin/hotels?message=Successfully deleted!";
     }
 
+    @PostMapping("/softdelete/{hotelId}")
+    private String softDelete(@PathVariable("hotelId") Long hotelId) throws NotFoundException, InvalidException {
+        this.hotelService.softDelete(hotelId);
+        return "redirect:/admin/hotels?message=Successfully deleted!";
+    }
 //    // returns image with that entity id
 //    @RequestMapping(value = "/images/{id}", method = RequestMethod.GET)
 //    private ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
@@ -183,7 +191,7 @@ public class HotelAdminController {
 
     // disable user of a hotel
     @RequestMapping(value = "/{id}/action", method = RequestMethod.POST)
-    private String disable(@PathVariable("id") Long id, @RequestParam("enabled") Boolean enabled) {
+    private String disable(@PathVariable("id") Long id, @RequestParam("enabled") Boolean enabled) throws InvalidException {
         Hotel hotel = this.hotelService.findOne(id);
         if (hotel == null || hotel.getUser() == null) return "redirect:/admin/hotels?message=User can not be found!";
         hotel.getUser().setEnabled(enabled);
@@ -313,4 +321,5 @@ public class HotelAdminController {
 //        this.roomService.delete(roomId);
 //        return "redirect:/hotel/rooms?message=Deleted!";
 //    }
+
 }

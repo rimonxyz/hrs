@@ -19,6 +19,7 @@ public class Hotel extends BaseEntity {
     private String type;
     private String star;
     private boolean enabled;
+    private boolean deleted;
 
     // TODO add
     private float rating;
@@ -105,6 +106,14 @@ public class Hotel extends BaseEntity {
 
     public void setAcomodationType(String acomodationType) {
         this.acomodationType = acomodationType;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public static final class Type {

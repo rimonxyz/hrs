@@ -72,11 +72,17 @@
                                           method="post">
                                         <button class="btn btn-primary" th:disabled="${hotel?.user?.hasAssignedRole('ROLE_ADMIN')}"
                                                 th:text="${hotel?.user?.isEnabled()}? 'Disable' : 'Enable'"
-                                                th:classappend="${hotel?.user?.isEnabled()}? 'btn-danger' : 'btn-success'"></button>
+                                                th:classappend="${hotel?.user?.isEnabled()}? 'btn-warning' : 'btn-success'"></button>
                                     </form>
                                 </td>
-                                <td><a class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-hotel"
+                                <td><a class="btn btn-info" data-toggle="modal" data-target="#modal-edit-hotel"
                                        th:onclick="'onHotelItemClick(this,\'' + ${hotel?.id} + '\');'">Edit</a></td>
+                                <td>
+                                    <form th:action="@{/admin/hotels/softdelete/}+${hotel?.getId()}"
+                                          method="post">
+                                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
+                                </td>
                                 <!--<td>-->
                                     <!--<form th:action="@{/admin/hotels/delete/}+${hotel.getId()}"-->
                                           <!--onsubmit="return confirm('Do you really want to delete this article?');" method="post">-->

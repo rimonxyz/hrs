@@ -3,6 +3,8 @@ package com.moninfotech.service;
 import com.moninfotech.commons.pojo.ParamFacilities;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.User;
+import com.moninfotech.exceptions.NotFoundException;
+import com.moninfotech.exceptions.invalid.InvalidException;
 
 import java.util.Date;
 import java.util.List;
@@ -16,10 +18,12 @@ public interface HotelService {
     List<Hotel> findAll(int page, int size, String sortBy, boolean isDesc);
 
     // save a hotel
-    Hotel save(Hotel hotel);
+    Hotel save(Hotel hotel) throws InvalidException;
 
     // find a hotel by id
     Hotel findOne(Long id);
+
+    Hotel getOne(Long id) throws NotFoundException;
 
     void delete(Long id);
 
@@ -43,4 +47,5 @@ public interface HotelService {
 
     List<Hotel> filter(String query, String star, String price, int rating, ParamFacilities facilities);
 
+    void softDelete(Long hotelId) throws NotFoundException, InvalidException;
 }

@@ -2,6 +2,7 @@ package com.moninfotech.repository;
 
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.User;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +17,9 @@ import java.util.List;
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
     Hotel findByUser(User user);
+
+    List<Hotel> findByDeletedFalse();
+    Page<Hotel> findByDeletedFalse(Pageable pageable);
 
     @Query(value = "SELECT * FROM hotel LEFT JOIN room ON hotel.id=room.hotel_id WHERE area LIKE %:q% AND star LIKE %:star%  AND ROUND(rating)=:rating" +
             " AND  (:restaurant is null or restaurant=:restaurant) " +
@@ -90,11 +94,11 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
                              @Param("babySitting")  Boolean babySitting
     );
 
-    List<Hotel> findDistinctByNameContainingIgnoreCaseOrAddressAreaContainingIgnoreCaseOrAddressUpazilaContainingIgnoreCase(String name,String area,String upazilla, Pageable pageable);
+    List<Hotel> findDistinctByNameContainingIgnoreCaseOrAddressAreaContainingIgnoreCaseOrAddressUpazilaContainingIgnoreCaseAndDeletedFalse(String name,String area,String upazilla, Pageable pageable);
 
-    List<Hotel> findByNameContainingIgnoreCase(String name, Pageable pageable);
+    List<Hotel> findByNameContainingIgnoreCaseAndDeletedFalse(String name, Pageable pageable);
 
-    List<Hotel> findByAddressAreaContainingIgnoreCase(String area,Pageable pageable);
+    List<Hotel> findByAddressAreaContainingIgnoreCaseAndDeletedFalse(String area,Pageable pageable);
 
-    List<Hotel> findByAddressUpazilaContainingIgnoreCase(String location,Pageable pageable);
+    List<Hotel> findByAddressUpazilaContainingIgnoreCaseAndDeletedFalse(String location,Pageable pageable);
 }

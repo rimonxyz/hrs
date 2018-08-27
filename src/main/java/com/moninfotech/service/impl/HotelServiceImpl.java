@@ -6,6 +6,8 @@ import com.moninfotech.commons.pojo.ParamFacilities;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
+import com.moninfotech.exceptions.NotFoundException;
+import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.repository.HotelRepository;
 import com.moninfotech.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<Hotel> findAll() {
-        return this.hotelRepo.findAll();
+        return this.hotelRepo.findByDeletedFalse();
     }
 
     // returns all hotels paginated
@@ -45,13 +47,14 @@ public class HotelServiceImpl implements HotelService {
     public List<Hotel> findAll(int page, int size, String sortBy, boolean isDesc) {
         if (sortBy == null || sortBy.isEmpty()) sortBy = SortAttributes.FIELD_ID;
         if (isDesc)
-            return this.hotelRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, sortBy)).getContent();
-        return this.hotelRepo.findAll(new PageRequest(page, size, Sort.Direction.ASC, sortBy)).getContent();
+            return this.hotelRepo.findByDeletedFalse(new PageRequest(page, size, Sort.Direction.DESC, sortBy)).getContent();
+        return this.hotelRepo.findByDeletedFalse(new PageRequest(page, size, Sort.Direction.ASC, sortBy)).getContent();
     }
 
     // save a hotel
     @Override
-    public Hotel save(Hotel hotel) {
+    public Hotel save(Hotel hotel) throws InvalidException {
+        if (hotel==null) throw new InvalidException("/admin/hotels","Hotel can not be null");
         return this.hotelRepo.save(hotel);
     }
 
@@ -59,6 +62,13 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Hotel findOne(Long id) {
         return this.hotelRepo.findOne(id);
+    }
+
+    @Override
+    public Hotel getOne(Long id) throws NotFoundException {
+        Hotel hotel = this.hotelRepo.findOne(id);
+        if (hotel==null) throw new NotFoundException("Could not find hotel with id: "+id);
+        return hotel;
     }
 
     @Override
@@ -73,18 +83,18 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<Hotel> searchHotel(String query, int page) {
-        List<Hotel> hotelList = this.hotelRepo.findDistinctByNameContainingIgnoreCaseOrAddressAreaContainingIgnoreCaseOrAddressUpazilaContainingIgnoreCase(query, query, query, new PageRequest(page, SortAttributes.Page.SIZE, Sort.Direction.DESC, SortAttributes.FIELD_ID));
+        List<Hotel> hotelList = this.hotelRepo.findDistinctByNameContainingIgnoreCaseOrAddressAreaContainingIgnoreCaseOrAddressUpazilaContainingIgnoreCaseAndDeletedFalse(query, query, query, new PageRequest(page, SortAttributes.Page.SIZE, Sort.Direction.DESC, SortAttributes.FIELD_ID));
         return hotelList;
     }
 
     @Override
     public List<Hotel> findByAddressArea(String area,int page) {
-        return this.hotelRepo.findByAddressAreaContainingIgnoreCase(area,new PageRequest(page,SortAttributes.Page.SIZE,Sort.Direction.ASC,SortAttributes.FIELD_ID));
+        return this.hotelRepo.findByAddressAreaContainingIgnoreCaseAndDeletedFalse(area, new PageRequest(page, SortAttributes.Page.SIZE, Sort.Direction.ASC, SortAttributes.FIELD_ID));
     }
 
     @Override
     public List<Hotel> findByAddressUpazila(String location,int page) {
-        return this.hotelRepo.findByAddressUpazilaContainingIgnoreCase(location,new PageRequest(page,SortAttributes.Page.SIZE,Sort.Direction.ASC,SortAttributes.FIELD_ID));
+        return this.hotelRepo.findByAddressUpazilaContainingIgnoreCaseAndDeletedFalse(location, new PageRequest(page, SortAttributes.Page.SIZE, Sort.Direction.ASC, SortAttributes.FIELD_ID));
     }
 
     @Override
@@ -159,7 +169,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<Hotel> findByNameContaining(String name,int page) {
-        return this.hotelRepo.findByNameContainingIgnoreCase(name,new PageRequest(page,SortAttributes.Page.SIZE,Sort.Direction.ASC,SortAttributes.FIELD_ID));
+        return this.hotelRepo.findByNameContainingIgnoreCaseAndDeletedFalse(name, new PageRequest(page, SortAttributes.Page.SIZE, Sort.Direction.ASC, SortAttributes.FIELD_ID));
     }
 
     @Override
@@ -205,6 +215,13 @@ public class HotelServiceImpl implements HotelService {
                 facilities.getExecutiveLaunge(),
                 facilities.getBabySitting()
         );
+    }
+
+    @Override
+    public void softDelete(Long hotelId) throws NotFoundException, InvalidException {
+        Hotel hotel = this.getOne(hotelId);
+        hotel.setDeleted(true);
+        this.save(hotel);
     }
 
 
