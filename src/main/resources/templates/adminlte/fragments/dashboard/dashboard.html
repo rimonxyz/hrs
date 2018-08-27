@@ -13,7 +13,7 @@
             <small></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
         </ol>
     </section>
@@ -21,17 +21,16 @@
     <div class="content">
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="info-box">
+                <div class="info-box d-info">
                     <!--<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>-->
 
                     <div class="info-box-content">
                         <span class="info-box-text">Total Booking</span>
                         <span class="info-box-number">
-                    <span th:text="${totalBookingList?.size()}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
-                    <span>
-                        <span>100</span><small>%</small>
-                    </span>
-                </span>
+                        <span th:text="${totalBookingList?.size()}"></span> &nbsp;&nbsp;=>&nbsp;&nbsp;
+                        <span>
+                            <span>100</span><small>%</small></span>
+                        </span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -39,7 +38,7 @@
             </div>
             <!-- /.col -->
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="info-box">
+                <div class="info-box d-info">
                     <!--<span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>-->
 
                     <div class="info-box-content">
@@ -62,7 +61,7 @@
             <div class="clearfix visible-sm-block"></div>
 
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="info-box">
+                <div class="info-box d-info">
                     <!--<span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>-->
 
                     <div class="info-box-content">
@@ -118,7 +117,7 @@
 
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="info-box">
+                <div class="info-box d-info">
                     <!--<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>-->
 
                     <div class="info-box-content">
@@ -136,7 +135,7 @@
             </div>
             <!-- /.col -->
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="info-box">
+                <div class="info-box d-info d-info">
                     <!--<span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>-->
 
                     <div class="info-box-content">
@@ -159,7 +158,7 @@
             <div class="clearfix visible-sm-block"></div>
 
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="info-box">
+                <div class="info-box d-info d-info">
                     <!--<span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>-->
 
                     <div class="info-box-content">
