@@ -74,7 +74,7 @@
 
                     <h5 th:if="${pckg?.exclude != null and !pckg?.exclude?.empty}" style="margin-top: 10px;">
                         <strong>Details : </strong>
-                        <span th:text="${pckg?.description}"></span>
+                        <span  th:utext="${pckg?.getDescriptionHtml()}"></span>
                     </h5>
 
                     <h5 th:if="${pckg?.include != null and !pckg?.include?.empty}" style="margin-top: 10px;">

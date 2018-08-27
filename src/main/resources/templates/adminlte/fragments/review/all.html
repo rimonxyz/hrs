@@ -14,11 +14,6 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">My Reviews</h3>
 
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <!-- /.box-tools -->
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -43,16 +38,10 @@
                 <div class="box box-primary" th:each="review, iter: ${reviewList}">
                     <div class="box-header">
                         <h3 class="box-title" th:text="${review?.title}">Collapsable</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <!-- /.box-tools -->
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <h4 th:text="${review?.comment}"></h4><br/><br/><br/>
+                        <p th:text="${review?.comment}"></p><br/><br/><br/>
                         <div class="progress-group" style="margin-left: 50px;margin-right: 50px;">
                             <span class="progress-text text-success">Rating: &nbsp; <span th:text="${review?.rating}"></span> / 10</span>
                             <!--<span class="progress-number"><b th:text="${review?.rating}">4</b>/5</span>-->

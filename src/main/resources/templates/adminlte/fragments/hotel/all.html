@@ -30,14 +30,14 @@
 
                         <h3 class="box-title">Search</h3>
 
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                    class="fa fa-times"></i>
-                            </button>
-                        </div>
+                        <!--<div class="box-tools pull-right">-->
+                            <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i-->
+                                    <!--class="fa fa-minus"></i>-->
+                            <!--</button>-->
+                            <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i-->
+                                    <!--class="fa fa-times"></i>-->
+                            <!--</button>-->
+                        <!--</div>-->
                     </div>
                     <div class="box-body">
                         <div>
@@ -71,14 +71,14 @@
 
                         <h3 class="box-title">Filter</h3>
 
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                    class="fa fa-times"></i>
-                            </button>
-                        </div>
+                        <!--<div class="box-tools pull-right">-->
+                            <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i-->
+                                    <!--class="fa fa-minus"></i>-->
+                            <!--</button>-->
+                            <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i-->
+                                    <!--class="fa fa-times"></i>-->
+                            <!--</button>-->
+                        <!--</div>-->
                     </div>
                     <div class="box-body">
                         <div>
@@ -437,7 +437,7 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div>
-                                            <a th:href="@{/hotels/}+${hotel?.id}">
+                                            <a target="_blank" th:href="@{/hotels/}+${hotel?.id}">
                                                 <span th:text="${hotel?.name?.trim()}"
                                                       style="font-size: 25px; font-weight: 600; color: #0f74a8;"></span>
                                             </a>
@@ -640,7 +640,7 @@
                                                  class="hotel-compare-image"/>
                                         </div>
                                         <div class="col-xs-3">
-                                            <a class="btn btn-success btn-block" th:href="@{/hotels/}+${hotel?.id}"
+                                            <a class="btn btn-success btn-block" target="_blank" th:href="@{/hotels/}+${hotel?.id}"
                                                th:text="@{See room availability}"></a>
                                             <!--<button class="btn btn-success btn-block">See room availability</button>-->
                                         </div>

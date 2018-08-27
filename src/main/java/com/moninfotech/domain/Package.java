@@ -37,6 +37,14 @@ public class Package extends BaseEntity {
     private String category;
     private Date lastBookingDate;
 
+    public String getDescriptionHtml(){
+        if (this.description==null) return "";
+        String newString =description.replace(",,,","<br/>");
+        newString = newString.replace("-b","<b>");
+        newString = newString.replace("b-","</b>");
+        return newString;
+    }
+
     public byte[] getImage() {
         return image;
     }
@@ -133,22 +141,6 @@ public class Package extends BaseEntity {
         this.exclude = exclude;
     }
 
-    @Override
-    public String toString() {
-        return "Package{" +
-                ", title='" + title + '\'' +
-                ", shortTag='" + shortTag + '\'' +
-                ", date=" + date +
-                ", duration='" + duration + '\'' +
-                ", price=" + price +
-                ", link='" + link + '\'' +
-                ", timeDistribution='" + timeDistribution + '\'' +
-                ", include='" + include + '\'' +
-                ", exclude='" + exclude + '\'' +
-                ", location='" + location + '\'' +
-                ", description='" + description + '\'' +
-                "} " + super.toString();
-    }
 
     public String getSpots() {
         return spots;
@@ -172,5 +164,21 @@ public class Package extends BaseEntity {
 
     public void setLastBookingDate(Date lastBookingDate) {
         this.lastBookingDate = lastBookingDate;
+    }
+    @Override
+    public String toString() {
+        return "Package{" +
+                ", title='" + title + '\'' +
+                ", shortTag='" + shortTag + '\'' +
+                ", date=" + date +
+                ", duration='" + duration + '\'' +
+                ", price=" + price +
+                ", link='" + link + '\'' +
+                ", timeDistribution='" + timeDistribution + '\'' +
+                ", include='" + include + '\'' +
+                ", exclude='" + exclude + '\'' +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                "} " + super.toString();
     }
 }
