@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by sayemkcn on 3/21/17.
@@ -62,6 +64,14 @@ public class Hotel extends BaseEntity {
         else if (this.reviewList.size() == 0)
             return "Unrated";
         return "Very Low";
+    }
+
+    public List<Category> getEffectiveCategories(){
+        if (this.roomList==null) return Collections.emptyList();
+        return this.roomList.stream()
+                .filter(room -> !room.isArchived())
+                .map(Room::getCategory)
+                .collect(Collectors.toList());
     }
 
     public int getMinimumPrice() {

@@ -138,7 +138,8 @@ public class HotelController {
 
         model.addAttribute("hotel", hotel);
         model.addAttribute("roomList", roomList);
-        model.addAttribute("categoryList", this.categoryService.findAll());
+        System.out.println("CAT: "+hotel.getEffectiveCategories().size());
+        model.addAttribute("categoryList", hotel.getEffectiveCategories());
         model.addAttribute("bookedIds", bookedIds);
 
         model.addAttribute("filterType", filterType);
