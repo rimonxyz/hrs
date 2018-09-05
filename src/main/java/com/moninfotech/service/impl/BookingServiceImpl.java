@@ -1,13 +1,16 @@
 package com.moninfotech.service.impl;
 
 import com.moninfotech.commons.Constants;
-import com.moninfotech.commons.utils.DateUtils;
+import com.moninfotech.commons.SessionAttr;
 import com.moninfotech.commons.Utils;
 import com.moninfotech.commons.pojo.FilterType;
+import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.domain.*;
+import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.repository.BookingRepository;
 import com.moninfotech.service.BookingService;
 import com.moninfotech.service.HotelService;
+import com.moninfotech.service.RoomService;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +18,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,11 +33,13 @@ import java.util.stream.Collectors;
 public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepo;
     private final HotelService hotelService;
+    private final RoomService roomService;
 
     @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepo, HotelService hotelService) {
+    public BookingServiceImpl(BookingRepository bookingRepo, HotelService hotelService, RoomService roomService) {
         this.bookingRepo = bookingRepo;
         this.hotelService = hotelService;
+        this.roomService = roomService;
     }
 
     @Override
@@ -272,6 +280,44 @@ public class BookingServiceImpl implements BookingService {
                         .collect(Collectors.toList());
         }
         return bookingList;
+    }
+
+    @Override
+    public Booking addToCart(HttpSession session, Long roomId, Date checkInDate, Date checkoutDate) throws InvalidException {
+//        Date date = null;
+//        try {
+//            date = DateUtils.getParsableDateFormat().parse(dateStr);
+//        } catch (ParseException e) {
+//            date = new Date();
+//        }
+
+        Room room = this.roomService.findOne(roomId);
+        if (room == null) throw new InvalidException("/rooms/" + roomId, "");
+        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+        if (booking == null || booking.getRoomList() == null || booking.getBookingDateList() == null) {
+            booking = new Booking();
+            booking.setRoomList(new ArrayList<>());
+            booking.setBookingDateList(new ArrayList<>());
+        }
+        if (checkInDate == null) checkInDate = new Date();
+        if (checkoutDate == null) checkoutDate = new Date();
+        LocalDate start = checkInDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate end = checkoutDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        for (LocalDate localDate = start; !localDate.isAfter(end); localDate = localDate.plusDays(1)) {
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            // validate booking // if user tries to book rooms from different hotels in a same booking restrict him from doing that shit.
+            if (this.isBookingInvalid(booking, room))
+                throw new InvalidException("/hotels/" + room.getHotel().getId(), "You can\'t book rooms from different hotels at the same time!");
+            if (this.isDuplicateAttempt(booking, room, date))
+                continue;
+
+            booking.getRoomList().add(room);
+            booking.getBookingDateList().add(date);
+        }
+
+        session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
+        return booking;
     }
 
 

@@ -165,6 +165,8 @@ public class HotelController {
         List<Room> filteredRooms = this.roomService.filter(hotelId,checkInDate,checkoutDate,categoryId);
         Hotel hotel = this.hotelService.findOne(hotelId);
 
+        model.addAttribute("checkInDate",DateUtils.getParsableDateFormat().format(checkInDate));
+        model.addAttribute("checkoutDate",DateUtils.getParsableDateFormat().format(checkoutDate));
         model.addAttribute("hotel", hotel);
         model.addAttribute("roomList", filteredRooms);
         model.addAttribute("categoryList", hotel.getEffectiveCategories());

@@ -8,6 +8,7 @@ import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.config.security.SecurityConfig;
 import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
+import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,30 +120,11 @@ public class BookingController {
 
     @GetMapping("/cart/add/{roomId}")
     private String addToCart(@PathVariable("roomId") Long roomId,
-                             @RequestParam(value = "date", required = false) String dateStr,
-                             HttpSession session) {
-        Date date = null;
-        try {
-            date = DateUtils.getParsableDateFormat().parse(dateStr);
-        } catch (ParseException e) {
-            date = new Date();
-        }
+                             @RequestParam(value = "checkInDate", required = false) Date checkInDate,
+                             @RequestParam(value = "checkoutDate", required = false) Date checkoutDate,
+                             HttpSession session) throws InvalidException {
         Room room = this.roomService.findOne(roomId);
-        if (room == null) return "redirect:/rooms/" + roomId;
-        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
-        if (booking == null || booking.getRoomList() == null || booking.getBookingDateList() == null) {
-            booking = new Booking();
-            booking.setRoomList(new ArrayList<>());
-            booking.setBookingDateList(new ArrayList<>());
-        }
-        // validate booking // if user tries to book rooms from different hotels in a same booking restrict him from doing that shit.
-        if (this.bookingService.isBookingInvalid(booking, room))
-            return "redirect:/hotels/" + room.getHotel().getId() + "?message=You can\'t book rooms from different hotels at the same time!";
-        if (this.bookingService.isDuplicateAttempt(booking, room, date))
-            return "redirect:/rooms/" + roomId + "/" + dateStr + "?message=You can't book same room twice at same day!";
-        booking.getRoomList().add(room);
-        booking.getBookingDateList().add(date);
-        session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
+        this.bookingService.addToCart(session,roomId,checkInDate,checkoutDate);
 
         return "redirect:/hotels/" + room.getHotel().getId() + "?messageinfo=Room " + room.getRoomNumber() + " Added to the cart!";
     }

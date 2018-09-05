@@ -205,7 +205,7 @@ public class RoomServiceImpl implements RoomService {
         LocalDate start = checkInDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate end = checkoutDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        for (LocalDate date = start; date.isBefore(end); date = date.plusDays(1)) {
+        for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
             Date d = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
             booked = room.isBooked(d);
         }

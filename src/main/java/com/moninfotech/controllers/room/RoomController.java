@@ -35,19 +35,23 @@ public class RoomController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping(value = "/{id}/{dateStr}")
+    @GetMapping(value = "/{id}/{checkInDate}/{checkoutDate}")
     private String details(@PathVariable("id") Long id,
-                           @PathVariable(value = "dateStr",required = false) String dateStr, Model model) {
+                           @PathVariable(value = "checkInDate",required = false) String checkInDate,
+                           @PathVariable(value = "checkoutDate",required = false) String checkoutDate,
+                           Model model) {
 //        System.out.println("dateStr "+dateStr);
-        if (!DateUtils.isParsable(dateStr))
-            dateStr = DateUtils.getParsableDateFormat().format(new Date());
+        if (!DateUtils.isParsable(checkInDate))
+            checkInDate = DateUtils.getParsableDateFormat().format(new Date());
+        if (!DateUtils.isParsable(checkoutDate))
+            checkoutDate= DateUtils.getParsableDateFormat().format(new Date());
         Room room = this.roomService.findOne(id);
         model.addAttribute("room", room);
         model.addAttribute("hotel",room.getHotel());
-        model.addAttribute("date",dateStr);
 
+        model.addAttribute("checkInDate",checkInDate);
+        model.addAttribute("checkoutDate",checkoutDate);
         model.addAttribute("filterType", FilterType.DATE);
-        model.addAttribute("filterValue",dateStr);
         model.addAttribute("categoryList",this.categoryService.findAll());
 
 //        model.addAttribute("template", "fragments/room/details");

@@ -481,7 +481,7 @@
                             <!-- Add the bg color to the header using any of the bg-* classes -->
                             <div class="widget-user-header"
                                  th:classappend="${bookedIds?.contains(room?.id)} ? bg-yellow : bg-aqua-active">
-                                <a th:href="@{/rooms/}+${room?.id}+@{/}+${filterValue}">
+                                <a th:href="@{/rooms/}+${room?.id}+@{/}+${checkInDate}+@{/}+${checkoutDate}">
                                     <h3 class="widget-user-username" style="color: white;">
                                         <span th:text="${room?.roomNumber}"></span>
                                         <span th:text="${room?.category?.name}" class="pull-right"
@@ -545,8 +545,8 @@
                                 </div>
                                 <div class="row" style="padding:0 15px;">
                                     <a class="btn btn-warning pull-right" th:if="${room?.hotel?.isEnabled()}" id="addToCart"
-                                       th:href="@{/bookings/cart/add/}+${room?.id}+@{/(date=${date})}">Book it!</a>
-                                    <a class="btn btn-success" th:href="@{/rooms/}+${room?.id}+@{/}+${filterValue}">Details</a>
+                                       th:href="@{/bookings/cart/add/}+${room?.id}+@{/(checkInDate=${checkInDate},checkoutDate=${checkoutDate})}">Book it!</a>
+                                    <a class="btn btn-success" th:href="@{/rooms/}+${room?.id}+@{/}+${checkInDate}+@{/}+${checkoutDate}">Details</a>
                                 </div>
                             </div>
                         </div>

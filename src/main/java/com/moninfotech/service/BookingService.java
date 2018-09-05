@@ -6,7 +6,9 @@ import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.domain.annotations.CurrentUser;
+import com.moninfotech.exceptions.invalid.InvalidException;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.Date;
@@ -70,4 +72,5 @@ public interface BookingService {
 
     List<Booking> filterBookingList(List<Booking> bookingList, String filterType, String filterValue) throws ParseException;
 
+    Booking addToCart(HttpSession session,Long roomId,Date checkInDate,Date checkoutDate) throws InvalidException;
 }
