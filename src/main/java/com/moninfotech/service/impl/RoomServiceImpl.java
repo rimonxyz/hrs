@@ -191,8 +191,8 @@ public class RoomServiceImpl implements RoomService {
         Hotel hotel = this.hotelService.findOne(hotelId);
         List<Room> roomList = hotel.getRoomList();
         List<Room> filteredList = new ArrayList<>();
-        if (checkInDate.after(checkoutDate))
-            throw new InvalidException("", "Checkin date can not be greater than check out date");
+        if (!checkInDate.before(checkoutDate) || checkInDate.before(new Date()))
+            throw new InvalidException("", "Check in date must be before than check out date and can not be a past date.");
         for (Room room : roomList) {
             if (room.isArchived()) continue;
             if (categoryId!=null && !Objects.equals(room.getCategory().getId(), categoryId))
