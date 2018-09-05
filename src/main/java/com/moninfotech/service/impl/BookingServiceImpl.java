@@ -304,7 +304,7 @@ public class BookingServiceImpl implements BookingService {
         LocalDate start = checkInDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate end = checkoutDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        for (LocalDate localDate = start; !localDate.isAfter(end); localDate = localDate.plusDays(1)) {
+        for (LocalDate localDate = start; localDate.isBefore(end); localDate = localDate.plusDays(1)) {
             Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             // validate booking // if user tries to book rooms from different hotels in a same booking restrict him from doing that shit.
             if (this.isBookingInvalid(booking, room))

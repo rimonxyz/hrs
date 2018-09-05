@@ -4,6 +4,7 @@ import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.commons.pojo.ParamFacilities;
 import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.utils.FileIO;
+import com.moninfotech.domain.Category;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.exceptions.invalid.InvalidException;
@@ -159,14 +160,19 @@ public class HotelController {
                                     @RequestParam("checkoutDate") Date checkoutDate,
                                     Model model) throws InvalidException {
         Long categoryId;
-        if (category==null || category.toLowerCase().equals("all"))
-            categoryId = null;
-        else categoryId = Long.parseLong(category);
+        Category cat = null;
+        if (category == null || category.toLowerCase().equals("all")) categoryId = null;
+        else {
+            categoryId = Long.parseLong(category);
+            cat = this.categoryService.findOne(categoryId);
+        }
         List<Room> filteredRooms = this.roomService.filter(hotelId,checkInDate,checkoutDate,categoryId);
         Hotel hotel = this.hotelService.findOne(hotelId);
 
         model.addAttribute("checkInDate",DateUtils.getParsableDateFormat().format(checkInDate));
         model.addAttribute("checkoutDate",DateUtils.getParsableDateFormat().format(checkoutDate));
+        if (cat != null)
+            model.addAttribute("categoryFilter", cat.getName());
         model.addAttribute("hotel", hotel);
         model.addAttribute("roomList", filteredRooms);
         model.addAttribute("categoryList", hotel.getEffectiveCategories());

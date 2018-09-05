@@ -416,7 +416,7 @@
                                 <input class="form-control" name="checkInDate" type="date" id="dateFilter"
                                        th:value="${checkInDate}" required></input>
                                 <input class="form-control" name="checkoutDate" type="date"
-                                       th:value="${ checkoutdate }" required></input>
+                                       th:value="${checkoutDate}" required></input>
                                 <select class="form-control" name="categoryId">
                                     <option>All</option>
                                     <option th:each="category: ${categoryList}" th:text="${category?.name}"
