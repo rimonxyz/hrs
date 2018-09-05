@@ -51,4 +51,5 @@ public interface RoomService {
 
     Room create(Room room, Long hotelId, MultipartFile[] multipartFiles, User user) throws InvalidException, ForbiddenException;
 
+    List<Room> filter(Long hotelId, Date checkInDate, Date checkoutDate, Long categoryId) throws InvalidException;
 }

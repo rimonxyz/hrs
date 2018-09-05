@@ -6,6 +6,7 @@ import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
+import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.service.CategoryService;
 import com.moninfotech.service.HotelService;
 import com.moninfotech.service.RoomService;
@@ -138,7 +139,6 @@ public class HotelController {
 
         model.addAttribute("hotel", hotel);
         model.addAttribute("roomList", roomList);
-        System.out.println("CAT: "+hotel.getEffectiveCategories().size());
         model.addAttribute("categoryList", hotel.getEffectiveCategories());
         model.addAttribute("bookedIds", bookedIds);
 
@@ -152,6 +152,26 @@ public class HotelController {
         return "adminlte/fragments/hotel/details";
     }
 
+    @GetMapping("/{id}/checkAvailablity")
+    private String checkAvailablity(@PathVariable("id") Long hotelId,
+                                    @RequestParam("categoryId") String category,
+                                    @RequestParam("checkInDate") Date checkInDate,
+                                    @RequestParam("checkoutDate") Date checkoutDate,
+                                    Model model) throws InvalidException {
+        Long categoryId;
+        if (category==null || category.toLowerCase().equals("all"))
+            categoryId = null;
+        else categoryId = Long.parseLong(category);
+        List<Room> filteredRooms = this.roomService.filter(hotelId,checkInDate,checkoutDate,categoryId);
+        Hotel hotel = this.hotelService.findOne(hotelId);
+
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("roomList", filteredRooms);
+        model.addAttribute("categoryList", hotel.getEffectiveCategories());
+//        model.addAttribute("bookedIds", bookedIds);
+        model.addAttribute("sidebarCollapse", true);
+        return "adminlte/fragments/hotel/details";
+    }
 //    // returns image with that entity id
 //    @RequestMapping(value = "/images/{id}", method = RequestMethod.GET)
 //    private ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {

@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -184,6 +186,32 @@ public class RoomServiceImpl implements RoomService {
         return this.roomRepo.save(room);
     }
 
+    @Override
+    public List<Room> filter(Long hotelId, Date checkInDate, Date checkoutDate, Long categoryId) throws InvalidException {
+        Hotel hotel = this.hotelService.findOne(hotelId);
+        List<Room> roomList = hotel.getRoomList();
+        List<Room> filteredList = hotel.getRoomList();
+        if (checkInDate.after(checkoutDate))
+            throw new InvalidException("", "Checkin date can not be greater than check out date");
+        for (Room room : roomList) {
+            if (isBookedInDateRange(room, checkInDate, checkoutDate) && !room.isArchived())
+                roomList.add(room);
+        }
+        return filteredList;
+    }
+
+    public boolean isBookedInDateRange(Room room, Date checkInDate, Date checkoutDate) {
+        boolean booked = false;
+        LocalDate start = checkInDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate end = checkoutDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        for (LocalDate date = start; date.isBefore(end); date = date.plusDays(1)) {
+            Date d = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            booked = room.isBooked(d);
+        }
+        return booked;
+    }
+
     private List<Long> filterRoomIdsByCategory(List<Room> roomList, String value) {
         List<Long> idsList = new ArrayList<>();
         roomList.forEach(room -> {
@@ -196,7 +224,6 @@ public class RoomServiceImpl implements RoomService {
     public List<Long> filterRoomIdsByDate(List<Room> roomList, String value) {
         SimpleDateFormat sdf = DateUtils.getParsableDateFormat();
         List<Long> idList = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
         roomList.forEach(room -> {
             try {
                 if (room.isBooked(sdf.parse(value))) {

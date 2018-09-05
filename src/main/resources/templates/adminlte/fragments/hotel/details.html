@@ -410,17 +410,17 @@
                 <div class="box box-primary">
                     <div class="box-footer">
                         <div class="row col-sm-12" style="text-align: center;">
-                            <form class="form form-inline" th:action="@{/hotels/}+${hotel?.id}" id="dateFilterForm"
+                            <form class="form form-inline" th:action="@{/hotels/}+${hotel?.id}+@{/checkAvailablity}" id=""
                                   method="get">
-                                <input name="filterType" type="hidden" th:value="date"></input>
-                                <input class="form-control" name="value" type="date" id="dateFilter"
-                                       th:value="${filterValue}"></input>
+
+                                <input class="form-control" name="checkInDate" type="date" id="dateFilter"
+                                       th:value="${checkInDate}" required></input>
                                 <input class="form-control" name="checkoutDate" type="date"
-                                       th:value="${ checkoutdate }"></input>
-                                <select class="form-control" name="categoryFilter">
+                                       th:value="${ checkoutdate }" required></input>
+                                <select class="form-control" name="categoryId">
                                     <option>All</option>
                                     <option th:each="category: ${categoryList}" th:text="${category?.name}"
-                                            th:selected="${categoryFilter?.equals(category?.name)}"></option>
+                                            th:selected="${categoryFilter?.equals(category?.name)}" th:value="${category?.id}"></option>
                                 </select>
                                 <button class="btn btn-success" type="submit">Filter</button>
                             </form>
@@ -456,7 +456,7 @@
                                         <input name="filterType" type="hidden" th:value="date"></input>
                                         <input name="value" type="hidden" th:value="${filterValue}"></input>
 
-                                        <label for="searchBox" >Search By Room Number</label>
+                                        <!--<label for="searchBox" >Search By Room Number</label>-->
                                         <input id="searchBox" style="height: 40px;" class="form-control" name="q" type="text"
                                                placeholder="Search by room number"></input>
                                     </form>
