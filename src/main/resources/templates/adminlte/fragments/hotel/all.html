@@ -22,7 +22,7 @@
     <section class="content">
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2" style="padding: 0;">
                 <!-- Donut chart -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -31,12 +31,12 @@
                         <h3 class="box-title">Search</h3>
 
                         <!--<div class="box-tools pull-right">-->
-                            <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i-->
-                                    <!--class="fa fa-minus"></i>-->
-                            <!--</button>-->
-                            <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i-->
-                                    <!--class="fa fa-times"></i>-->
-                            <!--</button>-->
+                        <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i-->
+                        <!--class="fa fa-minus"></i>-->
+                        <!--</button>-->
+                        <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i-->
+                        <!--class="fa fa-times"></i>-->
+                        <!--</button>-->
                         <!--</div>-->
                     </div>
                     <div class="box-body">
@@ -48,7 +48,7 @@
                                 </datalist>
                                 <div class="from-group">
                                     <label for="place" class="label label-primary">SEARCH</label>
-                                    <input style="height: 50px;" id="place" name="query" list="places"
+                                    <input style="height: 40px;" id="place" name="query" list="places"
                                            class="form-control"
                                            required="required" th:value="${query}"></input>
                                 </div>
@@ -72,12 +72,12 @@
                         <h3 class="box-title">Filter</h3>
 
                         <!--<div class="box-tools pull-right">-->
-                            <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i-->
-                                    <!--class="fa fa-minus"></i>-->
-                            <!--</button>-->
-                            <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i-->
-                                    <!--class="fa fa-times"></i>-->
-                            <!--</button>-->
+                        <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i-->
+                        <!--class="fa fa-minus"></i>-->
+                        <!--</button>-->
+                        <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i-->
+                        <!--class="fa fa-times"></i>-->
+                        <!--</button>-->
                         <!--</div>-->
                     </div>
                     <div class="box-body">
@@ -88,7 +88,7 @@
                                        th:value="${hotelType}"></input>
 
                                 <div class="form-group" th:if="${hotelType!=null and hotelType.equals('Hotel')}">
-                                    <label class="label label-primary">Star Filter</label>
+                                    <label class="label label-primary">Star Rating</label>
                                     <select class="form-control" name="star">
                                         <option value="">All
                                         </option>
@@ -96,7 +96,7 @@
                                         </option>
                                         <option value="2 star" th:selected="${star?.equals('2 star')}">2 Star
                                         </option>
-                                        <option value="3 star standard"
+                                        <option value="3 Star Standard"
                                                 th:selected="${star?.equals('3 star standard')}">3 Star
                                             Standard
                                         </option>
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="form-group" th:if="${hotelType!=null and hotelType.equals('Ship')}">
                                     <label class="label label-primary">AC/Non AC</label>
-                                    <select class="form-control" name="ac" >
+                                    <select class="form-control" name="ac">
                                         <option value="ac" th:selected="${filterValue?.equals('ac')}">AC
                                         </option>
                                         <option value="nonac" th:selected="${filterValue?.equals('nonac')}">NON AC
@@ -124,8 +124,35 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="label label-primary">Price Filter</label>
-                                    <select class="form-control" name="price" >
+                                    <label class="label label-primary">Nightly Price</label>
+                                    <select class="form-control" name="price">
+                                        <option th:selected="${ price?.equals('1x1000000') }" th:value="1x1000000">
+                                            All
+                                        </option>
+                                        <option th:selected="${ price?.equals('500x800') }" th:value="500x800">
+                                            500-1000
+                                        </option>
+                                        <option th:selected="${ price?.equals('900x1500') }" th:value="900x1500">
+                                            1001-1500
+                                        </option>
+                                        <option th:selected="${ price?.equals('1600x1000000') }"
+                                                th:value="1600x1000000">
+                                            1501-2000
+                                        </option>
+                                        <option th:selected="${ price?.equals('1600x1000000') }"
+                                                th:value="1600x1000000">
+                                            2001-3000
+                                        </option>
+                                        <option th:selected="${ price?.equals('1600x1000000') }"
+                                                th:value="1600x1000000">
+                                            3000+
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="label label-primary">Accommodation Type</label>
+                                    <select class="form-control" name="price">
                                         <option th:selected="${ price?.equals('1x1000000') }" th:value="1x1000000">
                                             All
                                         </option>
@@ -135,23 +162,28 @@
                                         <option th:selected="${ price?.equals('900x1500') }" th:value="900x1500">
                                             900-1500
                                         </option>
-                                        <option th:selected="${ price?.equals('1600x1000000') }" th:value="1600x1000000">
+                                        <option th:selected="${ price?.equals('1600x1000000') }"
+                                                th:value="1600x1000000">
                                             1600-Above
                                         </option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="label label-primary">Rating Filter</label>
+                                    <label class="label label-primary">Guest Rating</label>
                                     <div class="row lead">
-                                        <div style="margin-left: 20px;" id="stars" class="starrr"></div>
+                                        <div style="margin-left: 20px; font-size: 18px;" id="stars"
+                                             class="starrr"></div>
                                         <span hidden="hidden"><span id="count">5</span></span>
                                     </div>
                                     <input type="hidden" id="ratingCount" name="rating" th:value="${rating}"></input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="restaurant" th:checked="${f.restaurant}"  type="checkbox" value="true">&nbsp;&nbsp;Restaurant</input>
+                                    <label class="label label-primary">Facilities</label>
+                                </div>
+                                <div class="form-group">
+                                    <input name="restaurant" th:checked="${f.restaurant}" type="checkbox" value="true">&nbsp;&nbsp;Restaurant</input>
                                 </div>
                                 <div class="form-group">
                                     <input name="lift" th:checked="${f.lift}" type="checkbox" value="true">&nbsp;&nbsp;Lift</input>
@@ -160,41 +192,50 @@
                                     <input name="wifi" th:checked="${f.wifi}" type="checkbox" value="true">&nbsp;&nbsp;Wifi</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="conferenceRoom" th:checked="${f.conferenceRoom}" type="checkbox" value="true">&nbsp;&nbsp;Conference Room</input>
+                                    <input name="conferenceRoom" th:checked="${f.conferenceRoom}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Conference Room</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="swimingPool" th:checked="${f.swimingPool}" type="checkbox" value="true">&nbsp;&nbsp;Swiming Pool</input>
+                                    <input name="swimingPool" th:checked="${f.swimingPool}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Swiming Pool</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="sportsZone" th:checked="${f.sportsZone}" type="checkbox" value="true">&nbsp;&nbsp;Sports Zone</input>
+                                    <input name="sportsZone" th:checked="${f.sportsZone}" type="checkbox" value="true">&nbsp;&nbsp;Sports
+                                    Zone</input>
                                 </div>
                                 <div class="form-group">
                                     <input name="gym" th:checked="${f.gym}" type="checkbox" value="true">&nbsp;&nbsp;Gymnesium</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="spa" th:checked="${f.spa}" type="checkbox" value="true">&nbsp;&nbsp;Spa</input>
+                                    <input name="spa" th:checked="${f.spa}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Spa</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="bar" th:checked="${f.bar}" type="checkbox" value="true">&nbsp;&nbsp;Bar</input>
+                                    <input name="bar" th:checked="${f.bar}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Bar</input>
                                 </div>
                                 <div class="form-group">
                                     <input name="helipad" th:checked="${f.helipad}" type="checkbox" value="true">&nbsp;&nbsp;Helipad</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="ac" th:checked="${f.ac}" type="checkbox" value="true">&nbsp;&nbsp;AC</input>
+                                    <input name="ac" th:checked="${f.ac}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;AC</input>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <input name="frontDesk" th:checked="${f.frontDesk}" type="checkbox" value="true">&nbsp;&nbsp;Front Desk</input>
+                                    <input name="frontDesk" th:checked="${f.frontDesk}" type="checkbox" value="true">&nbsp;&nbsp;Front
+                                    Desk</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="roomService" th:checked="${f.roomService}" type="checkbox" value="true">&nbsp;&nbsp;Room Service</input>
+                                    <input name="roomService" th:checked="${f.roomService}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Room Service</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="electricity" th:checked="${f.electricity}" type="checkbox" value="true">&nbsp;&nbsp;Electricity</input>
+                                    <input name="electricity" th:checked="${f.electricity}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Electricity</input>
                                 </div>
 
                                 <div class="form-group">
@@ -202,55 +243,68 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="complementaryBreakfast" th:checked="${f.complementaryBreakfast}" type="checkbox" value="true">&nbsp;&nbsp;Complementary Breakfast</input>
+                                    <input name="complementaryBreakfast" th:checked="${f.complementaryBreakfast}"
+                                           type="checkbox" value="true">&nbsp;&nbsp;Complementary Breakfast</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="coffeeShop" th:checked="${f.coffeeShop}" type="checkbox" value="true">&nbsp;&nbsp;Coffee Shop</input>
+                                    <input name="coffeeShop" th:checked="${f.coffeeShop}" type="checkbox" value="true">&nbsp;&nbsp;Coffee
+                                    Shop</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="freeParking" th:checked="${f.freeParking}" type="checkbox" value="true">&nbsp;&nbsp;Free Parking</input>
+                                    <input name="freeParking" th:checked="${f.freeParking}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Free Parking</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="airportTransportation" th:checked="${f.airportTransportation}" type="checkbox" value="true">&nbsp;&nbsp;Airport Transportation</input>
+                                    <input name="airportTransportation" th:checked="${f.airportTransportation}"
+                                           type="checkbox" value="true">&nbsp;&nbsp;Airport Transportation</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="businessCenter" th:checked="${f.businessCenter}" type="checkbox" value="true">&nbsp;&nbsp;Business Center</input>
+                                    <input name="businessCenter" th:checked="${f.businessCenter}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Business Center</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="meetingRoom" th:checked="${f.meetingRoom}" type="checkbox" value="true">&nbsp;&nbsp;Meeting Room</input>
+                                    <input name="meetingRoom" th:checked="${f.meetingRoom}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Meeting Room</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="doctorOnCall" th:checked="${f.doctorOnCall}" type="checkbox" value="true">&nbsp;&nbsp;Doctors on Call</input>
+                                    <input name="doctorOnCall" th:checked="${f.doctorOnCall}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Doctors on Call</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="wakeupService" th:checked="${f.wakeupService}" type="checkbox" value="true">&nbsp;&nbsp;Wakeup Service</input>
+                                    <input name="wakeupService" th:checked="${f.wakeupService}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Wakeup Service</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="wheelChairAccessible" th:checked="${f.wheelChairAccessible}" type="checkbox" value="true">&nbsp;&nbsp;Wheelchair Accessible</input>
+                                    <input name="wheelChairAccessible" th:checked="${f.wheelChairAccessible}"
+                                           type="checkbox" value="true">&nbsp;&nbsp;Wheelchair Accessible</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="safeDepositBox" th:checked="${f.safeDepositBox}" type="checkbox" value="true">&nbsp;&nbsp;Safe Deposit Box</input>
+                                    <input name="safeDepositBox" th:checked="${f.safeDepositBox}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Safe Deposit Box</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="nonSmokingRoom" th:checked="${f.nonSmokingRoom}" type="checkbox" value="true">&nbsp;&nbsp;No Smoking Room</input>
+                                    <input name="nonSmokingRoom" th:checked="${f.nonSmokingRoom}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;No Smoking Room</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="vipFloor" th:checked="${f.vipFloor}" type="checkbox" value="true">&nbsp;&nbsp;VIP Floor</input>
+                                    <input name="vipFloor" th:checked="${f.vipFloor}" type="checkbox" value="true">&nbsp;&nbsp;VIP
+                                    Floor</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="acceptCreditCard" th:checked="${f.acceptCreditCard}" type="checkbox" value="true">&nbsp;&nbsp;Accept Credit Card</input>
+                                    <input name="acceptCreditCard" th:checked="${f.acceptCreditCard}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Accept Credit Card</input>
                                 </div>
 
                                 <div class="form-group">
@@ -266,20 +320,23 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="foreignExchange" th:checked="${f.foreignExchange}" type="checkbox" value="true">&nbsp;&nbsp;Foreign Exchange</input>
+                                    <input name="foreignExchange" th:checked="${f.foreignExchange}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Foreign Exchange</input>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <input name="executiveLaunge" th:checked="${f.executiveLaunge}" type="checkbox" value="true">&nbsp;&nbsp;Executive Launge</input>
+                                    <input name="executiveLaunge" th:checked="${f.executiveLaunge}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Executive Launge</input>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <input name="babySitting" th:checked="${f.babySitting}" type="checkbox" value="true">&nbsp;&nbsp;Baby Sitting</input>
+                                    <input name="babySitting" th:checked="${f.babySitting}" type="checkbox"
+                                           value="true">&nbsp;&nbsp;Baby Sitting</input>
                                 </div>
 
-                                <button class="btn btn-primary btn-block" type="submit">Filter</button>
+                                <!--<button class="btn btn-primary btn-block" type="submit">Filter</button>-->
                             </form>
 
 
@@ -290,129 +347,129 @@
 
 
                 <!--<div class="box box-primary">-->
-                    <!--<div class="box-header with-border">-->
-                        <!--<i class="fa fa-filter"></i>-->
+                <!--<div class="box-header with-border">-->
+                <!--<i class="fa fa-filter"></i>-->
 
-                        <!--<h3 class="box-title">Filter</h3>-->
+                <!--<h3 class="box-title">Filter</h3>-->
 
-                        <!--<div class="box-tools pull-right">-->
-                            <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i-->
-                                    <!--class="fa fa-minus"></i>-->
-                            <!--</button>-->
-                            <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i-->
-                                    <!--class="fa fa-times"></i>-->
-                            <!--</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="box-body">-->
-                        <!--<div>-->
-                            <!--&lt;!&ndash;Star Filter&ndash;&gt;-->
-                            <!--<div th:if="${hotelType!=null and hotelType.equals('Hotel')}">-->
-                                <!--<label for="starFilterDiv" class="label label-primary">BY STAR</label>-->
-                                <!--<div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
-                                    <!--<form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">-->
-                                        <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
-                                        <!--<input th:if="${hotelType}" name="type" type="hidden"-->
-                                               <!--th:value="${hotelType}"></input>-->
-                                        <!--<input name="filterType" type="hidden" th:value="star"></input>-->
-                                        <!--<select class="form-control" name="filterValue" id="starFilter">-->
-                                            <!--<option value="">All-->
-                                            <!--</option>-->
-                                            <!--<option value="1 star" th:selected="${filterValue?.equals('1 star')}">1 Star-->
-                                            <!--</option>-->
-                                            <!--<option value="2 star" th:selected="${filterValue?.equals('2 star')}">2 Star-->
-                                            <!--</option>-->
-                                            <!--<option value="3 star standard"-->
-                                                    <!--th:selected="${filterValue?.equals('3 star standard')}">3 Star-->
-                                                <!--Standard-->
-                                            <!--</option>-->
-                                            <!--<option value="3 star" th:selected="${filterValue?.equals('3 star')}">3 Star-->
-                                            <!--</option>-->
-                                            <!--<option value="4 star" th:selected="${filterValue?.equals('4 star')}">4 Star-->
-                                            <!--</option>-->
-                                            <!--<option value="5 star" th:selected="${filterValue?.equals('5 star')}">5 Star-->
-                                            <!--</option>-->
-                                            <!--<option value="resort" th:selected="${filterValue?.equals('resort')}">Resort-->
-                                            <!--</option>-->
-                                            <!--<option value="beach resort"-->
-                                                    <!--th:selected="${filterValue?.equals('beach resort')}">Beach Resort-->
-                                            <!--</option>-->
-                                        <!--</select>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div th:if="${hotelType!=null and hotelType.equals('Ship')}">-->
-                                <!--<label for="starFilterDiv" class="label label-primary">BY SHIP</label>-->
-                                <!--<div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
-                                    <!--<form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">-->
-                                        <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
-                                        <!--<input th:if="${hotelType}" name="type" type="hidden"-->
-                                               <!--th:value="${hotelType}"></input>-->
-                                        <!--<input name="filterType" type="hidden" value="ac"></input>-->
-                                        <!--<select class="form-control" name="filterValue" id="starFilter">-->
-                                            <!--<option value="ac" th:selected="${filterValue?.equals('ac')}">AC-->
-                                            <!--</option>-->
-                                            <!--<option value="nonac" th:selected="${filterValue?.equals('nonac')}">NON AC-->
-                                            <!--</option>-->
-                                        <!--</select>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash;Price Filter&ndash;&gt;-->
-                            <!--<div style="margin-top: 10px;margin-bottom: 10px;">-->
-                                <!--<label for="priceFilterDiv" class="label label-primary">BY PRICE</label>-->
-                                <!--<div id="priceFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
-                                    <!--<form class="form" th:action="@{/hotels/}" id="priceFilterForm" method="get">-->
-                                        <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
-                                        <!--<input th:if="${hotelType}" name="type" type="hidden"-->
-                                               <!--th:value="${hotelType}"></input>-->
-                                        <!--<input name="filterType" type="hidden" th:value="price"></input>-->
-                                        <!--<select class="form-control" name="filterValue" id="priceFilter">-->
-                                            <!--<option th:value="1x1000000">-->
-                                                <!--All-->
-                                            <!--</option>-->
-                                            <!--<option th:value="500x800"-->
-                                                    <!--th:selected="${filterValue?.equals('500x800')}">-->
-                                                <!--500-800-->
-                                            <!--</option>-->
-                                            <!--<option th:value="900x1500"-->
-                                                    <!--th:selected="${filterValue?.equals('900x1500')}">-->
-                                                <!--900-1500-->
-                                            <!--</option>-->
-                                            <!--<option th:value="1600x1000000"-->
-                                                    <!--th:selected="${filterValue?.equals('1600x1000000')}">-->
-                                                <!--1600-Above-->
-                                            <!--</option>-->
-                                        <!--</select>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash;Rating Filter&ndash;&gt;-->
-                            <!--<div style="margin-top: 10px;margin-bottom: 10px;">-->
-                                <!--<label for="priceFilterDiv" class="label label-primary">GUEST RATING</label>-->
-                                <!--<div id="ratingFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
-                                    <!--<form class="form" th:action="@{/hotels/}" id="ratingFilterForm" method="get">-->
-                                        <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
-                                        <!--<input th:if="${hotelType}" name="type" type="hidden"-->
-                                               <!--th:value="${hotelType}"></input>-->
-                                        <!--<input name="filterType" type="hidden" th:value="rating"></input>-->
-                                        <!--<div class="row lead">-->
-                                            <!--<div style="margin-left: 20px;" id="stars" class="starrr"></div>-->
-                                            <!--<span hidden="hidden"><span id="count">0</span></span>-->
-                                        <!--</div>-->
-                                        <!--<input type="hidden" id="ratingCount" name="filterValue"></input>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                <!--<div class="box-tools pull-right">-->
+                <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i-->
+                <!--class="fa fa-minus"></i>-->
+                <!--</button>-->
+                <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i-->
+                <!--class="fa fa-times"></i>-->
+                <!--</button>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="box-body">-->
+                <!--<div>-->
+                <!--&lt;!&ndash;Star Filter&ndash;&gt;-->
+                <!--<div th:if="${hotelType!=null and hotelType.equals('Hotel')}">-->
+                <!--<label for="starFilterDiv" class="label label-primary">BY STAR</label>-->
+                <!--<div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
+                <!--<form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">-->
+                <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
+                <!--<input th:if="${hotelType}" name="type" type="hidden"-->
+                <!--th:value="${hotelType}"></input>-->
+                <!--<input name="filterType" type="hidden" th:value="star"></input>-->
+                <!--<select class="form-control" name="filterValue" id="starFilter">-->
+                <!--<option value="">All-->
+                <!--</option>-->
+                <!--<option value="1 star" th:selected="${filterValue?.equals('1 star')}">1 Star-->
+                <!--</option>-->
+                <!--<option value="2 star" th:selected="${filterValue?.equals('2 star')}">2 Star-->
+                <!--</option>-->
+                <!--<option value="3 star standard"-->
+                <!--th:selected="${filterValue?.equals('3 star standard')}">3 Star-->
+                <!--Standard-->
+                <!--</option>-->
+                <!--<option value="3 star" th:selected="${filterValue?.equals('3 star')}">3 Star-->
+                <!--</option>-->
+                <!--<option value="4 star" th:selected="${filterValue?.equals('4 star')}">4 Star-->
+                <!--</option>-->
+                <!--<option value="5 star" th:selected="${filterValue?.equals('5 star')}">5 Star-->
+                <!--</option>-->
+                <!--<option value="resort" th:selected="${filterValue?.equals('resort')}">Resort-->
+                <!--</option>-->
+                <!--<option value="beach resort"-->
+                <!--th:selected="${filterValue?.equals('beach resort')}">Beach Resort-->
+                <!--</option>-->
+                <!--</select>-->
+                <!--</form>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div th:if="${hotelType!=null and hotelType.equals('Ship')}">-->
+                <!--<label for="starFilterDiv" class="label label-primary">BY SHIP</label>-->
+                <!--<div id="starFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
+                <!--<form class="form" th:action="@{/hotels}" id="starFilterForm" method="get">-->
+                <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
+                <!--<input th:if="${hotelType}" name="type" type="hidden"-->
+                <!--th:value="${hotelType}"></input>-->
+                <!--<input name="filterType" type="hidden" value="ac"></input>-->
+                <!--<select class="form-control" name="filterValue" id="starFilter">-->
+                <!--<option value="ac" th:selected="${filterValue?.equals('ac')}">AC-->
+                <!--</option>-->
+                <!--<option value="nonac" th:selected="${filterValue?.equals('nonac')}">NON AC-->
+                <!--</option>-->
+                <!--</select>-->
+                <!--</form>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;Price Filter&ndash;&gt;-->
+                <!--<div style="margin-top: 10px;margin-bottom: 10px;">-->
+                <!--<label for="priceFilterDiv" class="label label-primary">BY PRICE</label>-->
+                <!--<div id="priceFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
+                <!--<form class="form" th:action="@{/hotels/}" id="priceFilterForm" method="get">-->
+                <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
+                <!--<input th:if="${hotelType}" name="type" type="hidden"-->
+                <!--th:value="${hotelType}"></input>-->
+                <!--<input name="filterType" type="hidden" th:value="price"></input>-->
+                <!--<select class="form-control" name="filterValue" id="priceFilter">-->
+                <!--<option th:value="1x1000000">-->
+                <!--All-->
+                <!--</option>-->
+                <!--<option th:value="500x800"-->
+                <!--th:selected="${filterValue?.equals('500x800')}">-->
+                <!--500-800-->
+                <!--</option>-->
+                <!--<option th:value="900x1500"-->
+                <!--th:selected="${filterValue?.equals('900x1500')}">-->
+                <!--900-1500-->
+                <!--</option>-->
+                <!--<option th:value="1600x1000000"-->
+                <!--th:selected="${filterValue?.equals('1600x1000000')}">-->
+                <!--1600-Above-->
+                <!--</option>-->
+                <!--</select>-->
+                <!--</form>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;Rating Filter&ndash;&gt;-->
+                <!--<div style="margin-top: 10px;margin-bottom: 10px;">-->
+                <!--<label for="priceFilterDiv" class="label label-primary">GUEST RATING</label>-->
+                <!--<div id="ratingFilterDiv" class="fadeInDown animated" data-wow-delay=".5s">-->
+                <!--<form class="form" th:action="@{/hotels/}" id="ratingFilterForm" method="get">-->
+                <!--<input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>-->
+                <!--<input th:if="${hotelType}" name="type" type="hidden"-->
+                <!--th:value="${hotelType}"></input>-->
+                <!--<input name="filterType" type="hidden" th:value="rating"></input>-->
+                <!--<div class="row lead">-->
+                <!--<div style="margin-left: 20px;" id="stars" class="starrr"></div>-->
+                <!--<span hidden="hidden"><span id="count">0</span></span>-->
+                <!--</div>-->
+                <!--<input type="hidden" id="ratingCount" name="filterValue"></input>-->
+                <!--</form>-->
+                <!--</div>-->
+                <!--</div>-->
 
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /.box-body&ndash;&gt;-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; /.box-body&ndash;&gt;-->
                 <!--</div>-->
                 <!-- /.box -->
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-10" style="padding-right: 0;">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <i class="fa fa-bar-chart-o"></i>
@@ -424,205 +481,239 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="row" th:each="hotel : ${hotelList}"
-                             style="margin: 10px -10px; background: #fff8f8;">
-                            <div class="col-md-3">
+                             style="margin: 10px -10px; margin: 0 7px; border:1px solid darkgray; padding: 10px 10px 10px 0; ">
+
+                            <div class="col-md-4 hotel-list-images">
                                 <img th:src="@{/hotels/}+${hotel?.id}+@{/image/0}+@{/?height=200&width=300}" alt=""
                                      style="width: 100%;"/>
                                 <img th:src="@{/hotels/}+${hotel?.id}+@{/image/1}+@{/?height=100&width=150}" alt=""
                                      style="width: 49%; margin-top: 5px;"/>
                                 <img th:src="@{/hotels/}+${hotel?.id}+@{/image/2}+@{/?height=100&width=150}" alt=""
                                      style="width: 49%;  margin-top: 5px; float: right;"/>
+                                <div class="special-discount">20% OFF</div>
+                                <div class="special-discount-shadow"></div>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div>
                                             <a target="_blank" th:href="@{/hotels/}+${hotel?.id}">
                                                 <span th:text="${hotel?.name?.trim()}"
-                                                      style="font-size: 25px; font-weight: 600; color: #0f74a8;"></span>
+                                                      style="font-size: 28px; font-weight: 600; color: #0f74a8;"></span>
                                             </a>
                                             <br>
                                             <span th:text="${hotel?.capitalizeFirstLetter(hotel?.star)}"
-                                                  style="font-size: 20px;"></span> <br>
-                                            <span th:text="${hotel?.description}"
-                                                  style="font-size: 16px; font-weight: 200;"></span>
-                                        </div>
-                                        <!--<div style="margin: 10px 0;">-->
-                                        <!--<span th:if="${hotel?.facilities?.frontDesk}">-->
-                                        <!--<img th:src="@{/images/svgs/frontDesk.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.roomService}">-->
-                                        <!--<img th:src="@{/images/svgs/roomService.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.electricity}">-->
-                                        <!--<img th:src="@{/images/svgs/electricity.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.security}">-->
-                                        <!--<img th:src="@{/images/svgs/security.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.acceptCreditCard}">-->
-                                        <!--<img th:src="@{/images/svgs/acceptCreditCard.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.complementaryBreakfast}">-->
-                                        <!--<img th:src="@{/images/svgs/complementaryBreakfast.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.restaurant}">-->
-                                        <!--<img th:src="@{/images/svgs/restaurant.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.coffeeShop}">-->
-                                        <!--<img th:src="@{/images/svgs/coffeeShop.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.ac}">-->
-                                        <!--<img th:src="@{/images/svgs/ac.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.lift}">-->
-                                        <!--<img th:src="@{/images/svgs/elevator.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.wifi}">-->
-                                        <!--<img th:src="@{/images/svgs/wifi.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.freeParking}">-->
-                                        <!--<img th:src="@{/images/svgs/freeParking.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.newspaper}">-->
-                                        <!--<img th:src="@{/images/svgs/newspaper.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.swimingPool}">-->
-                                        <!--<img th:src="@{/images/svgs/swimingPool.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.laundry}">-->
-                                        <!--<img th:src="@{/images/svgs/laundry.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.lobby}">-->
-                                        <!--<img th:src="@{/images/svgs/lobby.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.sportsZone}">-->
-                                        <!--<img th:src="@{/images/svgs/sportsZone.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.gym}">-->
-                                        <!--<img th:src="@{/images/svgs/gym.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.spa}">-->
-                                        <!--<img th:src="@{/images/svgs/spa.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.bar}">-->
-                                        <!--<img th:src="@{/images/svgs/bar.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.helipad}">-->
-                                        <!--<img th:src="@{/images/svgs/helipad.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.vipFloor}">-->
-                                        <!--<img th:src="@{/images/svgs/vipFloor.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.foreignExchange}">-->
-                                        <!--<img th:src="@{/images/svgs/foreignExchange.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.airportTransportation}">-->
-                                        <!--<img th:src="@{/images/svgs/airportTransportation.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.conferenceRoom}">-->
-                                        <!--<img th:src="@{/images/svgs/conferenceRoom.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.businessCenter}">-->
-                                        <!--<img th:src="@{/images/svgs/businessCenter.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.meetingRoom}">-->
-                                        <!--<img th:src="@{/images/svgs/meetingRoom.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.executiveLaunge}">-->
-                                        <!--<img th:src="@{/images/svgs/executiveLaunge.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.babySitting}">-->
-                                        <!--<img th:src="@{/images/svgs/babySitting.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.doctorOnCall}">-->
-                                        <!--<img th:src="@{/images/svgs/doctorOnCall.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.wakeupService}">-->
-                                        <!--<img th:src="@{/images/svgs/wakeupService.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.wheelChairAccessible}">-->
-                                        <!--<img th:src="@{/images/svgs/wheelChairAccessible.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.safeDepositBox}">-->
-                                        <!--<img th:src="@{/images/svgs/safeDepositBox.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--<span th:if="${hotel?.facilities?.nonSmokingRoom}">-->
-                                        <!--<img th:src="@{/images/svgs/nonSmokingRoom.svg}" alt=""-->
-                                        <!--class="hotel-facilities-icons"/>-->
-                                        <!--</span>-->
-                                        <!--</div>-->
-                                        <div style="margin: 10px 0;">
-                                            <span style="font-weight: 600; font-size: 20px;">Address </span> <br>
+                                                  style="font-size: 20px; font-weight: 600; line-height: 20px;"></span>
+                                            <br>
                                             <span th:text="${hotel?.address?.getCommaSeperatedString()}"
                                                   style="font-size: 16px;"></span>
+                                            <!--<span th:text="${hotel?.description}"-->
+                                            <!--style="font-size: 16px; font-weight: 200;"></span>-->
+                                        </div>
+                                        <div style="margin: 10px 0;">
+                                            <!--<span th:if="${hotel?.facilities?.frontDesk}">-->
+                                            <!--<img th:src="@{/images/svgs/frontDesk.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.roomService}">-->
+                                            <!--<img th:src="@{/images/svgs/roomService.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.electricity}">-->
+                                            <!--<img th:src="@{/images/svgs/electricity.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.security}">-->
+                                            <!--<img th:src="@{/images/svgs/security.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.acceptCreditCard}">-->
+                                            <!--<img th:src="@{/images/svgs/acceptCreditCard.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.complementaryBreakfast}">-->
+                                            <!--<img th:src="@{/images/svgs/complementaryBreakfast.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--&lt;!&ndash;<a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>&ndash;&gt;-->
+                                            <!--</span>-->
+                                            <span th:if="${hotel?.facilities?.restaurant}">
+                                        <img th:src="@{/images/svgs/restaurant.svg}" alt=""
+                                             class="hotel-facilities-icons"/>
+                                        </span>
+                                            <!--<span th:if="${hotel?.facilities?.coffeeShop}">-->
+                                            <!--<img th:src="@{/images/svgs/coffeeShop.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.ac}">-->
+                                            <!--<img th:src="@{/images/svgs/ac.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <span th:if="${hotel?.facilities?.lift}">
+                                        <img th:src="@{/images/svgs/elevator.svg}" alt=""
+                                             class="hotel-facilities-icons"/>
+                                        </span>
+                                            <span th:if="${hotel?.facilities?.wifi}">
+                                        <img th:src="@{/images/svgs/wifi.svg}" alt=""
+                                             class="hotel-facilities-icons"/>
+                                        </span>
+                                            <span th:if="${hotel?.facilities?.freeParking}">
+                                        <img th:src="@{/images/svgs/freeParking.svg}" alt=""
+                                             class="hotel-facilities-icons"/>
+                                        </span>
+                                            <!--<span th:if="${hotel?.facilities?.newspaper}">-->
+                                            <!--<img th:src="@{/images/svgs/newspaper.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <span th:if="${hotel?.facilities?.swimingPool}">
+                                        <img th:src="@{/images/svgs/swimingPool.svg}" alt=""
+                                             class="hotel-facilities-icons"/>
+                                        </span>
+                                            <!--<span th:if="${hotel?.facilities?.laundry}">-->
+                                            <!--<img th:src="@{/images/svgs/laundry.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.lobby}">-->
+                                            <!--<img th:src="@{/images/svgs/lobby.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.sportsZone}">-->
+                                            <!--<img th:src="@{/images/svgs/sportsZone.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.gym}">-->
+                                            <!--<img th:src="@{/images/svgs/gym.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.spa}">-->
+                                            <!--<img th:src="@{/images/svgs/spa.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <span th:if="${hotel?.facilities?.bar}">
+                                        <img th:src="@{/images/svgs/bar.svg}" alt=""
+                                             class="hotel-facilities-icons"/>
+                                        </span>
+                                            <!--<span th:if="${hotel?.facilities?.helipad}">-->
+                                            <!--<img th:src="@{/images/svgs/helipad.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.vipFloor}">-->
+                                            <!--<img th:src="@{/images/svgs/vipFloor.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.foreignExchange}">-->
+                                            <!--<img th:src="@{/images/svgs/foreignExchange.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <span th:if="${hotel?.facilities?.airportTransportation}">
+                                        <img th:src="@{/images/svgs/airportTransportation.svg}" alt=""
+                                             class="hotel-facilities-icons"/>
+                                        </span>
+                                            <!--<span th:if="${hotel?.facilities?.conferenceRoom}">-->
+                                            <!--<img th:src="@{/images/svgs/conferenceRoom.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.businessCenter}">-->
+                                            <!--<img th:src="@{/images/svgs/businessCenter.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.meetingRoom}">-->
+                                            <!--<img th:src="@{/images/svgs/meetingRoom.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.executiveLaunge}">-->
+                                            <!--<img th:src="@{/images/svgs/executiveLaunge.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.babySitting}">-->
+                                            <!--<img th:src="@{/images/svgs/babySitting.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.doctorOnCall}">-->
+                                            <!--<img th:src="@{/images/svgs/doctorOnCall.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.wakeupService}">-->
+                                            <!--<img th:src="@{/images/svgs/wakeupService.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.wheelChairAccessible}">-->
+                                            <!--<img th:src="@{/images/svgs/wheelChairAccessible.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.safeDepositBox}">-->
+                                            <!--<img th:src="@{/images/svgs/safeDepositBox.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                            <!--<span th:if="${hotel?.facilities?.nonSmokingRoom}">-->
+                                            <!--<img th:src="@{/images/svgs/nonSmokingRoom.svg}" alt=""-->
+                                            <!--class="hotel-facilities-icons"/>-->
+                                            <!--</span>-->
+                                        </div>
+                                        <div style="margin: 10px 0;">
+                                            <span style="font-weight: 600; font-size: 20px;">Popular Places to Visit </span>
+                                            <br>
+                                            <span th:text="${hotel?.address?.getCommaSeperatedString()}"
+                                                  style="font-size: 16px;"></span><br>
+                                            <span th:text="${hotel?.address?.getCommaSeperatedString()}"
+                                                  style="font-size: 16px;"></span>
+
                                         </div>
 
                                     </div>
                                     <div class="col-md-4">
                                         <div class="row">
-                                            <div class="col-xs-7">
-                                                <span style="font-size: 25px; font-weight: 500;"
+                                            <!--<div class="col-xs-7" style="text-align: right;">-->
+
+                                            <!--</div>-->
+                                            <div class="col-xs-12" style="text-align: right; padding-right: 80px;">
+                                                <!--<span style="text-align: right;">-->
+                                                <span style="font-size: 20px; font-weight: 700;"
                                                       th:text="${ hotel?.ratingDesc}">Excelent</span><br>
-                                                <span style="font-size: 20px; font-weight: 200; text-align: center;"><span
+                                                <span style="font-size: 16px; font-weight: 200; text-align: center;"><span
                                                         th:text="${hotel?.reviewList?.size()}"></span> Reviews</span>
-                                            </div>
-                                            <div class="col-xs-5">
-                                                <span style="font-size: 50px; font-weight: 600; background: darkolivegreen; color: white; padding: 5px 10px;"
+                                                <!--</span>-->
+                                                <span style="position: absolute; right: 0; top: 1px; font-size: 35px; font-weight: 600; background: #1d3c78; color: white; padding: 0 10px;"
                                                       th:text="${hotel?.rating}">7.9</span>
                                             </div>
                                         </div>
                                         <div class="row" style="text-align: right;">
-                                            <div class="col-xs-12" style="font-size: 30px; margin: 20px 0;">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
+                                            <div class="col-xs-12" style="font-size: 30px; margin: 20px 0; padding: 0;">
+                                                <img th:src="@{/images/svgs/tripadvisor.svg}" alt=""
+                                                     style="height: 35px; width: 35px;"/>
+                                                <!--<span class="fa fa-star checked"></span>-->
+                                                <!--<span class="fa fa-star checked"></span>-->
+                                                <!--<span class="fa fa-star checked"></span>-->
+                                                <!--<span class="fa fa-star"></span>-->
+                                                <!--<span class="fa fa-star"></span>-->
                                             </div>
                                         </div>
-                                        <div style="text-align: right;">
+                                        <div class="row" style="text-align: right;">
                                             <span style="font-size: 20px;">Starts from</span><br>
                                             <span style="font-size: 30px;">BDT<span
                                                     th:text="${hotel?.minimumPrice}"></span></span>
                                         </div>
+
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin: 0;">
                                         <div class="col-xs-12">
-                                            <span style="font-weight: 600; font-size: 20px; color: blue;">Compare Price </span>
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <span style="font-weight: 600; font-size: 20px; color: #003261;">Tour Packages </span>
+                                                </div>
+                                                <div class="col-xs-4" style="text-align: right; padding:0;">
+                                                    <!--<span style="padding: 10px 0; text-align: right;">-->
+                                                    <div th:if="${hotel?.facilities?.complementaryBreakfast}"
+                                                          style="font-size: 16px; font-weight: 600; color: green;">Breakfast Included</div>
+                                                    <div th:if="${hotel?.facilities?.complementaryBreakfast}"
+                                                          style="font-size: 16px; font-weight: 600; color: green;">Free Cancelation</div>
+                                                    <!--</span>-->
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <span style="font-weight: 600; font-size: 20px; color: #6f0f04;">Compare Price </span>
                                             <br>
                                         </div>
                                         <div class="col-xs-2">
@@ -635,14 +726,22 @@
                                         <div class="col-xs-2">
                                             <img th:src="@{/images/agoda.com.png}" alt="" class="hotel-compare-image"/>
                                         </div>
-                                        <div class="col-xs-3">
+                                        <div class="col-xs-2">
                                             <img th:src="@{/images/expedia.com.jpg}" alt=""
                                                  class="hotel-compare-image"/>
                                         </div>
-                                        <div class="col-xs-3">
-                                            <a class="btn btn-success btn-block" target="_blank" th:href="@{/hotels/}+${hotel?.id}"
-                                               th:text="@{See room availability}"></a>
+                                        <div class="col-xs-4" style="text-align: right;">
+
+
                                             <!--<button class="btn btn-success btn-block">See room availability</button>-->
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 0; ">
+                                        <div class="col-xs-12" style="text-align: right; margin-bottom: 10px; padding: 0;">
+                                        <a target="_blank"
+                                           th:href="@{/hotels/}+${hotel?.id}"
+                                           style="position:relative; padding: 8px 16px; background: #07c; font-weight: 600; min-width: 200px; color: white; box-shadow: 0 0 1px #000000; border: 2px solid white; border-radius: 3px; ">See
+                                            room availability <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 </div>

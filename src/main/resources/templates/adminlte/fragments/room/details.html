@@ -8,7 +8,7 @@
 
     <section class="content-header">
         <h1>
-            <span style="font-size: 50px; color: green;" th:text="${room?.hotel?.name}"></span>
+            <span style="color: green;font-size: 38px; font-weight: bold;" th:text="@{Room Details}"></span>
         </h1>
         <ol class="breadcrumb">
             <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -88,17 +88,17 @@
                             <div class="carousel-inner room-pic-carousel-inner">
                                 <div class="item active room-pic-item">
                                     <img th:src="@{/rooms/}+${room?.id}+@{/image/0}" id="dtlsImg1" alt="Los Angeles"
-                                         style="height: 100%; width: auto; margin:auto;"></img>
+                                         style="height: auto; width: 100%; "></img>
                                 </div>
 
                                 <div class="item room-pic-item">
                                     <img th:src="@{/rooms/}+${room?.id}+@{/image/1}" id="dtlsImg2" alt="Chicago"
-                                         style="height: 100%; width: auto; margin:auto;"></img>
+                                         style="height: auto; width: 100%; margin:auto;"></img>
                                 </div>
 
                                 <div class="item room-pic-item">
                                     <img th:src="@{/rooms/}+${room?.id}+@{/image/2}" id="dtlsImg3" alt="New York"
-                                         style="height: 100%; width: auto; margin:auto;"></img>
+                                         style="height: auto; width: 100%; "></img>
                                 </div>
                             </div>
 
@@ -124,7 +124,7 @@
                             <div class="box-body">
 
                                 <div class="col-sm-12">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="box box-widget widget-user-2">
                                             <!-- Add the bg color to the header using any of the bg-* classes -->
                                             <div class="widget-user-header bg-aqua">
@@ -159,32 +159,32 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="box box-info">
-                                            <div class="box-header with-border">
-                                                <h3 class="box-title">Hotel Average Rating</h3>
-                                            </div>
-                                            <!-- /.box-header -->
-                                            <div class="box-body">
-                                                <div class="progress-group"
-                                                     style="margin-left: 50px;margin-right: 50px;">
-                                                    <span class="progress-text">Rating:</span>
-                                                    <span class="progress-number"><b
-                                                            th:text="${room?.hotel?.getAverageRating()}">4</b>/5</span>
+                                        <!--<div class="box box-info">-->
+                                            <!--<div class="box-header with-border">-->
+                                                <!--<h3 class="box-title">Hotel Average Rating</h3>-->
+                                            <!--</div>-->
+                                            <!--&lt;!&ndash; /.box-header &ndash;&gt;-->
+                                            <!--<div class="box-body">-->
+                                                <!--<div class="progress-group"-->
+                                                     <!--style="margin-left: 50px;margin-right: 50px;">-->
+                                                    <!--<span class="progress-text">Rating:</span>-->
+                                                    <!--<span class="progress-number"><b-->
+                                                            <!--th:text="${room?.hotel?.getAverageRating()}">4</b>/5</span>-->
 
-                                                    <div class="progress sm">
-                                                        <span id="ratingHidden" hidden="hidden"
-                                                              th:text="${room?.hotel?.getAverageRating()}"></span>
-                                                        <div id="ratingProgressBar"
-                                                             class="progress-bar progress-bar-aqua"
-                                                             style="width: 0%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /.box-body -->
-                                        </div>
+                                                    <!--<div class="progress sm">-->
+                                                        <!--<span id="ratingHidden" hidden="hidden"-->
+                                                              <!--th:text="${room?.hotel?.getAverageRating()}"></span>-->
+                                                        <!--<div id="ratingProgressBar"-->
+                                                             <!--class="progress-bar progress-bar-aqua"-->
+                                                             <!--style="width: 0%"></div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--&lt;!&ndash; /.box-body &ndash;&gt;-->
+                                        <!--</div>-->
 
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="small-box bg-aqua">
                                             <div class="inner">
                                                 <h3 th:text="${room?.category?.name}">150</h3>
@@ -192,7 +192,7 @@
                                                 <p>Category</p>
                                             </div>
                                             <div class="icon">
-                                                <i class="fa fa-shopping-cart"></i>
+                                                <i class="fa fa-bed"></i>
                                             </div>
                                         </div>
                                         <div class="small-box bg-red">
@@ -201,7 +201,7 @@
                                                 <p>Maximum Child</p>
                                             </div>
                                             <div class="icon">
-                                                <i class="fa fa-shopping-cart"></i>
+                                                <i class="fa fa-child"></i>
                                             </div>
                                         </div>
                                         <div class="small-box bg-yellow">
@@ -210,13 +210,47 @@
                                                 <p>Maximum Adult</p>
                                             </div>
                                             <div class="icon">
-                                                <i class="fa fa-shopping-cart"></i>
+                                                <i class="fa fa-male"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="box box-widget widget-user-2">
+                                            <div class="widget-user-header bg-aqua">
+                                                <h3 class="widget-user-username">House Rules</h3>
+                                            </div>
+                                            <div class="box-footer no-padding">
+                                                <ul class="nav nav-stacked">
+                                                    <li><a href="#">Check-in time <span class="pull-right badge bg-blue"
+                                                                                      th:text="@{12:00PM - 12:30PM}">31</span></a>
+                                                    </li>
+                                                    <li><a href="#">Check-out time <span
+                                                            class="pull-right badge bg-aqua"
+                                                            th:text="@{12:00PM - 12:30PM}">5</span></a>
+                                                    </li>
+                                                    <li><a href="#">Childer and extra beds<span class="pull-right badge bg-aqua"
+                                                                                  th:text="@{All children are welcome}">5</span></a>
+                                                    </li>
+                                                    <li><a href="#">Pets<span class="pull-right badge bg-aqua"
+                                                                                                th:text="@{Pets are not allowed}">5</span></a>
+                                                    </li>
+                                                    <li><a href="#">Payment method<span class="pull-right badge bg-aqua"
+                                                                                                th:text="@{Cash only}">5</span></a>
+                                                    </li>
+
+
+
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <div class="col-sm-6" th:if="${room?.facilities?.breakfast}">
+                                    <div class="col-sm-12" style="margin: 15px 0;">
+                                        <div style="margin-top: 10px; border-bottom: 1px solid gray; font-size: 38px; font-weight: bold;"><h1 class="text-center">Room Facilities</h1></div>
+                                        <hr>
+                                    </div>
+                                    <div class="col-sm-4" th:if="${room?.facilities?.breakfast}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.breakfast}?  bg-green : bg-red">
@@ -232,7 +266,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.tv}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.tv}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.tv}?  bg-green : bg-red">
@@ -249,7 +283,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.airConditioned}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.airConditioned}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.airConditioned}?  bg-green : bg-red">
@@ -266,7 +300,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.geyser}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.geyser}">
                                         <div class="info-box">
                                                 <span class="info-box-icon"
                                                       th:classappend="${room?.facilities?.geyser}?  bg-green : bg-red">
@@ -283,7 +317,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.internet}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.internet}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.internet}?  bg-green : bg-red">
@@ -300,7 +334,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.telephone}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.telephone}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.telephone}?  bg-green : bg-red">
@@ -317,7 +351,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.bathTowel}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.bathTowel}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.bathTowel}?  bg-green : bg-red">
@@ -334,7 +368,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.tableAndChair}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.tableAndChair}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.tableAndChair}?  bg-green : bg-red">
@@ -351,7 +385,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.seaView}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.seaView}">
                                         <div class="info-box">
                                                 <span class="info-box-icon"
                                                       th:classappend="${room?.facilities?.seaView}?  bg-green : bg-red">
@@ -368,7 +402,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.hillView}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.hillView}">
                                         <div class="info-box">
                                                 <span class="info-box-icon"
                                                       th:classappend="${room?.facilities?.hillView}?  bg-green : bg-red">
@@ -385,7 +419,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.frontFace}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.frontFace}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.frontFace}?  bg-green : bg-red">
@@ -401,7 +435,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.inMiddle}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.inMiddle}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.inMiddle}?  bg-green : bg-red">
@@ -417,7 +451,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.backFace}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.backFace}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.backFace}?  bg-green : bg-red">
@@ -433,7 +467,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.withCorridor}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.withCorridor}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.withCorridor}?  bg-green : bg-red">
@@ -449,7 +483,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.kitchen}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.kitchen}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.kitchen}?  bg-green : bg-red">
@@ -465,7 +499,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" th:if="${room?.facilities?.bathTub}">
+                                    <div class="col-sm-4" th:if="${room?.facilities?.bathTub}">
                                         <div class="info-box">
                                             <span class="info-box-icon"
                                                   th:classappend="${room?.facilities?.bathTub}?  bg-green : bg-red">
