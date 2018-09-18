@@ -25,7 +25,12 @@ public class Hotel extends BaseEntity {
 
     // TODO add
     private float rating;
-    private String acomodationType;
+    private String accomodationType;
+    private String popularPlacesToVisit;
+    private String bdcCompareLink;
+    private String hotelsDotComCompareLink;
+    private String agodaCompareLink;
+    private String expediaCompareLink;
     // END TODO
 
     private Integer discount;
@@ -110,12 +115,13 @@ public class Hotel extends BaseEntity {
         this.rating = rating;
     }
 
-    public String getAcomodationType() {
-        return acomodationType;
+
+    public String getAccomodationType() {
+        return accomodationType;
     }
 
-    public void setAcomodationType(String acomodationType) {
-        this.acomodationType = acomodationType;
+    public void setAccomodationType(String accomodationType) {
+        this.accomodationType = accomodationType;
     }
 
     public boolean isDeleted() {
@@ -133,6 +139,22 @@ public class Hotel extends BaseEntity {
         public static final String HOTEL = "Hotel";
         public static final String SHIP = "Ship";
         public static final String BOTH = "Both";
+    }
+
+    public enum AccomodationType {
+        HOTEL("Hotel"),
+        RESORT("Resort"),
+        APARTMENT("Apartment");
+
+        private String value;
+
+        AccomodationType(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 
     public float getAverageRating() {
@@ -274,4 +296,51 @@ public class Hotel extends BaseEntity {
         this.facilities = facilities;
     }
 
+    public String getPopularPlacesToVisit() {
+        return popularPlacesToVisit;
+    }
+
+    public String getPopularPlacesToVisitHtml() {
+        if (this.popularPlacesToVisit==null) return "";
+        String newString =popularPlacesToVisit.replace(",,,","<br/>");
+        newString = newString.replace("-b","<b>");
+        newString = newString.replace("b-","</b>");
+        return newString;
+    }
+
+    public void setPopularPlacesToVisit(String popularPlacesToVisit) {
+        this.popularPlacesToVisit = popularPlacesToVisit;
+    }
+
+    public String getBdcCompareLink() {
+        return bdcCompareLink;
+    }
+
+    public void setBdcCompareLink(String bdcCompareLink) {
+        this.bdcCompareLink = bdcCompareLink;
+    }
+
+    public String getHotelsDotComCompareLink() {
+        return hotelsDotComCompareLink;
+    }
+
+    public void setHotelsDotComCompareLink(String hotelsDotComCompareLink) {
+        this.hotelsDotComCompareLink = hotelsDotComCompareLink;
+    }
+
+    public String getAgodaCompareLink() {
+        return agodaCompareLink;
+    }
+
+    public void setAgodaCompareLink(String agodaCompareLink) {
+        this.agodaCompareLink = agodaCompareLink;
+    }
+
+    public String getExpediaCompareLink() {
+        return expediaCompareLink;
+    }
+
+    public void setExpediaCompareLink(String expediaCompareLink) {
+        this.expediaCompareLink = expediaCompareLink;
+    }
 }

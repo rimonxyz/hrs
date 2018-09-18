@@ -571,6 +571,7 @@
                 console.log(result);
                 $("#hotelIdEdit").val(result.id);
                 $("#hotelNameEdit").val(result.name);
+                $("#accomodationTypeEdit").val(result.accomodationType);
                 $("#starEdit").val(result.star);
                 $("#typeEdit").val(result.type);
                 $("#discountEdit").val(result.discount);
@@ -582,6 +583,12 @@
                 $("#addressMapDirectionFromEdit").val(result.address.mapDirectionFrom);
                 $("#phoneNumberEdit").val(result.phoneNumber);
                 $("#descriptionEdit").val(result.description);
+                $("#popularPlacesToVisitEdit").val(result.popularPlacesToVisit);
+                $("#bdcCompareLinkEdit").val(result.bdcCompareLink);
+                $("#hotelsDotComCompareLinkEdit").val(result.hotelsDotComCompareLink);
+                $("#agodaCompareLinkEdit").val(result.agodaCompareLink);
+                $("#expediaCompareLinkEdit").val(result.expediaCompareLink);
+
                 $("#userIdEdit").val(result.user.id);
                 $("#enableBookingEdit").prop("checked",result.enabled);
                 // facilities

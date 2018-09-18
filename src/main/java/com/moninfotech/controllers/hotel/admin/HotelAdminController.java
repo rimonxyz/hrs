@@ -130,7 +130,7 @@ public class HotelAdminController {
         hotel.setUser(user);
         // then save hotel
         hotel = this.hotelService.save(hotel);
-        return "redirect:/admin/hotels?messageinfo=" + hotel.getName() + " is saved. A confirmation link is sent to the hotel admin\'s email address. Please ask them to confirm their account by clicking the link on that email. Or alternatively you can enable this user by clicking \'enable\' button.";
+        return "redirect:/admin/hotels?type="+hotel.getType()+"&messageinfo=" + hotel.getName() + " is saved. A confirmation link is sent to the hotel admin\'s email address. Please ask them to confirm their account by clicking the link on that email. Or alternatively you can enable this user by clicking \'enable\' button.";
     }
 
     // Edit hotel informations by admin

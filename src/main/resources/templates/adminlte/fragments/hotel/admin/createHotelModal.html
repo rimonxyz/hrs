@@ -18,6 +18,14 @@
                                     <input class="form-control" name="name" id="name" type="text" placeholder="Hotel/Ship Name" required="required"/>
                                 </div>
                                 <div class="form-group">
+                                    <label for="accomodationType">Accomodation Type</label>
+                                    <select id="accomodationType" class="form-control" name="accomodationType">
+                                        <option value="Hotel">Hotel</option>
+                                        <option value="Resort">Resort</option>
+                                        <option value="Apartment">Apartment</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="star">Star</label>
                                     <select id="star" class="form-control" name="star">
                                         <option value="not applicable">N/A</option>
@@ -200,6 +208,31 @@
                                     <label for="description"><span th:text="${hotelType}">Hotel</span> Description</label>
                                     <textarea name="description" id="description" class="form-control" placeholder="Hotel Description"
                                           required="required"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="popularPlacesToVisit">Popular Place To Visit ( ,,, for new line )</label>
+                                    <textarea name="popularPlacesToVisit" id="popularPlacesToVisit" class="form-control" placeholder="Popular Place to visit ( ,, for new line )"
+                                          required="required"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bdcCompareLink">Booking.com Link</label>
+                                    <input name="bdcCompareLink" class="form-control" id="bdcCompareLink" type="text" placeholder="https://.."
+                                           required=""></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hotelsDotComCompareLink">Hotels.com Link</label>
+                                    <input name="hotelsDotComCompareLink" class="form-control" id="hotelsDotComCompareLink" type="text" placeholder="https://.."
+                                           required=""></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="agodaCompareLink">Agoda Link</label>
+                                    <input name="agodaCompareLink" class="form-control" id="agodaCompareLink" type="text" placeholder="https://.."
+                                           required=""></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expediaCompareLink">Expedia Link</label>
+                                    <input name="expediaCompareLink" class="form-control" id="expediaCompareLink" type="text" placeholder="https://.."
+                                           required=""></input>
                                 </div>
 
                                 <!--IMAGES-->

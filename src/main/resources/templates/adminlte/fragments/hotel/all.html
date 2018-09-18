@@ -652,10 +652,8 @@
                                         <div style="margin: 10px 0;">
                                             <span style="font-weight: 600; font-size: 20px;">Popular Places to Visit </span>
                                             <br>
-                                            <span th:text="${hotel?.address?.getCommaSeperatedString()}"
+                                            <span th:utext="${hotel?.getPopularPlacesToVisitHtml()}"
                                                   style="font-size: 16px;"></span><br>
-                                            <span th:text="${hotel?.address?.getCommaSeperatedString()}"
-                                                  style="font-size: 16px;"></span>
 
                                         </div>
 
@@ -717,18 +715,26 @@
                                             <br>
                                         </div>
                                         <div class="col-xs-2">
+                                            <a th:href="${hotel?.bdcCompareLink}">
                                             <img th:src="@{/images/booking.com.png}" alt=""
                                                  class="hotel-compare-image"/>
+                                            </a>
                                         </div>
                                         <div class="col-xs-2">
-                                            <img th:src="@{/images/hotels.com.png}" alt="" class="hotel-compare-image"/>
+                                            <a th:href="${hotel?.hotelsDotComCompareLink}">
+                                                <img th:src="@{/images/hotels.com.png}" alt="" class="hotel-compare-image"/>
+                                            </a>
                                         </div>
                                         <div class="col-xs-2">
-                                            <img th:src="@{/images/agoda.com.png}" alt="" class="hotel-compare-image"/>
+                                            <a th:href="${hotel?.agodaCompareLink}">
+                                                <img th:src="@{/images/agoda.com.png}" alt="" class="hotel-compare-image"/>
+                                            </a>
                                         </div>
                                         <div class="col-xs-2">
-                                            <img th:src="@{/images/expedia.com.jpg}" alt=""
+                                            <a th:href="${hotel?.expediaCompareLink}">
+                                                <img th:src="@{/images/expedia.com.jpg}" alt=""
                                                  class="hotel-compare-image"/>
+                                            </a>
                                         </div>
                                         <div class="col-xs-4" style="text-align: right;">
 

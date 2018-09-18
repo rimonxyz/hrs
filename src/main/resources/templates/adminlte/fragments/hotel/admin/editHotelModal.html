@@ -22,6 +22,14 @@
                                        placeholder="Hotel/Ship Name" required="required"></input>
                             </div>
                             <div class="form-group">
+                                <label for="accomodationTypeEdit">Accomodation Type</label>
+                                <select id="accomodationTypeEdit" class="form-control" name="accomodationType">
+                                    <option value="Hotel">Hotel</option>
+                                    <option value="Resort">Resort</option>
+                                    <option value="Apartment">Apartment</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="starEdit">Star</label>
                                 <select id="starEdit" class="form-control" name="star">
                                     <option value="not applicable">N/A</option>
@@ -225,7 +233,36 @@
                                           placeholder="Hotel/Ship Description"
                                           required="required"></textarea>
                             </div>
-
+                            <div class="form-group">
+                                <label for="popularPlacesToVisitEdit">Popular Place To Visit ( ,, for new line )</label>
+                                <textarea name="popularPlacesToVisit" id="popularPlacesToVisitEdit" class="form-control"
+                                          placeholder="Popular Place to visit ( ,, for new line )"
+                                          required="required"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="bdcCompareLinkEdit">Booking.com Link</label>
+                                <input name="bdcCompareLink" class="form-control" id="bdcCompareLinkEdit" type="text"
+                                       placeholder="https://.."
+                                       required=""></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="hotelsDotComCompareLinkEdit">Hotels.com Link</label>
+                                <input name="hotelsDotComCompareLink" class="form-control"
+                                       id="hotelsDotComCompareLinkEdit" type="text" placeholder="https://.."
+                                       required=""></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="agodaCompareLinkEdit">Agoda Link</label>
+                                <input name="agodaCompareLink" class="form-control" id="agodaCompareLinkEdit"
+                                       type="text" placeholder="https://.."
+                                       required=""></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="expediaCompareLinkEdit">Expedia Link</label>
+                                <input name="expediaCompareLink" class="form-control" id="expediaCompareLinkEdit"
+                                       type="text" placeholder="https://.."
+                                       required=""></input>
+                            </div>
 
                             <!--IMAGES-->
                             <div class="form-group">
