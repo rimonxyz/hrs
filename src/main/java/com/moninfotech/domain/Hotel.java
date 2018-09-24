@@ -23,7 +23,6 @@ public class Hotel extends BaseEntity {
     private boolean enabled;
     private boolean deleted;
 
-    // TODO add
     private float rating;
     private String accomodationType;
     private String popularPlacesToVisit;
@@ -31,7 +30,7 @@ public class Hotel extends BaseEntity {
     private String hotelsDotComCompareLink;
     private String agodaCompareLink;
     private String expediaCompareLink;
-    // END TODO
+    private String tourPackagesLink;
 
     private Integer discount;
 
@@ -130,6 +129,14 @@ public class Hotel extends BaseEntity {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getTourPackagesLink() {
+        return tourPackagesLink;
+    }
+
+    public void setTourPackagesLink(String tourPackagesLink) {
+        this.tourPackagesLink = tourPackagesLink;
     }
 
     public static final class Type {

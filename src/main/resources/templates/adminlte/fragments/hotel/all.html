@@ -537,7 +537,7 @@
                                             <!--&lt;!&ndash;<a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>&ndash;&gt;-->
                                             <!--</span>-->
                                             <span th:if="${hotel?.facilities?.restaurant}">
-                                        <img th:src="@{/images/svgs/restaurant.svg}" alt=""
+                                        <img title="Restaurant" th:src="@{/images/svgs/restaurant.svg}" alt=""
                                              class="hotel-facilities-icons"/>
                                         </span>
                                             <!--<span th:if="${hotel?.facilities?.coffeeShop}">-->
@@ -549,15 +549,15 @@
                                             <!--class="hotel-facilities-icons"/>-->
                                             <!--</span>-->
                                             <span th:if="${hotel?.facilities?.lift}">
-                                        <img th:src="@{/images/svgs/elevator.svg}" alt=""
+                                        <img title="Elevator"  class="tip" th:src="@{/images/svgs/elevator.svg}" alt=""
                                              class="hotel-facilities-icons"/>
                                         </span>
                                             <span th:if="${hotel?.facilities?.wifi}">
-                                        <img th:src="@{/images/svgs/wifi.svg}" alt=""
+                                        <img title="Wi-Fi" th:src="@{/images/svgs/wifi.svg}" alt=""
                                              class="hotel-facilities-icons"/>
                                         </span>
                                             <span th:if="${hotel?.facilities?.freeParking}">
-                                        <img th:src="@{/images/svgs/freeParking.svg}" alt=""
+                                        <img title="Free Parking" th:src="@{/images/svgs/freeParking.svg}" alt=""
                                              class="hotel-facilities-icons"/>
                                         </span>
                                             <!--<span th:if="${hotel?.facilities?.newspaper}">-->
@@ -565,7 +565,7 @@
                                             <!--class="hotel-facilities-icons"/>-->
                                             <!--</span>-->
                                             <span th:if="${hotel?.facilities?.swimingPool}">
-                                        <img th:src="@{/images/svgs/swimingPool.svg}" alt=""
+                                        <img title="Swiming Pool" th:src="@{/images/svgs/swimingPool.svg}" alt=""
                                              class="hotel-facilities-icons"/>
                                         </span>
                                             <!--<span th:if="${hotel?.facilities?.laundry}">-->
@@ -589,7 +589,7 @@
                                             <!--class="hotel-facilities-icons"/>-->
                                             <!--</span>-->
                                             <span th:if="${hotel?.facilities?.bar}">
-                                        <img th:src="@{/images/svgs/bar.svg}" alt=""
+                                        <img title="Bar" th:src="@{/images/svgs/bar.svg}" alt=""
                                              class="hotel-facilities-icons"/>
                                         </span>
                                             <!--<span th:if="${hotel?.facilities?.helipad}">-->
@@ -605,7 +605,7 @@
                                             <!--class="hotel-facilities-icons"/>-->
                                             <!--</span>-->
                                             <span th:if="${hotel?.facilities?.airportTransportation}">
-                                        <img th:src="@{/images/svgs/airportTransportation.svg}" alt=""
+                                        <img  title="Airport Transportation" th:src="@{/images/svgs/airportTransportation.svg}" alt=""
                                              class="hotel-facilities-icons"/>
                                         </span>
                                             <!--<span th:if="${hotel?.facilities?.conferenceRoom}">-->
