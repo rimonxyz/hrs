@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PackageRepository extends JpaRepository<Package, Long> {
+    Package findFirstByOrderByIdDesc();
 }

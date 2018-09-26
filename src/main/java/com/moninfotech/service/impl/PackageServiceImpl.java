@@ -2,6 +2,7 @@ package com.moninfotech.service.impl;
 
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.domain.Package;
+import com.moninfotech.exceptions.NotFoundException;
 import com.moninfotech.repository.PackageRepository;
 import com.moninfotech.service.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,12 @@ public class PackageServiceImpl implements PackageService {
     @Override
     public void delete(Long id) {
         this.packageRepo.delete(id);
+    }
+
+    @Override
+    public Package getLatestPackage() throws NotFoundException {
+        Package pckg = this.packageRepo.findFirstByOrderByIdDesc();
+        if (pckg==null) throw new NotFoundException("Could not find any package!");
+        return pckg;
     }
 }

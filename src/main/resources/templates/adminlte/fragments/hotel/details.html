@@ -327,10 +327,13 @@
                     </div>
                 </div>
                 <!--BOOKING SESSION ITEMS-->
-                <div class="box box-primary">
-                    <div class="box-footer">
-                        <div class="table-responsive"
+                <div class="box box-primary"
                      th:if="${session.booking?.roomList!=null and !session.booking?.roomList.isEmpty()}">
+                    <div class="box-header">
+                        <h3>Your Cart</h3>
+                    </div>
+                    <div class="box-footer">
+                        <div class="table-responsive">
                     <table class="table">
                         <thead class="panel-heading">
                         <th style="text-align: center;">Room Number</th>
@@ -425,7 +428,7 @@
                                     <option th:each="category: ${categoryList}" th:text="${category?.name}"
                                             th:selected="${categoryFilter?.equals(category?.name)}" th:value="${category?.id}"></option>
                                 </select>
-                                <button class="btn btn-success" type="submit">Filter</button>
+                                <button class="btn btn-success" type="submit">Check Availability</button>
                             </form>
                             <!--<span style="color: darkgreen;padding-left: 10px;margin-top: 10px;">Search by date</span>-->
                         </div>

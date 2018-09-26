@@ -3,6 +3,7 @@ package com.moninfotech.controllers.packages;
 
 import com.moninfotech.commons.utils.FileIO;
 import com.moninfotech.domain.Package;
+import com.moninfotech.exceptions.NotFoundException;
 import com.moninfotech.service.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,5 +47,11 @@ public class PackageController {
         return ResponseEntity.ok()
                 .body(imageBytes);
 
+    }
+
+    @GetMapping("/latest")
+    private String getLatestPackage() throws NotFoundException {
+        Package pckg = this.packageService.getLatestPackage();
+        return "redirect:/packages/" + pckg.getId();
     }
 }
