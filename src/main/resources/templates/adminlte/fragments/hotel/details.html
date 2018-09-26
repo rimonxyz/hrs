@@ -389,7 +389,7 @@
                                         <span th:if="${hotel?.enabled}">Hotel Status:<br/>
                                                 <i class="fa fa-circle text-success"></i> Online</span>
                                         <span th:if="${!hotel?.enabled}">Hotel Status:<br/>
-                                                <i class="fa fa-circle text-danger"></i> Offline</span>
+                                                <i class="fa fa-circle text-danger"></i> Manual</span>
                                         <!--<a th:href="@{/bookings/cart/clear}"-->
                                         <!--class="btn btn-lg btn-block btn-danger"><i-->
                                         <!--class="glyphicon glyphicon-shopping-cart"></i>CLEAR-->
@@ -474,10 +474,10 @@
 
                 <!--ROOM LIST-->
                 <div class="row">
-                    <div th:if="${!hotel?.enabled}" class="col-sm-8 col-sm-offset-2">
-                        <span style="color: red;font-size: 20px;">This Hotel is Offline. Please call for booking.</span>
-                        <br/><br/>
-                    </div>
+                    <!--<div th:if="${!hotel?.enabled}" class="col-sm-8 col-sm-offset-2">-->
+                        <!--<span style="color: red;font-size: 20px;">This Hotel is Offline. Please call for booking.</span>-->
+                        <!--<br/><br/>-->
+                    <!--</div>-->
 
                     <div class="col-md-3" th:each="room : ${roomList}"
                          th:classappend="${bookedIds?.contains(room?.id)} ? panel-danger : panel-primary"
