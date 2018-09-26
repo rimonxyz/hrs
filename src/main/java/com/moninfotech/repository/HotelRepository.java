@@ -45,7 +45,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
             " AND  (:meetingRoom is null or meeting_room=:meetingRoom) " +
             " AND  (:doctorOnCall is null or doctor_on_call=:doctorOnCall) " +
             " AND  (:wakeupService is null or wakeup_service=:wakeupService) " +
-            " AND  (:wheelChairAccessible is null or wheel_chair_accessable=:wheelChairAccessible) " +
+            " AND  (:wheelChairAccessible is null or wheel_chair_accessible=:wheelChairAccessible) " +
             " AND  (:safeDepositBox is null or safe_deposit_box=:safeDepositBox) " +
             " AND  (:nonSmokingRoom is null or non_smoking_room=:nonSmokingRoom) " +
             " AND  (:vipFloor is null or vip_floor=:vipFloor) " +
