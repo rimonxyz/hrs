@@ -53,7 +53,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
             " AND  (:newspaper is null or newspaper=:newspaper) " +
             " AND  (:laundry is null or laundry=:laundry) " +
             " AND  (:lobby is null or lobby=:lobby) " +
-            " AND  (:foreignExchange is null or foreign_exchage=:foreignExchange) " +
+            " AND  (:foreignExchange is null or foreign_exchange=:foreignExchange) " +
             " AND  (:executiveLaunge is null or executive_launge=:executiveLaunge) " +
             " AND  (:babySitting is null or baby_sitting=:babySitting) " +
             "AND room.price BETWEEN :priceFrom AND :priceTo GROUP BY hotel.id",nativeQuery = true)
