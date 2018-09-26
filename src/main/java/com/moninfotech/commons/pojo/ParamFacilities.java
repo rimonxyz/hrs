@@ -37,6 +37,7 @@ public class ParamFacilities {
     private Boolean foreignExchange;
     private Boolean executiveLaunge;
     private Boolean babySitting;
+    private Boolean freeCancellation;
 
     public Boolean getRestaurant() {
         return restaurant;
@@ -308,5 +309,13 @@ public class ParamFacilities {
 
     public void setBabySitting(Boolean babySitting) {
         this.babySitting = babySitting;
+    }
+
+    public Boolean getFreeCancellation() {
+        return freeCancellation;
+    }
+
+    public void setFreeCancellation(Boolean freeCancellation) {
+        this.freeCancellation = freeCancellation;
     }
 }

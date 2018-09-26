@@ -56,6 +56,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
             " AND  (:foreignExchange is null or foreign_exchange=:foreignExchange) " +
             " AND  (:executiveLaunge is null or executive_launge=:executiveLaunge) " +
             " AND  (:babySitting is null or baby_sitting=:babySitting) " +
+            " AND  (:freeCancellation is null or free_cancellation=:freeCancellation) " +
             "AND room.price BETWEEN :priceFrom AND :priceTo GROUP BY hotel.id",nativeQuery = true)
     List<Hotel> filterHotels(@Param("q") String query,
                              @Param("star") String star,
@@ -97,7 +98,8 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
                              @Param("lobby")  Boolean lobby,
                              @Param("foreignExchange")  Boolean foreignExchange,
                              @Param("executiveLaunge")  Boolean executiveLaunge,
-                             @Param("babySitting")  Boolean babySitting
+                             @Param("babySitting")  Boolean babySitting,
+                             @Param("freeCancellation")  Boolean freeCancellation
     );
 
     List<Hotel> findDistinctByNameContainingIgnoreCaseOrAddressAreaContainingIgnoreCaseOrAddressUpazilaContainingIgnoreCaseAndDeletedFalse(String name,String area,String upazilla, Pageable pageable);

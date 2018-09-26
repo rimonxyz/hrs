@@ -40,6 +40,7 @@ public class HotelFacilities {
     private boolean foreignExchange;
     private boolean executiveLaunge;
     private boolean babySitting;
+    private boolean freeCancellation;
 
     public HotelFacilities() {
     }
@@ -332,5 +333,13 @@ public class HotelFacilities {
                 ", helipad=" + helipad +
                 ", ac=" + ac +
                 '}';
+    }
+
+    public boolean isFreeCancellation() {
+        return freeCancellation;
+    }
+
+    public void setFreeCancellation(boolean freeCancellation) {
+        this.freeCancellation = freeCancellation;
     }
 }

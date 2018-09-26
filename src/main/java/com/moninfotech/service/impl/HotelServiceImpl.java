@@ -214,7 +214,8 @@ public class HotelServiceImpl implements HotelService {
                 facilities.getLobby(),
                 facilities.getForeignExchange(),
                 facilities.getExecutiveLaunge(),
-                facilities.getBabySitting()
+                facilities.getBabySitting(),
+                facilities.getFreeCancellation()
         );
     }
 
