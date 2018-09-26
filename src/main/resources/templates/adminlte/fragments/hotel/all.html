@@ -52,9 +52,10 @@
                                            class="form-control"
                                            required="required" th:value="${query}"></input>
                                 </div>
-                                <input type="hidden" name="star"></input>
+                                <input type="hidden" name="star"></ input>
                                 <input type="hidden" name="price" value="1x1000000"></input>
                                 <input type="hidden" name="rating"></input>
+                                <input type="hidden" name="accomodationType"></input>
                                 <button style="margin-top: 20px;" class="form-control btn btn-default" type="submit"><i
                                         style="margin-right: 10px;" class="glyphicon glyphicon-search"></i>Search
                                 </button>
@@ -89,7 +90,7 @@
 
                                 <div class="form-group" th:if="${hotelType!=null and hotelType.equals('Hotel')}">
                                     <label class="label label-primary">Star Rating</label>
-                                    <select class="form-control" name="star">
+                                    <select class="form-control" name="star" onchange="this.form.submit()">
                                         <option value="">All
                                         </option>
                                         <option value="1 star" th:selected="${star?.equals('1 star')}">1 Star
@@ -115,7 +116,7 @@
                                 </div>
                                 <div class="form-group" th:if="${hotelType!=null and hotelType.equals('Ship')}">
                                     <label class="label label-primary">AC/Non AC</label>
-                                    <select class="form-control" name="ac">
+                                    <select class="form-control" name="ac" onchange="this.form.submit()">
                                         <option value="ac" th:selected="${filterValue?.equals('ac')}">AC
                                         </option>
                                         <option value="nonac" th:selected="${filterValue?.equals('nonac')}">NON AC
@@ -125,7 +126,7 @@
 
                                 <div class="form-group">
                                     <label class="label label-primary">Nightly Price</label>
-                                    <select class="form-control" name="price">
+                                    <select class="form-control" name="price" onchange="this.form.submit()">
                                         <option th:selected="${ price?.equals('1x1000000') }" th:value="1x1000000">
                                             All
                                         </option>
@@ -135,16 +136,16 @@
                                         <option th:selected="${ price?.equals('900x1500') }" th:value="900x1500">
                                             1001-1500
                                         </option>
-                                        <option th:selected="${ price?.equals('1600x1000000') }"
-                                                th:value="1600x1000000">
+                                        <option th:selected="${ price?.equals('1501x2000') }"
+                                                th:value="1501x2000">
                                             1501-2000
                                         </option>
-                                        <option th:selected="${ price?.equals('1600x1000000') }"
-                                                th:value="1600x1000000">
+                                        <option th:selected="${ price?.equals('2001x3000') }"
+                                                th:value="2001x3000">
                                             2001-3000
                                         </option>
-                                        <option th:selected="${ price?.equals('1600x1000000') }"
-                                                th:value="1600x1000000">
+                                        <option th:selected="${ price?.equals('3000x1000000') }"
+                                                th:value="3000x1000000">
                                             3000+
                                         </option>
                                     </select>
@@ -152,19 +153,16 @@
 
                                 <div class="form-group">
                                     <label class="label label-primary">Accommodation Type</label>
-                                    <select class="form-control" name="price">
-                                        <option th:selected="${ price?.equals('1x1000000') }" th:value="1x1000000">
-                                            All
+                                    <select class="form-control" name="accomodationType" onchange="this.form.submit()">
+                                        <option th:selected="${ accomodationType?.equals('Hotel') }" th:value="Hotel">
+                                            Hotel
                                         </option>
-                                        <option th:selected="${ price?.equals('500x800') }" th:value="500x800">
-                                            500-800
+                                        <option th:selected="${ accomodationType?.equals('Resort') }" th:value="Resort">
+                                            Resort
                                         </option>
-                                        <option th:selected="${ price?.equals('900x1500') }" th:value="900x1500">
-                                            900-1500
-                                        </option>
-                                        <option th:selected="${ price?.equals('1600x1000000') }"
-                                                th:value="1600x1000000">
-                                            1600-Above
+                                        <option th:selected="${ accomodationType?.equals('Apartment') }"
+                                                th:value="Apartment">
+                                            Apartment
                                         </option>
                                     </select>
                                 </div>
@@ -176,164 +174,164 @@
                                              class="starrr"></div>
                                         <span hidden="hidden"><span id="count">5</span></span>
                                     </div>
-                                    <input type="hidden" id="ratingCount" name="rating" th:value="${rating}"></input>
+                                    <input type="hidden" id="ratingCount" name="rating" th:value="${rating}" onchange="this.form.submit()"></input>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="label label-primary">Facilities</label>
                                 </div>
                                 <div class="form-group">
-                                    <input name="restaurant" th:checked="${f.restaurant}" type="checkbox" value="true">&nbsp;&nbsp;Restaurant</input>
+                                    <input name="restaurant" th:checked="${f.restaurant}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Restaurant</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="lift" th:checked="${f.lift}" type="checkbox" value="true">&nbsp;&nbsp;Lift</input>
+                                    <input name="lift" th:checked="${f.lift}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Lift</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="wifi" th:checked="${f.wifi}" type="checkbox" value="true">&nbsp;&nbsp;Wifi</input>
+                                    <input name="wifi" th:checked="${f.wifi}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Wifi</input>
                                 </div>
                                 <div class="form-group">
                                     <input name="conferenceRoom" th:checked="${f.conferenceRoom}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Conference Room</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Conference Room</input>
                                 </div>
                                 <div class="form-group">
                                     <input name="swimingPool" th:checked="${f.swimingPool}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Swiming Pool</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Swiming Pool</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="sportsZone" th:checked="${f.sportsZone}" type="checkbox" value="true">&nbsp;&nbsp;Sports
+                                    <input name="sportsZone" th:checked="${f.sportsZone}" type="checkbox" value="true" onChange="this.form.submit()" onChange="this.form.submit()">&nbsp;&nbsp;Sports
                                     Zone</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="gym" th:checked="${f.gym}" type="checkbox" value="true">&nbsp;&nbsp;Gymnesium</input>
+                                    <input name="gym" th:checked="${f.gym}" type="checkbox" value="true" onChange="this.form.submit()" onChange="this.form.submit()">&nbsp;&nbsp;Gymnesium</input>
                                 </div>
                                 <div class="form-group">
                                     <input name="spa" th:checked="${f.spa}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Spa</input>
+                                           value="true" onChange="this.form.submit()" onChange="this.form.submit()">&nbsp;&nbsp;Spa</input>
                                 </div>
                                 <div class="form-group">
                                     <input name="bar" th:checked="${f.bar}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Bar</input>
+                                           value="true" onChange="this.form.submit()" onChange="this.form.submit()">&nbsp;&nbsp;Bar</input>
                                 </div>
                                 <div class="form-group">
-                                    <input name="helipad" th:checked="${f.helipad}" type="checkbox" value="true">&nbsp;&nbsp;Helipad</input>
+                                    <input name="helipad" th:checked="${f.helipad}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Helipad</input>
                                 </div>
                                 <div class="form-group">
                                     <input name="ac" th:checked="${f.ac}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;AC</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;AC</input>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <input name="frontDesk" th:checked="${f.frontDesk}" type="checkbox" value="true">&nbsp;&nbsp;Front
+                                    <input name="frontDesk" th:checked="${f.frontDesk}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Front
                                     Desk</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="roomService" th:checked="${f.roomService}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Room Service</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Room Service</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="electricity" th:checked="${f.electricity}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Electricity</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Electricity</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="security" th:checked="${f.security}" type="checkbox" value="true">&nbsp;&nbsp;Security</input>
+                                    <input name="security" th:checked="${f.security}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Security</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="complementaryBreakfast" th:checked="${f.complementaryBreakfast}"
-                                           type="checkbox" value="true">&nbsp;&nbsp;Complementary Breakfast</input>
+                                           type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Complementary Breakfast</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="coffeeShop" th:checked="${f.coffeeShop}" type="checkbox" value="true">&nbsp;&nbsp;Coffee
+                                    <input name="coffeeShop" th:checked="${f.coffeeShop}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Coffee
                                     Shop</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="freeParking" th:checked="${f.freeParking}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Free Parking</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Free Parking</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="airportTransportation" th:checked="${f.airportTransportation}"
-                                           type="checkbox" value="true">&nbsp;&nbsp;Airport Transportation</input>
+                                           type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Airport Transportation</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="businessCenter" th:checked="${f.businessCenter}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Business Center</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Business Center</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="meetingRoom" th:checked="${f.meetingRoom}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Meeting Room</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Meeting Room</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="doctorOnCall" th:checked="${f.doctorOnCall}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Doctors on Call</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Doctors on Call</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="wakeupService" th:checked="${f.wakeupService}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Wakeup Service</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Wakeup Service</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="wheelChairAccessible" th:checked="${f.wheelChairAccessible}"
-                                           type="checkbox" value="true">&nbsp;&nbsp;Wheelchair Accessible</input>
+                                           type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Wheelchair Accessible</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="safeDepositBox" th:checked="${f.safeDepositBox}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Safe Deposit Box</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Safe Deposit Box</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="nonSmokingRoom" th:checked="${f.nonSmokingRoom}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;No Smoking Room</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;No Smoking Room</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="vipFloor" th:checked="${f.vipFloor}" type="checkbox" value="true">&nbsp;&nbsp;VIP
+                                    <input name="vipFloor" th:checked="${f.vipFloor}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;VIP
                                     Floor</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="acceptCreditCard" th:checked="${f.acceptCreditCard}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Accept Credit Card</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Accept Credit Card</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="newspaper" th:checked="${f.newspaper}" type="checkbox" value="true">&nbsp;&nbsp;Newspaper</input>
+                                    <input name="newspaper" th:checked="${f.newspaper}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Newspaper</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="laundry" th:checked="${f.laundry}" type="checkbox" value="true">&nbsp;&nbsp;Laundry</input>
+                                    <input name="laundry" th:checked="${f.laundry}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Laundry</input>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="lobby" th:checked="${f.lobby}" type="checkbox" value="true">&nbsp;&nbsp;Lobby</input>
+                                    <input name="lobby" th:checked="${f.lobby}" type="checkbox" value="true" onChange="this.form.submit()">&nbsp;&nbsp;Lobby</input>
                                 </div>
 
                                 <div class="form-group">
                                     <input name="foreignExchange" th:checked="${f.foreignExchange}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Foreign Exchange</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Foreign Exchange</input>
                                 </div>
 
 
                                 <div class="form-group">
                                     <input name="executiveLaunge" th:checked="${f.executiveLaunge}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Executive Launge</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Executive Launge</input>
                                 </div>
 
 
                                 <div class="form-group">
                                     <input name="babySitting" th:checked="${f.babySitting}" type="checkbox"
-                                           value="true">&nbsp;&nbsp;Baby Sitting</input>
+                                           value="true" onChange="this.form.submit()">&nbsp;&nbsp;Baby Sitting</input>
                                 </div>
 
                                 <!--<button class="btn btn-primary btn-block" type="submit">Filter</button>-->

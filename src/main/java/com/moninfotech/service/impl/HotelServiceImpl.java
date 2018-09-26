@@ -173,11 +173,12 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<Hotel> filter(String query, String star, String price, int rating, ParamFacilities facilities) {
+    public List<Hotel> filter(String query, String star, String price,String accomodationType, int rating, ParamFacilities facilities) {
         String[] prices = price.split("x");
         return this.hotelRepo.filterHotels(
                 query,
                 star,
+                accomodationType,
                 Integer.parseInt(prices[0]),
                 Integer.parseInt(prices[1]), rating,
                 facilities.getRestaurant(),

@@ -21,7 +21,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     List<Hotel> findByDeletedFalse();
     Page<Hotel> findByDeletedFalse(Pageable pageable);
 
-    @Query(value = "SELECT * FROM hotel LEFT JOIN room ON hotel.id=room.hotel_id WHERE area LIKE %:q% AND star LIKE %:star%  AND ROUND(rating)=:rating" +
+    @Query(value = "SELECT * FROM hotel LEFT JOIN room ON hotel.id=room.hotel_id WHERE area LIKE %:q% AND star LIKE %:star% AND accomodation_type LIKE %:accomodationType% AND ROUND(rating)=:rating" +
             " AND  (:restaurant is null or restaurant=:restaurant) " +
             " AND  (:lift is null or lift=:lift) " +
             " AND  (:wifi is null or wifi=:wifi) " +
@@ -57,7 +57,13 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
             " AND  (:executiveLaunge is null or executive_launge=:executiveLaunge) " +
             " AND  (:babySitting is null or baby_sitting=:babySitting) " +
             "AND room.price BETWEEN :priceFrom AND :priceTo GROUP BY hotel.id",nativeQuery = true)
-    List<Hotel> filterHotels(@Param("q") String query,@Param("star")  String star,@Param("priceFrom")  int priceFrom,@Param("priceTo")  int priceTo,@Param("rating")  int rating,
+    List<Hotel> filterHotels(@Param("q") String query,
+                             @Param("star") String star,
+                             @Param("accomodationType") String accomodationType,
+                             @Param("priceFrom") int priceFrom,
+                             @Param("priceTo") int priceTo,
+                             @Param("rating") int rating,
+
                              @Param("restaurant")  Boolean restaurant,
                              @Param("lift")  Boolean lift,
                              @Param("wifi")  Boolean wifi,

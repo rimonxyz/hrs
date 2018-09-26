@@ -46,6 +46,7 @@ public class HotelController {
     private String filterHotels(@RequestParam(value = "query", defaultValue = "") String query,
                                 @RequestParam("star") String star,
                                 @RequestParam("price") String price,
+                                @RequestParam("accomodationType") String accomodationType,
                                 @RequestParam("rating") Integer rating,
                                 @ModelAttribute ParamFacilities facilities,
                                 @RequestParam Map<String,String> fMap,
@@ -54,7 +55,7 @@ public class HotelController {
                                 @RequestParam(value = "sortBy", required = false) String sortBy,
                                 @RequestParam(value = "isDesc", required = false) boolean isDesc,
                                 Model model) {
-        List<Hotel> hotels = this.hotelService.filter(query, star, price, rating == null ? 0 : rating, facilities);
+        List<Hotel> hotels = this.hotelService.filter(query, star, price,accomodationType, rating == null ? 0 : rating, facilities);
 
         model.addAttribute("hotelList", hotels);
         model.addAttribute("isDesc", !isDesc);
@@ -62,6 +63,7 @@ public class HotelController {
         model.addAttribute("query", query);
         model.addAttribute("price", price);
         model.addAttribute("star", star);
+        model.addAttribute("accomodationType", accomodationType);
         model.addAttribute("rating", rating);
         model.addAttribute("areaList", this.hotelService.getAddressAreaAndUpazilaList());
         model.addAttribute("hotelType", hotelType);

@@ -45,7 +45,7 @@ public interface HotelService {
 
     List<Hotel> findByNameContaining(String query,int page);
 
-    List<Hotel> filter(String query, String star, String price, int rating, ParamFacilities facilities);
+    List<Hotel> filter(String query, String star, String price,String accomodationType, int rating, ParamFacilities facilities);
 
     void softDelete(Long hotelId) throws NotFoundException, InvalidException;
 }
