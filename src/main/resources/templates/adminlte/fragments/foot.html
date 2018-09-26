@@ -510,6 +510,8 @@
         var dateInput = $("#dateFilter");
         var sDate = new Date(dateInput.val());
         var now = new Date();
+        now.setHours(0,0,1,0);
+
         if (now > sDate) {
             toastr.error('You can not book on past date!\nPlease Select a future date.')
         } else {

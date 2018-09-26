@@ -100,4 +100,20 @@ public class DateUtils {
         cal.add(Calendar.MONTH,1);
         return bookingDate.after(cal.getTime());
     }
+
+    public static Date getNextDay(Date currentDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        return calendar.getTime();
+    }
+
+    public static Date getDayEnd(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 30);
+        return calendar.getTime();
+    }
 }

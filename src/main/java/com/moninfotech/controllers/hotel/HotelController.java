@@ -140,6 +140,8 @@ public class HotelController {
             roomList = this.roomService.searchRooms(hotel, query);
         List<Long> bookedIds = this.roomService.filterRoomIds(roomList, filterType, value);
 
+        model.addAttribute("checkInDate",DateUtils.getParsableDateFormat().format(new Date()));
+        model.addAttribute("checkoutDate",DateUtils.getParsableDateFormat().format(DateUtils.getNextDay(new Date())));
         model.addAttribute("hotel", hotel);
         model.addAttribute("roomList", roomList);
         model.addAttribute("categoryList", hotel.getEffectiveCategories());
