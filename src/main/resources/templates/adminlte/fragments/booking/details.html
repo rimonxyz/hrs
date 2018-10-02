@@ -119,7 +119,7 @@
                         <ul class="nav nav-stacked">
                             <li class="badge bg-green" style="color: #ecf0f5;" sec:authorize="!hasRole('ROLE_ADMIN')">My Bookings in this Hotel</li>
                             <li class="badge bg-green" style="color: #ecf0f5;" sec:authorize="hasRole('ROLE_ADMIN')">Bookings by date in this Hotel</li>
-                            <li th:each="b : ${booking?.hotel?.bookingList}">
+                            <li th:each="b : ${myBookingList}">
                                 <a th:href="@{/bookings/}+${b?.id}"> <span class="badge bg-blue"
                                                                                  th:text="${b?.getAllBookingDates()}">31</span></a>
                             </li>

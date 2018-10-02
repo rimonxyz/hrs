@@ -3,7 +3,9 @@ package com.moninfotech.controllers.booking;
 import com.moninfotech.commons.Constants;
 import com.moninfotech.commons.SessionAttr;
 import com.moninfotech.commons.pojo.BookingHelper;
+
 import com.moninfotech.commons.utils.DateUtils;
+
 import com.moninfotech.commons.utils.PasswordUtil;
 import com.moninfotech.config.security.SecurityConfig;
 import com.moninfotech.domain.*;
@@ -114,6 +116,7 @@ public class BookingController {
             return "redirect:/bookings?message=You\'re not authorised to access this resource.";
 
         model.addAttribute("booking", booking);
+        model.addAttribute("myBookingList", this.bookingService.getBookingList(booking.getHotel(), currentUser));
 //        model.addAttribute("template", "fragments/booking/details");
         return "adminlte/fragments/booking/details";
     }
@@ -124,7 +127,7 @@ public class BookingController {
                              @RequestParam(value = "checkoutDate", required = false) Date checkoutDate,
                              HttpSession session) throws InvalidException {
         Room room = this.roomService.findOne(roomId);
-        this.bookingService.addToCart(session,roomId,checkInDate,checkoutDate);
+        this.bookingService.addToCart(session, roomId, checkInDate, checkoutDate);
 
         return "redirect:/hotels/" + room.getHotel().getId() + "?messageinfo=Room " + room.getRoomNumber() + " Added to the cart!";
     }
@@ -199,7 +202,7 @@ public class BookingController {
     }
 
     @PostMapping("/tempRegister")
-    private String tempRegister(@ModelAttribute User user, BindingResult bindingResult,HttpSession session) throws Exception, NullPasswordException {
+    private String tempRegister(@ModelAttribute User user, BindingResult bindingResult, HttpSession session) throws Exception, NullPasswordException {
         session.removeAttribute(SessionAttr.SESSION_BOOKING_PROCESSING); // remove booking processing
 
         if (bindingResult.hasErrors()) System.out.println(bindingResult.toString());
