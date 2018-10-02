@@ -5,7 +5,8 @@ import com.moninfotech.exceptions.UserAlreadyExistsException;
 import com.moninfotech.exceptions.forbidden.ForbiddenException;
 import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
-import com.mysql.jdbc.PacketTooBigException;
+
+import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MultipartException;
