@@ -25,6 +25,43 @@ public class Facilities {
     private boolean kitchen;
     private boolean bathTub;
 
+    private boolean children;
+    private boolean extraBeds;
+    private boolean petsAllowed;
+    private boolean hasPaymentMethod;
+
+    public boolean isChildren() {
+        return children;
+    }
+
+    public void setChildren(boolean children) {
+        this.children = children;
+    }
+
+    public boolean isExtraBeds() {
+        return extraBeds;
+    }
+
+    public void setExtraBeds(boolean extraBeds) {
+        this.extraBeds = extraBeds;
+    }
+
+    public boolean isPetsAllowed() {
+        return petsAllowed;
+    }
+
+    public void setPetsAllowed(boolean petsAllowed) {
+        this.petsAllowed = petsAllowed;
+    }
+
+    public boolean isHasPaymentMethod() {
+        return hasPaymentMethod;
+    }
+
+    public void setHasPaymentMethod(boolean hasPaymentMethod) {
+        this.hasPaymentMethod = hasPaymentMethod;
+    }
+
     public boolean isTelephone() {
         return telephone;
     }
