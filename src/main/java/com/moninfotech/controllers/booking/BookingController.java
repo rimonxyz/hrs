@@ -63,7 +63,7 @@ public class BookingController {
                               Model model) throws ParseException {
 
         // find booking list by role
-        List<Booking> bookingList = this.bookingService.findBookings(currentUser, false,true, true, page, size);
+        List<Booking> bookingList = this.bookingService.findBookings(currentUser, false,false, true, page, size);
 
         Date date = null;
         if (analDate == null || analDate.isEmpty()) date = new Date();

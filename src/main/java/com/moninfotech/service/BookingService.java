@@ -18,9 +18,9 @@ import java.util.List;
  */
 public interface BookingService {
 
-    List<Booking> findByUser(User user,boolean isCanceled, boolean isConfirmed, Integer page, Integer size);
+    List<Booking> findByUser(User user,boolean isCanceled, boolean isConfirmed,boolean isApproved, Integer page, Integer size);
 
-    List<Booking> findByHotel(Hotel hotel,boolean isCanceled, boolean isConfirmed, Integer page, Integer size);
+    List<Booking> findByHotel(Hotel hotel,boolean isCanceled, boolean isConfirmed,boolean isApproved, Integer page, Integer size);
 
     Booking findOne(Long id);
 

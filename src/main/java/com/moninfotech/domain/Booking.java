@@ -207,6 +207,7 @@ public class Booking extends BaseEntity {
     }
 
     public void setApproved(boolean approved) {
+        this.confirmed = approved;
         this.approved = approved;
     }
 }

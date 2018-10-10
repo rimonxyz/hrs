@@ -16,15 +16,15 @@ import java.util.List;
  */
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    List<Booking> findByCancelledAndConfirmedAndApproved(boolean calceled,boolean isConfirmed,boolean isApproved);
+    List<Booking> findByCancelledAndConfirmedAndApproved(boolean calceled, boolean isConfirmed, boolean isApproved);
 
-    List<Booking> findByUserAndCancelledAndConfirmed(User user,boolean calceled, boolean isConfirmed);
+    List<Booking> findByUserAndCancelledAndConfirmedAndApproved(User user, boolean calceled, boolean isConfirmed, boolean isApproved);
 
-    List<Booking> findByHotelAndCancelledAndConfirmed(Hotel hotel,boolean calceled, boolean isConfirmed);
+    List<Booking> findByHotelAndCancelledAndConfirmedAndApproved(Hotel hotel, boolean calceled, boolean isConfirmed, boolean isApproved);
 
-    Page<Booking> findByUserAndCancelledAndConfirmed(User user,boolean calceled, boolean isConfirmed, Pageable pageable);
+    Page<Booking> findByUserAndCancelledAndConfirmedAndApproved(User user, boolean calceled, boolean isConfirmed, boolean isApproved, Pageable pageable);
 
-    Page<Booking> findByHotelAndCancelledAndConfirmed(Hotel hotel,boolean calceled, boolean isConfirmed, Pageable pageable);
+    Page<Booking> findByHotelAndCancelledAndConfirmedAndApproved(Hotel hotel, boolean calceled, boolean isConfirmed, boolean isApproved, Pageable pageable);
 
-    Page<Booking> findByCancelledAndConfirmed(boolean isConfirmed,boolean calceled, Pageable pageable);
+    Page<Booking> findByCancelledAndConfirmedAndApproved(boolean canceled, boolean confirmed, boolean isApproved, Pageable pageable);
 }

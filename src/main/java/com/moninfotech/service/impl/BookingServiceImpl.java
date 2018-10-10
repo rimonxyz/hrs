@@ -9,10 +9,7 @@ import com.moninfotech.domain.*;
 import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.exceptions.notfound.SessionBookingNotFoundException;
 import com.moninfotech.repository.BookingRepository;
-import com.moninfotech.service.BookingService;
-import com.moninfotech.service.HotelService;
-import com.moninfotech.service.RoomService;
-import com.moninfotech.service.TransactionService;
+import com.moninfotech.service.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,27 +34,29 @@ public class BookingServiceImpl implements BookingService {
     private final HotelService hotelService;
     private final RoomService roomService;
     private final TransactionService transactionService;
+    private final MailService mailService;
 
     @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepo, HotelService hotelService, RoomService roomService, TransactionService transactionService) {
+    public BookingServiceImpl(BookingRepository bookingRepo, HotelService hotelService, RoomService roomService, TransactionService transactionService, MailService mailService) {
         this.bookingRepo = bookingRepo;
         this.hotelService = hotelService;
         this.roomService = roomService;
         this.transactionService = transactionService;
+        this.mailService = mailService;
     }
 
     @Override
-    public List<Booking> findByUser(User user, boolean isCanceled, boolean isConfirmed, Integer page, Integer size) {
+    public List<Booking> findByUser(User user, boolean isCanceled, boolean isConfirmed, boolean isApproved, Integer page, Integer size) {
         if (page == null || size == null)
-            return this.bookingRepo.findByUserAndCancelledAndConfirmed(user, isCanceled, isConfirmed);
-        return this.bookingRepo.findByUserAndCancelledAndConfirmed(user, isCanceled, isConfirmed, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
+            return this.bookingRepo.findByUserAndCancelledAndConfirmedAndApproved(user, isCanceled, isConfirmed, isApproved);
+        return this.bookingRepo.findByUserAndCancelledAndConfirmedAndApproved(user, isCanceled, isConfirmed, isApproved, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
 
     @Override
-    public List<Booking> findByHotel(Hotel hotel, boolean isCanceled, boolean isConfirmed, Integer page, Integer size) {
+    public List<Booking> findByHotel(Hotel hotel, boolean isCanceled, boolean isConfirmed, boolean isApproved, Integer page, Integer size) {
         if (page == null || size == null)
-            return this.bookingRepo.findByHotelAndCancelledAndConfirmed(hotel, isCanceled, isConfirmed);
-        return this.bookingRepo.findByHotelAndCancelledAndConfirmed(hotel, isCanceled, isConfirmed, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
+            return this.bookingRepo.findByHotelAndCancelledAndConfirmedAndApproved(hotel, isCanceled, isConfirmed, isApproved);
+        return this.bookingRepo.findByHotelAndCancelledAndConfirmedAndApproved(hotel, isCanceled, isConfirmed, isApproved, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
 
     @Override
@@ -69,7 +68,7 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> findAll(boolean isCanceled, boolean isConfirmed, boolean isApproved, Integer page, Integer size) {
         if (page == null || size == null)
             return this.bookingRepo.findByCancelledAndConfirmedAndApproved(isCanceled, isConfirmed, isApproved);
-        return this.bookingRepo.findByCancelledAndConfirmed(isCanceled, isConfirmed, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
+        return this.bookingRepo.findByCancelledAndConfirmedAndApproved(isCanceled, isConfirmed, isApproved, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
 
     @Override
@@ -89,6 +88,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking save(Booking booking) {
+        if (booking.isApproved() && !booking.isCancelled())
+            this.mailService.sendEmail(booking.getUser().getEmail(), "Your booking #" + booking.getId() + " on hotelswave is placed!",
+                    "Your booking on hotelswave.com is successfully placed. \n You'll find your invoice at https://www.hotelswave.com/invoices/generate/" + booking.getId() + ". Please pay your invoice to confirm your booking.");
         return this.bookingRepo.save(booking);
     }
 
@@ -183,10 +185,10 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> findBookings(User currentUser, boolean isCanceled, boolean isConfirmed, boolean isApproved, Integer page, Integer size) {
         List<Booking> bookingList = new ArrayList<>();
         if (currentUser.hasAssignedRole(Constants.Roles.ROLE_USER))
-            bookingList = this.findByUser(currentUser, isCanceled, isConfirmed, page, size);
+            bookingList = this.findByUser(currentUser, isCanceled, isConfirmed, isApproved, page, size);
         else if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
             Hotel hotel = this.hotelService.findByUser(currentUser);
-            bookingList = this.findByHotel(hotel, isCanceled, isConfirmed, page, size);
+            bookingList = this.findByHotel(hotel, isCanceled, isConfirmed, isApproved, page, size);
         } else if (currentUser.hasAssignedRole(Constants.Roles.ROLE_ADMIN)) {
             bookingList = this.findAll(isCanceled, isConfirmed, isApproved, page, size);
         }
@@ -196,7 +198,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> findFiltered(User currentUser, boolean isManual, String hotelType) {
-        List<Booking> bookingList = this.findBookings(currentUser, false, true,true, null, null);
+        List<Booking> bookingList = this.findBookings(currentUser, false, true, true, null, null);
         // filter
         if (hotelType == null || hotelType.equals(Hotel.Type.BOTH))
             return bookingList
@@ -214,7 +216,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date, String analFlagRole) {
-        List<Booking> bookingList = this.findBookings(currentUser, false, true,true, null, null);
+        List<Booking> bookingList = this.findBookings(currentUser, false, true, true, null, null);
         List<Room> roomList = new ArrayList<>();
         for (Booking booking : bookingList) {
             // filter booking by role
@@ -242,7 +244,7 @@ public class BookingServiceImpl implements BookingService {
     // returns all rooms that are booked on provided day
     @Override
     public List<Room> findFilteredRoomList(User currentUser, Date date, String analFlagRole) {
-        List<Booking> bookingList = this.findBookings(currentUser, false, true,true, null, null);
+        List<Booking> bookingList = this.findBookings(currentUser, false, true, true, null, null);
 
         List<Room> bookedRooms = new ArrayList<>();
         for (Booking booking : bookingList) {

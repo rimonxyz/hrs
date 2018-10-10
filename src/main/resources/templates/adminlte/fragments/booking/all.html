@@ -40,7 +40,8 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Bookings (Order placed by date)</h3><br/>
                         <h4 class="box-title">Date: <span th:text="${todaysDate}"></span></h4>
-                        <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormBookings" method="get">
+                        <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormBookings"
+                              method="get">
                             <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
                             <input class="form-control" name="analDate" type="date" id="analDateFilterBookings"
                                    th:value="${analDate}"></input>
@@ -76,7 +77,9 @@
                             <td th:text="${room?.category?.name}"></td>
                             <td th:text="${room?.getBookingDatesForView(analDate)?.get('dates')}"></td>
                             <!--<td th:text="${todaysPlacedRoomListSize}"></td>-->
-                            <td>৳<span th:text="${room?.getDiscountedPrice(analDate)*room?.getBookingDatesForView(analDate)?.get('size')}"></span></td>
+                            <td>৳<span
+                                    th:text="${room?.getDiscountedPrice(analDate)*room?.getBookingDatesForView(analDate)?.get('size')}"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td></td>
@@ -85,7 +88,8 @@
                             <td></td>
                             <td>Total</td>
                             <td>
-                                ৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate,true)}"></span>
+                                ৳<span
+                                    th:text="${bookingHelper?.getTotalDiscountedPrice(todaysPlacedRoomList,analDate,true)}"></span>
                             </td>
                         </tr>
                     </table>
@@ -98,7 +102,8 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Sales (Booked Rooms by date)</h3><br/>
                         <h4 class="box-title">Date: <span th:text="${analDate}"></span></h4>
-                        <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormSales" method="get">
+                        <form class="form pull-right" th:action="@{/bookings}" id="analDateFilterFormSales"
+                              method="get">
                             <input type="hidden" name="analFlagRole" th:value="${analFlagRole}">
                             <input class="form-control" name="analDate" type="date" id="analDateFilterSales"
                                    th:value="${analDate}"></input>
@@ -131,7 +136,8 @@
                             <td sec:authorize="hasRole('ROLE_ADMIN')"></td>
                             <td></td>
                             <td>Total</td>
-                            <td>৳<span th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate,false)}"></span>
+                            <td>৳<span
+                                    th:text="${bookingHelper?.getTotalDiscountedPrice(bookedRoomList,analDate,false)}"></span>
                             </td>
                         </tr>
                     </table>
@@ -164,18 +170,20 @@
                         </div>
                         <div class="col-sm-8">
                             <!--<form sec:authorize="hasRole('ROLE_ADMIN')" class="form col-sm-4" th:action="@{/bookings}"-->
-                                  <!--id="typeFilterForm" method="get">-->
-                                <!--<input name="filterType" type="hidden" value="hotelType"></input>-->
-                                <!--<select class="form-control" name="filterValue" id="typeFilter">-->
-                                    <!--<option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel-->
-                                    <!--</option>-->
-                                    <!--<option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship-->
-                                    <!--</option>-->
-                                <!--</select>-->
+                            <!--id="typeFilterForm" method="get">-->
+                            <!--<input name="filterType" type="hidden" value="hotelType"></input>-->
+                            <!--<select class="form-control" name="filterValue" id="typeFilter">-->
+                            <!--<option th:selected="${filterValue.toLowerCase().equals('hotel')}" name="hotel">Hotel-->
+                            <!--</option>-->
+                            <!--<option th:selected="${filterValue.toLowerCase().equals('ship')}" name="ship">Ship-->
+                            <!--</option>-->
+                            <!--</select>-->
                             <!--</form>-->
-                            <form class="form col-sm-6" th:action="@{/bookings}" id="bookingsDateFilterForm" method="get">
+                            <form class="form col-sm-6" th:action="@{/bookings}" id="bookingsDateFilterForm"
+                                  method="get">
                                 <input name="filterType" type="hidden" value="date"></input>
-                                <input class="form-control" th:value="${filterValue}" name="filterValue" type="date" id="bookingsDateFilter"/>
+                                <input class="form-control" th:value="${filterValue}" name="filterValue" type="date"
+                                       id="bookingsDateFilter"/>
                             </form>
                             <form class="form col-sm-6" th:action="@{/bookings}" method="get">
                                 <input type="hidden" name="filterType" value="hotelName">
@@ -204,7 +212,12 @@
                         </tr>
                         <tr th:if="${bookingList != null}" th:each="booking,iter : ${bookingList}">
                             <td th:text="${iter.index+1}"></td>
-                            <td th:text="${booking?.id}"></td>
+                            <td>
+                                <span th:text="${booking?.id}"></span> &nbsp;&nbsp;&nbsp;
+                                <span class="label"
+                                      th:classappend="${booking?.confirmed} ?'label-success':'label-warning'"
+                                      th:text="${booking?.confirmed} ?'Confirmed':'Not yet confirmed' "></span>
+                            </td>
                             <td sec:authorize="!hasRole('ROLE_HOTEL_ADMIN')">
                                 <a th:href="@{/bookings/}+${booking?.id}">
                                     <h5 th:text="${booking?.hotel?.name}"></h5>
@@ -225,10 +238,14 @@
                                 <a sec:authorize="!hasAnyRole('ROLE_ADMIN','ROLE_HOTEL_ADMIN')" class="btn btn-success"
                                    th:href="@{/reviews/hotel/}+${booking?.hotel?.id}+@{/create}">Write a
                                     review</a>
-                                <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate Invoice</a>
-                                <form class="form pull-right" th:action="@{/bookings/cancel/}+${booking?.id}" method="post">
-                                    <button class="btn btn-warning" onsubmit="return confirm('Do you really want to cancel this booking?');"
-                                       th:disabled="${!booking?.isCancelable()}">Cancel</button>
+                                <a class="btn btn-info" th:href="@{/invoices/generate/}+${booking?.id}">Generate
+                                    Invoice</a>
+                                <form class="form pull-right" th:action="@{/bookings/cancel/}+${booking?.id}"
+                                      method="post">
+                                    <button class="btn btn-warning"
+                                            onsubmit="return confirm('Do you really want to cancel this booking?');"
+                                            th:disabled="${!booking?.isCancelable()}">Cancel
+                                    </button>
                                 </form>
                             </td>
 
