@@ -7,10 +7,12 @@ import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.commons.utils.DateUtils;
 import com.moninfotech.domain.*;
 import com.moninfotech.exceptions.invalid.InvalidException;
+import com.moninfotech.exceptions.notfound.SessionBookingNotFoundException;
 import com.moninfotech.repository.BookingRepository;
 import com.moninfotech.service.BookingService;
 import com.moninfotech.service.HotelService;
 import com.moninfotech.service.RoomService;
+import com.moninfotech.service.TransactionService;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +36,14 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepo;
     private final HotelService hotelService;
     private final RoomService roomService;
+    private final TransactionService transactionService;
 
     @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepo, HotelService hotelService, RoomService roomService) {
+    public BookingServiceImpl(BookingRepository bookingRepo, HotelService hotelService, RoomService roomService, TransactionService transactionService) {
         this.bookingRepo = bookingRepo;
         this.hotelService = hotelService;
         this.roomService = roomService;
+        this.transactionService = transactionService;
     }
 
     @Override
@@ -62,9 +66,9 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> findAll(boolean isCanceled, boolean isConfirmed, Integer page, Integer size) {
+    public List<Booking> findAll(boolean isCanceled, boolean isConfirmed, boolean isApproved, Integer page, Integer size) {
         if (page == null || size == null)
-            return this.bookingRepo.findByCancelledAndConfirmed(isCanceled, isConfirmed);
+            return this.bookingRepo.findByCancelledAndConfirmedAndApproved(isCanceled, isConfirmed, isApproved);
         return this.bookingRepo.findByCancelledAndConfirmed(isCanceled, isConfirmed, new PageRequest(page, size, Sort.Direction.DESC, Constants.FIELD_ID)).getContent();
     }
 
@@ -176,7 +180,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> findBookings(User currentUser, boolean isCanceled, boolean isConfirmed, Integer page, Integer size) {
+    public List<Booking> findBookings(User currentUser, boolean isCanceled, boolean isConfirmed, boolean isApproved, Integer page, Integer size) {
         List<Booking> bookingList = new ArrayList<>();
         if (currentUser.hasAssignedRole(Constants.Roles.ROLE_USER))
             bookingList = this.findByUser(currentUser, isCanceled, isConfirmed, page, size);
@@ -184,7 +188,7 @@ public class BookingServiceImpl implements BookingService {
             Hotel hotel = this.hotelService.findByUser(currentUser);
             bookingList = this.findByHotel(hotel, isCanceled, isConfirmed, page, size);
         } else if (currentUser.hasAssignedRole(Constants.Roles.ROLE_ADMIN)) {
-            bookingList = this.findAll(isCanceled, isConfirmed, page, size);
+            bookingList = this.findAll(isCanceled, isConfirmed, isApproved, page, size);
         }
         return bookingList;
     }
@@ -192,7 +196,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> findFiltered(User currentUser, boolean isManual, String hotelType) {
-        List<Booking> bookingList = this.findBookings(currentUser, false, true, null, null);
+        List<Booking> bookingList = this.findBookings(currentUser, false, true,true, null, null);
         // filter
         if (hotelType == null || hotelType.equals(Hotel.Type.BOTH))
             return bookingList
@@ -210,7 +214,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Room> findFilteredRoomListByPlacementDate(User currentUser, Date date, String analFlagRole) {
-        List<Booking> bookingList = this.findBookings(currentUser, false, true, null, null);
+        List<Booking> bookingList = this.findBookings(currentUser, false, true,true, null, null);
         List<Room> roomList = new ArrayList<>();
         for (Booking booking : bookingList) {
             // filter booking by role
@@ -238,7 +242,7 @@ public class BookingServiceImpl implements BookingService {
     // returns all rooms that are booked on provided day
     @Override
     public List<Room> findFilteredRoomList(User currentUser, Date date, String analFlagRole) {
-        List<Booking> bookingList = this.findBookings(currentUser, false, true, null, null);
+        List<Booking> bookingList = this.findBookings(currentUser, false, true,true, null, null);
 
         List<Room> bookedRooms = new ArrayList<>();
         for (Booking booking : bookingList) {
@@ -317,6 +321,52 @@ public class BookingServiceImpl implements BookingService {
         }
 
         session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
+        return booking;
+    }
+
+    @Override
+    public Booking getBookingFromSession(HttpSession session) throws SessionBookingNotFoundException {
+        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
+        if (booking == null
+                || booking.getRoomList() == null
+                || booking.getRoomList().isEmpty()
+                || booking.getBookingDateList() == null
+                || booking.getBookingDateList().isEmpty())
+            throw new SessionBookingNotFoundException("/hotels", "No items to book!");
+        return booking;
+    }
+
+    @Override
+    public Booking checkout(User currentUser, HttpSession session) throws SessionBookingNotFoundException {
+        Booking booking = this.getBookingFromSession(session);
+        // set hotel for booking
+        Hotel hotel = booking.findOutHotel();
+        booking.setHotel(hotel);
+        // check if hotel list and booking date list are incompatible
+        if (booking.getRoomList().size() != booking.getBookingDateList().size()) {
+            session.removeAttribute(SessionAttr.SESSION_BOOKING);
+            throw new SessionBookingNotFoundException("/hotels/" + booking.getHotel().getId(), "There\'s something wrong. Please try again later!");
+        }
+        if (!booking.isValid()) {
+            session.removeAttribute(SessionAttr.SESSION_BOOKING);
+            throw new SessionBookingNotFoundException("/hotels/" + booking.getHotel().getId(), "One or more room isn't available during this time. Please try again!");
+        }
+        // set user of booking
+//        if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
+//            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
+//            return "redirect:/bookings/checkout/assignUser";
+//        }
+        booking.setUser(currentUser);
+        // Transaction
+        Transaction transaction = new Transaction();
+        transaction.setAmount(booking.getTotalPayableCost());
+        transaction.setDebit(true);
+        transaction = this.transactionService.save(transaction);
+        booking.setTransaction(transaction);
+        booking.setApproved(hotel.isEnabled());
+
+        booking = this.save(booking);
+        session.removeAttribute(SessionAttr.SESSION_BOOKING);
         return booking;
     }
 

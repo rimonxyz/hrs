@@ -11,6 +11,7 @@ import com.moninfotech.config.security.SecurityConfig;
 import com.moninfotech.domain.*;
 import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.exceptions.invalid.InvalidException;
+import com.moninfotech.exceptions.notfound.SessionBookingNotFoundException;
 import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 import com.moninfotech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class BookingController {
                               Model model) throws ParseException {
 
         // find booking list by role
-        List<Booking> bookingList = this.bookingService.findBookings(currentUser, false, true, page, size);
+        List<Booking> bookingList = this.bookingService.findBookings(currentUser, false,true, true, page, size);
 
         Date date = null;
         if (analDate == null || analDate.isEmpty()) date = new Date();
@@ -99,7 +100,7 @@ public class BookingController {
                                     @RequestParam(value = "size", required = false, defaultValue = "10") Integer size,
                                     Model model) {
         // find booking list by role
-        List<Booking> canceledBookingList = this.bookingService.findBookings(currentUser, true, true, page, size);
+        List<Booking> canceledBookingList = this.bookingService.findBookings(currentUser, true, true,true, page, size);
         model.addAttribute("bookingList", canceledBookingList);
 //        model.addAttribute("template", "fragments/booking/allCanceled");
         return "adminlte/fragments/booking/allCanceled";
@@ -157,41 +158,11 @@ public class BookingController {
     }
 
     @GetMapping("/checkout")
-    private String checkout(@CurrentUser User currentUser, HttpSession session) {
+    private String checkout(@CurrentUser User currentUser, HttpSession session) throws SessionBookingNotFoundException {
         if (currentUser == null) return "redirect:/bookings/tempRegister";
-        Booking booking = (Booking) session.getAttribute(SessionAttr.SESSION_BOOKING);
-        if (booking == null
-                || booking.getRoomList() == null
-                || booking.getRoomList().isEmpty()
-                || booking.getBookingDateList() == null
-                || booking.getBookingDateList().isEmpty()) return "redirect:/hotels?message=No items to book!";
-        // set hotel for booking
-        Hotel hotel = booking.getRoomList().get(0).getHotel();
-        booking.setHotel(hotel);
-        // check if hotel list and booking date list are incompatible
-        if (booking.getRoomList().size() != booking.getBookingDateList().size()) {
-            session.removeAttribute(SessionAttr.SESSION_BOOKING);
-            return "redirect:/hotels/" + booking.getHotel() + "?message=There\'s something wrong. Please try again later!";
-        }
-        if (!booking.isValid()) {
-            session.removeAttribute(SessionAttr.SESSION_BOOKING);
-            return "redirect:/hotels/" + booking.getHotel().getId() + "?message=One or more room isn't available during this time. Please try again!";
-        }
-        // set user of booking
-//        if (currentUser.hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN)) {
-//            session.setAttribute(SessionAttr.SESSION_BOOKING, booking);
-//            return "redirect:/bookings/checkout/assignUser";
-//        }
-        booking.setUser(currentUser);
-        // Transaction
-        Transaction transaction = new Transaction();
-        transaction.setAmount(booking.getTotalPayableCost());
-        transaction.setDebit(true);
-        transaction = this.transactionService.save(transaction);
-        booking.setTransaction(transaction);
-
-        booking = this.bookingService.save(booking);
-        session.removeAttribute(SessionAttr.SESSION_BOOKING);
+        Booking booking = this.bookingService.checkout(currentUser, session);
+        if (!booking.isApproved())
+            return "redirect:/hotels?messagesuccess=Thank you for your request. We'll send you an invoice by email after your booking is approved!";
         return "redirect:/invoices/generate/" + booking.getId();
     }
 

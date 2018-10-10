@@ -41,14 +41,15 @@ public class Booking extends BaseEntity {
     private Invoice invoice;
 
     private boolean confirmed;
+    private boolean approved;
     private boolean cancelled;
 
     @PrePersist
     @PreUpdate
-    void setDefaults(){
+    void setDefaults() {
         // set manual booking
-        if (this.getUser()!=null)
-                this.setManualBooking(this.getUser().hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN) || this.getUser().hasAssignedRole(Constants.Roles.ROLE_ADMIN));
+        if (this.getUser() != null)
+            this.setManualBooking(this.getUser().hasAssignedRole(Constants.Roles.ROLE_HOTEL_ADMIN) || this.getUser().hasAssignedRole(Constants.Roles.ROLE_ADMIN));
     }
 
     public boolean isValid() {
@@ -56,7 +57,8 @@ public class Booking extends BaseEntity {
         for (int i = 0; i < roomList.size() && i < bookingDateList.size(); i++) {
             Room room = roomList.get(i);
             Date bookingDate = bookingDateList.get(i);
-            if (DateUtils.isOnPast(bookingDate) || DateUtils.isOnFarFuture(bookingDate) || room.isBooked(bookingDate)) return false;
+            if (DateUtils.isOnPast(bookingDate) || DateUtils.isOnFarFuture(bookingDate) || room.isBooked(bookingDate))
+                return false;
         }
         return true;
     }
@@ -65,6 +67,10 @@ public class Booking extends BaseEntity {
         return this.roomList.stream()
                 .mapToInt(Room::getPrice)
                 .sum();
+    }
+
+    public Hotel findOutHotel() {
+        return this.getRoomList().get(0).getHotel();
     }
 
     public synchronized int getTotalDiscount() {
@@ -183,7 +189,7 @@ public class Booking extends BaseEntity {
 
     public boolean isCancelable() {
         Date minDate = Collections.min(this.bookingDateList);
-        boolean before72Hours = DateUtils.getDateDiff(new Date(),minDate,TimeUnit.HOURS)>72;
+        boolean before72Hours = DateUtils.getDateDiff(new Date(), minDate, TimeUnit.HOURS) > 72;
         long dateDiff = DateUtils.getDateDiff(this.getLastUpdated(), new Date(), TimeUnit.HOURS);
         return dateDiff >= 0 && dateDiff <= 24 && before72Hours && !this.cancelled;
     }
@@ -196,4 +202,11 @@ public class Booking extends BaseEntity {
         return this.hotel.getId().equals(hotel.getId());
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
 }

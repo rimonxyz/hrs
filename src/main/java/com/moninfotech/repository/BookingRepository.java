@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    List<Booking> findByCancelledAndConfirmed(boolean calceled,boolean isConfirmed);
+    List<Booking> findByCancelledAndConfirmedAndApproved(boolean calceled,boolean isConfirmed,boolean isApproved);
 
     List<Booking> findByUserAndCancelledAndConfirmed(User user,boolean calceled, boolean isConfirmed);
 

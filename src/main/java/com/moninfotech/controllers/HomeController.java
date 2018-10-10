@@ -108,7 +108,7 @@ public class HomeController {
             if (hotel != null)
                 model.addAttribute("hotelName", hotel.getName());
         }
-        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser, false, true, null, null));
+        model.addAttribute("totalBookingList", this.bookingService.findBookings(currentUser, false, true,true, null, null));
         model.addAttribute("manualBookingList", this.bookingService.findFiltered(currentUser, true, hotelType));
         model.addAttribute("autoBookingList", this.bookingService.findFiltered(currentUser, false, hotelType));
 

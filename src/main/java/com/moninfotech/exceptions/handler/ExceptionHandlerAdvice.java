@@ -4,6 +4,7 @@ import com.moninfotech.exceptions.NotFoundException;
 import com.moninfotech.exceptions.UserAlreadyExistsException;
 import com.moninfotech.exceptions.forbidden.ForbiddenException;
 import com.moninfotech.exceptions.invalid.InvalidException;
+import com.moninfotech.exceptions.notfound.SessionBookingNotFoundException;
 import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
 
 import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
@@ -58,6 +59,14 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(ForbiddenException.class)
     private ModelAndView handleForbiddenException(ForbiddenException ex) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (ex.getRedirectTo() != null)
+            modelAndView.setViewName("redirect:" + ex.getRedirectTo() + "?message=" + ex.getMessage());
+        return modelAndView;
+    }
+
+    @ExceptionHandler(SessionBookingNotFoundException.class)
+    private ModelAndView handleSessionBookingNotFoundException(SessionBookingNotFoundException ex) {
         ModelAndView modelAndView = new ModelAndView();
         if (ex.getRedirectTo() != null)
             modelAndView.setViewName("redirect:" + ex.getRedirectTo() + "?message=" + ex.getMessage());

@@ -1,19 +1,17 @@
 package com.moninfotech.service;
 
-import com.moninfotech.commons.pojo.Analytics;
 import com.moninfotech.domain.Booking;
 import com.moninfotech.domain.Hotel;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
-import com.moninfotech.domain.annotations.CurrentUser;
 import com.moninfotech.exceptions.invalid.InvalidException;
+import com.moninfotech.exceptions.notfound.SessionBookingNotFoundException;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by sayemkcn on 4/18/17.
@@ -26,7 +24,7 @@ public interface BookingService {
 
     Booking findOne(Long id);
 
-    List<Booking> findAll(boolean isCanceled,boolean isConfirmed, Integer page, Integer size);
+    List<Booking> findAll(boolean isCanceled,boolean isConfirmed, boolean isApproved, Integer page, Integer size);
 
     boolean belongsTo(Booking booking, User user);
 
@@ -56,7 +54,7 @@ public interface BookingService {
      * @param size
      * @return List<Booking>
      */
-    List<Booking> findBookings(User currentUser,boolean isCanceled, boolean isConfirmed, Integer page, Integer size);
+    List<Booking> findBookings(User currentUser,boolean isCanceled, boolean isConfirmed, boolean isApproved, Integer page, Integer size);
 
     // returns filtered booking list by booking creation type
     List<Booking> findFiltered(User currentUser, boolean isManual, String hotelType);
@@ -73,4 +71,8 @@ public interface BookingService {
     List<Booking> filterBookingList(List<Booking> bookingList, String filterType, String filterValue) throws ParseException;
 
     Booking addToCart(HttpSession session,Long roomId,Date checkInDate,Date checkoutDate) throws InvalidException;
+
+    Booking getBookingFromSession(HttpSession session) throws SessionBookingNotFoundException;
+
+    Booking checkout(User currentUser, HttpSession session) throws SessionBookingNotFoundException;
 }

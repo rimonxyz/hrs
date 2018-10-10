@@ -517,11 +517,11 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <a th:if="${room?.hotel?.isEnabled()}" id="addToCart" class="btn btn-lg btn-block btn-success"
+                                    <a  id="addToCart" class="btn btn-lg btn-block btn-success"
                                        th:href="@{/bookings/cart/add/}+${room?.id}+@{/(checkInDate=${checkInDate},checkoutDate=${checkoutDate})}">Book This Room!</a>
-                                    <a th:if="${!room?.hotel?.isEnabled()}" id="addToCart" class="btn btn-lg btn-block btn-warning">
-                                        Call for Booking
-                                    </a>
+                                    <!--<a th:if="${!room?.hotel?.isEnabled()}" id="addToCart" class="btn btn-lg btn-block btn-warning">-->
+                                        <!--Call for Booking-->
+                                    <!--</a>-->
                                 </div>
                             </div>
                         </div>
