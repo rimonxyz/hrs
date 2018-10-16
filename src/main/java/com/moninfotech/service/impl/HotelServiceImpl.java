@@ -4,6 +4,7 @@ import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.commons.pojo.FilterType;
 import com.moninfotech.commons.pojo.ParamFacilities;
 import com.moninfotech.domain.Hotel;
+import com.moninfotech.domain.HotelFacilities;
 import com.moninfotech.domain.Room;
 import com.moninfotech.domain.User;
 import com.moninfotech.exceptions.NotFoundException;
@@ -55,6 +56,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Hotel save(Hotel hotel) throws InvalidException {
         if (hotel==null) throw new InvalidException("/admin/hotels","Hotel can not be null");
+        if (hotel.getFacilities()==null) hotel.setFacilities(new HotelFacilities());
         return this.hotelRepo.save(hotel);
     }
 

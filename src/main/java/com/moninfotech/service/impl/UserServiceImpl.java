@@ -5,6 +5,7 @@ import com.moninfotech.commons.SessionIdentifierGenerator;
 import com.moninfotech.commons.SortAttributes;
 import com.moninfotech.domain.AcValidationToken;
 import com.moninfotech.domain.User;
+import com.moninfotech.exceptions.AlreadyExistsException;
 import com.moninfotech.repository.UserRepository;
 import com.moninfotech.service.AcValidationTokenService;
 import com.moninfotech.service.MailService;
@@ -42,15 +43,17 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         boolean isNewUser = user.getId() == null;
         // save user
+        if (isNewUser && findByEmail(user.getEmail()) != null)
+            throw new AlreadyExistsException("User already exists with email " + user.getEmail());
         user = this.userRepo.save(user);
         // for new user registration
         // send email for validation
         if (isNewUser)
-            this.requireAccountValidationByEmail(user,"/user/validation");
+            this.requireAccountValidationByEmail(user, "/user/validation");
         return user;
     }
 
-    public void requireAccountValidationByEmail(User user,String validationUrl) {
+    public void requireAccountValidationByEmail(User user, String validationUrl) {
         SessionIdentifierGenerator sessionIdentifierGenerator = new SessionIdentifierGenerator();
         AcValidationToken acValidationToken = new AcValidationToken();
         acValidationToken.setToken(sessionIdentifierGenerator.nextSessionId());
@@ -59,7 +62,7 @@ public class UserServiceImpl implements UserService {
         // save acvalidationtoken
         acValidationToken = this.acValidationTokenService.save(acValidationToken);
         // build confirmation link
-        String confirmationLink = baseUrl.trim() + validationUrl+"?token=" + acValidationToken.getToken() + "&enabled=true";
+        String confirmationLink = baseUrl.trim() + validationUrl + "?token=" + acValidationToken.getToken() + "&enabled=true";
         // send link by email
         this.mailService.sendEmail(user.getEmail(), "HotelsWave Registration", "Please confirm your email by clicking this link " + confirmationLink);
     }
@@ -103,6 +106,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByRole(String role, int page) {
-        return this.userRepo.findByRolesIn(role,new PageRequest(page,Constants.PAGE_SIZE, Sort.Direction.DESC, SortAttributes.FIELD_ID));
+        return this.userRepo.findByRolesIn(role, new PageRequest(page, Constants.PAGE_SIZE, Sort.Direction.DESC, SortAttributes.FIELD_ID));
     }
 }

@@ -6,7 +6,6 @@ import com.moninfotech.exceptions.forbidden.ForbiddenException;
 import com.moninfotech.exceptions.invalid.InvalidException;
 import com.moninfotech.exceptions.notfound.SessionBookingNotFoundException;
 import com.moninfotech.exceptions.nullexceptions.NullPasswordException;
-
 import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,6 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
+
+    // GENERIC
+    @ExceptionHandler(Exception.class)
+    private ModelAndView handleSQLIntegrityConstraintViolationException(Exception ex) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/admin?message=" + ex.getMessage());
+        return modelAndView;
+    }
+    // END GENERIC
+
 
     @ExceptionHandler(NotFoundException.class)
     private ModelAndView handleNotFoundException(NotFoundException ex) {
@@ -32,12 +41,14 @@ public class ExceptionHandlerAdvice {
         modelAndView.setViewName("redirect:/login?message=" + ex.getMessage());
         return modelAndView;
     }
+
     @ExceptionHandler(MultipartException.class)
     private ModelAndView handleFileSizeLimitExceedException(Throwable ex) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/dashboard?message=File size can not be greater than 1MB!");
         return modelAndView;
     }
+
     @ExceptionHandler(PacketTooBigException.class)
     private ModelAndView handlePacketTooBigExceptionException(Throwable ex) {
         ModelAndView modelAndView = new ModelAndView();
