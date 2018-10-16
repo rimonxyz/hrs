@@ -83,7 +83,7 @@
                     </div>
                     <div class="box-body">
                         <div>
-                            <form th:action="@{/hotels/filter}">
+                            <form th:action="@{/hotels/filter}" id="filterForm">
                                 <input th:if="${query}" name="query" type="hidden" th:value="${query}"></input>
                                 <input th:if="${hotelType}" name="type" type="hidden"
                                        th:value="${hotelType}"></input>

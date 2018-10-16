@@ -477,10 +477,13 @@
     });
 
     $(document).ready(function () {
+        var stars = $('#ratingCount').val();
+        $('#count').html(stars);
 
         $('#stars').on('starrr:change', function (e, value) {
             $('#count').html(value);
             $('#ratingCount').val(value);
+            $('#filterForm').submit();
         });
 
         $('#stars-existing').on('starrr:change', function (e, value) {
@@ -660,11 +663,9 @@
 <!--<script>-->
 
     <!--$("#starFilter").on("change", function (form) {-->
-        <!--$("#starFilterForm").submit();-->
+        <!--$("#filterForm").submit();-->
     <!--});-->
-    <!--$("#priceFilter").on("change", function (form) {-->
-        <!--$("#priceFilterForm").submit();-->
-    <!--});-->
+
 
 <!--</script>-->
 
