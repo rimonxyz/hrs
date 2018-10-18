@@ -50,6 +50,7 @@ public class SearchController {
         model.addAttribute("hotelType","Hotel");
         model.addAttribute("page",page);
         model.addAttribute("f", new ParamFacilities());
+        model.addAttribute("sidebarCollapse", true);
 //        model.addAttribute("template","fragments/hotel/all");
         return "adminlte/fragments/hotel/all";
     }
