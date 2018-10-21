@@ -305,7 +305,7 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
 }
 @media (max-width: 768px) {
     .follow-us-section{
-        height: auto;
+        height: 400px;
     }
 }
 .row-style-dark h1, .row-style-dark h2, .row-style-dark h3, .row-style-dark h4, .row-style-dark h5, .row-style-dark h6, .row-style-dark p {
@@ -346,8 +346,8 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
 }
 
 .bg-5 h2, .bg-6 h2 {
-    margin-bottom: 123px;
-    font: 500 42px/48px Roboto, sans-serif;
+    margin-bottom: 50px;
+    /*font: 500 42px/48px Roboto, sans-serif;*/
     color: white;
     /*font: bold;*/
     font-weight: bold;
@@ -589,7 +589,7 @@ p {
 }
 
 .partner_contents {
-    margin-top: 100px;
+    margin-top: 70px;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -774,7 +774,7 @@ h1, .h1-style {
     letter-spacing: 0.08em;
     display: inline-block;
     max-width: 100%;
-    padding: 1rem 25px 1.5rem;
+    padding: 1rem 1rem;
     cursor: pointer;
     text-align: center;
     overflow: hidden;
@@ -842,14 +842,21 @@ h4, .h4-style {
 
 @media screen and (max-width: 767px){
     .package-button{
-        width: 70%;
-    }f
+        width: 60%;
+    }
+    .news-letter-contnet{
+        padding-top: 0px;
+    }
+
+    .tm_pb_text_5 {
+        font-size: 20px;
+    }
 }
 
 @media screen and (max-width: 445px) {
     .sloganText {
         font-size: 18px;
-        color: #7d1f10;
+        /*color: #2a2a34;*/
         padding: 5px;
         -moz-border-radius: 6px;
         border-radius: 6px;
@@ -918,6 +925,32 @@ h4, .h4-style {
     font-size: 30px;
 }
 
+.top-banner{
+    background-color:#ffffff;
+    background-image:url(/images/bed1.jpg);
+    background-repeat: no-repeat;
+    background-position: 0;
+    background-size: 100%;
+}
+.top-dialog{
+    margin-top:100px;
+    color:white;
+}
+
+@media screen and (max-width: 768px) {
+    .top-banner{
+        background-position: top;
+        height: 200px;
+        background-size: contain;
+    }
+    .top-dialog{
+        margin-top:10px;
+    }
+    .dash {
+        font: 500 30px/32px Roboto, sans-serif;
+    }
+
+}
 
 
  /*!*Small devices (landscape phones, 576px and up)*!*/

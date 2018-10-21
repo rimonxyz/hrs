@@ -3964,9 +3964,7 @@ button::-moz-focus-inner {
 
 .tm_pb_link_box {
     box-shadow: 0 0 20px #dbdbdb;
-    margin-top: 15px !important;
-    margin-right: 15px !important;
-    margin-bottom: 15px !important;
+    margin: 15px !important;
 }
 
 .tm_pb_link_box .tm_pb_link_box_content {
@@ -4651,7 +4649,7 @@ i.mail {
     height: 28px;
     width: auto;
     max-width: 98%;
-    margin: 5px;
+    /*margin: 5px;*/
 }
 .checked {
     color: orange;
@@ -4766,7 +4764,7 @@ i.mail {
     z-index: 101;
     padding: 10px;
     top: 10px;
-    left: 5px;
+    left: 1px;
     background-color: #e85e34;
     color: white;
     font-weight: 600;
@@ -4777,7 +4775,7 @@ i.mail {
     position: absolute;
     z-index: 101;
     top: 50px;
-    left: 5px;
+    left: 1px;
     border-left: 10px solid transparent;
     /*border-right: 5px solid transparent;*/
 
