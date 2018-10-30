@@ -114,6 +114,10 @@
                                         </option>
                                     </select>
                                 </div>
+                                <div>
+                                    <input th:if="${hotelType!=null and hotelType.equals('Ship')}" type="hidden" name="star"></input>
+                                </div>
+
                                 <div class="form-group" th:if="${hotelType!=null and hotelType.equals('Ship')}">
                                     <label class="label label-primary">AC/Non AC</label>
                                     <select class="form-control" name="ac" onchange="this.form.submit()">
@@ -126,7 +130,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="label label-primary">Ticket Price</label>
+                                    <label class="label label-primary"><span  th:if="${hotelType!=null and hotelType.equals('Ship')}">Ticket</span> Price</label>
                                     <select class="form-control" name="price" onchange="this.form.submit()">
                                         <option th:selected="${ price?.equals('1x1000000') }" th:value="1x1000000">
                                             All
@@ -152,21 +156,24 @@
                                     </select>
                                 </div>
 
-                                <!--<div class="form-group">-->
-                                    <!--<label class="label label-primary">Accommodation Type</label>-->
-                                    <!--<select class="form-control" name="accomodationType" onchange="this.form.submit()">-->
-                                        <!--<option th:selected="${ accomodationType?.equals('Hotel') }" th:value="Hotel">-->
-                                            <!--Hotel-->
-                                        <!--</option>-->
-                                        <!--<option th:selected="${ accomodationType?.equals('Resort') }" th:value="Resort">-->
-                                            <!--Resort-->
-                                        <!--</option>-->
-                                        <!--<option th:selected="${ accomodationType?.equals('Apartment') }"-->
-                                                <!--th:value="Apartment">-->
-                                            <!--Apartment-->
-                                        <!--</option>-->
-                                    <!--</select>-->
-                                <!--</div>-->
+                                <div class="form-group" th:if="${hotelType!=null and hotelType.equals('Hotel')}">
+                                    <label class="label label-primary">Accommodation Type</label>
+                                    <select class="form-control" name="accomodationType" onchange="this.form.submit()">
+                                        <option th:selected="${ accomodationType?.equals('Hotel') }" th:value="Hotel">
+                                            Hotel
+                                        </option>
+                                        <option th:selected="${ accomodationType?.equals('Resort') }" th:value="Resort">
+                                            Resort
+                                        </option>
+                                        <option th:selected="${ accomodationType?.equals('Apartment') }"
+                                                th:value="Apartment">
+                                            Apartment
+                                        </option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <input th:if="${hotelType!=null and hotelType.equals('Ship')}" type="hidden" name="accomodationType"></input>
+                                </div>
 
                                 <div class="form-group">
                                     <label class="label label-primary">Guest Rating</label>
