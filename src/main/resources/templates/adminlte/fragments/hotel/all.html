@@ -726,23 +726,23 @@
                                             <!--<span th:text="${#strings.length(hotel?.bdcCompareLink)}>0"></span>-->
                                             <!--<br>-->
                                         <!--</div>-->
-                                        <div class="col-xs-2" th:if="${!hotel?.bdcCompareLink?.empty}">
+                                        <div class="col-xs-2" th:if="${hotel?.bdcCompareLink !=null && !hotel?.bdcCompareLink?.empty}">
                                             <a th:href="${hotel?.bdcCompareLink}" target="_blank">
                                             <img th:src="@{/images/booking.com.png}" alt=""
                                                  class="hotel-compare-image"/>
                                             </a>
                                         </div>
-                                        <div class="col-xs-2" th:if="${!hotel?.hotelsDotComCompareLink?.empty}">
+                                        <div class="col-xs-2" th:if="${hotel?.hotelsDotComCompareLink !=null && !hotel?.hotelsDotComCompareLink?.empty}">
                                             <a th:href="${hotel?.hotelsDotComCompareLink}" target="_blank">
                                                 <img th:src="@{/images/hotels.com.png}" alt="" class="hotel-compare-image"/>
                                             </a>
                                         </div>
-                                        <div class="col-xs-2" th:if="${!hotel?.agodaCompareLink?.empty}">
+                                        <div class="col-xs-2" th:if="${hotel?.agodaCompareLink !=null && !hotel?.agodaCompareLink?.empty}">
                                             <a th:href="${hotel?.agodaCompareLink}" target="_blank">
                                                 <img th:src="@{/images/agoda.com.png}" alt="" class="hotel-compare-image"/>
                                             </a>
                                         </div>
-                                        <div class="col-xs-2" th:if="${!hotel?.expediaCompareLink?.empty}">
+                                        <div class="col-xs-2" th:if="${hotel?.expediaCompareLink !=null && !hotel?.expediaCompareLink?.empty}">
                                             <a th:href="${hotel?.expediaCompareLink}" target="_blank">
                                                 <img th:src="@{/images/expedia.com.jpg}" alt=""
                                                  class="hotel-compare-image"/>
