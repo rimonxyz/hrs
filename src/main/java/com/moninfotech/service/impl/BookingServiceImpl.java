@@ -88,9 +88,12 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking save(Booking booking) {
-        if (booking.isApproved() && !booking.isCancelled())
+        if (booking.isApproved() && !booking.isCancelled()) {
             this.mailService.sendEmail(booking.getUser().getEmail(), "Your booking #" + booking.getId() + " on hotelswave is placed!",
                     "Your booking on hotelswave.com is successfully placed. \n You'll find your invoice at https://www.hotelswave.com/invoices/generate/" + booking.getId() + ". Please pay your invoice to confirm your booking.");
+            this.mailService.sendEmail("hotelswave@gmail.com", "New booking #" + booking.getId() + " on hotelswave is placed!",
+                    "New booking on hotelswave.com is successfully placed. \n You'll need to approve this booking in your admin panel at http://localhost:8080/admin/bookings/pending");
+        }
         return this.bookingRepo.save(booking);
     }
 
