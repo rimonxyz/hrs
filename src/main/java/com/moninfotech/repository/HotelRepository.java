@@ -21,7 +21,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     List<Hotel> findByDeletedFalse();
     Page<Hotel> findByDeletedFalse(Pageable pageable);
 
-    @Query(value = "SELECT * FROM hotel LEFT JOIN room ON hotel.id=room.hotel_id WHERE area LIKE %:q% AND star LIKE %:star% AND accomodation_type LIKE %:accomodationType% AND ROUND(rating)=:rating" +
+    @Query(value = "SELECT * FROM hotel LEFT JOIN room ON hotel.id=room.hotel_id WHERE area LIKE %:q% OR name LIKE %:q%  AND star LIKE %:star% AND accomodation_type LIKE %:accomodationType% AND ROUND(rating)=:rating" +
             " AND  (:restaurant is null or restaurant=:restaurant) " +
             " AND  (:lift is null or lift=:lift) " +
             " AND  (:wifi is null or wifi=:wifi) " +

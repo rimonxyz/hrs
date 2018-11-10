@@ -55,7 +55,7 @@ public class HotelController {
                                 @RequestParam(value = "sortBy", required = false) String sortBy,
                                 @RequestParam(value = "isDesc", required = false) boolean isDesc,
                                 Model model) {
-        List<Hotel> hotels = this.hotelService.filter(query, star, price,accomodationType, rating == null ? 0 : rating, facilities);
+        List<Hotel> hotels = this.hotelService.filter(query, star, price, accomodationType, rating == null ? 0 : rating, facilities);
 
         model.addAttribute("hotelList", hotels);
         model.addAttribute("isDesc", !isDesc);
