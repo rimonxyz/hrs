@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "h_activities")
 public class Activity extends BaseEntity {
 
     private String userAgent;
